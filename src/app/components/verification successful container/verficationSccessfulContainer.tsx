@@ -6,12 +6,18 @@ import Image from "next/image"
 import { RiVerifiedBadgeFill } from "react-icons/ri"
 import Table from "./table/table"
 import Button from "@components/button/button"
+import { useState } from "react"
 
 const VerificationSccessfulContainer = () => {
+    const [show, setShow] = useState(false)
     return (
         <div>
             <Overlay>
-                <Container className="!w-[500px] pb-[30px]">
+                <Container 
+                    className="!w-[500px] pb-[30px]"
+                    display={show}
+                    setDisplay={(setShow)}
+                >
                     <div className="py-[30px]">
                         <div className="relative h-[200px] w-[280px] flex justify-center">
                             <div className="absolute bottom-0 left-0 p-2 w-[140px] h-[140px] bg-[#24242F] rounded-full border-b-[1px] border-solid border-border-tetiary">
