@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Montserrat } from "next/font/google";
 import "./globals.css";
+import "./components/loader.css"
 import Topbar from "@components/topbar/topbar";
+import { MainContextProvider } from "./context/context";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -9,8 +11,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Preproom Admin",
-  description: "For moderators and Supervisors",
+  title: "PAIV System",
+  description: "PAIV",
 };
 
 export default function RootLayout({
@@ -23,8 +25,10 @@ export default function RootLayout({
       <body
         className={`${montserrat.variable} antialiased`}
       >
-        <Topbar />
-        {children}
+        <MainContextProvider>
+          <Topbar />
+          {children}
+        </MainContextProvider>
       </body>
     </html>
   );

@@ -1,3 +1,5 @@
+'use client'
+
 import Text from "@styles/components/text";
 import Hero from "./components/hero/hero";
 import RecentTable from "./components/recent table/recentTable";
@@ -6,26 +8,25 @@ import theme from "@styles/theme";
 import NhisDetails from "./components/nhis details/nhisDetails";
 import Instructions from "./components/instructions/instructions";
 import ResultsTable from "./components/results table/resultsTable";
+import CaptureContainer from "./components/capture container/captureContainer";
+import VerificationSccessfulContainer from "./components/verification successful container/verficationSccessfulContainer";
+import { useContext } from "react";
+import { mainContext } from "./context/context";
 
 export default function Home() {
+  const {searchValue, setSearchValue, setShowNhisDetails, showNhisDetails} = useContext(mainContext)
   return (
     <>
-      {/* <NhisDetails /> */}
-      {/* <Instructions /> */}
+      <NhisDetails />
+      {/* <VerificationSccessfulContainer /> */}
       <div className="flex flex-col gap-[30px]">
         <Hero />
-        <div className="w-full flex flex-col px-[30px] gap-[15px] items-center">
-          <div className="w-full min-[800px] max-w-[1024px]">
-            <Text
-              textColor={theme.colors.text.primary}
-              bold={TypographyBold.md}
-            >
-              Recent Visits
-            </Text>
-          </div>
-          {/* <RecentTable /> */}
+        {
+          searchValue.length ?
           <ResultsTable />
-        </div>
+          :
+          <RecentTable />
+        }
       </div>
     </>
   );

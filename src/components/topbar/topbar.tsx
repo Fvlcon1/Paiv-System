@@ -28,7 +28,7 @@ const Topbar = () => {
                     <Text
                         bold={TypographyBold.md}
                     >
-                        NHIS System
+                        PAIV System
                     </Text>
                 </div>
                 <div className="flex px-2 py-[6px] border-[1px] border-solid border-border-tetiary rounded-full bg-bg-secondary h-fit items-center gap-1">

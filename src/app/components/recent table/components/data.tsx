@@ -183,6 +183,17 @@ export const columns = [
         }
     },
     {
+        accessorKey : 'dob',
+        header : 'DOB',
+        cell : ({getValue} : {getValue : any}) => {
+            return (
+                <Text>
+                    {getValue()}
+                </Text>
+            )
+        }
+    },
+    {
         accessorKey : 'NHISID',
         header : 'NHISID',
         cell : ({getValue} : {getValue : any}) => {

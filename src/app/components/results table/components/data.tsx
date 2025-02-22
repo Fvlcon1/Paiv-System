@@ -1,3 +1,4 @@
+import Button from "@components/button/button"
 import Text from "@styles/components/text"
 import { TypographyBold } from "@styles/style.types"
 import Image from "next/image"
@@ -36,6 +37,11 @@ export const data = [
                 </Text>
             </div>
         ),
+        verifyVisit : (
+            <Button 
+                text="Verify Visit"
+            />
+        )
     },
     {
         image : (
@@ -69,6 +75,11 @@ export const data = [
                 </Text>
             </div>
         ),
+        verifyVisit : (
+            <Button 
+                text="Verify Visit"
+            />
+        )
     },
     {
         image : (
@@ -102,6 +113,11 @@ export const data = [
                 </Text>
             </div>
         ),
+        verifyVisit : (
+            <Button 
+                text="Verify Visit"
+            />
+        )
     },
     {
         image : (
@@ -121,7 +137,7 @@ export const data = [
         NHISID : "9832993",
         lastVisit : (new Date()).toDateString(),
         gender : 'male',
-        cardValidity : 
+        cardValidity : (
             <div className="flex gap-1 items-center">
                 <RiVerifiedBadgeFill
                     color="green"
@@ -133,7 +149,13 @@ export const data = [
                 >
                     Valid Card
                 </Text>
-            </div>,
+            </div>
+        ),
+        verifyVisit : (
+            <Button 
+                text="Verify Visit"
+            />
+        )
     }
 ]
 
@@ -223,6 +245,15 @@ export const columns = [
                 <Text>
                     {getValue()}
                 </Text>
+            )
+        }
+    },
+    {
+        accessorKey : 'verifyVisit',
+        header : 'Verify Visit',
+        cell : ({getValue} : {getValue : any}) => {
+            return (
+                <>{getValue()}</>
             )
         }
     },

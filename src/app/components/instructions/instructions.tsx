@@ -5,14 +5,28 @@ import Text from "@styles/components/text"
 import { TypographyBold, TypographySize } from "@styles/style.types"
 import theme from "@styles/theme"
 import Image from "next/image"
+import { Dispatch, SetStateAction } from "react"
 import { MdVerifiedUser } from "react-icons/md"
 import { RiCameraLensFill } from "react-icons/ri"
 import { TbFaceId } from "react-icons/tb"
 
-const Instructions = () => {
+const Instructions = ({
+    setShowCaptureContainer,
+    setShowInstructions,
+    showInstructions
+} : {
+    setShowCaptureContainer: Dispatch<SetStateAction<boolean>>
+    setShowInstructions: Dispatch<SetStateAction<boolean>>
+    showInstructions: boolean
+}) => {
     return (
-        <Overlay>
-            <Container  className="w-[450px] !px-10 !py-6">
+        showInstructions ?
+        <Overlay onClick={()=>setShowInstructions(false)}>
+            <Container  
+                className="w-[450px] !px-10 !py-6"
+                display={showInstructions}
+                setDisplay={setShowInstructions}
+            >
                 <div className="flex w-full flex-col gap-2">
                     <Image
                         src={"/assets/prod/nhis-logo.png"}
@@ -95,10 +109,16 @@ const Instructions = () => {
                     </div>
                     <Button 
                         text="Continue"
+                        onClick={()=>{
+                            setShowInstructions(false)
+                            setShowCaptureContainer(true)
+                        }}
                     />
                 </div>
             </Container>
         </Overlay>
+        :
+        <></>
     )
 }
 export default Instructions

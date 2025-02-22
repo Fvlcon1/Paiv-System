@@ -1,64 +1,74 @@
 'use client'
 
-import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table"
-import { columns, data } from "./components/data"
 import Text from "@styles/components/text"
-import theme from "@styles/theme"
 import { TypographyBold } from "@styles/style.types"
+import theme from "@styles/theme"
+import Table from "./components/table"
+import Pagination from "./components/pagination"
+import { useContext, useEffect, useState } from "react"
+import { FaListUl } from "react-icons/fa"
+import { IoGrid } from "react-icons/io5"
+import { Tooltip } from "antd"
+import { HiAdjustmentsHorizontal } from "react-icons/hi2"
+import { mainContext } from "@/app/context/context"
+import useSearchResults from "./utils/useSearchResults"
 
 const ResultsTable = () => {
-    const {getHeaderGroups, getRowModel} = useReactTable({
-        data:data,
-        columns : columns,
-        getCoreRowModel:getCoreRowModel()
-    })
-    console
+  const [pageSize, setPageSize] = useState(15)
+  const [pageNumber, setPageNumber] = useState(1)
+  const [view, setView] = useState<"list" | "grid">("list")
+
     return (
-        <>
-            <table className="w-full min-[800px] max-w-[1024px] border-separate border-spacing-0">
-                <thead className="bg-bg-secondary px-2">
-                    {
-                        getHeaderGroups().map((headerGroup) => (
-                            <tr key={headerGroup.id}>
-                                {
-                                    headerGroup.headers.map((header, index) => (
-                                        <th className={`text-left border-y-[1px] border-solid border-border-primary ${index === 0 ? 'rounded-l-xl border-l-[1px]' : ''} ${index === headerGroup.headers.length - 1 ? 'rounded-r-xl border-r-[1px]' : ''}`} key={header.id}>
-                                            <div className={`py-[15px] mt-[-5px] ${index === 0 ? 'pl-[30px]' : ''}`}>
-                                                <Text
-                                                    textColor={theme.colors.text.primary}
-                                                    bold={TypographyBold.md}
-                                                >
-                                                    {header.isPlaceholder
-                                                        ? null
-                                                        : typeof header.column.columnDef.header === 'function'
-                                                        ? header.column.columnDef.header(header.getContext()) // Call function if it's a header renderer
-                                                        : header.column.columnDef.header} {/* Directly render if it's a string */}
-                                                </Text>
-                                            </div>
-                                        </th>
-                                    ))
-                                }
-                            </tr>
-                        ))
-                    }
-                </thead>
-                <tbody>
-                    {
-                        getRowModel().rows.map((row, index) => (
-                            <tr className={`${index % 2 === 1 ? 'bg-bg-secondary' : ''}`} key={row.id}>
-                                {
-                                    row.getVisibleCells().map((cell, index) => (
-                                        <td className={`py-[16px] ${index === 0 ? 'pl-[40px] rounded-l-xl' : ''}`} key={cell.id}>
-                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                        </td>
-                                    ))
-                                }
-                            </tr>
-                        ))
-                    }
-                </tbody>
-            </table>
-        </>
+        <div className="w-full flex flex-col px-[30px] gap-[15px] items-center">
+          <div className="w-full min-[800px] max-w-[1024px] flex items-center justify-between">
+            <Text
+              textColor={theme.colors.text.primary}
+              bold={TypographyBold.md}
+            >
+              Results
+            </Text>
+            <div className="flex items-center gap-2">
+              <div className="flex h-[33px] items-center p-1 px-2 border-[1px] border-solid border-border-tetiary rounded-lg gap-[1px] cursor-pointer hover:bg-bg-tetiary">
+                <HiAdjustmentsHorizontal 
+                  color={theme.colors.text.primary}
+                />
+              </div>
+              <Pagination 
+                pageNumber={pageNumber}
+                pageSize={pageSize}
+                setPageSize={setPageSize}
+                setPageNumber={setPageNumber}
+              />
+              <div className="flex h-[33px] p-1 border-[1px] border-solid border-border-tetiary rounded-lg gap-[1px]">
+                <Tooltip title='List'>
+                  <div 
+                    className={`${view === 'list' ? 'bg-bg-tetiary' : ''} p-1 px-2 rounded-md hover:bg-bg-tetiary cursor-pointer duration-150`}
+                    onClick={()=>setView("list")}
+                  >
+                    <FaListUl
+                      size={13}
+                      color={view === "list" ? theme.colors.text.primary : theme.colors.text.tetiary}
+                      className="mt-[1px]"
+                    />
+                  </div>
+                </Tooltip>
+                <Tooltip title="Grid">
+                  <div 
+                    className={`${view === 'grid' ? 'bg-bg-tetiary' : ''} p-1 px-2 rounded-md hover:bg-bg-tetiary cursor-pointer duration-150`}
+                    onClick={()=>setView("grid")}
+                  >
+                    <IoGrid
+                      size={13}
+                      color={view === "grid" ? theme.colors.text.primary : theme.colors.text.tetiary}
+                      className="mt-[1px]"
+                    />
+                  </div>
+                </Tooltip>
+              </div>
+            </div>
+          </div>
+          <Table />
+        </div>
     )
 }
 export default ResultsTable

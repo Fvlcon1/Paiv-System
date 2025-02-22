@@ -1,15 +1,23 @@
 'use client'
 
+import { mainContext } from "@/app/context/context"
 import Input from "@components/input/input"
 import Text from "@styles/components/text"
 import { TypographyBold, TypographySize } from "@styles/style.types"
 import theme from "@styles/theme"
 import Image from "next/image"
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { FaMagnifyingGlass } from "react-icons/fa6"
+import useSearchResults from "../results table/utils/useSearchResults"
 
 const Hero = () => {
-    const [searchValue, setSearchValue] = useState('')
+    const {searchValue, setSearchValue} = useContext(mainContext)
+    const {getSearchResults} = useSearchResults()
+
+    useEffect(()=>{
+        if(searchValue.length)
+            getSearchResults({searchValue})
+    },[searchValue])
     return (
         <div className="w-full bg-[#ffffff05] border-b-[1px] border-solid border-b-border-tetiary justify-center h-[300px] flex items-center">
             <div className="max-w-[1024px] w-full flex flex-col items-center justify-center gap-3">
@@ -32,7 +40,6 @@ const Hero = () => {
                     </Text>
                     <Text
                         textAlign="center"
-                        size={TypographySize.body2}
                     >
                         Enter the NHIS ID or Patient Name to retrieve their details. Verify insurance status and proceed 
                         with facial recognition for check-in.

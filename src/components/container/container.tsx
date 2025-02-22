@@ -1,17 +1,22 @@
 import ClickableTab from "@components/clickable/clickabletab"
 import Overlay from "@components/overlay/overlay"
 import theme from "@styles/theme"
-import { ReactNode } from "react"
+import { Dispatch, ReactNode, SetStateAction } from "react"
 import { IoMdCloseCircle } from "react-icons/io"
 
 const Container = ({
     children,
-    className
+    className,
+    display,
+    setDisplay
 } : {
     children? : ReactNode,
     className? : string
+    display : boolean,
+    setDisplay : Dispatch<SetStateAction<boolean>>
 }) => {
     return (
+        display &&
         <div 
             className={`min-w-[300px] min-h-[200px] flex flex-col items-center p-2 relative rounded-[20px] border-[1px] border-solid border-border-tetiary bg-[#1F1F28] ${className}`}
             style={{
@@ -27,7 +32,10 @@ const Container = ({
 
             </div>
             <div className="absolute top-[10px] right-[10px]">
-                <ClickableTab className="!rounded-full hover:!bg-bg-tetiary">
+                <ClickableTab 
+                    className="!rounded-full hover:!bg-bg-tetiary"
+                    onClick={()=>setDisplay(false)}
+                >
                     <IoMdCloseCircle color={theme.colors.text.secondary} />
                 </ClickableTab>
             </div>
