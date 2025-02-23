@@ -1,23 +1,31 @@
+import { mainContext } from "@/app/context/context"
 import Text from "@styles/components/text"
 import { TypographyBold } from "@styles/style.types"
 import theme from "@styles/theme"
+import { useContext, useEffect, useState } from "react"
 import { RiVerifiedBadgeFill } from "react-icons/ri"
 
 const Table = () => {
-    const data = [
-        ["Full Name", "Chris Ampeh"],
-        ["Date of Birth", "11th January 1996"],
-        ["Gender", "Male"],
-        ["Marital Status", "Single"],
-        ["NHIS Number", "2683102"],
-        ["Inssurance Type", "Fee-Paying"],
-        ["Issue Date", "09/12/2016"],
-        ["Enrollment Status", "Active"],
-        ["Current Expiry Date", "09/12/2026"],
-        ["Phone Number", "0276483203"],
-        ["Residential Address", "15 Ankobea Street, Kumasi"],
-        ["Ghana Card Number", "GHA-692209778-4"],
-    ]
+    const {nhisDetails} = useContext(mainContext)
+    const [data, setData] = useState<any[][]>([])
+
+    useEffect(()=>{
+        if(nhisDetails)
+            setData([
+                ["Full Name", `${nhisDetails.firstname}${nhisDetails.othernames ? ` ${nhisDetails.othernames}` : ''} ${nhisDetails.lastname}`],
+                ["Date of Birth", nhisDetails.dob],
+                ["Gender", nhisDetails.gender],
+                ["Marital Status", "Single"],
+                ["NHIS Number", nhisDetails.nhisId],
+                ["Inssurance Type", nhisDetails.insuranceType],
+                ["Issue Date", nhisDetails.issueDate],
+                ["Enrollment Status", nhisDetails.enrolementStatus],
+                ["Current Expiry Date", nhisDetails.expirtyDate],
+                ["Phone Number", nhisDetails.phoneNumber],
+                ["Residential Address", nhisDetails.residentialAddress],
+                ["Ghana Card Number", nhisDetails.ghanaCardNumber],
+            ])
+    },[nhisDetails])
     return (
         <table className="w-full">
             <tbody>

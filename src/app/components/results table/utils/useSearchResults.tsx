@@ -8,9 +8,10 @@ import Text from "@styles/components/text"
 import { TypographyBold } from "@styles/style.types"
 import { mainContext } from "@/app/context/context"
 import Button from "@components/button/button"
+import { ViewState } from "@/app/utils/types"
 
 const useSearchResults = () => {
-    const {setSearchMembersResult, setNhisDetails, setShowNhisDetails} = useContext(mainContext)
+    const {setSearchMembersResult, setNhisDetails, setShowNhisDetails, setViewState} = useContext(mainContext)
     
     const getSearchResults = async ({
         searchValue,
@@ -79,7 +80,7 @@ const useSearchResults = () => {
                                 text="View Details"
                                 onClick={()=>{
                                     setNhisDetails({...NHISDetails, imageUrl : visit.profile_image_url})
-                                    setShowNhisDetails(true)
+                                    setViewState(ViewState.NHIS_DETAILS)
                                 }}
                             />
                         )

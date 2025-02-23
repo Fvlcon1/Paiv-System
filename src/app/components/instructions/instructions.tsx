@@ -5,27 +5,30 @@ import Text from "@styles/components/text"
 import { TypographyBold, TypographySize } from "@styles/style.types"
 import theme from "@styles/theme"
 import Image from "next/image"
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { MdVerifiedUser } from "react-icons/md"
 import { RiCameraLensFill } from "react-icons/ri"
 import { TbFaceId } from "react-icons/tb"
+import { ViewState } from "@/app/utils/types"
 
 const Instructions = ({
-    setShowCaptureContainer,
-    setShowInstructions,
-    showInstructions
+    setViewState
 } : {
-    setShowCaptureContainer: Dispatch<SetStateAction<boolean>>
-    setShowInstructions: Dispatch<SetStateAction<boolean>>
-    showInstructions: boolean
+    setViewState: Dispatch<SetStateAction<ViewState | null>>
 }) => {
+    const [isVisible, setIsVisible] = useState(true)
+
+    useEffect(()=>{
+        if(!isVisible)
+            setViewState(null)
+    },[isVisible])
     return (
-        showInstructions ?
-        <Overlay onClick={()=>setShowInstructions(false)}>
+        isVisible ?
+        <Overlay onClick={()=>setViewState(null)}>
             <Container  
                 className="w-[450px] !px-10 !py-6"
-                display={showInstructions}
-                setDisplay={setShowInstructions}
+                display={isVisible}
+                setDisplay={setIsVisible}
             >
                 <div className="flex w-full flex-col gap-2">
                     <Image
@@ -109,10 +112,7 @@ const Instructions = ({
                     </div>
                     <Button 
                         text="Continue"
-                        onClick={()=>{
-                            setShowInstructions(false)
-                            setShowCaptureContainer(true)
-                        }}
+                        onClick={()=>setViewState(ViewState.CAPTURE)}
                     />
                 </div>
             </Container>

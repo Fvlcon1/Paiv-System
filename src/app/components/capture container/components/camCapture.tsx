@@ -4,21 +4,23 @@ import { mainContext } from "@/app/context/context"
 import Button from "@components/button/button"
 import Text from "@styles/components/text"
 import theme from "@styles/theme"
+import { useMutation, useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import Image from "next/image"
-import { useContext, useEffect, useRef, useState } from "react"
+import { Dispatch, SetStateAction, useContext, useEffect, useRef, useState } from "react"
+import VerificationSccessfulContainer from "../../verification successful container/verificationSuccessfulContainer"
+import { ViewState } from "@/app/utils/types"
+import VeficationFailed from "./verificationFailed"
 
 const CamCapture = ({
-    isVisible
+    setViewState
 } : {
-    isVisible : boolean
+    setViewState: Dispatch<SetStateAction<ViewState | null>>
 }) => {
     const videoRef = useRef<HTMLVideoElement>(null)
-    const spinnerRef = useRef<HTMLVideoElement>(null)
-    const [capturedImageUrl, setCaptureImageUrl] = useState<string | null>(null)
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const [stream, setStream] = useState<MediaStream | null>(null)
-    const {nhisDetails} = useContext(mainContext)
+    const {nhisDetails, setCaptureImageUrl, capturedImageUrl} = useContext(mainContext)
 
     // Start the camera
     const startCamera = async () => {
@@ -70,23 +72,30 @@ const CamCapture = ({
         return bytes
     }
     
-
-    const verifyVisit = (binaryImage :  Uint8Array<ArrayBufferLike>) => {
-        try {
-            const compareImage = axios.post("https://j8juo9cz2p675o-8080.proxy.runpod.net/api/compare", {
-                membership_id : nhisDetails?.memberShipId,
-                webcam_image : binaryImage
-            })
-            console.log({compareImage})
-        } catch (error) {
-            console.log({error})
+    const verifyVisitMutation = useMutation({
+        mutationFn: async (binaryImage: Uint8Array) => {
+            const formData = new FormData();
+            formData.append("membership_id", nhisDetails?.memberShipId || "");
+            formData.append("webcam_image", new Blob([binaryImage], { type: "image/png" }), "image.png");
+    
+            const response = await axios.post(
+                "https://j8juo9cz2p675o-8080.proxy.runpod.net/api/compare",
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
+    
+            return response.data; // Ensure response is returned
         }
-    }
+    });   
 
     const handleCapture = () => {
         const binaryImage = captureImage()
         if(binaryImage)
-            verifyVisit(binaryImage)
+            verifyVisitMutation.mutate(binaryImage)
     }
 
     const stopCamera = async () => {
@@ -112,64 +121,82 @@ const CamCapture = ({
         } else {
             console.log("Camera is fully stopped.")
         }
-    }     
+    }
 
     useEffect(()=>{
-        if(!isVisible)
-            stopCamera()
-    },[isVisible])
+        if(verifyVisitMutation.data)
+            setViewState(ViewState.VERIFICATION_SUCCESS)
+    },[verifyVisitMutation.data])
+
+    useEffect(()=>{
+        if(verifyVisitMutation.isError)
+            setViewState(ViewState.VERIFICATION_FAILED)
+    },[verifyVisitMutation.isError])
 
     useEffect(() => {
+        setCaptureImageUrl(null)
         startCamera()
-
-        if (spinnerRef.current) {
-            spinnerRef.current.playbackRate = 5 // Increase playback speed (only works with .webm)
-        }
-
         return () => {
             stopCamera()
         }
     }, [])
 
     return (
-        <div className="relative w-full h-full flex items-center justify-center bg-black rounded-lg overflow-hidden">
-            {capturedImageUrl ? (
-                <div className="w-full h-full relative">
-                    <Image 
-                        src={capturedImageUrl}
-                        alt="Captured Image"
-                        className="object-cover"
-                        fill
-                    />
-                    <div className="flex absolute justify-center items-center h-full w-full top-0 left-0 bg-[#15151fca] backdrop-filter backdrop-blur-sm">
-                        <div className="flex flex-col justify-center gap-2 animate-pulse">
-                            <div className="loader"></div> 
-                            <Text
-                                textColor={theme.colors.text.primary}
-                            >
-                                Verifying Visit...
-                            </Text>
-                        </div>
+        <>
+            <div className="relative w-full h-full flex items-center justify-center bg-black rounded-lg overflow-hidden">
+                {capturedImageUrl ? (
+                    <div className="w-full h-full relative">
+                        <Image 
+                            src={capturedImageUrl}
+                            alt="Captured Image"
+                            className="object-cover"
+                            fill
+                        />
+                        {
+                            verifyVisitMutation.isPending &&
+                            <div className="flex absolute justify-center items-center h-full w-full top-0 left-0 bg-[#15151fca] backdrop-filter backdrop-blur-sm">
+                                <div className="flex flex-col justify-center gap-2 animate-pulse">
+                                    <div className="loader"></div> 
+                                    <Text
+                                        textColor={theme.colors.text.primary}
+                                    >
+                                        Verifying Visit...
+                                    </Text>
+                                </div>
+                            </div>
+                        }
                     </div>
-                </div>
-            ) : (
-                <video
-                    ref={videoRef}
-                    className="w-full h-full object-cover"
-                    autoPlay
-                    playsInline
-                />
-            )}
+                ) : (
+                    <video
+                        ref={videoRef}
+                        className="w-full h-full object-cover"
+                        autoPlay
+                        playsInline
+                    />
+                )}
 
-            {/* Hidden canvas for capturing the image */}
-            <canvas ref={canvasRef} className="hidden" />
+                {/* Hidden canvas for capturing the image */}
+                <canvas ref={canvasRef} className="hidden" />
 
-            <Button 
-                text="Capture"
-                onClick={handleCapture}
-                className="absolute bottom-5 !bg-bg-quantinary"
-            />
-        </div>
+                {
+                    capturedImageUrl ?
+                    <Button 
+                        text="Retake"
+                        onClick={()=>{
+                            setCaptureImageUrl(null)
+                            startCamera()
+                        }}
+                        className="absolute bottom-5 !bg-bg-quantinary"
+                    />
+                    :
+                    <Button 
+                        text="Capture"
+                        onClick={handleCapture}
+                        className="absolute bottom-5 !bg-bg-quantinary"
+                    />
+                }
+            </div>
+        </>
     )
 }
 

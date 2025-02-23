@@ -10,19 +10,16 @@ import Rules from "./components/rules"
 import CamContainer from "./components/camContainer"
 import CamCapture from "./components/camCapture"
 import { Dispatch, SetStateAction } from "react"
+import { ViewState } from "@/app/utils/types"
 
 const CaptureContainer = ({
-    setShowCaptureContainer,
-    setShowInstructions,
-    showCaptureContainer
+    setViewState
 } : {
-    setShowCaptureContainer: Dispatch<SetStateAction<boolean>>
-    setShowInstructions: Dispatch<SetStateAction<boolean>>
-    showCaptureContainer : boolean
+    setViewState: Dispatch<SetStateAction<ViewState | null>>
 }) => {
     return (
         <div>
-            <Overlay onClick={()=>setShowCaptureContainer(false)}>
+            <Overlay onClick={()=>setViewState(null)}>
                 <div 
                     className="w-[500px] flex flex-col items-center p-2 relative rounded-[20px] border-[1px] border-solid border-border-tetiary h-[650px] bg-[#1F1F28]"
                     style={{
@@ -32,15 +29,13 @@ const CaptureContainer = ({
                     }}                    
                 >
                     <CamContainer>
-                        <CamCapture 
-                            isVisible={showCaptureContainer}
-                        />
+                        <CamCapture setViewState={setViewState}/>
                     </CamContainer>
                     <Rules />
                     <div className="absolute top-[15px] right-[15px]">
                         <ClickableTab 
                             className="!rounded-full !bg-[#00000045] hover:!bg-bg-tetiary"
-                            onClick={()=>setShowCaptureContainer(false)}
+                            onClick={()=>setViewState(null)}
                         >
                             <IoMdCloseCircle color={theme.colors.text.secondary} />
                         </ClickableTab>

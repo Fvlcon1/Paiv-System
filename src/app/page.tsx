@@ -9,7 +9,7 @@ import NhisDetails from "./components/nhis details/nhisDetails";
 import Instructions from "./components/instructions/instructions";
 import ResultsTable from "./components/results table/resultsTable";
 import CaptureContainer from "./components/capture container/captureContainer";
-import VerificationSccessfulContainer from "./components/verification successful container/verficationSccessfulContainer";
+import VerificationSccessfulContainer from "./components/verification successful container/verificationSuccessfulContainer";
 import { useContext } from "react";
 import { mainContext } from "./context/context";
 
@@ -18,7 +18,6 @@ export default function Home() {
   return (
     <>
       <NhisDetails />
-      {/* <VerificationSccessfulContainer /> */}
       <div className="flex flex-col gap-[30px]">
         <Hero />
         {

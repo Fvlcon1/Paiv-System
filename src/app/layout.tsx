@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Montserrat } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
-import "./components/loader.css"
+import "./components/loader.css";
 import Topbar from "@components/topbar/topbar";
 import { MainContextProvider } from "./context/context";
+import QueryProvider from "./QueryProvider";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -17,18 +18,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body
-        className={`${montserrat.variable} antialiased`}
-      >
-        <MainContextProvider>
-          <Topbar />
-          {children}
-        </MainContextProvider>
+      <body className={`${montserrat.variable} antialiased`}>
+        <QueryProvider> {/* ✅ Wrap children in QueryProvider */}
+          <MainContextProvider>
+            <Topbar />
+            {children}
+          </MainContextProvider>
+        </QueryProvider>
       </body>
     </html>
   );

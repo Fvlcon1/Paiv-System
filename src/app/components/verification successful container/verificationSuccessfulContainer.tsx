@@ -6,13 +6,36 @@ import Image from "next/image"
 import { RiVerifiedBadgeFill } from "react-icons/ri"
 import Table from "./table/table"
 import Button from "@components/button/button"
-import { useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
+import { mainContext } from "@/app/context/context"
+import { ViewState } from "@/app/utils/types"
+import theme from "@styles/theme"
+import { FaUserCircle } from "react-icons/fa"
 
-const VerificationSccessfulContainer = () => {
-    const [show, setShow] = useState(false)
+const VerificationSuccessfulContainer = () => {
+    const [show, setShow] = useState(true)
+    const {setViewState, nhisDetails, capturedImageUrl, setCaptureImageUrl} = useContext(mainContext)
+    const firstRender = useRef(true);
+
+    useEffect(()=>{
+        if(!show)
+            setViewState(null)
+    },[show])
+
+    useEffect(()=>{
+        if (firstRender.current) {
+            firstRender.current = false;
+            return;
+        }
+        
+        return ()=> {
+            console.log("unmount")
+            setCaptureImageUrl(null)
+        }
+    },[])
     return (
-        <div>
-            <Overlay>
+        <>
+            <Overlay onClick={()=>setViewState(null)}>
                 <Container 
                     className="!w-[500px] pb-[30px]"
                     display={show}
@@ -20,20 +43,25 @@ const VerificationSccessfulContainer = () => {
                 >
                     <div className="py-[30px]">
                         <div className="relative h-[200px] w-[280px] flex justify-center">
-                            <div className="absolute bottom-0 left-0 p-2 w-[140px] h-[140px] bg-[#24242F] rounded-full border-b-[1px] border-solid border-border-tetiary">
-                                <div className="relative overflow-hidden rounded-full w-full h-full">
-                                    <Image
-                                        src={"/assets/dev/profile.png"}
-                                        alt="profile"
-                                        width={130}
-                                        height={130}
-                                    />
-                                </div>
+                            <div className="absolute flex justify-center items-center bottom-0 left-0 p-2 w-[140px] h-[140px] bg-[#24242F] rounded-full border-b-[1px] border-solid border-border-tetiary">
+                                {
+                                    capturedImageUrl ?
+                                    <div className="relative overflow-hidden rounded-full w-full h-full">
+                                        <Image
+                                            src={capturedImageUrl ?? ''}
+                                            alt="profile"
+                                            width={130}
+                                            height={130}
+                                        />
+                                    </div>
+                                    :
+                                    <FaUserCircle color={theme.colors.text.tetiary} size={105} />
+                                }
                             </div>
                             <div className="absolute right-0 top-0 p-2 w-[140px] h-[140px] bg-[#24242F] rounded-full border-b-[1px] border-solid border-border-tetiary">
                                 <div className="relative overflow-hidden rounded-full w-full h-full">
                                     <Image
-                                        src={"/assets/dev/profile.png"}
+                                        src={nhisDetails?.imageUrl ?? ''}
                                         alt="profile"
                                         width={130}
                                         height={130}
@@ -68,12 +96,13 @@ const VerificationSccessfulContainer = () => {
                             <Button 
                                 text="View NHIS Details"
                                 className="!border-none !bg-bg-quantinary hover:!bg-bg-tetiary"
+                                onClick={()=>setViewState(ViewState.NHIS_DETAILS)}
                             />
                         </div>
                     </div>
                 </Container>
             </Overlay>
-        </div>
+        </>
     )
 }
-export default VerificationSccessfulContainer
+export default VerificationSuccessfulContainer
