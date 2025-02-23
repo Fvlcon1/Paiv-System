@@ -42,7 +42,7 @@ const useRecentVisits = () => {
                         image : (
                             <div className="rounded-lg overflow-hidden relative w-[50px] h-[50px] ">
                                 <Image
-                                    src={`data:image/jpeg;base64,${visit.profile_image}`}
+                                    src={visit.profile_image_url}
                                     alt="profile image"
                                     layout="intrinsic"
                                     width={50}

@@ -205,7 +205,7 @@ export const columns = [
         }
     },
     {
-        accessorKey : 'NHISID',
+        accessorKey : 'nhisId',
         header : 'NHISID',
         cell : ({getValue} : {getValue : any}) => {
             return (
