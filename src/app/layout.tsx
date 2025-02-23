@@ -5,6 +5,7 @@ import "./components/loader.css";
 import Topbar from "@components/topbar/topbar";
 import { MainContextProvider } from "./context/context";
 import QueryProvider from "./QueryProvider";
+import { SearchProvider } from "./context/searchContext";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -26,8 +27,10 @@ export default function RootLayout({
       <body className={`${montserrat.variable} antialiased`}>
         <QueryProvider> {/* ✅ Wrap children in QueryProvider */}
           <MainContextProvider>
-            <Topbar />
-            {children}
+            <SearchProvider>
+              <Topbar />
+              {children}
+            </SearchProvider>
           </MainContextProvider>
         </QueryProvider>
       </body>

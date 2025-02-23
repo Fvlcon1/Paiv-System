@@ -9,9 +9,15 @@ import { IRecentVisits } from "../utils/type"
 import NoData from "@components/NoData/noData"
 
 const Table = ({
-    data
+    data,
+    error,
+    isLoading,
+    isError
 } : {
     data : IRecentVisits[]
+    error: Error | null,
+    isLoading : boolean,
+    isError : boolean
 }) => {
     const {getHeaderGroups, getRowModel} = useReactTable({
         data:data,
@@ -20,7 +26,7 @@ const Table = ({
     })
     return (
         <>
-            <table className="w-full min-[800px] max-w-[1024px] border-separate border-spacing-0">
+            <table className="w-full min-w-[800px] max-w-[1024px] border-separate border-spacing-0">
                 <thead className="bg-bg-secondary px-2">
                     {
                         getHeaderGroups().map((headerGroup) => (
@@ -48,7 +54,7 @@ const Table = ({
                     }
                 </thead>
                 {
-                    data.length ?
+                    !isLoading && data.length ?
                     <tbody>
                         {
                             getRowModel().rows.map((row, index) => (
@@ -69,6 +75,11 @@ const Table = ({
                 }
             </table>
             {
+                isLoading ?
+                <div className="h-[100px] flex items-center">
+                    <div className="normal-loader"></div>
+                </div>
+                :
                 !data.length && <NoData />
             }
         </>

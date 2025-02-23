@@ -8,9 +8,11 @@ import { TypographyBold } from "@styles/style.types"
 import { useContext } from "react"
 import { mainContext } from "@/app/context/context"
 import NoData from "@components/NoData/noData"
+import { SearchContext } from "@/app/context/searchContext"
 
 const Table = () => {
     const {searchMembersResult} = useContext(mainContext)
+    const {isLoading, isError, error} = useContext(SearchContext)
     const {getHeaderGroups, getRowModel} = useReactTable({
         data:searchMembersResult,
         columns : columns,
@@ -46,7 +48,7 @@ const Table = () => {
                     }
                 </thead>
                 {
-                    searchMembersResult.length ?
+                    !isLoading && searchMembersResult.length ?
                     <tbody>
                         {
                             getRowModel().rows.map((row, index) => (
@@ -67,6 +69,11 @@ const Table = () => {
                 }
             </table>
             {
+                isLoading ?
+                <div className="h-[100px] flex items-center">
+                    <div className="normal-loader"></div>
+                </div>
+                :
                 !searchMembersResult.length && <NoData />
             }
         </>

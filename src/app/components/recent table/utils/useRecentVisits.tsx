@@ -1,6 +1,7 @@
 import { message } from "antd"
 import axios from "axios"
 import { useState } from "react"
+import { useMutation } from "@tanstack/react-query"
 import { IRecentVisits } from "./type"
 import Image from "next/image"
 import { VscUnverified } from "react-icons/vsc"
@@ -9,37 +10,41 @@ import { TypographyBold } from "@styles/style.types"
 
 const useRecentVisits = () => {
     const [recentVisitsTableData, setRecentVisitsTableData] = useState<IRecentVisits[]>([])
-    
-    const getRecentVisits = async ({
+
+    const fetchRecentVisits = async ({
         pageSize,
         pageNumber
-    } : {
-        pageSize? : number
-        pageNumber? : number
+    }: {
+        pageSize?: number
+        pageNumber?: number
     }) => {
-        try {
-            const getVisits = await axios.get(
-                "https://j8juo9cz2p675o-8080.proxy.runpod.net/recent_visits?skip=0&limit=15", {
-                    params : {
-                        limit : pageSize,
-                        skip : pageNumber ? pageNumber - 1 : undefined
-                    }
+        const response = await axios.get(
+            "https://j8juo9cz2p675o-8080.proxy.runpod.net/recent_visits", {
+                params: {
+                    limit: pageSize ?? 5,
+                    skip: pageNumber ? pageNumber - 1 : undefined
                 }
-            )
-            const visits =  getVisits.data
-            console.log({visits})
-            if(visits){
-                const transformVisit : IRecentVisits[] = visits.map((visit : any) => {
-                    console.log("hhfhgf")
+            }
+        )
+        return response.data
+    }
+
+    const { mutate: getRecentVisits, isPending, isError, error } = useMutation({
+        mutationFn: fetchRecentVisits,
+        onSuccess: (visits) => {
+            if (visits) {
+                const transformVisit: IRecentVisits[] = visits.map((visit: any) => {
+                    const isExpired = new Date(visit.current_expiry_date) < new Date()
+
                     return {
-                        firstname : visit.first_name,
-                        othernames : visit.middle_name,
-                        lastname : visit.last_name,
-                        NHISID : visit.nhis_number,
-                        lastVisit : (new Date(visit.visit_date)).toDateString(),
-                        gender : visit.gender,
-                        dob : (new Date(visit.date_of_birth)).toDateString(),
-                        image : (
+                        firstname: visit.first_name,
+                        othernames: visit.middle_name,
+                        lastname: visit.last_name,
+                        NHISID: visit.nhis_number,
+                        lastVisit: (new Date(visit.visit_date)).toDateString(),
+                        gender: visit.gender,
+                        dob: (new Date(visit.date_of_birth)).toDateString(),
+                        image: (
                             <div className="rounded-lg overflow-hidden relative w-[50px] h-[50px] ">
                                 <Image
                                     src={visit.profile_image_url}
@@ -51,31 +56,26 @@ const useRecentVisits = () => {
                                 />
                             </div>
                         ),
-                        cardValidity : (
+                        cardValidity: (
                             <div className="flex gap-1 items-center">
-                                <VscUnverified
-                                    color="#db4040"
-                                    size={18}
-                                />
-                                <Text
-                                    textColor="#db4040"
-                                    bold={TypographyBold.md}
-                                >
-                                    Expired
+                                <VscUnverified color={isExpired ? "#db4040" : "#60B956"} size={18} />
+                                <Text textColor={isExpired ? "#db4040" : "#60B956"} bold={TypographyBold.md}>
+                                    {isExpired ? "Expired" : "Valid"}
                                 </Text>
                             </div>
                         ),
                     }
                 })
-                console.log({transformVisit})
                 setRecentVisitsTableData(transformVisit)
             }
-            return visits
-        } catch (error) {
-            console.log("Error fetching members", error)
+        },
+        onError: (error) => {
+            console.error("Error fetching members", error)
+            message.error("Failed to fetch recent visits. Please try again.")
         }
-    }
-    return {getRecentVisits, recentVisitsTableData}
+    })
+
+    return { getRecentVisits, recentVisitsTableData, isLoading : isPending, isError, error }
 }
 
 export default useRecentVisits

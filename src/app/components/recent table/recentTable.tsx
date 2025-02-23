@@ -8,7 +8,7 @@ import useRecentVisits from "./utils/useRecentVisits"
 import { useEffect } from "react"
 
 const RecentTable = () => {
-  const {getRecentVisits, recentVisitsTableData} = useRecentVisits()
+  const {getRecentVisits, recentVisitsTableData, isLoading, isError, error} = useRecentVisits()
 
   useEffect(()=>{
     getRecentVisits({})
@@ -28,7 +28,12 @@ const RecentTable = () => {
             Recent Visits
           </Text>
         </div>
-        <Table data={recentVisitsTableData} />
+        <Table
+          data={recentVisitsTableData}
+          isError={isError}
+          isLoading={isLoading}
+          error={error}
+        />
       </div>
     )
 }

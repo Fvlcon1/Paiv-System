@@ -9,10 +9,11 @@ import Image from "next/image"
 import { useContext, useEffect, useState } from "react"
 import { FaMagnifyingGlass } from "react-icons/fa6"
 import useSearchResults from "../results table/utils/useSearchResults"
+import { SearchContext } from "@/app/context/searchContext"
 
 const Hero = () => {
     const {searchValue, setSearchValue} = useContext(mainContext)
-    const {getSearchResults} = useSearchResults()
+    const {getSearchResults} = useContext(SearchContext)
 
     useEffect(()=>{
         if(searchValue.length)

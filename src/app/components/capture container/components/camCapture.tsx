@@ -124,8 +124,13 @@ const CamCapture = ({
     }
 
     useEffect(()=>{
-        if(verifyVisitMutation.data)
+        if(!verifyVisitMutation.data)
+            return
+        if(verifyVisitMutation.data?.match_summary?.is_match){
             setViewState(ViewState.VERIFICATION_SUCCESS)
+        } else {
+            setViewState(ViewState.VERIFICATION_FAILED)
+        }
     },[verifyVisitMutation.data])
 
     useEffect(()=>{
@@ -155,8 +160,8 @@ const CamCapture = ({
                         {
                             verifyVisitMutation.isPending &&
                             <div className="flex absolute justify-center items-center h-full w-full top-0 left-0 bg-[#15151fca] backdrop-filter backdrop-blur-sm">
-                                <div className="flex flex-col justify-center gap-2 animate-pulse">
-                                    <div className="loader"></div> 
+                                <div className="flex flex-col justify-center items-center gap-2 animate-pulse">
+                                    <div className="face-loader"></div> 
                                     <Text
                                         textColor={theme.colors.text.primary}
                                     >
