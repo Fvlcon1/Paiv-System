@@ -100,28 +100,34 @@ const CamCapture = ({
 
     const stopCamera = async () => {
         if (stream) {
-            stream.getTracks().forEach(track => track.stop()) // Stop all tracks
+            stream.getTracks().forEach(track => {
+                track.stop(); // Stop all tracks
+            });
         }
-        
+    
         if (videoRef.current) {
-            videoRef.current.srcObject = null // Release video feed
+            videoRef.current.srcObject = null; // Ensure video feed is released
         }
     
-        setStream(null) // Reset state
+        setStream(null); // Reset state
     
-        await checkCameraStatus() // Verify if camera is still active
-    }
+        // Double-check if camera is still active
+        await new Promise(resolve => setTimeout(resolve, 500)); // Small delay for cleanup
+        checkCameraStatus();
+    };
     
     const checkCameraStatus = async () => {
-        const devices = await navigator.mediaDevices.enumerateDevices()
-        const activeCameras = devices.filter(device => device.kind === "videoinput")
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        const videoInputs = devices.filter(device => device.kind === "videoinput");
     
-        if (activeCameras.length > 0) {
-            console.log("Camera is still in use by another process!")
+        const activeTracks = videoInputs.length > 0 && stream?.getTracks().some(track => track.readyState === "live");
+    
+        if (activeTracks) {
+            console.log("Camera is still in use!");
         } else {
-            console.log("Camera is fully stopped.")
+            console.log("Camera is fully stopped.");
         }
-    }
+    };
 
     useEffect(()=>{
         if(!verifyVisitMutation.data)
