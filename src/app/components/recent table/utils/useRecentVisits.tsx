@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useMutation } from "@tanstack/react-query"
 import { IRecentVisits } from "./type"
 import Image from "next/image"
-import { VscUnverified } from "react-icons/vsc"
+import { VscUnverified, VscVerified } from "react-icons/vsc"
 import Text from "@styles/components/text"
 import { TypographyBold } from "@styles/style.types"
 
@@ -58,7 +58,12 @@ const useRecentVisits = () => {
                         ),
                         cardValidity: (
                             <div className="flex gap-1 items-center">
-                                <VscUnverified color={isExpired ? "#db4040" : "#60B956"} size={18} />
+                                {
+                                    isExpired ?
+                                    <VscUnverified color={"#db4040"} size={18} />
+                                    :
+                                    <VscVerified color={"#60B956"} size={18} />
+                                }
                                 <Text textColor={isExpired ? "#db4040" : "#60B956"} bold={TypographyBold.md}>
                                     {isExpired ? "Expired" : "Valid"}
                                 </Text>

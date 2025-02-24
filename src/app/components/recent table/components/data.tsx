@@ -195,7 +195,7 @@ export const columns = [
     },
     {
         accessorKey : 'NHISID',
-        header : 'NHISID',
+        header : 'NHIS Number',
         cell : ({getValue} : {getValue : any}) => {
             return (
                 <Text>

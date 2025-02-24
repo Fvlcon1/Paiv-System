@@ -206,7 +206,7 @@ export const columns = [
     },
     {
         accessorKey : 'nhisId',
-        header : 'NHISID',
+        header : 'NHIS Number',
         cell : ({getValue} : {getValue : any}) => {
             return (
                 <Text>

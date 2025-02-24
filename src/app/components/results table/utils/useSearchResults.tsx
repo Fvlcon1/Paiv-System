@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { INhisDetails, IRearchResults } from "./type";
 import { mainContext } from "@/app/context/context";
 import Image from "next/image";
-import { VscUnverified } from "react-icons/vsc";
+import { VscUnverified, VscVerified } from "react-icons/vsc";
 import Text from "@styles/components/text";
 import { TypographyBold } from "@styles/style.types";
 import Button from "@components/button/button";
@@ -66,7 +66,12 @@ const useSearchResults = () => {
                     ),
                     cardValidity: (
                         <div className="flex gap-1 items-center">
-                            <VscUnverified color={isExpired ? "#db4040" : "#60B956"} size={18} />
+                            {
+                                isExpired ?
+                                <VscUnverified color={"#db4040"} size={18} />
+                                :
+                                <VscVerified color={"#60B956"} size={18} />
+                            }
                             <Text textColor={isExpired ? "#db4040" : "#60B956"} bold={TypographyBold.md}>
                                 {isExpired ? "Expired" : "Valid"}
                             </Text>
