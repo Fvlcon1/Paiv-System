@@ -76,7 +76,6 @@ const useRecentVisits = () => {
         },
         onError: (error) => {
             console.error("Error fetching members", error)
-            message.error("Failed to fetch recent visits. Please try again.")
         }
     })
 

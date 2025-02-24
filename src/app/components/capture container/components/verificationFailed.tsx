@@ -39,7 +39,7 @@ const VeficationFailed = () => {
                         >
                             Verification Failed
                         </Text>
-                        <div className="flex gap-1 items-center">
+                        <div className="flex gap-1 items-center mt-1">
                             <OutlineButton
                                 text="Cancel"
                                 onClick={()=>{

@@ -42,7 +42,7 @@ const Hero = () => {
                     <Text
                         textAlign="center"
                     >
-                        Enter the NHIS ID or Patient Name to retrieve their details. Verify insurance status and proceed 
+                        Enter the NHIS ID or patient name to retrieve their details. Verify insurance status and proceed 
                         with facial recognition for check-in.
                     </Text>
                 </div>
