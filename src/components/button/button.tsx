@@ -5,7 +5,6 @@ import Text from "@styles/components/text";
 import { useState } from "react";
 import Flex from "@styles/components/flex";
 import { TypographyBold } from "@styles/style.types";
-import { Spin } from "antd";
 
 const Button = ({
   className,
@@ -73,7 +72,7 @@ const Button = ({
       <div className="w-full justify-center items-center flex gap-[8px]">
         {
           loading ?
-          <Spin size="small"/>
+          <div className="normal-loader"></div>
           :
           <Text
             size={textSize}

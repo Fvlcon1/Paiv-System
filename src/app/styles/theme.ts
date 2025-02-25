@@ -16,6 +16,7 @@ export const colors = {
         primary : "#272737",
         secondary : '#2C2C3F',
         tetiary : '#3A3A46',
+        quantinary : '#2f2f39'
     },
     main : {
         primary : '#7575A3'
@@ -37,7 +38,8 @@ export const cssColors = {
     border : {
         primary : "var(--border-primary)",
         secondary : "var(--border-primary)",
-        tetiary : "var(--border-primary)"
+        tetiary : "var(--border-primary)",
+        quantinary : "var(--border-quantinary)"
     },
     main : {
         primary : 'var(--main-primary)'
