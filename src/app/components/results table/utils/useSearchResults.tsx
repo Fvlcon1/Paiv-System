@@ -23,7 +23,7 @@ const useSearchResults = () => {
             if (!searchValue) throw new Error("Search value is required");
 
             const { data } = await axios.get(
-                "https://j8juo9cz2p675o-8080.proxy.runpod.net/autocomplete/memberships",
+                `${process.env.NEXT_PUBLIC_API_URL}/autocomplete/memberships`,
                 { params: { query: searchValue } }
             );
 

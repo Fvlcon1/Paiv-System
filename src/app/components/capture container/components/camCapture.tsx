@@ -79,7 +79,7 @@ const CamCapture = ({
             formData.append("webcam_image", new Blob([binaryImage], { type: "image/png" }), "image.png");
     
             const response = await axios.post(
-                "https://j8juo9cz2p675o-8080.proxy.runpod.net/api/compare",
+                `${process.env.NEXT_PUBLIC_API_URL}/api/compare`,
                 formData,
                 {
                     headers: {

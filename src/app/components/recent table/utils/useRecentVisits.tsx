@@ -19,7 +19,7 @@ const useRecentVisits = () => {
         pageNumber?: number
     }) => {
         const response = await axios.get(
-            "https://j8juo9cz2p675o-8080.proxy.runpod.net/recent_visits", {
+            `${process.env.NEXT_PUBLIC_API_URL}/recent_visits`, {
                 params: {
                     limit: pageSize ?? 5,
                     skip: pageNumber ? pageNumber - 1 : undefined
