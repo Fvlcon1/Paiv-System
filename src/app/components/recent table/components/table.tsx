@@ -1,7 +1,7 @@
 'use client'
 
 import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table"
-import { columns, data } from "./data"
+import { columns } from "./data"
 import Text from "@styles/components/text"
 import theme from "@styles/theme"
 import { TypographyBold } from "@styles/style.types"
