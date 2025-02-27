@@ -6,7 +6,7 @@ export interface IRearchResults {
     othernames : string,
     lastname : string,
     nhisId : string,
-    lastVisit : string,
+    lastVisit : ReactNode,
     gender : string,
     dob : string,
     cardValidity : ReactNode,

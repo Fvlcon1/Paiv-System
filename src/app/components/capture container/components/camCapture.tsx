@@ -25,7 +25,7 @@ const CamCapture = ({
     // Start the camera
     const startCamera = async () => {
         try {
-            const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true })
+            const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio : false })
             setStream(mediaStream)
             if (videoRef.current) {
                 videoRef.current.srcObject = mediaStream
@@ -99,22 +99,25 @@ const CamCapture = ({
     }
 
     const stopCamera = async () => {
-        if (stream) {
-            stream.getTracks().forEach(track => {
-                track.stop(); // Stop all tracks
-            });
+        if (stream?.getTracks) {
+            stream.getTracks().forEach(track => track.stop()); // Stop all tracks
         }
     
         if (videoRef.current) {
-            videoRef.current.srcObject = null; // Ensure video feed is released
+            videoRef.current.srcObject = null; // Release the video feed
         }
     
         setStream(null); // Reset state
     
-        // Double-check if camera is still active
-        await new Promise(resolve => setTimeout(resolve, 500)); // Small delay for cleanup
-        checkCameraStatus();
-    };
+        // Small delay to ensure cleanup is complete
+        await new Promise(resolve => setTimeout(resolve, 500)); 
+        console.log({stream})
+        
+        // Ensure checkCameraStatus exists before calling
+        if (typeof checkCameraStatus === "function") {
+            checkCameraStatus();
+        }
+    };    
     
     const checkCameraStatus = async () => {
         const devices = await navigator.mediaDevices.enumerateDevices();

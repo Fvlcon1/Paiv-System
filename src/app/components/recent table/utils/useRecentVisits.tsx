@@ -7,6 +7,8 @@ import Image from "next/image"
 import { VscUnverified, VscVerified } from "react-icons/vsc"
 import Text from "@styles/components/text"
 import { TypographyBold } from "@styles/style.types"
+import { getRelativeTime, getTime } from "@/utils/getDate"
+import theme from "@styles/theme"
 
 const useRecentVisits = () => {
     const [recentVisitsTableData, setRecentVisitsTableData] = useState<IRecentVisits[]>([])
@@ -41,7 +43,16 @@ const useRecentVisits = () => {
                         othernames: visit.middle_name,
                         lastname: visit.last_name,
                         NHISID: visit.nhis_number,
-                        lastVisit: (new Date(visit.visit_date)).toDateString(),
+                        lastVisit: (
+                            <div className="flex flex-col gap-1">
+                                <Text>
+                                    {`${(new Date(visit.visit_date)).toDateString()}`}
+                                </Text>
+                                <Text textColor={theme.colors.text.tetiary}>
+                                    {`${getTime(visit.visit_date)} | ${getRelativeTime(visit.visit_date)}`}
+                                </Text>
+                            </div>
+                        ),
                         gender: visit.gender,
                         dob: (new Date(visit.date_of_birth)).toDateString(),
                         image: (

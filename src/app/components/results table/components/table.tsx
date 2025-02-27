@@ -20,7 +20,7 @@ const Table = () => {
     })
     return (
         <>
-            <table className="w-full min-[800px] max-w-[1024px] border-separate border-spacing-0">
+            <table className="w-full border-separate border-spacing-0">
                 <thead className="bg-bg-secondary px-2">
                     {
                         getHeaderGroups().map((headerGroup) => (
@@ -70,7 +70,7 @@ const Table = () => {
             </table>
             {
                 isLoading ?
-                <div className="h-[100px] flex items-center">
+                <div className="h-[100px] w-full justify-center flex items-center">
                     <div className="normal-loader"></div>
                 </div>
                 :

@@ -55,7 +55,7 @@ const Button = ({
         height : size?.height ?? '35px',
         opacity : (onHover && !disabled)
                   ? hover?.opacity 
-                  ?? 0.9 
+                  ?? 0.8
                   : disabled 
                   ? 0.5 : 1,
         transform : `scale(${onPress ? 0.97 : 1})`,
@@ -72,11 +72,11 @@ const Button = ({
       <div className="w-full justify-center items-center flex gap-[8px]">
         {
           loading ?
-          <div className="normal-loader"></div>
+          <div className="normal-loader !w-[20px]"></div>
           :
           <Text
             size={textSize}
-            bold={textBold ?? TypographyBold.sm2}
+            bold={textBold ?? TypographyBold.md}
             textColor={
               onHover ? hover?.color
                 ? hover.color

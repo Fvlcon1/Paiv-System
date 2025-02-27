@@ -28,7 +28,6 @@ export default function RootLayout({
         <QueryProvider> {/* ✅ Wrap children in QueryProvider */}
           <MainContextProvider>
             <SearchProvider>
-              <Topbar />
               {children}
             </SearchProvider>
           </MainContextProvider>

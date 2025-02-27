@@ -19,7 +19,7 @@ export const colors = {
         quantinary : '#2f2f39'
     },
     main : {
-        primary : '#7575A3'
+        primary : '#6060D0'
     }
 }
 

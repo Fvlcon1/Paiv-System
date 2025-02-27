@@ -9,6 +9,8 @@ import Text from "@styles/components/text";
 import { TypographyBold } from "@styles/style.types";
 import Button from "@components/button/button";
 import { ViewState } from "@/app/utils/types";
+import { getTime, getRelativeTime } from "@/utils/getDate";
+import theme from "@styles/theme";
 
 const useSearchResults = () => {
     const { setSearchMembersResult, setNhisDetails, setViewState } = useContext(mainContext);
@@ -35,7 +37,7 @@ const useSearchResults = () => {
                     othernames: visit.middle_name,
                     lastname: visit.last_name,
                     nhisId: visit.nhis_number,
-                    lastVisit: new Date(visit.last_visit).toDateString(),
+                    lastVisit: `${(new Date(visit.last_visit)).toDateString()} | ${getTime(visit.last_visit)} | ${getRelativeTime(visit.last_visit)}`,
                     gender: visit.gender,
                     dob: new Date(visit.date_of_birth).toDateString(),
                     maritalStatus: visit.marital_status,
@@ -53,6 +55,16 @@ const useSearchResults = () => {
 
                 return {
                     ...NHISDetails,
+                    lastVisit : (
+                        <div className="flex flex-col gap-1">
+                            <Text>
+                                {`${(new Date(visit.last_visit)).toDateString()}`}
+                            </Text>
+                            <Text textColor={theme.colors.text.tetiary}>
+                                {`${getTime(visit.last_visit)} | ${getRelativeTime(visit.last_visit)}`}
+                            </Text>
+                        </div>
+                    ),
                     image: (
                         <div className="rounded-lg overflow-hidden relative w-[50px] h-[50px]">
                             <Image

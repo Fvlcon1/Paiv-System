@@ -46,3 +46,13 @@ export interface ButtonProps extends ButtonStyleProps {
 }
 
 export type ButtonTypes = 'submit' | 'button'
+
+export interface DropdownItem {
+    key: string;
+    label?: ReactNode | string;
+    disabled?: boolean;
+    type?: "divider" | "title" | "link"
+    href? : string
+    icon?: ReactNode;
+    onClick? : ()=>void
+}

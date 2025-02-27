@@ -19,21 +19,23 @@ const RecentTable = () => {
   },[recentVisitsTableData])
 
   return (
-      <div className="w-full flex flex-col px-[30px] gap-[15px] items-center">
-        <div className="w-full min-[800px] max-w-[1024px]">
-          <Text
-            textColor={theme.colors.text.primary}
-            bold={TypographyBold.md}
-          >
-            Recent Visits
-          </Text>
+      <div className="w-full flex flex-col px-[30px] items-center">
+        <div className="flex gap-[15px] flex-col min-w-[800px] w-full max-w-[1200px]">
+          <div className="w-full">
+            <Text
+              textColor={theme.colors.text.primary}
+              bold={TypographyBold.md}
+            >
+              Recent Visits
+            </Text>
+          </div>
+          <Table
+            data={recentVisitsTableData}
+            isError={isError}
+            isLoading={isLoading}
+            error={error}
+          />
         </div>
-        <Table
-          data={recentVisitsTableData}
-          isError={isError}
-          isLoading={isLoading}
-          error={error}
-        />
       </div>
     )
 }

@@ -51,19 +51,19 @@ const Text = ({
                 fontWeight : bold ?? TypographyBold.sm2,
                 fontSize : size ?? TypographySize.body,
                 color : onHover && clickableLink 
-                        ? 'blue'
-                        : textColor
                         ? textColor
-                        : theme.colors.text.secondary,
+                        : textColor
+                        ?? theme.colors.text.secondary,
                 flexWrap : wrap ? 'wrap' : 'nowrap',
                 textDecoration : underline || (onHover && clickableLink) ? 'underline' : 'none',
-                opacity : onHover && clickable ? 0.7 : 1,
+                opacity : onHover && (clickable || clickableLink) ? 0.7 : 1,
                 fontStyle : italic ? 'italic' : 'normal',
                 textAlign,
                 display: display ? display : ellipsis ? '-webkit-box' : undefined,
                 textOverflow : ellipsis ? 'ellipsis' : 'none',
                 maxHeight : ellipsis ? 13.33 * 1.5 * (maxLines ?? 1) : 'none',
                 lineHeight : lineHeight ?? 1.3,
+                cursor : (clickableLink || clickable) ? 'pointer' : '',
                 whiteSpace
             }}
             onMouseOver={()=>setOnHover(true)}

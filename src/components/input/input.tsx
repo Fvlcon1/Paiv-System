@@ -42,7 +42,7 @@ type InputProps = {
     borderColor,
     autoSelect
   }: InputProps) => {
-    const [inputFocus, setInputFocus] = useState<boolean>(false);
+    const [inputFocus, setInputFocus] = useState<boolean>(autofocus ?? false);
     const [hover, setHover] = useState<boolean>(false);
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -53,10 +53,10 @@ type InputProps = {
   
     return (
       <div
-        className={`flex w-full flex-1 gap-2 px-[15px] py-[10px] h-[40px] items-center rounded-xl bg-bg-secondary border-bg-tetiary border-[1px] border-solid duration-200 ${className}`}
+        className={`flex w-full flex-1 gap-2 px-[15px] py-[10px] h-[40px] items-center rounded-xl bg-bg-secondary border-border-tetiary border-[1px] border-solid duration-200 ${className}`}
         onClick={onClick}
         style={{
-          borderColor : inputFocus || hover ? theme.colors.main.primary : borderColor || theme.colors.border.secondary
+          borderColor : (inputFocus || hover ) ? theme.colors.main.primary : borderColor || theme.colors.border.secondary
         }}
       >
         {PreIcon && PreIcon}

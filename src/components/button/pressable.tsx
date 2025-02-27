@@ -23,7 +23,7 @@ const Pressable = ({
       onMouseLeave={()=>setOnHover(false)}
       onMouseDown={()=>setOnPress(true)}
       onMouseUp={()=>setOnPress(false)}
-      className={`${className} duration-200`}
+      className={`${className} duration-200 cursor-pointer`}
       style={{
         transform : `scale(${onPress ? scaleFactor ?? 0.97 : 1})`,
       }}
