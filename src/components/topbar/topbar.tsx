@@ -10,6 +10,7 @@ import Link from "next/link"
 import { DropdownItem } from "@/utils/@types"
 import { IoMdSettings } from "react-icons/io"
 import { TbLogout2 } from "react-icons/tb"
+import Pressable from "@components/button/pressable"
 
 const Topbar = () => {
     const navTabs = [
@@ -24,10 +25,11 @@ const Topbar = () => {
     ]
     const menuItems: DropdownItem[] = [
         { key: "1", label: "Pages", type : 'title', disabled: true },
-        { key: "2", type : 'link', href : "/claims", label: "Claims" },
+        { key: "2", type : 'link', href : "/", label: "Search" },
+        { key: "3", type : 'link', href : "/claims", label: "Claims" },
         { type: "divider", key: "divider-2" },
-        { key: "3", label: "Settings", icon: <IoMdSettings size={15} className="ml-[-1.5px]" color={theme.colors.text.secondary} /> },
-        { key: "4", label: "Logout", type : 'link', href : "/auth/login",  icon: <FaPowerOff size={12} color={theme.colors.text.secondary} /> },
+        { key: "4", label: "Settings", icon: <IoMdSettings size={15} className="ml-[-1.5px]" color={theme.colors.text.secondary} /> },
+        { key: "5", label: "Logout", type : 'link', href : "/auth/login",  icon: <FaPowerOff size={12} color={theme.colors.text.secondary} /> },
     ];
 
     return (
@@ -47,16 +49,18 @@ const Topbar = () => {
                     </Text>
                 </Link>
                 <div className="flex items-center gap-2">
-                    <div className="flex px-2 py-[6px] border-[1px] border-solid border-border-tetiary rounded-full bg-bg-secondary h-fit items-center gap-1">
-                        <FaUserCircle 
-                            color={theme.colors.text.primary}
-                        />
-                        <Text 
-                            textColor={theme.colors.text.primary}
-                        >
-                            Prince Nedjoh
-                        </Text>
-                    </div>
+                    <Pressable scaleFactor={1.015}>
+                        <div className="flex px-2 py-[6px] border-[1px] border-solid border-border-tetiary rounded-full bg-bg-tetiary cursor-pointer hover:bg-bg-quantinary duration-200 h-fit items-center gap-1">
+                            <FaUserCircle 
+                                color={theme.colors.text.primary}
+                            />
+                            <Text 
+                                textColor={theme.colors.text.primary}
+                            >
+                                Prince Nedjoh
+                            </Text>
+                        </div>
+                    </Pressable>
                     <Menu
                         menuItems={menuItems}
                     >

@@ -4,9 +4,13 @@ import Button from "@components/button/button"
 import Text from "@styles/components/text"
 import theme from "@styles/theme"
 import { Dispatch, SetStateAction, useState } from "react"
-import { MdEmail } from "react-icons/md"
+import { MdEmail, MdMyLocation } from "react-icons/md"
 import FormInput from "../../form input/formInput"
 import PrivacyText from "./privacyText"
+import { RiLockPasswordFill } from "react-icons/ri"
+import { GiHospitalCross } from "react-icons/gi"
+import { IoLocation, IoMap } from "react-icons/io5"
+import Pressable from "@components/button/pressable"
 
 const Form = ({
     loading,
@@ -17,37 +21,42 @@ const Form = ({
 }) => {
     return (
         <form onSubmit={formik.handleSubmit} className="flex flex-col gap-3">
-            <div className="w-full gap-2 flex">
-                <FormInput 
-                    value={formik.values.firstname}
-                    handleChange={formik.handleChange}
-                    handleBlur={formik.handleBlur}
-                    touched={formik.touched.firstname}
-                    error={formik.errors.firstname}
-                    autofocus
-                    PreIcon={<MdEmail color={theme.colors.text.tetiary}/>}
-                    name="firstname"
-                    type="text"
-                    placeholder="Eg: John"
-                    label="First Name"
-                />
-            
-                <FormInput 
-                    value={formik.values.lastname}
-                    handleChange={formik.handleChange}
-                    handleBlur={formik.handleBlur}
-                    touched={formik.touched.lastname}
-                    error={formik.errors.lastname}
-                    PreIcon={<MdEmail color={theme.colors.text.tetiary}/>}
-                    name="lastname"
-                    type="text"
-                    placeholder="Eg: Doe"
-                    label="Last Name"
-                />
-            </div>
+            <FormInput 
+                value={formik.values.hospitalName}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                touched={formik.touched.hospitalName}
+                error={formik.errors.hospitalName}
+                PreIcon={<GiHospitalCross color={theme.colors.text.tetiary}/>}
+                name="hospitalName"
+                type="text"
+                placeholder="Enter hospital name"
+                label="Hospital Name"
+            />
+
+            <FormInput 
+                value={formik.values.location}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                touched={formik.touched.location}
+                error={formik.errors.location}
+                PreIcon={<MdMyLocation color={theme.colors.text.tetiary}/>}
+                PostIcon={
+                    <Pressable>
+                        <div className="py-[6px] px-2 rounded-md bg-bg-tetiary hover:bg-bg-quantinary cursor-pointer">
+                            <IoMap size={15} color={theme.colors.text.tetiary}/>
+                        </div>
+                    </Pressable>
+                }
+                name="location"
+                type="text"
+                placeholder="Enter location"
+                label="location"
+            />
+
             <FormInput 
                 value={formik.values.email}
-                handleChange={formik.email}
+                handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
                 touched={formik.touched.email}
                 error={formik.errors.email}
@@ -60,11 +69,11 @@ const Form = ({
 
             <FormInput 
                 value={formik.values.password}
-                handleChange={formik.password}
+                handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
                 touched={formik.touched.password}
                 error={formik.errors.password}
-                PreIcon={<MdEmail color={theme.colors.text.tetiary}/>}
+                PreIcon={<RiLockPasswordFill color={theme.colors.text.tetiary}/>}
                 name="password"
                 type="password"
                 placeholder="Enter password"

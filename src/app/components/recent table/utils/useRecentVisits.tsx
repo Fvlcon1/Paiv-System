@@ -2,7 +2,7 @@ import { message } from "antd"
 import axios from "axios"
 import { useState } from "react"
 import { useMutation } from "@tanstack/react-query"
-import { IRecentVisits } from "./type"
+import { IRecentVisitsTable, IRecentVisits } from './type';
 import Image from "next/image"
 import { VscUnverified, VscVerified } from "react-icons/vsc"
 import Text from "@styles/components/text"
@@ -11,7 +11,7 @@ import { getRelativeTime, getTime } from "@/utils/getDate"
 import theme from "@styles/theme"
 
 const useRecentVisits = () => {
-    const [recentVisitsTableData, setRecentVisitsTableData] = useState<IRecentVisits[]>([])
+    const [recentVisitsTableData, setRecentVisitsTableData] = useState<IRecentVisitsTable[]>([])
 
     const fetchRecentVisits = async ({
         pageSize,
@@ -35,14 +35,22 @@ const useRecentVisits = () => {
         mutationFn: fetchRecentVisits,
         onSuccess: (visits) => {
             if (visits) {
-                const transformVisit: IRecentVisits[] = visits.map((visit: any) => {
+                const transformVisitTable: IRecentVisitsTable[] = visits.map((visit: any) => {
                     const isExpired = new Date(visit.current_expiry_date) < new Date()
-
-                    return {
+                    const recentVisit : IRecentVisits = {
                         firstname: visit.first_name,
                         othernames: visit.middle_name,
                         lastname: visit.last_name,
-                        NHISID: visit.nhis_number,
+                        nhisId: visit.nhis_number,
+                        lastVisitDate : visit.visit_date,
+                        gender : visit.gender,
+                        dob: (new Date(visit.date_of_birth)).toDateString(),
+                        imageUrl : visit.profile_image_url,
+                        cardExpiryDate : visit.current_expiry_date
+                    }
+                    
+                    return {
+                        ...recentVisit,
                         lastVisit: (
                             <div className="flex flex-col gap-1">
                                 <Text>
@@ -53,8 +61,6 @@ const useRecentVisits = () => {
                                 </Text>
                             </div>
                         ),
-                        gender: visit.gender,
-                        dob: (new Date(visit.date_of_birth)).toDateString(),
                         image: (
                             <div className="rounded-lg overflow-hidden relative w-[50px] h-[50px] ">
                                 <Image
@@ -82,7 +88,7 @@ const useRecentVisits = () => {
                         ),
                     }
                 })
-                setRecentVisitsTableData(transformVisit)
+                setRecentVisitsTableData(transformVisitTable)
             }
         },
         onError: (error) => {

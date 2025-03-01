@@ -4,7 +4,7 @@ import { mainContext } from "@/app/context/context"
 import Button from "@components/button/button"
 import Text from "@styles/components/text"
 import theme from "@styles/theme"
-import { useMutation, useQuery } from "@tanstack/react-query"
+import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import Image from "next/image"
 import { Dispatch, SetStateAction, useContext, useEffect, useRef, useState } from "react"
@@ -20,13 +20,16 @@ const CamCapture = ({
     const videoRef = useRef<HTMLVideoElement>(null)
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const [stream, setStream] = useState<MediaStream | null>(null)
-    const {nhisDetails, setCaptureImageUrl, capturedImageUrl} = useContext(mainContext)
+    const { nhisDetails, setCaptureImageUrl, capturedImageUrl } = useContext(mainContext)
 
-    // Start the camera
+    // Start Camera (Ensures no duplicate streams)
     const startCamera = async () => {
         try {
-            const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio : false })
+            stopCamera(); // Stop any existing stream before starting a new one
+            
+            const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false })
             setStream(mediaStream)
+
             if (videoRef.current) {
                 videoRef.current.srcObject = mediaStream
             }
@@ -35,13 +38,24 @@ const CamCapture = ({
         }
     }
 
-    // Capture an image from the video stream
+    // Stop Camera
+    const stopCamera = () => {
+        if (stream) {
+            stream.getTracks().forEach(track => track.stop()); // Stop all tracks
+            setStream(null);
+        }
+
+        if (videoRef.current) {
+            videoRef.current.srcObject = null; // Release video feed
+        }
+    }
+
+    // Capture Image from Video
     const captureImage = () => {
         if (canvasRef.current && videoRef.current) {
             const canvas = canvasRef.current
             const context = canvas.getContext("2d")
-            
-            // Ensure video dimensions match canvas for better quality
+
             const videoWidth = videoRef.current.videoWidth
             const videoHeight = videoRef.current.videoHeight
             canvas.width = videoWidth
@@ -52,108 +66,72 @@ const CamCapture = ({
                 const imageData = canvas.toDataURL("image/png")
                 const binaryData = dataURLToUint8Array(imageData)
                 setCaptureImageUrl(imageData)
+                stopCamera(); // Stop camera after capturing
                 return binaryData
             }
-
-            stopCamera()
         }
     }
 
+    // Convert Image to Uint8Array
     function dataURLToUint8Array(dataURL: string): Uint8Array {
-        const base64String = dataURL.split(',')[1] // Remove the prefix
-        const binaryString = atob(base64String) // Decode Base64
+        const base64String = dataURL.split(',')[1]
+        const binaryString = atob(base64String)
         const length = binaryString.length
         const bytes = new Uint8Array(length)
-    
+
         for (let i = 0; i < length; i++) {
-            bytes[i] = binaryString.charCodeAt(i) // Convert to binary
+            bytes[i] = binaryString.charCodeAt(i)
         }
-    
+
         return bytes
     }
-    
+
+    // Verify Visit Mutation
     const verifyVisitMutation = useMutation({
         mutationFn: async (binaryImage: Uint8Array) => {
             const formData = new FormData();
             formData.append("membership_id", nhisDetails?.memberShipId || "");
             formData.append("webcam_image", new Blob([binaryImage], { type: "image/png" }), "image.png");
-    
+
             const response = await axios.post(
                 `${process.env.NEXT_PUBLIC_API_URL}/api/compare`,
                 formData,
-                {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                    },
-                }
+                { headers: { "Content-Type": "multipart/form-data" } }
             );
-    
-            return response.data; // Ensure response is returned
+
+            return response.data;
         }
-    });   
+    });
 
     const handleCapture = () => {
-        const binaryImage = captureImage()
-        if(binaryImage)
-            verifyVisitMutation.mutate(binaryImage)
+        const binaryImage = captureImage();
+        if (binaryImage) verifyVisitMutation.mutate(binaryImage);
     }
 
-    const stopCamera = async () => {
-        if (stream?.getTracks) {
-            stream.getTracks().forEach(track => track.stop()); // Stop all tracks
+    useEffect(() => {
+        if (verifyVisitMutation.data) {
+            setViewState(
+                verifyVisitMutation.data.match_summary?.is_match
+                    ? ViewState.VERIFICATION_SUCCESS
+                    : ViewState.VERIFICATION_FAILED
+            );
         }
-    
-        if (videoRef.current) {
-            videoRef.current.srcObject = null; // Release the video feed
-        }
-    
-        setStream(null); // Reset state
-    
-        // Small delay to ensure cleanup is complete
-        await new Promise(resolve => setTimeout(resolve, 500)); 
-        console.log({stream})
-        
-        // Ensure checkCameraStatus exists before calling
-        if (typeof checkCameraStatus === "function") {
-            checkCameraStatus();
-        }
-    };    
-    
-    const checkCameraStatus = async () => {
-        const devices = await navigator.mediaDevices.enumerateDevices();
-        const videoInputs = devices.filter(device => device.kind === "videoinput");
-    
-        const activeTracks = videoInputs.length > 0 && stream?.getTracks().some(track => track.readyState === "live");
-    
-        if (activeTracks) {
-            console.log("Camera is still in use!");
-        } else {
-            console.log("Camera is fully stopped.");
-        }
-    };
-
-    useEffect(()=>{
-        if(!verifyVisitMutation.data)
-            return
-        if(verifyVisitMutation.data?.match_summary?.is_match){
-            setViewState(ViewState.VERIFICATION_SUCCESS)
-        } else {
-            setViewState(ViewState.VERIFICATION_FAILED)
-        }
-    },[verifyVisitMutation.data])
-
-    useEffect(()=>{
-        if(verifyVisitMutation.isError)
-            setViewState(ViewState.VERIFICATION_FAILED)
-    },[verifyVisitMutation.isError])
+    }, [verifyVisitMutation.data]);
 
     useEffect(() => {
-        setCaptureImageUrl(null)
-        startCamera()
-        return () => {
-            stopCamera()
+        if (verifyVisitMutation.isError) {
+            setViewState(ViewState.VERIFICATION_FAILED);
         }
-    }, [])
+    }, [verifyVisitMutation.isError]);
+
+    useEffect(() => {
+        setCaptureImageUrl(null);
+        startCamera();
+
+        return () => {
+            stopCamera(); // Cleanup on unmount
+        };
+    }, []);
 
     return (
         <>
@@ -166,19 +144,16 @@ const CamCapture = ({
                             className="object-cover"
                             fill
                         />
-                        {
-                            verifyVisitMutation.isPending &&
+                        {verifyVisitMutation.isPending && (
                             <div className="flex absolute justify-center items-center h-full w-full top-0 left-0 bg-[#15151fca] backdrop-filter backdrop-blur-sm">
                                 <div className="flex flex-col justify-center items-center gap-2 animate-pulse">
                                     <div className="face-loader"></div> 
-                                    <Text
-                                        textColor={theme.colors.text.primary}
-                                    >
+                                    <Text textColor={theme.colors.text.primary}>
                                         Verifying Visit...
                                     </Text>
                                 </div>
                             </div>
-                        }
+                        )}
                     </div>
                 ) : (
                     <video
@@ -192,26 +167,25 @@ const CamCapture = ({
                 {/* Hidden canvas for capturing the image */}
                 <canvas ref={canvasRef} className="hidden" />
 
-                {
-                    capturedImageUrl ?
+                {capturedImageUrl ? (
                     <Button 
                         text="Retake"
-                        onClick={()=>{
-                            setCaptureImageUrl(null)
-                            startCamera()
+                        onClick={() => {
+                            setCaptureImageUrl(null);
+                            startCamera();
                         }}
                         className="absolute bottom-5 !bg-bg-quantinary"
                     />
-                    :
+                ) : (
                     <Button 
                         text="Capture"
                         onClick={handleCapture}
                         className="absolute bottom-5 !bg-bg-quantinary"
                     />
-                }
+                )}
             </div>
         </>
-    )
+    );
 }
 
-export default CamCapture
+export default CamCapture;

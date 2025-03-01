@@ -19,6 +19,10 @@ const Hero = () => {
         if(searchValue.length)
             getSearchResults({searchValue})
     },[searchValue])
+
+    useEffect(()=>{
+        setSearchValue('')
+    },[])
     return (
         <div className="w-full bg-[#ffffff05] border-b-[1px] border-solid border-b-border-tetiary justify-center h-[300px] flex items-center">
             <div className="max-w-[1024px] w-full flex flex-col items-center justify-center gap-3">

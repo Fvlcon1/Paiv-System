@@ -67,13 +67,13 @@ const Dropdown = (
                                             {
                                                 item.type === 'link' ?
                                                 <Link href={item.href ?? '#'}>
-                                                    <div className={`${!item.disabled ? 'hover:bg-bg-quantinary px-2 py-[6px] rounded-md flex gap-[6px] items-center' : ''}`}>
+                                                    <div className={`${!item.disabled ? 'hover:bg-bg-quantinary px-2 py-1 rounded-md flex gap-[6px] items-center' : ''}`}>
                                                         {item.icon && <span>{item.icon}</span>}
                                                         {typeof item.label === "string" ? <Text>{item.label}</Text> : item.label}
                                                     </div>
                                                 </Link>
                                                 :
-                                                <div className={`${!item.disabled ? 'hover:bg-bg-quantinary px-2 py-[6px] rounded-md flex gap-[6px] items-center' : ''}`}>
+                                                <div className={`${!item.disabled ? 'hover:bg-bg-quantinary px-2 py-1 rounded-md flex gap-[6px] items-center' : ''}`}>
                                                     {item.icon && <span>{item.icon}</span>}
                                                     {typeof item.label === "string" ? <Text>{item.label}</Text> : item.label}
                                                 </div>

@@ -19,6 +19,7 @@ const RecentTable = () => {
   },[recentVisitsTableData])
 
   return (
+    <>
       <div className="w-full flex flex-col px-[30px] items-center">
         <div className="flex gap-[15px] flex-col min-w-[800px] w-full max-w-[1200px]">
           <div className="w-full">
@@ -37,6 +38,7 @@ const RecentTable = () => {
           />
         </div>
       </div>
+    </>
     )
 }
 export default RecentTable

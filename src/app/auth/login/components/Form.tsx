@@ -8,6 +8,7 @@ import { MdEmail } from "react-icons/md"
 import FormInput from "../../form input/formInput"
 import PrivacyText from "./privacyText"
 import StayLoggedIn from "./stayLoggedIn"
+import { RiLockPasswordFill } from "react-icons/ri"
 
 const Form = ({
     loading,
@@ -26,7 +27,7 @@ const Form = ({
         <form onSubmit={formik.handleSubmit} className="flex flex-col gap-2">
             <FormInput
                 value={formik.values.email}
-                handleChange={formik.email}
+                handleChange={formik.handleChange}
                 autofocus
                 handleBlur={formik.handleBlur}
                 touched={formik.touched.email}
@@ -39,11 +40,11 @@ const Form = ({
             />
             <FormInput 
                 value={formik.values.password}
-                handleChange={formik.password}
+                handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
                 touched={formik.touched.password}
                 error={formik.errors.password}
-                PreIcon={<MdEmail color={theme.colors.text.tetiary}/>}
+                PreIcon={<RiLockPasswordFill color={theme.colors.text.tetiary}/>}
                 name="password"
                 type="password"
                 placeholder="Enter password"

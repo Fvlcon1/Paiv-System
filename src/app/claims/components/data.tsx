@@ -1,6 +1,7 @@
 import Text from "@styles/components/text"
 import { IClaims } from "../utils/types"
 import Image from "next/image"
+import Copychip from "@components/chip/copyChip"
 
 export const data : IClaims[] = [
     {
@@ -16,9 +17,9 @@ export const data : IClaims[] = [
         ),
         status : <Text textColor="green">Successful</Text>,
         token : (
-            <div className="px-3 py-1 bg-bg-tetiary hover:bg-bg-quantinary rounded-lg cursor-pointer w-fit">
+            <Copychip>
                 lkjsdfasdf89uaweoifjdsasdf
-            </div>
+            </Copychip>
         ),
         visitDate : new Date(),
         firstname : "Chris",
@@ -39,9 +40,9 @@ export const data : IClaims[] = [
         ),
         status : <Text textColor="orange">pending</Text>,
         token : (
-            <div className="px-3 py-1 bg-bg-tetiary hover:bg-bg-quantinary rounded-lg cursor-pointer w-fit">
+            <Copychip>
                 lkjsdfasdf89uaweoifjdsasdf
-            </div>
+            </Copychip>
         ),
         visitDate : new Date(),
         firstname : "Chris",
@@ -62,9 +63,9 @@ export const data : IClaims[] = [
         ),
         status : <Text textColor="red">Declined</Text>,
         token : (
-            <div className="px-3 py-1 bg-bg-tetiary hover:bg-bg-quantinary rounded-lg cursor-pointer w-fit">
+            <Copychip>
                 lkjsdfasdf89uaweoifjdsasdf
-            </div>
+            </Copychip>
         ),
         visitDate : new Date(),
         firstname : "Chris",

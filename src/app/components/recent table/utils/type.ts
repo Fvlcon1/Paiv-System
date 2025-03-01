@@ -1,13 +1,18 @@
 import { ReactNode } from "react";
 
 export interface IRecentVisits {
-    image : ReactNode,
+    imageUrl : string,
     firstname : string,
     othernames : string,
     lastname : string,
     nhisId : string,
-    lastVisit : ReactNode,
+    lastVisitDate : string,
     gender : string,
     dob : string,
+    cardExpiryDate : string
+}
+export interface IRecentVisitsTable extends IRecentVisits {
+    image : ReactNode,
+    lastVisit : ReactNode,
     cardValidity : ReactNode
 }
