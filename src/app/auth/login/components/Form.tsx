@@ -9,6 +9,7 @@ import FormInput from "../../form input/formInput"
 import PrivacyText from "./privacyText"
 import StayLoggedIn from "./stayLoggedIn"
 import { RiLockPasswordFill } from "react-icons/ri"
+import { GiHospitalCross } from "react-icons/gi"
 
 const Form = ({
     loading,
@@ -26,9 +27,21 @@ const Form = ({
     return (
         <form onSubmit={formik.handleSubmit} className="flex flex-col gap-2">
             <FormInput
-                value={formik.values.email}
+                value={formik.values.hospitalId}
                 handleChange={formik.handleChange}
                 autofocus
+                handleBlur={formik.handleBlur}
+                touched={formik.touched.hospitalId}
+                error={formik.errors.hospitalId}
+                PreIcon={<GiHospitalCross color={theme.colors.text.tetiary}/>}
+                name="hospitalId"
+                type="text"
+                placeholder="Enter hospital id"
+                label="Hospital Id"
+            />
+            <FormInput
+                value={formik.values.email}
+                handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
                 touched={formik.touched.email}
                 error={formik.errors.email}
@@ -37,6 +50,7 @@ const Form = ({
                 type="text"
                 placeholder="Eg: johndoe@paiv.com"
                 label="Email"
+                autoComplete="username"
             />
             <FormInput 
                 value={formik.values.password}
@@ -49,6 +63,7 @@ const Form = ({
                 type="password"
                 placeholder="Enter password"
                 label="Password"
+                autoComplete="password"
             />
             <div className="pl-1 text-main-primary w-fit cursor-pointer">
                 <Text

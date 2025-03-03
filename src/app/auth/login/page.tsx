@@ -15,30 +15,64 @@ import { MdEmail } from "react-icons/md"
 import Button from "@components/button/button"
 import Pressable from "@components/button/pressable"
 import Form from "./components/Form"
+import axios from "axios"
+import { useMutation } from "@tanstack/react-query"
+import { useRouter } from "next/navigation"
+import toast from "react-hot-toast"
+import Cookies from "universal-cookie"
+
+interface LoginType {
+    hospitalId : string,
+    email : string,
+    password : string,
+}
+const cookies = new Cookies()
 
 const Login = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [stayLoggedIn, setStayLoggedIn] = useState(true)
 
+    const router = useRouter()
+
+    const handeleSubmit = async (values : LoginType) => {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
+            hospital_id: values.hospitalId,
+            email: values.email,
+            password: values.password,
+            coordinates: {
+                lat: 0,
+                lng: 0
+            }
+        })
+        return response.data
+    }
+
+    const handleSubmitMutation = useMutation({
+        mutationFn : handeleSubmit,
+        onSuccess : (data)=>{
+            cookies.set("accessToken", data.access_token)
+            toast.success("Login successful")
+            router.push("/")
+        },
+        onError : (error)=>{
+            toast.error(error.message)
+            console.log({error})
+        }
+    })
+
+    const {mutate, error, isPending, isError} = handleSubmitMutation
+
     const formik = useFormik({
         initialValues: {
+            hospitalId : '',
             email: '',
             password: '',
         },
         validationSchema,
         onSubmit: async (values) => {
-          try {
-            setLoading(true)
-          } catch (error : any) {
-            console.log({error})
-            setLoading(false)
-          }
+            mutate(values)
         }
     })
-
-    const submitHandler = async () => {
-
-    }
 
     return (
         <div className="w-full h-screen flex justify-center items-center mt-[-50px]">
@@ -60,7 +94,7 @@ const Login = () => {
                 </div>
                 <Form
                     formik={formik}
-                    loading={loading}
+                    loading={isPending}
                     stayLoggedIn={stayLoggedIn}
                     setStayLoggedIn={setStayLoggedIn}
                 />

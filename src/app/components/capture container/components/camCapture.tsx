@@ -11,6 +11,7 @@ import { Dispatch, SetStateAction, useContext, useEffect, useRef, useState } fro
 import VerificationSccessfulContainer from "../../verification successful container/verificationSuccessfulContainer"
 import { ViewState } from "@/app/utils/types"
 import VeficationFailed from "./verificationFailed"
+import { protectedApi } from "@/app/utils/apis/api"
 
 const CamCapture = ({
     setViewState
@@ -93,11 +94,7 @@ const CamCapture = ({
             formData.append("membership_id", nhisDetails?.memberShipId || "");
             formData.append("webcam_image", new Blob([binaryImage], { type: "image/png" }), "image.png");
 
-            const response = await axios.post(
-                `${process.env.NEXT_PUBLIC_API_URL}/api/compare`,
-                formData,
-                { headers: { "Content-Type": "multipart/form-data" } }
-            );
+            const response = await protectedApi.POST("/api/compare", formData)
 
             return response.data;
         }

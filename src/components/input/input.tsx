@@ -2,7 +2,7 @@
 
 import { hexOpacity } from "@/utils/hexOpacity"
 import theme from "@styles/theme"
-import { ChangeEventHandler, Dispatch, FocusEventHandler, ReactNode, SetStateAction, useEffect, useRef, useState } from "react"
+import { ChangeEventHandler, Dispatch, FocusEventHandler, HTMLInputAutoCompleteAttribute, ReactNode, SetStateAction, useEffect, useRef, useState } from "react"
 
 type InputProps = {
     className?: string;
@@ -19,6 +19,7 @@ type InputProps = {
     onBlur? : FocusEventHandler<HTMLInputElement>
     name? : string,
     autoSelect? : boolean
+    autoComplete? : HTMLInputAutoCompleteAttribute
   } & (
     | { value: string; setValue?: Dispatch<SetStateAction<string>> }
     | { value: number; setValue?: Dispatch<SetStateAction<number>> }
@@ -40,7 +41,8 @@ type InputProps = {
     onBlur,
     required,
     borderColor,
-    autoSelect
+    autoSelect,
+    autoComplete
   }: InputProps) => {
     const [inputFocus, setInputFocus] = useState<boolean>(autofocus ?? false);
     const [hover, setHover] = useState<boolean>(false);
@@ -74,6 +76,7 @@ type InputProps = {
           autoFocus={autofocus}
           name={name}
           onChange={(e) => {onChange ? onChange(e) : setValue && setValue(e.target.value as any)}}
+          autoComplete={autoComplete}
         />
         {PostIcon && PostIcon}
       </div>

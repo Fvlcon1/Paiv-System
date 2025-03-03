@@ -11,6 +11,7 @@ import Button from "@components/button/button";
 import { ViewState } from "@/app/utils/types";
 import { getTime, getRelativeTime } from "@/utils/getDate";
 import theme from "@styles/theme";
+import { protectedApi } from "@/app/utils/apis/api";
 
 const useSearchResults = () => {
     const { setSearchMembersResult, setNhisDetails, setViewState } = useContext(mainContext);
@@ -23,11 +24,7 @@ const useSearchResults = () => {
             searchValue?: string
         }) => {
             if (!searchValue) throw new Error("Search value is required");
-
-            const { data } = await axios.get(
-                `${process.env.NEXT_PUBLIC_API_URL}/autocomplete/memberships`,
-                { params: { query: searchValue } }
-            );
+            const {results:data} = await protectedApi.GET("/autocomplete/memberships", { query: searchValue })
 
             if (!data || data.length === 0) return [];
 

@@ -6,6 +6,8 @@ import Topbar from "@components/topbar/topbar";
 import { MainContextProvider } from "./context/context";
 import QueryProvider from "./QueryProvider";
 import { SearchProvider } from "./context/searchContext";
+import { Toaster } from 'react-hot-toast';
+import { AuthProvider } from "./context/authContext";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -25,13 +27,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${montserrat.variable} antialiased`}>
-        <QueryProvider> {/* ✅ Wrap children in QueryProvider */}
-          <MainContextProvider>
-            <SearchProvider>
-              {children}
-            </SearchProvider>
-          </MainContextProvider>
-        </QueryProvider>
+        <AuthProvider>
+          <QueryProvider>
+            <MainContextProvider>
+              <Toaster />
+              <SearchProvider>
+                {children}
+              </SearchProvider>
+            </MainContextProvider>
+          </QueryProvider>
+        </AuthProvider>
       </body>
     </html>
   );

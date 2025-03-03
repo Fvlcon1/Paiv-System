@@ -18,8 +18,10 @@
     "next": "15.1.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hot-toast": "^2.5.2",
     "react-icons": "^5.5.0",
     "react-use": "^17.6.0",
+    "universal-cookie": "^7.2.2",
     "yup": "^1.6.1"
   },
   "devDependencies": {

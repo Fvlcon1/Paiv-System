@@ -9,6 +9,8 @@ import Text from "@styles/components/text"
 import { TypographyBold } from "@styles/style.types"
 import { getRelativeTime, getTime } from "@/utils/getDate"
 import theme from "@styles/theme"
+import toast from "react-hot-toast";
+import { protectedApi } from "@/app/utils/apis/api";
 
 const useRecentVisits = () => {
     const [recentVisitsTableData, setRecentVisitsTableData] = useState<IRecentVisitsTable[]>([])
@@ -20,14 +22,10 @@ const useRecentVisits = () => {
         pageSize?: number
         pageNumber?: number
     }) => {
-        const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_URL}/recent_visits`, {
-                params: {
-                    limit: pageSize ?? 5,
-                    skip: pageNumber ? pageNumber - 1 : undefined
-                }
-            }
-        )
+        const response = await protectedApi.GET("/recent_visits", {
+            limit: pageSize ?? 5,
+            skip: pageNumber ? pageNumber - 1 : undefined
+        })
         return response.data
     }
 
@@ -92,6 +90,7 @@ const useRecentVisits = () => {
             }
         },
         onError: (error) => {
+            toast.error(error.message)
             console.error("Error fetching members", error)
         }
     })

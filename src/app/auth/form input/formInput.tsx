@@ -1,7 +1,7 @@
 import Input from "@components/input/input"
 import Text from "@styles/components/text"
 import theme from "@styles/theme"
-import { ReactNode } from "react"
+import { HTMLInputAutoCompleteAttribute, ReactNode } from "react"
 
 const FormInput = ({
     value,
@@ -15,7 +15,8 @@ const FormInput = ({
     name,
     type,
     placeholder,
-    label
+    label,
+    autoComplete
 } : {
     value : string,
     handleChange : ()=>void
@@ -29,6 +30,7 @@ const FormInput = ({
     type? : "number" | "text" | "password",
     placeholder? : string,
     label : string
+    autoComplete? : HTMLInputAutoCompleteAttribute
 }) => {
     return (
         <div className="flex flex-col gap-[6px] w-full">
@@ -50,6 +52,7 @@ const FormInput = ({
                 onBlur={handleBlur}
                 className={`${error && touched ? '!border-[#d44848]' : ''}`}
                 inputClassName="!h-[25px]"
+                autoComplete={autoComplete}
             />
             {
                 error && touched && (
