@@ -59,12 +59,13 @@ const Text = ({
                 opacity : onHover && (clickable || clickableLink) ? 0.7 : 1,
                 fontStyle : italic ? 'italic' : 'normal',
                 textAlign,
-                display: display ? display : ellipsis ? '-webkit-box' : undefined,
+                display: display ?? maxLines ? '-webkit-box' : 'inline-block',
+                WebkitLineClamp : maxLines ?? 6,
+                WebkitBoxOrient : 'vertical',
                 textOverflow : ellipsis ? 'ellipsis' : 'none',
-                maxHeight : ellipsis ? 13.33 * 1.5 * (maxLines ?? 1) : 'none',
-                lineHeight : lineHeight ?? 1.3,
                 cursor : (clickableLink || clickable) ? 'pointer' : '',
-                whiteSpace
+                whiteSpace : maxLines ? 'none' : ellipsis ? 'nowrap' : 'none',
+                overflow : ellipsis ? 'hidden' : 'inherit'
             }}
             onMouseOver={()=>setOnHover(true)}
             onMouseLeave={()=>setOnHover(false)}

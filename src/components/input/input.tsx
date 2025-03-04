@@ -2,7 +2,7 @@
 
 import { hexOpacity } from "@/utils/hexOpacity"
 import theme from "@styles/theme"
-import { ChangeEventHandler, Dispatch, FocusEventHandler, HTMLInputAutoCompleteAttribute, ReactNode, SetStateAction, useEffect, useRef, useState } from "react"
+import { ChangeEventHandler, DetailedHTMLProps, Dispatch, FocusEventHandler, HTMLInputAutoCompleteAttribute, InputHTMLAttributes, ReactNode, SetStateAction, useEffect, useRef, useState } from "react"
 
 type InputProps = {
     className?: string;
@@ -20,12 +20,14 @@ type InputProps = {
     name? : string,
     autoSelect? : boolean
     autoComplete? : HTMLInputAutoCompleteAttribute
+    inputProps? : DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
   } & (
     | { value: string; setValue?: Dispatch<SetStateAction<string>> }
     | { value: number; setValue?: Dispatch<SetStateAction<number>> }
   );
   
   const Input = ({
+    inputProps,
     className,
     inputClassName,
     placeholder,
@@ -55,7 +57,7 @@ type InputProps = {
   
     return (
       <div
-        className={`flex w-full flex-1 gap-2 px-[15px] py-[10px] h-[40px] items-center rounded-xl bg-bg-secondary border-border-tetiary border-[1px] border-solid duration-200 ${className}`}
+        className={`flex w-full flex-1 gap-2 px-[15px] py-[10px] items-center rounded-xl bg-bg-secondary border-border-tetiary border-[1px] border-solid duration-200 ${className}`}
         onClick={onClick}
         style={{
           borderColor : (inputFocus || hover ) ? theme.colors.main.primary : borderColor || theme.colors.border.secondary
@@ -63,21 +65,38 @@ type InputProps = {
       >
         {PreIcon && PreIcon}
         <input
+          {...inputProps}
           ref={inputRef}
-          placeholder={placeholder ?? "Input text"}
-          type={type ?? "text"}
-          required={required}
+          placeholder={placeholder ?? inputProps?.placeholder ?? "Input text"}
+          type={type ?? inputProps?.type ?? "text"}
+          required={required ?? inputProps?.required}
           className={`flex w-full flex-1 bg-transparent outline-none placeholder:text-[12px] placeholder:text-text-tetiary text-text-primary md:text-[12px] text-[16px] ${inputClassName}`}
-          onFocus={() => setInputFocus(true)}
-          onBlur={() => setInputFocus(false)}
-          onMouseOver={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
+          onFocus={(e) => {
+            setInputFocus(true);
+            inputProps?.onFocus?.(e);
+          }}
+          onBlur={(e) => {
+            setInputFocus(false);
+            inputProps?.onBlur?.(e);
+          }}
+          onMouseOver={(e) => {
+            setHover(true);
+            inputProps?.onMouseOver?.(e);
+          }}
+          onMouseLeave={(e) => {
+            setHover(false);
+            inputProps?.onMouseLeave?.(e);
+          }}
           value={value}
-          autoFocus={autofocus}
-          name={name}
-          onChange={(e) => {onChange ? onChange(e) : setValue && setValue(e.target.value as any)}}
-          autoComplete={autoComplete}
+          autoFocus={autofocus ?? inputProps?.autoFocus}
+          name={name ?? inputProps?.name}
+          onChange={(e) => {
+            onChange ? onChange(e) : setValue && setValue(e.target.value as any);
+            inputProps?.onChange?.(e);
+          }}
+          autoComplete={autoComplete ?? inputProps?.autoComplete}
         />
+
         {PostIcon && PostIcon}
       </div>
     );

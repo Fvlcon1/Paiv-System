@@ -1,7 +1,7 @@
 import Input from "@components/input/input"
 import Text from "@styles/components/text"
 import theme from "@styles/theme"
-import { HTMLInputAutoCompleteAttribute, ReactNode } from "react"
+import { ChangeEvent, DetailedHTMLProps, HTMLInputAutoCompleteAttribute, InputHTMLAttributes, ReactNode } from "react"
 
 const FormInput = ({
     value,
@@ -16,10 +16,11 @@ const FormInput = ({
     type,
     placeholder,
     label,
-    autoComplete
+    autoComplete,
+    inputProps
 } : {
     value : string,
-    handleChange : ()=>void
+    handleChange : (e?:ChangeEvent<HTMLInputElement>)=>void
     handleBlur : ()=>void
     error? : string
     touched? : boolean
@@ -31,9 +32,10 @@ const FormInput = ({
     placeholder? : string,
     label : string
     autoComplete? : HTMLInputAutoCompleteAttribute
+    inputProps? : DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 }) => {
     return (
-        <div className="flex flex-col gap-[6px] w-full">
+        <div className="flex flex-col gap-[6px] w-full h-fit">
             <Text
                 textColor={theme.colors.text.primary} 
                 className="pl-1"
@@ -53,6 +55,7 @@ const FormInput = ({
                 className={`${error && touched ? '!border-[#d44848]' : ''}`}
                 inputClassName="!h-[25px]"
                 autoComplete={autoComplete}
+                inputProps={inputProps}
             />
             {
                 error && touched && (

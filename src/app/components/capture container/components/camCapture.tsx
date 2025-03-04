@@ -96,7 +96,14 @@ const CamCapture = ({
 
             const response = await protectedApi.POST("/api/compare", formData)
 
-            return response.data;
+            return response;
+        },
+        onSuccess : (data) => {
+            setViewState(
+                data.match_summary?.is_match
+                    ? ViewState.VERIFICATION_SUCCESS
+                    : ViewState.VERIFICATION_FAILED
+            );
         }
     });
 
@@ -104,16 +111,6 @@ const CamCapture = ({
         const binaryImage = captureImage();
         if (binaryImage) verifyVisitMutation.mutate(binaryImage);
     }
-
-    useEffect(() => {
-        if (verifyVisitMutation.data) {
-            setViewState(
-                verifyVisitMutation.data.match_summary?.is_match
-                    ? ViewState.VERIFICATION_SUCCESS
-                    : ViewState.VERIFICATION_FAILED
-            );
-        }
-    }, [verifyVisitMutation.data]);
 
     useEffect(() => {
         if (verifyVisitMutation.isError) {

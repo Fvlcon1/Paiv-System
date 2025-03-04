@@ -19,7 +19,9 @@ const CaptureContainer = ({
 }) => {
     return (
         <div>
-            <Overlay onClick={()=>setViewState(null)}>
+            <Overlay    
+                onClick={()=>setViewState(null)}
+            >
                 <div 
                     className="w-[500px] flex flex-col items-center p-2 relative rounded-[20px] border-[1px] border-solid border-border-tetiary h-[650px] bg-[#1F1F28]"
                     style={{

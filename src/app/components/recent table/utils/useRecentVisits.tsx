@@ -26,7 +26,7 @@ const useRecentVisits = () => {
             limit: pageSize ?? 5,
             skip: pageNumber ? pageNumber - 1 : undefined
         })
-        return response.data
+        return response.results
     }
 
     const { mutate: getRecentVisits, isPending, isError, error } = useMutation({
@@ -62,7 +62,7 @@ const useRecentVisits = () => {
                         image: (
                             <div className="rounded-lg overflow-hidden relative w-[50px] h-[50px] ">
                                 <Image
-                                    src={visit.profile_image_url}
+                                    src={visit.profile_image_url ?? null}
                                     alt="profile image"
                                     layout="intrinsic"
                                     width={50}

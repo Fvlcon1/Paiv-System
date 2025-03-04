@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { GenericAbortSignal } from "axios";
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
@@ -15,10 +15,10 @@ const getHeaders = () => {
 };
 
 export const protectedApi = {
-    GET: async (url: string, params?: any) => {
+    GET: async (url: string, params?: any, signal? : GenericAbortSignal) => {
         try {
             const headers = getHeaders();
-            const response = await axios.get(`${baseURL}${url}`, { headers, params });
+            const response = await axios.get(`${baseURL}${url}`, { headers, params, signal });
             return response.data;
         } catch (error) {
             throw error;

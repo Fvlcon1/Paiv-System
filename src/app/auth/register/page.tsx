@@ -12,12 +12,16 @@ import axios from "axios"
 import { useMutation } from "@tanstack/react-query"
 import { useRouter } from "next/navigation"
 import { message } from "antd"
+import toast from "react-hot-toast"
 
 interface SignupType {
     hospitalName : string,
     location : string,
     email : string
     password : string
+    longitude : number
+    latitude : number
+    manual : boolean
 }
 
 const Login = () => {
@@ -31,11 +35,11 @@ const Login = () => {
             email: values.email,
             password: values.password,
             location: {
-                // place_name: "string",
+                place_name: values.manual ? undefined : values.location,
                 // address: "string",
                 coordinates: {
-                    lat: 0,
-                    lng: 0
+                    lat: values.latitude,
+                    lng: values.longitude
                 }
             }
         })
@@ -45,10 +49,11 @@ const Login = () => {
     const handleSubmitMutation = useMutation({
         mutationFn : handleSubmit,
         onSuccess : ()=>{
-            alert("registration successful")
+            toast.success("registration successful")
             router.push('/auth/login')
         },
         onError: (error) => {
+            toast.error(error.message)
             console.error({error});
         }
     })
@@ -59,11 +64,17 @@ const Login = () => {
         initialValues: {
             location : '',
             hospitalName : '',
+            longitude : 0,
+            latitude : 0,
             email: '',
             password: '',
+            manual : false
         },
         validationSchema,
-        onSubmit: async (values) => mutate(values)
+        onSubmit: async (values) => {
+            console.log({values})
+            mutate(values)
+        }
     })
 
     return (
