@@ -33,7 +33,7 @@ const useSearchResults = () => {
         return data.map((visit: any) => {
             const NHISDetails: INhisDetails = {
                 firstname: visit.first_name,
-                othernames: visit.middle_name ?? '-',
+                othernames: visit.middle_name,
                 lastname: visit.last_name,
                 nhisId: visit.nhis_number,
                 lastVisit: `${(new Date(visit.last_visit)).toDateString()} | ${getTime(visit.last_visit)} | ${getRelativeTime(visit.last_visit)}`,
@@ -54,6 +54,7 @@ const useSearchResults = () => {
 
             return {
                 ...NHISDetails,
+                othernames : NHISDetails.othernames ?? '-',
                 lastVisit : (
                     visit.last_visit ?
                     <div className="flex flex-col gap-1">
