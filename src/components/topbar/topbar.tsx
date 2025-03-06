@@ -4,7 +4,7 @@ import Text from "@styles/components/text"
 import { TypographyBold } from "@styles/style.types"
 import theme from "@styles/theme"
 import Image from "next/image"
-import { FaPowerOff, FaUserCircle } from "react-icons/fa"
+import { FaHospitalSymbol, FaPowerOff, FaUserCircle } from "react-icons/fa"
 import { FiMenu } from "react-icons/fi"
 import Menu from "../dropdown/dropdown"
 import Link from "next/link"
@@ -12,9 +12,12 @@ import { DropdownItem } from "@/utils/@types"
 import { IoMdSettings } from "react-icons/io"
 import Pressable from "@components/button/pressable"
 import { useAuth } from "@/app/context/authContext"
+import { protectedApi } from "@/app/utils/apis/api"
+import { useMutation } from "@tanstack/react-query"
 
 const Topbar = () => {
     const [isScrolled, setIsScrolled] = useState(false)
+    const [hospitalName, setHospitalName] = useState('')
 
     useEffect(() => {
         const handleScroll = () => {
@@ -41,6 +44,22 @@ const Topbar = () => {
         { key: "5", label: "Logout", onClick: () => logout(false), icon: <FaPowerOff size={12} color={theme.colors.text.secondary} /> },
     ]
 
+    const getUserProfile = async() => {
+        const response = await protectedApi.GET("/user/profile")
+        return response
+    }
+    
+    const {mutate : getUserProfileMutation, isPending : isUserProfileLoading} = useMutation({
+        mutationFn : getUserProfile,
+        onSuccess : (data)=>{
+            setHospitalName(data.hospital_name)
+        }
+    })
+
+    useEffect(()=>{
+        getUserProfileMutation()
+    },[])
+
     return (
         <div className={`w-full h-[60px] flex justify-center fixed top-0 left-0 transition-all duration-300 z-50
             ${isScrolled ? "bg-bg-secondary" : "bg-transparent"}`}
@@ -58,14 +77,19 @@ const Topbar = () => {
                     </Text>
                 </Link>
                 <div className="flex items-center gap-2">
-                    <Pressable scaleFactor={1.015}>
-                        <div className="flex px-2 py-[6px] border-[1px] border-solid border-border-tetiary rounded-full bg-bg-tetiary cursor-pointer hover:bg-bg-quantinary duration-200 h-fit items-center gap-1">
-                            <FaUserCircle color={theme.colors.text.primary} />
-                            <Text textColor={theme.colors.text.primary}>
-                                Prince Nedjoh
-                            </Text>
-                        </div>
-                    </Pressable>
+                    {
+                        isUserProfileLoading ?
+                        <div className="normal-loader !w-[18px]"></div>
+                        : hospitalName &&
+                        <Pressable scaleFactor={1.015}>
+                            <div className="flex px-2 py-[6px] pr-[10px] border-[1px] border-solid border-border-tetiary rounded-full bg-bg-tetiary cursor-pointer hover:bg-bg-quantinary duration-200 h-fit items-center gap-[6px]">
+                                <FaHospitalSymbol color={theme.colors.text.primary} />
+                                <Text textColor={theme.colors.text.primary}>
+                                    {hospitalName}
+                                </Text>
+                            </div>
+                        </Pressable>
+                    }
                     <Menu menuItems={menuItems}>
                         <ClickableTab>
                             <FiMenu color={theme.colors.text.secondary} />
