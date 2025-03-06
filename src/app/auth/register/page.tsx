@@ -79,7 +79,7 @@ const Login = () => {
 
     return (
         <div className="w-full h-screen flex justify-center items-center mt-[-50px]">
-            <div className="w-[400px] flex flex-col gap-3">
+            <div className="w-[350px] flex flex-col gap-3">
                 <div className="w-full flex flex-col items-center gap-1 justify-center">
                     <Image 
                         src={"/assets/prod/logo.png"}

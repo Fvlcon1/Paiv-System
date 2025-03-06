@@ -8,12 +8,14 @@ const Container = ({
     children,
     className,
     display,
-    setDisplay
+    setDisplay,
+    closable = true
 } : {
     children? : ReactNode,
     className? : string
     display : boolean,
     setDisplay : Dispatch<SetStateAction<boolean>>
+    closable? : boolean
 }) => {
     return (
         display &&
@@ -31,14 +33,17 @@ const Container = ({
             <div className="absolute right-[-3px] bottom-[-3px] w-[70px] h-[70px] rounded-br-[20px] border-b-[5px] border-r-[5px] border-solid border-[#3C3C53]">
 
             </div>
-            <div className="absolute top-[10px] right-[10px]">
-                <ClickableTab 
-                    className="!rounded-full hover:!bg-bg-tetiary"
-                    onClick={()=>setDisplay(false)}
-                >
-                    <IoMdCloseCircle color={theme.colors.text.secondary} />
-                </ClickableTab>
-            </div>
+            {
+                closable &&
+                <div className="absolute top-[10px] right-[10px]">
+                    <ClickableTab 
+                        className="!rounded-full hover:!bg-bg-tetiary"
+                        onClick={()=>setDisplay(false)}
+                    >
+                        <IoMdCloseCircle color={theme.colors.text.secondary} />
+                    </ClickableTab>
+                </div>
+            }
             {children}
         </div>
     )

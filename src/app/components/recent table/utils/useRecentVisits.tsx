@@ -22,7 +22,7 @@ const useRecentVisits = () => {
         pageSize?: number
         pageNumber?: number
     }) => {
-        const response = await protectedApi.GET("/recent_visits", {
+        const response = await protectedApi.GET("/my_verifications", {
             limit: pageSize ?? 5,
             skip: pageNumber ? pageNumber - 1 : undefined
         })
@@ -40,11 +40,13 @@ const useRecentVisits = () => {
                         othernames: visit.middle_name,
                         lastname: visit.last_name,
                         nhisId: visit.nhis_number,
-                        lastVisitDate : visit.visit_date,
+                        lastVisitDate : (new Date(visit.verification_date)).toString(),
                         gender : visit.gender,
                         dob: (new Date(visit.date_of_birth)).toDateString(),
                         imageUrl : visit.profile_image_url,
-                        cardExpiryDate : visit.current_expiry_date
+                        cardExpiryDate : (new Date(visit.current_expiry_date)).toDateString(),
+                        verificationStatus : visit.verification_status,
+                        token : visit.token
                     }
                     
                     return {
@@ -52,10 +54,10 @@ const useRecentVisits = () => {
                         lastVisit: (
                             <div className="flex flex-col gap-1">
                                 <Text>
-                                    {`${(new Date(visit.visit_date)).toDateString()}`}
+                                    {`${(new Date(visit.verification_date)).toDateString()}`}
                                 </Text>
                                 <Text textColor={theme.colors.text.tetiary}>
-                                    {`${getTime(visit.visit_date)} | ${getRelativeTime(visit.visit_date)}`}
+                                    {`${getTime(visit.verification_date)} | ${getRelativeTime(visit.verification_date)}`}
                                 </Text>
                             </div>
                         ),
@@ -64,10 +66,9 @@ const useRecentVisits = () => {
                                 <Image
                                     src={visit.profile_image_url ?? null}
                                     alt="profile image"
-                                    layout="intrinsic"
                                     width={50}
                                     height={50}
-                                    className="w-[50px] h-[50px]"
+                                    style={{ height: "auto", width: "100%" }}
                                 />
                             </div>
                         ),
@@ -89,8 +90,8 @@ const useRecentVisits = () => {
                 setRecentVisitsTableData(transformVisitTable)
             }
         },
-        onError: (error) => {
-            toast.error(error.message)
+        onError: (error :any) => {
+            toast.error(error.response.data.detail ?? "Error fetching members")
             console.error("Error fetching members", error)
         }
     })

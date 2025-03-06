@@ -51,7 +51,7 @@ export const data = [
                     alt="Fvlcon logo"
                     width={50}
                     height={50}
-                    layout="intrinsic"
+                    style={{ height: "auto", width: "100%" }}
                 />
             </div>
         ),
@@ -89,7 +89,7 @@ export const data = [
                     alt="Fvlcon logo"
                     width={50}
                     height={50}
-                    layout="intrinsic"
+                    style={{ height: "auto", width: "100%" }}
                 />
             </div>
         ),
@@ -127,7 +127,7 @@ export const data = [
                     alt="Fvlcon logo"
                     width={50}
                     height={50}
-                    layout="intrinsic"
+                    style={{ height: "auto", width: "100%" }}
                 />
             </div>
         ),

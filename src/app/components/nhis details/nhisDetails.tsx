@@ -65,7 +65,7 @@ const NhisDetails = () => {
                                             alt="Profile Image"
                                             width={110}
                                             height={110}
-                                            layout="intrinsic"
+                                            style={{ height: "auto", width: "100%" }}
                                             className="hover:scale-[1.1] cursor-pointer duration-200"
                                             onClick={() => setZoomProfile(true)}
                                         />

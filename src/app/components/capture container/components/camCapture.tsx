@@ -96,7 +96,7 @@ const CamCapture = ({
 
             const response = await protectedApi.POST("/api/compare", formData)
 
-            return response;
+            return response.data;
         },
         onSuccess : (data) => {
             setViewState(

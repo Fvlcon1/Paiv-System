@@ -27,7 +27,7 @@ const RecentTable = () => {
               textColor={theme.colors.text.primary}
               bold={TypographyBold.md}
             >
-              Recent Visits
+              Recent Verifications
             </Text>
           </div>
           <Table

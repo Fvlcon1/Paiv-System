@@ -36,7 +36,7 @@ const Instructions = ({
                         alt="Fvlcon logo"
                         width={50}
                         height={50}
-                        layout="intrinsic"
+                        style={{ height: "auto", width: 50 }}
                         className="mt-[30px] ml-[-3px]"
                     />
                     <Text
@@ -95,7 +95,7 @@ const Instructions = ({
                                 alt="connector"
                                 width={20}
                                 height={20}
-                                layout="intrinsic"
+                                style={{ height: "auto", width: "100%" }}
                                 className=""
                             />
                         </div>
@@ -105,7 +105,7 @@ const Instructions = ({
                                 alt="connector"
                                 width={20}
                                 height={20}
-                                layout="intrinsic"
+                                style={{ height: "auto", width: "100%" }}
                                 className=""
                             />
                         </div>

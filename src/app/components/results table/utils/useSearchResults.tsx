@@ -69,7 +69,7 @@ const useSearchResults = () => {
                         <Image
                             src={visit.profile_image_url}
                             alt="profile image"
-                            layout="intrinsic"
+                            style={{ height: "auto", width: "100%" }}
                             width={50}
                             height={50}
                         />

@@ -32,7 +32,7 @@ const Hero = () => {
                         alt="Fvlcon logo"
                         width={70}
                         height={70}
-                        layout="intrinsic"
+                        style={{ height: "auto", width: 70 }}
                         className="mb-[5px]"
                     />
                     <Text

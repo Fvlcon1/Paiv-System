@@ -1,51 +1,88 @@
 'use client'
 
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState, useCallback } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Cookies from "universal-cookie";
+import SessionTimeoutAlert from "./components/sessionTimeoutAlert";
+import { setupInterceptors } from "../utils/apis/axiosInstance";
 
-const AuthContext = createContext({ logout: () => {} });
-const cookies = new Cookies()
+const AuthContext = createContext<{
+    logout : (showAlert? : boolean)=>void
+}>({ 
+    logout: () => {}
+ });
+const cookies = new Cookies();
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const pathname = usePathname();
     const router = useRouter();
-    const [isAuthenticated, setIsAuthenticated] = useState(true);
-    const logoutTimer = useRef<NodeJS.Timeout | null>(null);
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+    const [showSessionAlert, setShowSessionAlert] = useState<boolean>(false);
+    const logoutTimer = useRef<number | null>(null);
 
-    // Function to log out user
-    const logout = () => {
-        console.log("User logged out due to inactivity");
+    // 🔹 Logout function: Clears session & optionally shows alert
+    const logout = useCallback((showAlert = true) => {
         setIsAuthenticated(false);
-        cookies.remove("accessToken"); // Clear auth token
-        router.push("/auth/login"); // Redirect to login page
-    };
+        cookies.remove("accessToken");
 
-    // Function to reset timer on user activity
-    const resetTimer = () => {
+        if (pathname.startsWith("/auth")){
+            setShowSessionAlert(false);
+        }
+
+        if (showAlert) {
+            setShowSessionAlert(true);
+        } else {
+            router.push("/auth/login"); // Redirect immediately if no token
+        }
+    }, [router, pathname]);
+
+    // 🔹 Reset inactivity timer (triggers logout after inactivity)
+    const resetTimer = useCallback(() => {
         if (logoutTimer.current) clearTimeout(logoutTimer.current);
-        logoutTimer.current = setTimeout(logout, 60 * 60 * 60); // 1 hour (3600000 ms)
-    };
+        logoutTimer.current = window.setTimeout(() => {
+            console.log("timeout")
+            logout(true)
+        }, 60 * 60 * 1000);
+    }, [logout]);
 
-    // Set up event listeners for user activity
+    // 🔹 Check token on app load
     useEffect(() => {
+        const token = cookies.get("accessToken");
+
+        if (!token) {
+            logout(false); // No token? Redirect immediately
+        } else {
+            setIsAuthenticated(true);
+        }
+        setupInterceptors(logout); // Setup API interceptors
+    }, [logout]);
+
+    // 🔹 Track user activity & reset inactivity timer
+    useEffect(() => {
+        if (isAuthenticated && pathname.startsWith("/auth")) {
+            router.push("/"); // Redirect to home page
+        }
+
         if (!isAuthenticated || pathname.startsWith("/auth")) return;
-        
+
+
         const events = ["mousemove", "keydown", "click"];
         events.forEach(event => window.addEventListener(event, resetTimer));
 
-        // Start initial timer
-        resetTimer();
+        resetTimer(); // Start initial timer
 
         return () => {
             events.forEach(event => window.removeEventListener(event, resetTimer));
             if (logoutTimer.current) clearTimeout(logoutTimer.current);
         };
-    }, [isAuthenticated]);
+    }, [isAuthenticated, pathname, resetTimer]);
 
     return (
         <AuthContext.Provider value={{ logout }}>
             {children}
+            {showSessionAlert && (
+                <SessionTimeoutAlert show={showSessionAlert} />
+            )}
         </AuthContext.Provider>
     );
 };

@@ -23,9 +23,8 @@ const Table = ({
             ["NHIS Number", recentVisit.nhisId],
             ["Last Visit Date", `${(new Date(recentVisit.lastVisitDate)).toDateString()}`],
             ["Last Visit Time", `${getTime(new Date(recentVisit.lastVisitDate))} | ${getRelativeTime(new Date(recentVisit.lastVisitDate))}`],
-            ["Location", "Uknown"],
-            ["Visit Id", <Copychip containerClassName="bg-bg-quantinary">Unknown</Copychip>],
-            ["Verification Status", "Unknown"],
+            ["Token", <Copychip containerClassName="bg-bg-quantinary">{recentVisit.token}</Copychip>],
+            ["Verification Status", recentVisit.verificationStatus ? "True" : "False"],
             ["Card Expiry Date", `${(new Date(recentVisit.cardExpiryDate)).toDateString()}`],
             ["Card Validity", recentVisit.cardValidity],
             

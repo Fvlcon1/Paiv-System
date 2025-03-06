@@ -50,12 +50,12 @@ const Login = () => {
     const handleSubmitMutation = useMutation({
         mutationFn : handeleSubmit,
         onSuccess : (data)=>{
-            cookies.set("accessToken", data.access_token)
+            cookies.set("accessToken", data.access_token, {path : "/"})
             toast.success("Login successful")
             router.push("/")
         },
-        onError : (error)=>{
-            toast.error(error.message)
+        onError : (error : any)=>{
+            toast.error(error.response.data.detail ?? "Error fetching members")
             console.log({error})
         }
     })
@@ -76,7 +76,7 @@ const Login = () => {
 
     return (
         <div className="w-full h-screen flex justify-center items-center mt-[-50px]">
-            <div className="w-[300px] flex flex-col gap-3">
+            <div className="w-[350px] flex flex-col gap-3">
                 <div className="w-full flex flex-col items-center gap-1 justify-center">
                     <Image 
                         src={"/assets/prod/logo.png"}

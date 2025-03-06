@@ -11,6 +11,7 @@ import { DropdownItem } from "@/utils/@types"
 import { IoMdSettings } from "react-icons/io"
 import { TbLogout2 } from "react-icons/tb"
 import Pressable from "@components/button/pressable"
+import { useAuth } from "@/app/context/authContext"
 
 const Topbar = () => {
     const navTabs = [
@@ -23,13 +24,15 @@ const Topbar = () => {
             active : false
         }
     ]
+    const {logout} = useAuth()
+
     const menuItems: DropdownItem[] = [
         { key: "1", label: "Pages", type : 'title', disabled: true },
         { key: "2", type : 'link', href : "/", label: "Search" },
         { key: "3", type : 'link', href : "/claims", label: "Claims" },
         { type: "divider", key: "divider-2" },
         { key: "4", label: "Settings", icon: <IoMdSettings size={15} className="ml-[-1.5px]" color={theme.colors.text.secondary} /> },
-        { key: "5", label: "Logout", type : 'link', href : "/auth/login",  icon: <FaPowerOff size={12} color={theme.colors.text.secondary} /> },
+        { key: "5", label: "Logout", onClick : ()=>logout(false),  icon: <FaPowerOff size={12} color={theme.colors.text.secondary} /> },
     ];
 
     return (

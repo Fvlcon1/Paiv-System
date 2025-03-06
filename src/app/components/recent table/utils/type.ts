@@ -10,6 +10,8 @@ export interface IRecentVisits {
     gender : string,
     dob : string,
     cardExpiryDate : string
+    verificationStatus : boolean
+    token : string
 }
 export interface IRecentVisitsTable extends IRecentVisits {
     image : ReactNode,
