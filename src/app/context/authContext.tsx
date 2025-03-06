@@ -80,7 +80,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return (
         <AuthContext.Provider value={{ logout }}>
             {children}
-            {showSessionAlert && (
+            {showSessionAlert && pathname.startsWith("/auth") &&(
                 <SessionTimeoutAlert show={showSessionAlert} />
             )}
         </AuthContext.Provider>
