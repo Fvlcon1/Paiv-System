@@ -10,6 +10,7 @@ import PrivacyText from "./privacyText"
 import StayLoggedIn from "./stayLoggedIn"
 import { RiLockPasswordFill } from "react-icons/ri"
 import { GiHospitalCross } from "react-icons/gi"
+import { FaEye, FaEyeSlash } from "react-icons/fa"
 
 const Form = ({
     loading,
@@ -60,10 +61,24 @@ const Form = ({
                 error={formik.errors.password}
                 PreIcon={<RiLockPasswordFill color={theme.colors.text.tetiary}/>}
                 name="password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Enter password"
                 label="Password"
                 autoComplete="password"
+                PostIcon={
+                    showPassword ? 
+                    <FaEyeSlash
+                        color={theme.colors.text.secondary}
+                        onClick={()=>setShowPassword(false)}
+                        className='cursor-pointer'
+                    /> 
+                    : 
+                    <FaEye
+                        color={theme.colors.text.secondary}
+                        onClick={()=>setShowPassword(true)}
+                        className='cursor-pointer'
+                    />
+                }
             />
             <div className="pl-1 text-main-primary w-fit cursor-pointer">
                 <Text

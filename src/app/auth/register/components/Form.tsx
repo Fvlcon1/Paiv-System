@@ -12,7 +12,7 @@ import { GiHospitalCross } from "react-icons/gi"
 import { IoLocation, IoMap } from "react-icons/io5"
 import Pressable from "@components/button/pressable"
 import { DropdownItem } from "@/utils/@types"
-import { FaPowerOff } from "react-icons/fa"
+import { FaEye, FaEyeSlash, FaPowerOff } from "react-icons/fa"
 import { IoMdSettings } from "react-icons/io"
 import Dropdown from "@components/dropdown/dropdown"
 import Coordinates from "./coordinates"
@@ -33,6 +33,7 @@ const Form = ({
     const [coordinates, setCoordinates] = useState('')
     const [dropdownItems, setDropdownItems] = useState<DropdownItem[]>([])
     const controllerRef = useRef<AbortController>(null)
+    const [showPassword, setShowPassword] = useState(false)
 
     const setCoodinatesInput = (value : string) => {
         console.log({value})
@@ -219,9 +220,23 @@ const Form = ({
                 error={formik.errors.password}
                 PreIcon={<RiLockPasswordFill color={theme.colors.text.tetiary}/>}
                 name="password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Enter password"
                 label="Password"
+                PostIcon={
+                    showPassword ? 
+                    <FaEyeSlash
+                        color={theme.colors.text.secondary}
+                        onClick={()=>setShowPassword(false)}
+                        className='cursor-pointer'
+                    /> 
+                    : 
+                    <FaEye
+                        color={theme.colors.text.secondary}
+                        onClick={()=>setShowPassword(true)}
+                        className='cursor-pointer'
+                    />
+                }
             />
             <Button
                 text="Register"
