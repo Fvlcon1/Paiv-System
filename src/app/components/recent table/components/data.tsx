@@ -79,6 +79,17 @@ export const columns = [
         }
     },
     {
+        accessorKey : 'verificationStatus',
+        header : 'Verification Status',
+        cell : ({getValue} : {getValue : any}) => {
+            return (
+                <Text>
+                    {getValue()}
+                </Text>
+            )
+        }
+    },
+    {
         accessorKey : 'gender',
         header : 'Gender',
         cell : ({getValue} : {getValue : any}) => {

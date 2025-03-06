@@ -19,22 +19,14 @@ const Topbar = () => {
     const [isScrolled, setIsScrolled] = useState(false)
     const [hospitalName, setHospitalName] = useState('')
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 10) // Change background if scrolled more than 10px
-        }
-
-        window.addEventListener("scroll", handleScroll)
-        return () => window.removeEventListener("scroll", handleScroll)
-    }, [])
-
+    
     const navTabs = [
         { name: "Add Questions", active: true },
         { name: "Curate Questions", active: false }
     ]
-
+    
     const { logout } = useAuth()
-
+    
     const menuItems: DropdownItem[] = [
         { key: "1", label: "Pages", type: 'title', disabled: true },
         { key: "2", type: 'link', href: "/", label: "Search" },
@@ -43,7 +35,7 @@ const Topbar = () => {
         { key: "4", label: "Settings", icon: <IoMdSettings size={15} className="ml-[-1.5px]" color={theme.colors.text.secondary} /> },
         { key: "5", label: "Logout", onClick: () => logout(false), icon: <FaPowerOff size={12} color={theme.colors.text.secondary} /> },
     ]
-
+    
     const getUserProfile = async() => {
         const response = await protectedApi.GET("/user/profile")
         return response
@@ -55,6 +47,15 @@ const Topbar = () => {
             setHospitalName(data.hospital_name)
         }
     })
+    
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 10)
+        }
+
+        window.addEventListener("scroll", handleScroll)
+        return () => window.removeEventListener("scroll", handleScroll)
+    }, [])
 
     useEffect(()=>{
         getUserProfileMutation()

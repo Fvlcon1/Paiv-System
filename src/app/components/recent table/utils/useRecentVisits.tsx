@@ -51,6 +51,16 @@ const useRecentVisits = () => {
                     
                     return {
                         ...recentVisit,
+                        othernames : recentVisit.othernames ?? '-',
+                        verificationStatus : recentVisit.verificationStatus ? (
+                            <Text textColor="#60B956">
+                                Successful
+                            </Text>
+                        ) : (
+                            <Text textColor="#db4040">
+                                Failed
+                            </Text>
+                        ),
                         lastVisit: (
                             <div className="flex flex-col gap-1">
                                 <Text>
