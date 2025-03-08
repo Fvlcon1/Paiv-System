@@ -11,7 +11,7 @@ export const data = [
             <div className="rounded-lg overflow-hidden relative w-[50px] h-[50px] ">
                 <Image
                     src={"/assets/dev/profile.png"}
-                    alt="Fvlcon logo"
+                    alt="logo"
                     width={50}
                     height={50}
                 />
@@ -48,7 +48,7 @@ export const data = [
             <div className="rounded-lg overflow-hidden relative w-[50px] h-[50px] ">
                 <Image
                     src={"/assets/dev/profile.png"}
-                    alt="Fvlcon logo"
+                    alt="logo"
                     width={50}
                     height={50}
                     style={{ height: "auto", width: "100%" }}
@@ -86,7 +86,7 @@ export const data = [
             <div className="rounded-lg overflow-hidden relative w-[50px] h-[50px] ">
                 <Image
                     src={"/assets/dev/profile.png"}
-                    alt="Fvlcon logo"
+                    alt="logo"
                     width={50}
                     height={50}
                     style={{ height: "auto", width: "100%" }}
@@ -124,7 +124,7 @@ export const data = [
             <div className="rounded-lg overflow-hidden relative w-[50px] h-[50px] ">
                 <Image
                     src={"/assets/dev/profile.png"}
-                    alt="Fvlcon logo"
+                    alt="logo"
                     width={50}
                     height={50}
                     style={{ height: "auto", width: "100%" }}

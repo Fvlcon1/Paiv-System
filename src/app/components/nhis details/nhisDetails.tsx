@@ -80,7 +80,7 @@ const NhisDetails = () => {
                             <div className="px-4 w-full">
                                 <Button
                                     text="Verify Visit"
-                                    className="mt-[20px] !w-full !h-[45px] !border-none !bg-green-700"
+                                    className="mt-[20px] !w-full !h-[45px] !border-none !bg-main-primary"
                                     onClick={() => setViewState(ViewState.INSTRUCTIONS)}
                                 />
                             </div>

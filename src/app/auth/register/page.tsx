@@ -83,7 +83,7 @@ const Login = () => {
                 <div className="w-full flex flex-col items-center gap-1 justify-center">
                     <Image 
                         src={"/assets/prod/logo.png"}
-                        alt="Fvlcon logo"
+                        alt="logo"
                         width={25}
                         height={25}
                     />

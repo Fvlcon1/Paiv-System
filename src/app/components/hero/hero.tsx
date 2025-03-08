@@ -29,7 +29,7 @@ const Hero = () => {
                 <div className="max-w-[600px] w-full flex flex-col gap-[2px] items-center justify-center">
                     <Image
                         src={"/assets/prod/nhis-logo.png"}
-                        alt="Fvlcon logo"
+                        alt="logo"
                         width={70}
                         height={70}
                         style={{ height: "auto", width: 70 }}

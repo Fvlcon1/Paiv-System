@@ -1,9 +1,9 @@
 'use client'
 import { message } from 'antd';
-import React, { createContext, useState, ReactNode } from 'react';
+import React, { createContext, useState, ReactNode, useContext } from 'react';
 import { Dispatch } from 'react';
-import { INhisDetails, IRearchResults } from '../components/results table/utils/type';
-import { ViewState } from '../utils/types';
+import { IDispositionType, INhisDetails, IRearchResults } from '../components/results table/utils/type';
+import { DispositionViewState, ViewState } from '../utils/types';
 
 export const mainContext = createContext<{
     searchMembersResult : any[]
@@ -18,6 +18,10 @@ export const mainContext = createContext<{
     viewState: ViewState | null
     setCaptureImageUrl: React.Dispatch<React.SetStateAction<string | null>>
     capturedImageUrl: string | null
+    setDispositionViewState: React.Dispatch<React.SetStateAction<DispositionViewState | null>>
+    dispositionViewState: DispositionViewState | null
+    setSelectedDisposition: React.Dispatch<React.SetStateAction<IDispositionType | undefined>>
+    selectedDisposition: IDispositionType | undefined
 }>({
     searchMembersResult : [],
     setSearchMembersResult: ()=>{},
@@ -30,7 +34,11 @@ export const mainContext = createContext<{
     setViewState : ()=>{},
     viewState : null,
     setCaptureImageUrl : ()=>{},
-    capturedImageUrl : null
+    capturedImageUrl : null,
+    setDispositionViewState : ()=>{},
+    dispositionViewState : null,
+    setSelectedDisposition : ()=>{},
+    selectedDisposition : undefined
 });
 
 export const MainContextProvider = ({ children }: { children: ReactNode }) => {
@@ -39,7 +47,9 @@ export const MainContextProvider = ({ children }: { children: ReactNode }) => {
     const [showNhisDetails, setShowNhisDetails] = useState(false)
     const [nhisDetails, setNhisDetails] = useState<INhisDetails>()
     const [viewState, setViewState] = useState<ViewState | null>(null);
+    const [dispositionViewState, setDispositionViewState] = useState<DispositionViewState | null>(null);
     const [capturedImageUrl, setCaptureImageUrl] = useState<string | null>(null)
+    const [selectedDisposition, setSelectedDisposition] = useState<IDispositionType>()
     return (
         <mainContext.Provider value={{ 
             searchMembersResult,
@@ -53,9 +63,15 @@ export const MainContextProvider = ({ children }: { children: ReactNode }) => {
             viewState,
             setViewState,
             setCaptureImageUrl,
-            capturedImageUrl
+            capturedImageUrl,
+            setDispositionViewState,
+            dispositionViewState,
+            setSelectedDisposition,
+            selectedDisposition
          }}>
             {children}
         </mainContext.Provider>
     );
 };
+
+export const useMainContext = () => useContext(mainContext)

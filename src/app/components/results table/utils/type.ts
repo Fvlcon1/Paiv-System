@@ -31,4 +31,11 @@ export interface INhisDetails {
     phoneNumber : string
     ghanaCardNumber : string
     memberShipId : string
+    token? : string
+}
+
+export interface IDispositionType {
+    id : string,
+    name : string,
+    description : string
 }

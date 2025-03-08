@@ -8,13 +8,13 @@ import { VscUnverified, VscVerified } from "react-icons/vsc";
 import Text from "@styles/components/text";
 import { TypographyBold } from "@styles/style.types";
 import Button from "@components/button/button";
-import { ViewState } from "@/app/utils/types";
+import { DispositionViewState, ViewState } from "@/app/utils/types";
 import { getTime, getRelativeTime } from "@/utils/getDate";
 import theme from "@styles/theme";
 import { protectedApi } from "@/app/utils/apis/api";
 
 const useSearchResults = () => {
-    const { setSearchMembersResult, setNhisDetails, setViewState } = useContext(mainContext);
+    const { setSearchMembersResult, setNhisDetails, setViewState, setDispositionViewState } = useContext(mainContext);
     let fetchResultsControllerRef = useRef<AbortController>(null)
 
     const fetchSearchResults = async ({
@@ -47,7 +47,8 @@ const useSearchResults = () => {
                 residentialAddress: visit.residential_address,
                 phoneNumber: visit.phone_number,
                 ghanaCardNumber: visit.ghana_card_number,
-                memberShipId: visit.membership_id
+                memberShipId: visit.membership_id,
+                token : visit.token
             };
 
             const isExpired = new Date(visit.current_expiry_date) < new Date();
@@ -91,6 +92,25 @@ const useSearchResults = () => {
                         </Text>
                     </div>
                 ),
+                // verifyVisit: (
+                //     visit.disposition || !visit.last_visit ?
+                //     <Button
+                //         text="View Details"
+                //         onClick={() => {
+                //             setNhisDetails({ ...NHISDetails, imageUrl: visit.profile_image_url });
+                //             setViewState(ViewState.NHIS_DETAILS);
+                //         }}
+                //     />
+                //     :
+                //     <Button
+                //         text="Checkout"
+                //         className="!bg-bg-secondary hover:!bg-bg-quantinary"
+                //         onClick={() => {
+                //             setNhisDetails({ ...NHISDetails, imageUrl: visit.profile_image_url });
+                //             setDispositionViewState(DispositionViewState.NHIS_DETAILS);
+                //         }}
+                //     />
+                // ),
                 verifyVisit: (
                     <Button
                         text="View Details"
@@ -99,7 +119,7 @@ const useSearchResults = () => {
                             setViewState(ViewState.NHIS_DETAILS);
                         }}
                     />
-                )
+                ),
             };
         });
     }

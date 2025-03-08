@@ -9,22 +9,20 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { MdVerifiedUser } from "react-icons/md"
 import { RiCameraLensFill } from "react-icons/ri"
 import { TbFaceId } from "react-icons/tb"
-import { ViewState } from "@/app/utils/types"
+import { DispositionViewState, ViewState } from "@/app/utils/types"
+import { useMainContext } from "@/app/context/context"
 
-const Instructions = ({
-    setViewState
-} : {
-    setViewState: Dispatch<SetStateAction<ViewState | null>>
-}) => {
+const Instructions = () => {
     const [isVisible, setIsVisible] = useState(true)
+    const {setDispositionViewState} = useMainContext()
 
     useEffect(()=>{
         if(!isVisible)
-            setViewState(null)
+            setDispositionViewState(null)
     },[isVisible])
     return (
         isVisible ?
-        <Overlay onClick={()=>setViewState(null)}>
+        <Overlay onClick={()=>setDispositionViewState(null)}>
             <Container  
                 className="w-[450px] !px-10 !py-6"
                 display={isVisible}
@@ -112,7 +110,7 @@ const Instructions = ({
                     </div>
                     <Button 
                         text="Continue"
-                        onClick={()=>setViewState(ViewState.CAPTURE)}
+                        onClick={()=>setDispositionViewState(DispositionViewState.CAPTURE)}
                     />
                 </div>
             </Container>

@@ -69,7 +69,7 @@ const Topbar = () => {
                 <Link className="flex items-center gap-1" href={'/'}>
                     <Image 
                         src={"/assets/prod/logo.png"}
-                        alt="Fvlcon logo"
+                        alt="logo"
                         width={25}
                         height={25}
                     />

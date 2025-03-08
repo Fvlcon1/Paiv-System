@@ -6,12 +6,14 @@ import NhisDetails from "./components/nhis details/nhisDetails";
 import ResultsTable from "./components/results table/resultsTable";
 import { useContext } from "react";
 import { mainContext } from "./context/context";
+import Disposition from "./components/disposition/disposition";
 
 export default function Home() {
   const {searchValue, setSearchValue, setShowNhisDetails, showNhisDetails} = useContext(mainContext)
   return (
     <>
       <NhisDetails />
+      <Disposition />
       <div className="flex flex-col gap-[30px]">
         <Hero />
         {
