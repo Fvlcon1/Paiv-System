@@ -1,6 +1,6 @@
 import { message } from "antd"
 import axios from "axios"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { useMutation } from "@tanstack/react-query"
 import { IRecentVisitsTable, IRecentVisits } from './type';
 import Image from "next/image"
@@ -11,9 +11,14 @@ import { getRelativeTime, getTime } from "@/utils/getDate"
 import theme from "@styles/theme"
 import toast from "react-hot-toast";
 import { protectedApi } from "@/app/utils/apis/api";
+import Button from "@components/button/button";
+import { mainContext } from "@/app/context/context";
+import { DispositionViewState } from "@/app/utils/types";
+import { INhisDetails } from "../../results table/utils/type";
 
 const useRecentVisits = () => {
     const [recentVisitsTableData, setRecentVisitsTableData] = useState<IRecentVisitsTable[]>([])
+    const { setSearchMembersResult, setNhisDetails, setViewState, setDispositionViewState } = useContext(mainContext);
 
     const fetchRecentVisits = async ({
         pageSize,
@@ -48,6 +53,26 @@ const useRecentVisits = () => {
                         verificationStatus : visit.verification_status,
                         token : visit.token
                     }
+
+                    const NHISDetails: INhisDetails = {
+                        firstname: visit.first_name,
+                        othernames: visit.middle_name,
+                        lastname: visit.last_name,
+                        nhisId: visit.nhis_number,
+                        lastVisit: `${(new Date(visit.last_visit)).toDateString()} | ${getTime(visit.last_visit)} | ${getRelativeTime(visit.last_visit)}`,
+                        gender: visit.gender,
+                        dob: new Date(visit.date_of_birth).toDateString(),
+                        maritalStatus: visit.marital_status,
+                        expirtyDate: visit.current_expiry_date,
+                        enrolementStatus: visit.enrolment_status,
+                        insuranceType: visit.insurance_type,
+                        issueDate: visit.issue_date,
+                        residentialAddress: visit.residential_address,
+                        phoneNumber: visit.phone_number,
+                        ghanaCardNumber: visit.ghana_card_number,
+                        memberShipId: visit.membership_id,
+                        token : visit.token
+                    };
                     
                     return {
                         ...recentVisit,
@@ -70,6 +95,19 @@ const useRecentVisits = () => {
                                     {`${getTime(visit.verification_date)} | ${getRelativeTime(visit.verification_date)}`}
                                 </Text>
                             </div>
+                        ),
+                        checkout : (
+                            visit.verification_date && !visit.disposition_name ?
+                            <Button
+                                text="Checkout"
+                                className="!bg-bg-secondary hover:!bg-bg-quantinary"
+                                onClick={() => {
+                                    setNhisDetails({ ...NHISDetails, imageUrl: visit.profile_image_url });
+                                    setDispositionViewState(DispositionViewState.NHIS_DETAILS);
+                                }}
+                            />
+                            :
+                            "-"
                         ),
                         image: (
                             <div className="rounded-lg overflow-hidden relative w-[50px] h-[50px] ">

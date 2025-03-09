@@ -6,11 +6,8 @@ import Cookies from "universal-cookie";
 import SessionTimeoutAlert from "./components/sessionTimeoutAlert";
 import { setupInterceptors } from "../utils/apis/axiosInstance";
 
-const AuthContext = createContext<{
-    logout : (showAlert? : boolean)=>void
-}>({ 
-    logout: () => {}
- });
+const AuthContext = createContext<{ logout: (showAlert?: boolean) => void }>({ logout: () => {} });
+
 const cookies = new Cookies();
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
@@ -20,30 +17,33 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [showSessionAlert, setShowSessionAlert] = useState<boolean>(false);
     const logoutTimer = useRef<number | null>(null);
 
-    // 🔹 Logout function: Clears session & optionally shows alert
+    // 🔹 Logout function (Prevents showing session alert on /auth pages)
     const logout = useCallback((showAlert = true) => {
         setIsAuthenticated(false);
         cookies.remove("accessToken");
 
-        if (pathname.startsWith("/auth")){
-            return setShowSessionAlert(false);
+        if (pathname.startsWith("/auth")) {
+            setShowSessionAlert(false); // Hide session alert immediately
+            return;
         }
 
         if (showAlert) {
             setShowSessionAlert(true);
         } else {
-            router.push("/auth/login"); // Redirect immediately if no token
+            router.push("/auth/login"); // Redirect if no token
         }
-    }, [router, pathname]);
+    }, [pathname, router]);
 
-    // 🔹 Reset inactivity timer (triggers logout after inactivity)
+    // 🔹 Reset inactivity timer (Prevents logout on /auth pages)
     const resetTimer = useCallback(() => {
         if (logoutTimer.current) clearTimeout(logoutTimer.current);
+        
         logoutTimer.current = window.setTimeout(() => {
-            console.log("timeout")
-            logout(true)
+            if (!pathname.startsWith("/auth")) { // Ensure logout only runs if NOT on auth pages
+                logout(true);
+            }
         }, 60 * 60 * 1000);
-    }, [logout]);
+    }, [logout, pathname]);
 
     // 🔹 Check token on app load
     useEffect(() => {
@@ -54,17 +54,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         } else {
             setIsAuthenticated(true);
         }
-        setupInterceptors(logout); // Setup API interceptors
+
+        setupInterceptors(logout); // ✅ Runs only once
     }, [logout]);
 
     // 🔹 Track user activity & reset inactivity timer
     useEffect(() => {
-        if (isAuthenticated && pathname.startsWith("/auth")) {
-            router.push("/"); // Redirect to home page
-        }
-
         if (!isAuthenticated || pathname.startsWith("/auth")) return;
-
 
         const events = ["mousemove", "keydown", "click"];
         events.forEach(event => window.addEventListener(event, resetTimer));
@@ -80,9 +76,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return (
         <AuthContext.Provider value={{ logout }}>
             {children}
-            {showSessionAlert && pathname.startsWith("/auth") &&(
-                <SessionTimeoutAlert show={showSessionAlert} />
-            )}
+            {showSessionAlert && !pathname.startsWith("/auth") && <SessionTimeoutAlert show={showSessionAlert} />}
         </AuthContext.Provider>
     );
 };

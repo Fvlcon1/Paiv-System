@@ -7,12 +7,17 @@ import { TypographyBold, TypographySize } from "@styles/style.types";
 import theme from "@styles/theme";
 import Button from "@components/button/button";
 import { motion } from "framer-motion";
+import { IoIosArrowBack } from "react-icons/io";
+import Pressable from "@components/button/pressable";
+import { useMFAContext } from "../context/mfaContext";
+import { MFAViewStates } from "../utils/types";
 
 const MFACode = () => {
     const [otp, setOtp] = useState(["", "", "", "", "", ""]);
     const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
     const [timeLeft, setTimeLeft] = useState(60 * 5);
-    const [canResend, setCanResend] = useState(false); // Disable resend initially
+    const [canResend, setCanResend] = useState(false);
+    const {setViewState} = useMFAContext()
 
     useEffect(() => {
         if (timeLeft > 0) {
@@ -83,6 +88,18 @@ const MFACode = () => {
             transition={{ duration: 0.5 }}
         >
             <form className="flex flex-col gap-4 items-center mt-[-50px]">
+                <Pressable 
+                    className="w-full mb-[20px] flex items-center gap-1 hover:opacity-70 cursor-pointer duration-200"
+                    scaleFactor={0.99}
+                    onClick={()=>setViewState(MFAViewStates.MFA_SELECTION)}
+                >
+                    <IoIosArrowBack 
+                        color={theme.colors.text.secondary}
+                    />
+                    <Text>
+                        Back
+                    </Text>
+                </Pressable>
                 <div className="flex flex-col gap-0 items-center">
                     <Text
                         fontfamily="greater-theory"

@@ -94,7 +94,7 @@ const CamCapture = ({
             formData.append("disposition_id", selectedDisposition?.id || "");
             formData.append("webcam_image", new Blob([binaryImage], { type: "image/png" }), "image.png");
 
-            const response = await protectedApi.POST("/api/compare", formData)
+            const response = await protectedApi.POST("/api/encounter", formData)
 
             return response.data;
         },

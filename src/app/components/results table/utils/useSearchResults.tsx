@@ -68,6 +68,20 @@ const useSearchResults = () => {
                     </div>
                     : <Text>-</Text>
                 ),
+                checkout : (
+                    visit.last_visit && !visit.disposition_name ?
+                    <Button
+                        text="Checkout"
+                        className="!bg-bg-secondary hover:!bg-bg-quantinary"
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            setNhisDetails({ ...NHISDetails, imageUrl: visit.profile_image_url });
+                            setDispositionViewState(DispositionViewState.NHIS_DETAILS);
+                        }}
+                    />
+                    :
+                    "-"
+                ),
                 image: (
                     <div className="rounded-lg overflow-hidden relative w-[50px] h-[50px]">
                         <Image
@@ -92,25 +106,6 @@ const useSearchResults = () => {
                         </Text>
                     </div>
                 ),
-                // verifyVisit: (
-                //     visit.disposition || !visit.last_visit ?
-                //     <Button
-                //         text="View Details"
-                //         onClick={() => {
-                //             setNhisDetails({ ...NHISDetails, imageUrl: visit.profile_image_url });
-                //             setViewState(ViewState.NHIS_DETAILS);
-                //         }}
-                //     />
-                //     :
-                //     <Button
-                //         text="Checkout"
-                //         className="!bg-bg-secondary hover:!bg-bg-quantinary"
-                //         onClick={() => {
-                //             setNhisDetails({ ...NHISDetails, imageUrl: visit.profile_image_url });
-                //             setDispositionViewState(DispositionViewState.NHIS_DETAILS);
-                //         }}
-                //     />
-                // ),
                 verifyVisit: (
                     <Button
                         text="View Details"

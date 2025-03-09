@@ -1,163 +1,4 @@
-import Button from "@components/button/button"
 import Text from "@styles/components/text"
-import { TypographyBold } from "@styles/style.types"
-import Image from "next/image"
-import { RiVerifiedBadgeFill } from "react-icons/ri"
-import { VscUnverified } from "react-icons/vsc"
-
-export const data = [
-    {
-        image : (
-            <div className="rounded-lg overflow-hidden relative w-[50px] h-[50px] ">
-                <Image
-                    src={"/assets/dev/profile.png"}
-                    alt="logo"
-                    width={50}
-                    height={50}
-                />
-            </div>
-        ),
-        firstname : "Chris",
-        othernames : "Oduro",
-        lastname : "Ampeh",
-        NHISID : "9832993",
-        lastVisit : (new Date()).toDateString(),
-        gender : 'male',
-        cardValidity : (
-            <div className="flex gap-1 items-center">
-                <VscUnverified
-                    color="#db4040"
-                    size={18}
-                />
-                <Text
-                    textColor="#db4040"
-                    bold={TypographyBold.md}
-                >
-                    Expired
-                </Text>
-            </div>
-        ),
-        verifyVisit : (
-            <Button 
-                text="Verify Visit"
-            />
-        )
-    },
-    {
-        image : (
-            <div className="rounded-lg overflow-hidden relative w-[50px] h-[50px] ">
-                <Image
-                    src={"/assets/dev/profile.png"}
-                    alt="logo"
-                    width={50}
-                    height={50}
-                    style={{ height: "auto", width: "100%" }}
-                />
-            </div>
-        ),
-        firstname : "Chris",
-        othernames : "Oduro",
-        lastname : "Ampeh",
-        NHISID : "9832993",
-        lastVisit : (new Date()).toDateString(),
-        gender : 'male',
-        cardValidity : (
-            <div className="flex gap-1 items-center">
-                <RiVerifiedBadgeFill
-                    color="green"
-                    size={18}
-                />
-                <Text
-                    textColor="green"
-                    bold={TypographyBold.md}
-                >
-                    Valid Card
-                </Text>
-            </div>
-        ),
-        verifyVisit : (
-            <Button 
-                text="Verify Visit"
-            />
-        )
-    },
-    {
-        image : (
-            <div className="rounded-lg overflow-hidden relative w-[50px] h-[50px] ">
-                <Image
-                    src={"/assets/dev/profile.png"}
-                    alt="logo"
-                    width={50}
-                    height={50}
-                    style={{ height: "auto", width: "100%" }}
-                />
-            </div>
-        ),
-        firstname : "Chris",
-        othernames : "Oduro",
-        lastname : "Ampeh",
-        NHISID : "9832993",
-        lastVisit : (new Date()).toDateString(),
-        gender : 'male',
-        cardValidity : (
-            <div className="flex gap-1 items-center">
-                <VscUnverified
-                    color="#db4040"
-                    size={18}
-                />
-                <Text
-                    textColor="#db4040"
-                    bold={TypographyBold.md}
-                >
-                    Expired
-                </Text>
-            </div>
-        ),
-        verifyVisit : (
-            <Button 
-                text="Verify Visit"
-            />
-        )
-    },
-    {
-        image : (
-            <div className="rounded-lg overflow-hidden relative w-[50px] h-[50px] ">
-                <Image
-                    src={"/assets/dev/profile.png"}
-                    alt="logo"
-                    width={50}
-                    height={50}
-                    style={{ height: "auto", width: "100%" }}
-                />
-            </div>
-        ),
-        firstname : "Chris",
-        othernames : "Oduro",
-        lastname : "Ampeh",
-        NHISID : "9832993",
-        lastVisit : (new Date()).toDateString(),
-        gender : 'male',
-        cardValidity : (
-            <div className="flex gap-1 items-center">
-                <RiVerifiedBadgeFill
-                    color="green"
-                    size={18}
-                />
-                <Text
-                    textColor="green"
-                    bold={TypographyBold.md}
-                >
-                    Valid Card
-                </Text>
-            </div>
-        ),
-        verifyVisit : (
-            <Button 
-                text="Verify Visit"
-            />
-        )
-    }
-]
 
 export const columns = [
     {
@@ -218,6 +59,17 @@ export const columns = [
     {
         accessorKey : 'lastVisit',
         header : 'Last Visit',
+        cell : ({getValue} : {getValue : any}) => {
+            return (
+                <Text>
+                    {getValue()}
+                </Text>
+            )
+        }
+    },
+    {
+        accessorKey : 'checkout',
+        header : 'Checkout',
         cell : ({getValue} : {getValue : any}) => {
             return (
                 <Text>

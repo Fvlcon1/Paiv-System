@@ -79,6 +79,17 @@ export const columns = [
         }
     },
     {
+        accessorKey : 'checkout',
+        header : 'Checkout',
+        cell : ({getValue} : {getValue : any}) => {
+            return (
+                <Text>
+                    {getValue()}
+                </Text>
+            )
+        }
+    },
+    {
         accessorKey : 'verificationStatus',
         header : 'Verification Status',
         cell : ({getValue} : {getValue : any}) => {

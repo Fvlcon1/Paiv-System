@@ -1,5 +1,5 @@
 import { TypographyBold, TypographySize } from "@styles/style.types";
-import { ElementType, ReactNode } from "react";
+import { ElementType, MouseEvent, ReactNode } from "react";
 
 export type overflow = "visible" | "hidden" | "clip" | "scroll" | "auto"
 
@@ -37,12 +37,12 @@ export interface baseProps {
     hover? : Omit<ButtonStyleProps, 'onHover'>
   }
   
-export interface ButtonProps extends ButtonStyleProps {
-    loading? : boolean
-    type?: ButtonTypes
-    text? : string
-    icon? : ReactNode
-    onClick?: () => void
+  export interface ButtonProps extends ButtonStyleProps {
+    loading?: boolean;
+    type?: ButtonTypes;
+    text?: string;
+    icon?: ReactNode;
+    onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 export type ButtonTypes = 'submit' | 'button'
