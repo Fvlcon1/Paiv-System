@@ -5,7 +5,7 @@ import MFACode from "./components/MFACode"
 import MFASelection from "./components/MFASelection"
 import { useMFAContext } from "./context/mfaContext"
 import { MFAViewStates } from "./utils/types"
-import MobileAuthenticator from "./components/MobileAuthenticator"
+import MobileAuthenticator from "./components/mobile auth/MobileAuthenticator"
 
 const MFA = () => {
     const {viewState} = useMFAContext()

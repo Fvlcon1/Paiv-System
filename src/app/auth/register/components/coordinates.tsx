@@ -103,7 +103,7 @@ const Coordinates = ({
                     text="Save & Apply"
                     className="!bg-main-primary"
                     type="button"
-                    onClick={formik.handleSubmit}
+                    onClick={(e:any)=>formik.handleSubmit(e)}
                 />
             </div>
         </div>
