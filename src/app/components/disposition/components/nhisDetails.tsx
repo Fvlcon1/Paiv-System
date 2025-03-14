@@ -57,7 +57,7 @@ const NhisDetails = () => {
                     </div>
                     <div className="px-4 w-full">
                         <Button
-                            text="Verify Checkout"
+                            text="Close Encounter"
                             className="mt-[20px] !w-full !h-[45px] !border-none !bg-main-primary"
                             onClick={() => setDispositionViewState(DispositionViewState.SELECT_DISPOSITION)}
                         />

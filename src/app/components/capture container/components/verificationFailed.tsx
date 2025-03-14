@@ -25,7 +25,7 @@ const VeficationFailed = () => {
                 <Container
                     display={isVisible}
                     setDisplay={setIsVisible}
-                    className="!w-[500px] justify-center"
+                    className="!w-fit !py-8 justify-center"
                 >
                     <div className="flex flex-col gap-1 items-center">
                         <TbFaceIdError 

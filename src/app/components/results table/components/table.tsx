@@ -48,7 +48,7 @@ const Table = () => {
                     }
                 </thead>
                 {
-                    !isLoading && searchMembersResult.length ?
+                    !isLoading && searchMembersResult?.length ?
                     <tbody>
                         {
                             getRowModel().rows.map((row, index) => (
@@ -74,7 +74,7 @@ const Table = () => {
                     <div className="normal-loader"></div>
                 </div>
                 :
-                !searchMembersResult.length && <NoData />
+                !searchMembersResult?.length && <NoData />
             }
         </>
     )

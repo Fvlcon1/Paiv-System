@@ -51,7 +51,9 @@ const useRecentVisits = () => {
                         imageUrl : visit.profile_image_url,
                         cardExpiryDate : (new Date(visit.current_expiry_date)).toDateString(),
                         verificationStatus : visit.verification_status,
-                        token : visit.token
+                        token : visit.token,
+                        finalTime : visit.final_time,
+                        dispositionName : visit.disposition_name
                     }
 
                     const NHISDetails: INhisDetails = {
@@ -96,19 +98,26 @@ const useRecentVisits = () => {
                                 </Text>
                             </div>
                         ),
-                        checkout : (
-                            visit.verification_date && !visit.disposition_name ?
-                            <Button
-                                text="Checkout"
-                                className="!bg-bg-secondary hover:!bg-bg-quantinary"
-                                onClick={() => {
-                                    setNhisDetails({ ...NHISDetails, imageUrl: visit.profile_image_url });
-                                    setDispositionViewState(DispositionViewState.NHIS_DETAILS);
-                                }}
-                            />
-                            :
-                            "-"
-                        ),
+                        // checkout : (
+                        //     visit.verification_date && !visit.disposition_name ?
+                        //     <Button
+                        //         text="Checkout"
+                        //         className="!bg-bg-secondary hover:!bg-bg-quantinary"
+                        //         onClick={() => {
+                        //             setNhisDetails({ ...NHISDetails, imageUrl: visit.profile_image_url });
+                        //             setDispositionViewState(DispositionViewState.NHIS_DETAILS);
+                        //         }}
+                        //     />
+                        //     : visit.final_verification_status && visit.final_time &&
+                        //     <div className="flex flex-col gap-1">
+                        //         <Text>
+                        //             {`${(new Date(visit.final_time)).toDateString()}`}
+                        //         </Text>
+                        //         <Text textColor={theme.colors.text.tetiary}>
+                        //             {`${getTime(visit.final_time)} | ${getRelativeTime(visit.final_time)}`}
+                        //         </Text>
+                        //     </div>
+                        // ),
                         image: (
                             <div className="rounded-lg overflow-hidden relative w-[50px] h-[50px] ">
                                 <Image
@@ -120,19 +129,19 @@ const useRecentVisits = () => {
                                 />
                             </div>
                         ),
-                        cardValidity: (
-                            <div className="flex gap-1 items-center">
-                                {
-                                    isExpired ?
-                                    <VscUnverified color={"#db4040"} size={18} />
-                                    :
-                                    <VscVerified color={"#60B956"} size={18} />
-                                }
-                                <Text textColor={isExpired ? "#db4040" : "#60B956"} bold={TypographyBold.md}>
-                                    {isExpired ? "Expired" : "Valid"}
-                                </Text>
-                            </div>
-                        ),
+                        // cardValidity: (
+                        //     <div className="flex gap-1 items-center mt-2">
+                        //         {
+                        //             isExpired ?
+                        //             <VscUnverified color={"#db4040"} size={18} />
+                        //             :
+                        //             <VscVerified color={"#60B956"} size={18} />
+                        //         }
+                        //         <Text textColor={isExpired ? "#db4040" : "#60B956"} bold={TypographyBold.md}>
+                        //             {isExpired ? "Expired" : "Valid"}
+                        //         </Text>
+                        //     </div>
+                        // ),
                     }
                 })
                 setRecentVisitsTableData(transformVisitTable)

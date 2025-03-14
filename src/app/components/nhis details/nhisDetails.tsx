@@ -15,6 +15,7 @@ import CaptureContainer from "../capture container/captureContainer"
 import VerificationSuccessfulContainer from "../verification successful container/verificationSuccessfulContainer"
 import { ViewState } from "@/app/utils/types"
 import VeficationFailed from "../capture container/components/verificationFailed"
+import VerificationSelection from "../verification selection/verificationSelection"
 
 const NhisDetails = () => {
     const {nhisDetails, showNhisDetails, setShowNhisDetails, viewState, setViewState} = useContext(mainContext)
@@ -23,6 +24,9 @@ const NhisDetails = () => {
     return (
         <>
             <AnimatePresence>
+                {
+                    viewState === ViewState.VERIFICATION_SELECTION && <VerificationSelection />
+                }
                 {
                     viewState === ViewState.INSTRUCTIONS && (
                         <Instructions setViewState={setViewState} />
@@ -79,9 +83,9 @@ const NhisDetails = () => {
                             </div>
                             <div className="px-4 w-full">
                                 <Button
-                                    text="Verify Visit"
+                                    text="Create Encounter"
                                     className="mt-[20px] !w-full !h-[45px] !border-none !bg-main-primary"
-                                    onClick={() => setViewState(ViewState.INSTRUCTIONS)}
+                                    onClick={() => setViewState(ViewState.VERIFICATION_SELECTION)}
                                 />
                             </div>
                             <div className="absolute top-[15px] right-[15px]">

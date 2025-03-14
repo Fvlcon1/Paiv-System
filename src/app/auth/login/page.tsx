@@ -6,14 +6,8 @@ import { TypographyBold, TypographySize } from "@styles/style.types"
 import theme from "@styles/theme"
 import { useFormik } from "formik"
 import Image from "next/image"
-import { FaCheckSquare, FaEye, FaEyeSlash, FaRegCheckSquare, FaUser } from "react-icons/fa"
 import validationSchema from './utils/validationSchema'
 import { useState } from "react"
-import { RiLockPasswordFill } from "react-icons/ri"
-import { FaCircleUser } from "react-icons/fa6"
-import { MdEmail } from "react-icons/md"
-import Button from "@components/button/button"
-import Pressable from "@components/button/pressable"
 import Form from "./components/Form"
 import axios from "axios"
 import { useMutation } from "@tanstack/react-query"
@@ -50,9 +44,10 @@ const Login = () => {
     const handleSubmitMutation = useMutation({
         mutationFn : handeleSubmit,
         onSuccess : (data)=>{
-            cookies.set("accessToken", data.access_token, {path : "/"})
+            const token =  data.access_token ||  data.temp_token
+            cookies.set("accessToken", token, {path : "/"})
             toast.success("Login successful")
-            router.push("/")
+            router.push("/auth/mfa")
         },
         onError : (error : any)=>{
             toast.error(error.response.data.detail ?? "Error fetching members")

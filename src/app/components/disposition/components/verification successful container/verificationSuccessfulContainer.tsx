@@ -7,7 +7,7 @@ import { RiVerifiedBadgeFill } from "react-icons/ri"
 import Table from "./table/table"
 import Button from "@components/button/button"
 import { useContext, useEffect, useRef, useState } from "react"
-import { mainContext } from "@/app/context/context"
+import { mainContext, useMainContext } from "@/app/context/context"
 import { ViewState } from "@/app/utils/types"
 import theme from "@styles/theme"
 import { FaUserCircle } from "react-icons/fa"
@@ -16,6 +16,7 @@ const VerificationSuccessfulContainer = () => {
     const [show, setShow] = useState(true)
     const {setViewState, nhisDetails, capturedImageUrl, setCaptureImageUrl} = useContext(mainContext)
     const firstRender = useRef(true);
+    const {setDispositionViewState} = useMainContext()
 
     useEffect(()=>{
         if(!show)
@@ -35,7 +36,7 @@ const VerificationSuccessfulContainer = () => {
     },[])
     return (
         <>
-            <Overlay onClick={()=>setViewState(null)}>
+            <Overlay onClick={()=>setDispositionViewState(null)}>
                 <Container 
                     className="!w-[500px] pb-[30px]"
                     display={show}

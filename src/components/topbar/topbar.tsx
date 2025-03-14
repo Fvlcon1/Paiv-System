@@ -18,12 +18,6 @@ import { useMutation } from "@tanstack/react-query"
 const Topbar = () => {
     const [isScrolled, setIsScrolled] = useState(false)
     const [hospitalName, setHospitalName] = useState('')
-
-    
-    const navTabs = [
-        { name: "Add Questions", active: true },
-        { name: "Curate Questions", active: false }
-    ]
     
     const { logout } = useAuth()
     
@@ -31,9 +25,10 @@ const Topbar = () => {
         { key: "1", label: "Pages", type: 'title', disabled: true },
         { key: "2", type: 'link', href: "/", label: "Search" },
         { key: "3", type: 'link', href: "/claims", label: "Claims" },
+        { key: "4", type: 'link', href: "/encounters", label: "Encounters" },
         { type: "divider", key: "divider-2" },
-        { key: "4", label: "Settings", icon: <IoMdSettings size={15} className="ml-[-1.5px]" color={theme.colors.text.secondary} /> },
-        { key: "5", label: "Logout", onClick: () => logout(false), icon: <FaPowerOff size={12} color={theme.colors.text.secondary} /> },
+        { key: "below-1", label: "Settings", icon: <IoMdSettings size={15} className="ml-[-1.5px]" color={theme.colors.text.secondary} /> },
+        { key: "below-2", label: "Logout", onClick: () => logout(false), icon: <FaPowerOff size={12} color={theme.colors.text.secondary} /> },
     ]
     
     const getUserProfile = async() => {

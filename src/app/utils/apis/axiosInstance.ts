@@ -17,7 +17,7 @@ export const setupInterceptors = (logout: () => void) => {
                 console.log("instance")
                 toast.error("Please login to continue")
                 logout();
-                return new Promise(() => {}); 
+                return null
             }
             
             // 🔹 Allow other errors to be handled by the calling function

@@ -100,7 +100,7 @@ const CamCapture = ({
         },
         onSuccess : (data) => {
             setDispositionViewState(
-                data.match_summary?.is_match
+                data.final_verification_status
                     ? DispositionViewState.VERIFICATION_SUCCESS
                     : DispositionViewState.VERIFICATION_FAILED
             );

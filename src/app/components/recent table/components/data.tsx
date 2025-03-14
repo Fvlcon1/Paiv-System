@@ -78,17 +78,17 @@ export const columns = [
             )
         }
     },
-    {
-        accessorKey : 'checkout',
-        header : 'Checkout',
-        cell : ({getValue} : {getValue : any}) => {
-            return (
-                <Text>
-                    {getValue()}
-                </Text>
-            )
-        }
-    },
+    // {
+    //     accessorKey : 'checkout',
+    //     header : 'Checkout',
+    //     cell : ({getValue} : {getValue : any}) => {
+    //         return (
+    //             <Text>
+    //                 {getValue()}
+    //             </Text>
+    //         )
+    //     }
+    // },
     {
         accessorKey : 'verificationStatus',
         header : 'Verification Status',
@@ -111,15 +111,15 @@ export const columns = [
             )
         }
     },
-    {
-        accessorKey : 'cardValidity',
-        header : 'Card Validity',
-        cell : ({getValue} : {getValue : any}) => {
-            return (
-                <Text>
-                    {getValue()}
-                </Text>
-            )
-        }
-    },
+    // {
+    //     accessorKey : 'cardValidity',
+    //     header : 'Card Validity',
+    //     cell : ({getValue} : {getValue : any}) => {
+    //         return (
+    //             <Text>
+    //                 {getValue()}
+    //             </Text>
+    //         )
+    //     }
+    // },
 ]

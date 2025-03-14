@@ -11,13 +11,54 @@ import { IoIosArrowBack } from "react-icons/io";
 import Pressable from "@components/button/pressable";
 import { useMFAContext } from "../context/mfaContext";
 import { MFAViewStates } from "../utils/types";
+import { protectedApi } from "@/app/utils/apis/api";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import Cookies from "universal-cookie";
 
-const MFACode = () => {
+const cookies = new Cookies()
+
+const MFACode = ({
+    email_2fa_enabled
+} : {
+    email_2fa_enabled : boolean
+}) => {
     const [otp, setOtp] = useState(["", "", "", "", "", ""]);
     const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
     const [timeLeft, setTimeLeft] = useState(60 * 5);
     const [canResend, setCanResend] = useState(false);
     const {setViewState} = useMFAContext()
+    const router = useRouter()
+
+    const enableEmailOtp = async () => {
+        const response = await protectedApi.POST("enable-email-2fa")
+        return response
+    }
+
+    const sendEmailOtp = async () => {
+        const response = await protectedApi.POST("send-otp")
+        return response
+    }
+
+    const {mutate : sendEmailOtpMutation, isPending : sendEmailOtpPending} = useMutation({
+        mutationFn : sendEmailOtp
+    })
+
+    const {mutate : enableEmailOtpMutation, isPending : enableEmailOtpPending} = useMutation({
+        mutationFn : enableEmailOtp,
+        onSuccess : ()=>{
+            sendEmailOtpMutation()
+        }
+    })
+
+    useEffect(()=>{
+        if(!email_2fa_enabled){
+            enableEmailOtpMutation()
+        } else {
+            sendEmailOtpMutation()
+        }
+    },[])
 
     useEffect(() => {
         if (timeLeft > 0) {
@@ -37,6 +78,10 @@ const MFACode = () => {
         const newOtp = [...otp];
         newOtp[index] = value;
         setOtp(newOtp);
+
+        if (newOtp.every((digit) => digit !== "")) {
+            submitOTPMutation(newOtp.join(""));
+        }
 
         if (value && index < otp.length - 1) {
             inputRefs.current[index + 1]?.focus();
@@ -60,6 +105,11 @@ const MFACode = () => {
             inputRefs.current[index - 1]?.focus();
         }
 
+        // Submit on Enter if all fields are filled
+        if (e.key === "Enter" && otp.every((digit) => digit !== "")) {
+            submitOTPMutation(otp.join(""));
+        }
+
         setTimeout(() => inputRefs.current[index]?.setSelectionRange(1, 1), 0);
     };
 
@@ -69,16 +119,40 @@ const MFACode = () => {
         if (/^\d{6}$/.test(pastedData)) {
             setOtp(pastedData.split(""));
             inputRefs.current[5]?.focus();
+            submitOTPMutation(pastedData)
         }
     };
 
+    const submitOTP = async (otp: string) => {
+        console.log({ otp });
+        const response = await protectedApi.POST("verify-otp", {
+            otp: otp
+        });
+        return response
+    };
+
+    const {mutate : submitOTPMutation, isPending : submitOTPPending} = useMutation({
+        mutationFn : submitOTP,
+        onSuccess : (data)=>{
+            cookies.set("accessToken", data.access_token, {path : "/"})
+            toast.success("Setup completed successfully")
+            router.push("/")
+        },
+        onError : ()=>{
+            toast.error("Error setting up mobile auth")
+        }
+    })
+
     const handleResendCode = () => {
-        setTimeLeft(60 * 5); // Reset timer
-        setCanResend(false); // Disable resend until timer ends
-        console.log("Resend Code API Call"); // Simulate API call
+        setTimeLeft(60 * 5);
+        setCanResend(false);
+        sendEmailOtpMutation()
     };
 
     const isButtonEnabled = otp.every((digit) => digit !== "");
+
+    if(enableEmailOtpPending || sendEmailOtpPending)
+        return <div className="w-full h-screen flex justify-center items-center"><div className="normal-loader"></div></div>
 
     return (
         <motion.div
@@ -132,6 +206,10 @@ const MFACode = () => {
                         />
                     ))}
                 </div>
+                {
+                    submitOTPPending &&
+                    <div className="normal-loader"></div>
+                }
                 <Button text="Resend code" disabled={!canResend} onClick={handleResendCode} />
                 <Text textColor={theme.colors.main.primary}>
                     Code will expire in 

@@ -94,7 +94,7 @@ const useSearchResults = () => {
                     </div>
                 ),
                 cardValidity: (
-                    <div className="flex gap-1 items-center">
+                    <div className="flex gap-1 items-center mt-2">
                         {
                             isExpired ?
                             <VscUnverified color={"#db4040"} size={18} />

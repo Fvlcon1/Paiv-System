@@ -51,6 +51,7 @@ const MobileAuthCode = () => {
         const response = await protectedApi.POST("2fa/enable", {
             totp_code: otp
         });
+        return response
     };
 
     const {mutate : submitOTPMutation, isPending} = useMutation({
