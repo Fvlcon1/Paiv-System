@@ -16,6 +16,7 @@ import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Cookies from "universal-cookie";
+import { useAuth } from "@/app/context/authContext";
 
 const cookies = new Cookies()
 
@@ -30,6 +31,7 @@ const MFACode = ({
     const [canResend, setCanResend] = useState(false);
     const {setViewState} = useMFAContext()
     const router = useRouter()
+    const {userDetails} = useAuth()
 
     const enableEmailOtp = async () => {
         const response = await protectedApi.POST("enable-email-2fa")
@@ -183,7 +185,7 @@ const MFACode = ({
                         MFA
                     </Text>
                     <Text>A verification code has been sent to</Text>
-                    <Text bold={TypographyBold.md2}>princenedjoh5@gmail.com</Text>
+                    <Text bold={TypographyBold.md2}>{userDetails?.email}</Text>
                 </div>
                 <div className="flex gap-2 items-center">
                     {otp.map((value, index) => (

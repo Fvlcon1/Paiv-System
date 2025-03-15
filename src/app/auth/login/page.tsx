@@ -14,6 +14,7 @@ import { useMutation } from "@tanstack/react-query"
 import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 import Cookies from "universal-cookie"
+import { useAuth } from "@/app/context/authContext"
 
 interface LoginType {
     hospitalId : string,
@@ -25,6 +26,7 @@ const cookies = new Cookies()
 const Login = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [stayLoggedIn, setStayLoggedIn] = useState(true)
+    const {setUserDetails} = useAuth()
 
     const router = useRouter()
 
@@ -46,6 +48,7 @@ const Login = () => {
         onSuccess : (data)=>{
             const token =  data.access_token ||  data.temp_token
             cookies.set("accessToken", token, {path : "/"})
+            setUserDetails({email : formik.values.email})
             toast.success("Login successful")
             router.push("/auth/mfa")
         },

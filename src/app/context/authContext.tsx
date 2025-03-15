@@ -1,20 +1,32 @@
 'use client'
 
-import { createContext, useContext, useEffect, useRef, useState, useCallback } from "react";
+import { createContext, useContext, useEffect, useRef, useState, useCallback, Dispatch, SetStateAction } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Cookies from "universal-cookie";
 import SessionTimeoutAlert from "./components/sessionTimeoutAlert";
 import { setupInterceptors } from "../utils/apis/axiosInstance";
 
-const AuthContext = createContext<{ logout: (showAlert?: boolean) => void }>({ logout: () => {} });
+const AuthContext = createContext<{ 
+    logout: (showAlert?: boolean) => void
+    setUserDetails: Dispatch<SetStateAction<IUserDetails | undefined>>
+    userDetails: IUserDetails | undefined
+ }>({ 
+    logout: () => {},
+    setUserDetails : ()=>{},
+    userDetails : undefined
+  });
 
 const cookies = new Cookies();
+interface IUserDetails {
+    email : string
+}
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const pathname = usePathname();
     const router = useRouter();
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [showSessionAlert, setShowSessionAlert] = useState<boolean>(false);
+    const [userDetails, setUserDetails] = useState<IUserDetails>()
     const logoutTimer = useRef<number | null>(null);
 
     // 🔹 Logout function (Prevents showing session alert on /auth pages)
@@ -74,7 +86,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, [isAuthenticated, pathname, resetTimer]);
 
     return (
-        <AuthContext.Provider value={{ logout }}>
+        <AuthContext.Provider value={{ 
+            logout,
+            userDetails,
+            setUserDetails
+         }}>
             {children}
             {showSessionAlert && !pathname.startsWith("/auth") && <SessionTimeoutAlert show={showSessionAlert} />}
         </AuthContext.Provider>
