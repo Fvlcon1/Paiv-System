@@ -3,7 +3,7 @@ import Pagination from "./pagination"
 import { Tooltip } from "antd"
 import { FaListUl } from "react-icons/fa"
 import theme from "@styles/theme"
-import { IoGrid } from "react-icons/io5"
+import { IoGrid, IoReload } from "react-icons/io5"
 import { Dispatch, SetStateAction } from "react"
 
 const Controls = ({
@@ -12,7 +12,8 @@ const Controls = ({
     pageSize,
     pageNumber,
     setView,
-    view
+    view,
+    refresh
 } : {
     setPageSize: Dispatch<SetStateAction<number>>
     setPageNumber: Dispatch<SetStateAction<number>>
@@ -20,13 +21,20 @@ const Controls = ({
     pageNumber: number
     setView: Dispatch<SetStateAction<"list" | "grid">>
     view: "list" | "grid"
+    refresh : ()=>void
 }) => {
     return (
         <div className="flex items-center gap-2">
             <div className="flex h-[33px] items-center p-1 px-2 border-[1px] border-solid border-border-tetiary rounded-lg gap-[1px] cursor-pointer hover:bg-bg-tetiary">
-            <HiAdjustmentsHorizontal
-                color={theme.colors.text.primary}
-            />
+                <IoReload
+                    color={theme.colors.text.primary}
+                    onClick={refresh}
+                />
+            </div>
+            <div className="flex h-[33px] items-center p-1 px-2 border-[1px] border-solid border-border-tetiary rounded-lg gap-[1px] cursor-pointer hover:bg-bg-tetiary">
+                <HiAdjustmentsHorizontal
+                    color={theme.colors.text.primary}
+                />
             </div>
             <Pagination
                 pageNumber={pageNumber}

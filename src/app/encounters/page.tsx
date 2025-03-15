@@ -48,6 +48,7 @@ const Encounters = () => {
                                 setPageNumber={setPageNumber}
                                 view={view}
                                 setView={setView}
+                                refresh={()=>getRecentVisits({})}
                             />
                         </div>
                         <Table
