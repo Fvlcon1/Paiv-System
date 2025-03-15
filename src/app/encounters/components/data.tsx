@@ -45,17 +45,17 @@ export const columns = [
             )
         }
     },
-    {
-        accessorKey : 'dob',
-        header : 'DOB',
-        cell : ({getValue} : {getValue : any}) => {
-            return (
-                <Text>
-                    {getValue()}
-                </Text>
-            )
-        }
-    },
+    // {
+    //     accessorKey : 'dob',
+    //     header : 'DOB',
+    //     cell : ({getValue} : {getValue : any}) => {
+    //         return (
+    //             <Text>
+    //                 {getValue()}
+    //             </Text>
+    //         )
+    //     }
+    // },
     {
         accessorKey : 'nhisId',
         header : 'NHIS Number',
@@ -68,8 +68,19 @@ export const columns = [
         }
     },
     {
-        accessorKey : 'lastVisit',
-        header : 'Last Visit',
+        accessorKey : 'checkIn',
+        header : 'Check in',
+        cell : ({getValue} : {getValue : any}) => {
+            return (
+                <Text>
+                    {getValue()}
+                </Text>
+            )
+        }
+    },
+    {
+        accessorKey : 'checkout',
+        header : 'Check out',
         cell : ({getValue} : {getValue : any}) => {
             return (
                 <Text>

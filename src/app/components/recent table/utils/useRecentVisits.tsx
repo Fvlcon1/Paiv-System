@@ -129,19 +129,19 @@ const useRecentVisits = () => {
                                 />
                             </div>
                         ),
-                        // cardValidity: (
-                        //     <div className="flex gap-1 items-center mt-2">
-                        //         {
-                        //             isExpired ?
-                        //             <VscUnverified color={"#db4040"} size={18} />
-                        //             :
-                        //             <VscVerified color={"#60B956"} size={18} />
-                        //         }
-                        //         <Text textColor={isExpired ? "#db4040" : "#60B956"} bold={TypographyBold.md}>
-                        //             {isExpired ? "Expired" : "Valid"}
-                        //         </Text>
-                        //     </div>
-                        // ),
+                        cardValidity: (
+                            <div className="flex gap-1 items-center mt-2">
+                                {
+                                    isExpired ?
+                                    <VscUnverified color={"#db4040"} size={18} />
+                                    :
+                                    <VscVerified color={"#60B956"} size={18} />
+                                }
+                                <Text textColor={isExpired ? "#db4040" : "#60B956"} bold={TypographyBold.md}>
+                                    {isExpired ? "Expired" : "Valid"}
+                                </Text>
+                            </div>
+                        ),
                     }
                 })
                 setRecentVisitsTableData(transformVisitTable)

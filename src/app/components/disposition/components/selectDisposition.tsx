@@ -108,26 +108,6 @@ const SelectDisposition = () => {
                             className="w-full max-h-[300px] overflow-y-auto"
                             outterContainerClassName="w-full"
                         >
-                            {/* <div className="w-full bg-bg-tetiary px-3 hover:opacity-70 cursor-pointer duration-100 flex items-center justify-between rounded-lg h-[40px] border-[1px] border-solid border-border-tetiary">
-                                <div className="flex items-center gap-1">
-                                    <BiSolidCategoryAlt 
-                                        color={theme.colors.text.secondary}
-                                    />
-                                    {
-                                        dispositionValue ?
-                                        <Text>
-                                            {dispositionValue}
-                                        </Text>
-                                        :
-                                        <Text>
-                                            Please Select Disposition
-                                        </Text>
-                                    }
-                                </div>
-                                <FaAngleDown 
-                                    color={theme.colors.text.secondary}
-                                />
-                            </div> */}
                             <Input 
                                 value={searchValue}
                                 setValue={setSearchValue}

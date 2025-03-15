@@ -11,7 +11,7 @@ import { IoMdSettings } from "react-icons/io"
 
 const useDropdownItems = () => {
     const { setDispositionViewState, setViewState } = useContext(mainContext);
-    const {setShowClaims} = useEncounterContext()
+    const {setShowClaims, setShowEncounterDetails} = useEncounterContext()
 
     const menuItems: DropdownItem[] = [
         { key: "1", label: "Close Encounter", onClick : () => {
@@ -22,7 +22,7 @@ const useDropdownItems = () => {
         }},
         { type: "divider", key: "divider-1" },
         { key: "3", label: "More Details...", onClick : () => {
-            setViewState(ViewState.NHIS_DETAILS)
+            setShowEncounterDetails(true)
         } },
     ]
     return {menuItems}

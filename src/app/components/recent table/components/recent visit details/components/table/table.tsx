@@ -30,7 +30,6 @@ const Table = ({
             ["Verification Status", recentVisit.verificationStatus],
             ["Card Expiry Date", `${(new Date(recentVisit.cardExpiryDate)).toDateString()}`],
             ["Card Validity", recentVisit.cardValidity],
-            
         ])
     },[recentVisit])
     return (

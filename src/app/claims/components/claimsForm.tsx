@@ -15,6 +15,18 @@ import { GiCaduceus } from "react-icons/gi"
 import Button from "@components/button/button"
 import { DropdownItem } from "@/utils/@types"
 
+interface addClaimsType {
+    encounterToken : string
+    serviceType : string[]
+    disgnosis : string
+    drugs : {
+        code : string,
+        quantity : number
+    }[]
+    medicalProcedures : string[]
+    labTests : string[]
+}
+
 const ClaimsForm = ({
     close
 } : {
@@ -25,12 +37,10 @@ const ClaimsForm = ({
 
     const formik = useFormik({
         initialValues: {
-          primaryDiagnosis: "",
-          secondaryDiagnosis: "",
+          disgnosis: "",
           medicalProcedures: [],
-          drugs: [{ name: "", strength: "", dosage: "", quantity: 1 }],
+          drugs: [{ code : "", quantity: 1 }],
           labTests: [],
-          consumables: [],
           serviceType: "",
         },
         validationSchema,
@@ -80,25 +90,6 @@ const ClaimsForm = ({
         { type: "divider", key: "divider-19" },
         { key: "C80", label: "Cancer (C80)", onClick: () => formik.setFieldValue("primaryDiagnosis", "C80") },
         { type: "divider", key: "divider-20" }
-    ];    
-
-    const secondaryConditionItems: DropdownItem[] = [
-        { key: "E78", label: "Dyslipidemia (E78)", onClick: () => formik.setFieldValue("secondaryDiagnosis", "E78") },
-        { type: "divider", key: "divider-1" },
-        { key: "G47", label: "Sleep Apnea (G47)", onClick: () => formik.setFieldValue("secondaryDiagnosis", "G47") },
-        { type: "divider", key: "divider-2" },
-        { key: "M81", label: "Osteoporosis (M81)", onClick: () => formik.setFieldValue("secondaryDiagnosis", "M81") },
-        { type: "divider", key: "divider-3" },
-        { key: "E03", label: "Hypothyroidism (E03)", onClick: () => formik.setFieldValue("secondaryDiagnosis", "E03") },
-        { type: "divider", key: "divider-4" },
-        { key: "R10", label: "Abdominal Pain (R10)", onClick: () => formik.setFieldValue("secondaryDiagnosis", "R10") },
-        { type: "divider", key: "divider-5" },
-        { key: "J30", label: "Allergic Rhinitis (J30)", onClick: () => formik.setFieldValue("secondaryDiagnosis", "J30") },
-        { type: "divider", key: "divider-6" },
-        { key: "F41", label: "Anxiety Disorder (F41)", onClick: () => formik.setFieldValue("secondaryDiagnosis", "F41") },
-        { type: "divider", key: "divider-7" },
-        { key: "F32", label: "Depression (F32)", onClick: () => formik.setFieldValue("secondaryDiagnosis", "F32") },
-        { type: "divider", key: "divider-8" }
     ];
 
     const medicalProcedureItems: DropdownItem[] = [
@@ -129,19 +120,6 @@ const ClaimsForm = ({
         { type: "divider", key: "divider-5" },
         { key: "Z01.89", label: "Electrolyte Panel (Z01.89)", onClick: () => formik.setFieldValue("labTests", "Z01.89") },
         { type: "divider", key: "divider-6" }
-    ];
-
-    const consumableItems: DropdownItem[] = [
-        { key: "C1", label: "Syringe (C1)", onClick: () => formik.setFieldValue("consumables", "C1") },
-        { type: "divider", key: "divider-1" },
-        { key: "C2", label: "Gloves (C2)", onClick: () => formik.setFieldValue("consumables", "C2") },
-        { type: "divider", key: "divider-2" },
-        { key: "C3", label: "Face Mask (C3)", onClick: () => formik.setFieldValue("consumables", "C3") },
-        { type: "divider", key: "divider-3" },
-        { key: "C4", label: "IV Fluids (C4)", onClick: () => formik.setFieldValue("consumables", "C4") },
-        { type: "divider", key: "divider-4" },
-        { key: "C5", label: "Catheter (C5)", onClick: () => formik.setFieldValue("consumables", "C5") },
-        { type: "divider", key: "divider-5" }
     ];
 
     const serviceTypeItems: DropdownItem[] = [
@@ -214,7 +192,7 @@ const ClaimsForm = ({
                             <div className="w-full flex flex-col justify-between gap-2">
                                 <div className="flex flex-col pl-1">
                                     <Text>
-                                        Primary Diagnosis
+                                        Diagnosis
                                     </Text>
                                     <Text textColor={theme.colors.text.tetiary}>
                                         Select the main condition diagnosed (ICD-10 code).
@@ -229,33 +207,6 @@ const ClaimsForm = ({
                                         value={patientSearchValue}
                                         setValue={setPatientSearchValue}
                                         placeholder="Select primary diagnosis"
-                                        className="!flex !flex-1"
-                                        PostIcon={<FaChevronDown color={theme.colors.text.tetiary} size={12} />}
-                                        PreIcon={<GiCaduceus color={theme.colors.text.tetiary} size={12} />}
-                                    />
-                                </Dropdown>
-                            </div>
-
-                            <Divider />
-
-                            <div className="w-full flex flex-col justify-between gap-2">
-                                <div className="flex flex-col pl-1">
-                                    <Text>
-                                        Secondary Diagnosis
-                                    </Text>
-                                    <Text textColor={theme.colors.text.tetiary}>
-                                        Select any additional conditions diagnosed (if applicable).
-                                    </Text>
-                                </div>
-                                <Dropdown 
-                                    className="flex-1"
-                                    outterContainerClassName="flex-1"
-                                    menuItems={secondaryConditionItems}
-                                >
-                                    <Input
-                                        value={patientSearchValue}
-                                        setValue={setPatientSearchValue}
-                                        placeholder="Select secondary diagnosis"
                                         className="!flex !flex-1"
                                         PostIcon={<FaChevronDown color={theme.colors.text.tetiary} size={12} />}
                                         PreIcon={<GiCaduceus color={theme.colors.text.tetiary} size={12} />}
@@ -343,30 +294,6 @@ const ClaimsForm = ({
                             </div>
 
                             <Divider />
-
-                            <div className="w-full flex flex-col justify-between gap-2">
-                                <div className="flex flex-col pl-1">
-                                    <Text>
-                                        Consumables
-                                    </Text>
-                                    <Text textColor={theme.colors.text.tetiary}>
-                                        Select medical consumables used during treatment.
-                                    </Text>
-                                </div>
-                                <Dropdown 
-                                    className="flex-1"
-                                    outterContainerClassName="flex-1"
-                                >
-                                    <Input
-                                        value={patientSearchValue}
-                                        setValue={setPatientSearchValue}
-                                        placeholder="Select consumables"
-                                        className="!flex !flex-1"
-                                        PostIcon={<FaChevronDown color={theme.colors.text.tetiary} size={12} />}
-                                        PreIcon={<GiCaduceus color={theme.colors.text.tetiary} size={12} />}
-                                    />
-                                </Dropdown>
-                            </div>
                         </div>
                     </div>
                     <div className="flex w-full justify-end">

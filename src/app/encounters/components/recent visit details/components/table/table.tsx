@@ -1,5 +1,5 @@
-import { IRecentVisitsTable } from "@/app/components/recent table/utils/type"
 import { mainContext } from "@/app/context/context"
+import { IRecentVisitsTable } from "@/app/encounters/utils/type"
 import { getRelativeTime, getTime } from "@/utils/getDate"
 import Copychip from "@components/chip/copyChip"
 import Text from "@styles/components/text"
@@ -26,7 +26,7 @@ const Table = ({
             ["Checkout Date", `${recentVisit.finalTime ? (new Date(recentVisit.finalTime)).toDateString() : '-'}`],
             ["Checkout Time", recentVisit.finalTime ? `${getTime(new Date(recentVisit.finalTime))} | ${getRelativeTime(new Date(recentVisit.finalTime))}` : '-'],
             ["Disposition", recentVisit.dispositionName ?? "-"],
-            ["Token", recentVisit.token ? <Copychip containerClassName="bg-bg-quantinary">{recentVisit.token}</Copychip> : '-'],
+            ["Token", recentVisit.token ? <Copychip containerClassName="!bg-bg-quantinary">{recentVisit.token}</Copychip> : '-'],
             ["Verification Status", recentVisit.verificationStatus],
             ["Card Expiry Date", `${(new Date(recentVisit.cardExpiryDate)).toDateString()}`],
             ["Card Validity", recentVisit.cardValidity],

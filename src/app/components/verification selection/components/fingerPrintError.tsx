@@ -23,7 +23,7 @@ const FingerPrintError = ({
     return (
         <Container className="!px-4 !py-6 !h-fit" display={isVisible} setDisplay={setIsVisible}>
             <Pressable
-                className="w-full mb-[20px] flex items-center gap-1 hover:opacity-70 cursor-pointer duration-200"
+                className="w-full mb-[20px] flex items-center gap-1 hover:opacity-70 !cursor-pointer duration-200"
                 scaleFactor={0.99}
                 onClick={()=>setSelectionViewState("selection")}
             >

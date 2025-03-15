@@ -58,7 +58,8 @@ const useRecentVisits = () => {
                         verificationStatus : visit.verification_status,
                         token : visit.token,
                         finalTime : visit.final_time,
-                        dispositionName : visit.disposition_name
+                        dispositionName : visit.disposition_name,
+                        isExpired
                     }
 
                     const NHISDetails: INhisDetails = {
@@ -84,7 +85,16 @@ const useRecentVisits = () => {
                     return {
                         ...recentVisit,
                         othernames : recentVisit.othernames ?? '-',
-                        lastVisit: (
+                        verificationStatus : recentVisit.verificationStatus ? (
+                            <Text textColor="#60B956">
+                                Successful
+                            </Text>
+                        ) : (
+                            <Text textColor="#db4040">
+                                Failed
+                            </Text>
+                        ),
+                        checkIn: (
                             <div className="flex flex-col gap-1">
                                 <Text>
                                     {`${(new Date(visit.verification_date)).toDateString()}`}
@@ -93,6 +103,19 @@ const useRecentVisits = () => {
                                     {`${getTime(visit.verification_date)} | ${getRelativeTime(visit.verification_date)}`}
                                 </Text>
                             </div>
+                        ),
+                        checkout : (
+                            visit.final_time ?
+                            <div className="flex flex-col gap-1">
+                                <Text>
+                                    {`${(new Date(visit.final_time)).toDateString()}`}
+                                </Text>
+                                <Text textColor={theme.colors.text.tetiary}>
+                                    {`${getTime(visit.final_time)} | ${getRelativeTime(visit.final_time)}`}
+                                </Text>
+                            </div>
+                            :
+                            "-"
                         ),
                         image: (
                             <div className="rounded-lg overflow-hidden relative w-[50px] h-[50px] ">
@@ -103,6 +126,19 @@ const useRecentVisits = () => {
                                     height={50}
                                     style={{ height: "auto", width: "100%" }}
                                 />
+                            </div>
+                        ),
+                        cardValidity: (
+                            <div className="flex gap-1 items-center mt-2">
+                                {
+                                    isExpired ?
+                                    <VscUnverified color={"#db4040"} size={18} />
+                                    :
+                                    <VscVerified color={"#60B956"} size={18} />
+                                }
+                                <Text textColor={isExpired ? "#db4040" : "#60B956"} bold={TypographyBold.md}>
+                                    {isExpired ? "Expired" : "Valid"}
+                                </Text>
                             </div>
                         ),
                         actions : (

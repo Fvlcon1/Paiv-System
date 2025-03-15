@@ -5,18 +5,25 @@ import { createContext, useContext, ReactNode, useState, SetStateAction, Dispatc
 const EncounterContext = createContext<{
     setShowClaims: Dispatch<SetStateAction<boolean>>
     showClaims: boolean
+    setShowEncounterDetails: Dispatch<SetStateAction<boolean>>
+    showEncounterDetilas: boolean
 }>({
     showClaims : false,
-    setShowClaims : ()=>{}
+    setShowClaims : ()=>{},
+    setShowEncounterDetails : ()=>{},
+    showEncounterDetilas : false
 });
 
 export const EncounterProvider = ({ children }: { children: ReactNode }) => {
     const [showClaims, setShowClaims] = useState(false)
+    const [showEncounterDetilas, setShowEncounterDetails] = useState(false)
     return (
         <EncounterContext.Provider
             value={{
                 setShowClaims,
-                showClaims
+                showClaims,
+                setShowEncounterDetails,
+                showEncounterDetilas
             }}
         >
             {children}

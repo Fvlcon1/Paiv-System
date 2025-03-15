@@ -9,6 +9,7 @@ import { IRecentVisitsTable } from "../utils/type"
 import NoData from "@components/NoData/noData"
 import RecentVisitsDetails from "./recent visit details/recentVisitsDetails"
 import { useState } from "react"
+import { useEncounterContext } from "../context/encounterContext"
 
 const Table = ({
     data,
@@ -27,13 +28,13 @@ const Table = ({
         getCoreRowModel:getCoreRowModel()
     })
     const [selectedVisit, setSelectedVisit] = useState<IRecentVisitsTable>()
-    const [displayRecentVisitsDetails, setDisplayRecentVisitsDetails] = useState(false)
+    const {setShowEncounterDetails, showEncounterDetilas} = useEncounterContext()
     return (
         <>
             <RecentVisitsDetails 
                 data={selectedVisit}
-                display={displayRecentVisitsDetails}
-                setDisplay={setDisplayRecentVisitsDetails}
+                display={showEncounterDetilas}
+                setDisplay={setShowEncounterDetails}
             />
             <table className="w-full border-separate border-spacing-0">
                 <thead className="bg-bg-secondary px-2">
@@ -72,7 +73,7 @@ const Table = ({
                                     key={row.id}
                                     onClick={()=>{
                                         // setDisplayRecentVisitsDetails(true)
-                                        // setSelectedVisit(data[index])
+                                        setSelectedVisit(data[index])
                                     }}
                                 >
                                     {

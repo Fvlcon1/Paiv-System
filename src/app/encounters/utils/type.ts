@@ -14,6 +14,7 @@ export interface IRecentVisits {
     cardExpiryDate : string
     verificationStatus : boolean
     token : string
+    isExpired : boolean
 }
 export interface IRecentVisitsTable extends IRecentVisits {
     image : ReactNode,
