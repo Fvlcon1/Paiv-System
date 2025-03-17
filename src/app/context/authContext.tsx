@@ -43,6 +43,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             setShowSessionAlert(true);
         } else {
             router.push("/auth/login"); // Redirect if no token
+            setShowSessionAlert(false);
         }
     }, [pathname, router]);
 
