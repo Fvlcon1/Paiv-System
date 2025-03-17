@@ -4,7 +4,7 @@ import Table from "./components/table/table"
 import { IoMdCloseCircle } from "react-icons/io"
 import theme from "@styles/theme"
 import ClickableTab from "@components/clickable/clickabletab"
-import { Dispatch, SetStateAction, useContext, useState } from "react"
+import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react"
 import { AnimatePresence } from "framer-motion"
 import { mainContext } from "@/app/context/context"
 import { FaUserCircle } from "react-icons/fa"
@@ -16,10 +16,31 @@ import VerificationSuccessfulContainer from "../verification successful containe
 import { ViewState } from "@/app/utils/types"
 import VeficationFailed from "../capture container/components/verificationFailed"
 import VerificationSelection from "../verification selection/verificationSelection"
+import { protectedApi } from "@/app/utils/apis/api"
+import { useMutation } from "@tanstack/react-query"
+import toast from "react-hot-toast"
+import { useRouter } from "next/navigation"
 
 const NhisDetails = () => {
     const {nhisDetails, showNhisDetails, setShowNhisDetails, viewState, setViewState} = useContext(mainContext)
     const [zoomProfile, setZoomProfile] = useState(false)
+    const router = useRouter()
+
+    const handleCreateEncounter = async () => {
+        const response = await protectedApi.POST("api/initiate-encounter", {membership_id : nhisDetails?.memberShipId})
+        return response
+    }
+
+    const {mutate : handleCreateEncounterMutation, isPending} = useMutation({
+        mutationFn : handleCreateEncounter,
+        onSuccess : (data)=>{
+            toast.success("Encounter created successfully")
+            router.push(`/encounter/${data.token}`)
+        },
+        onError : ()=>{
+            toast.error("Error creating encounter")
+        }
+    })
     
     return (
         <>
@@ -85,7 +106,9 @@ const NhisDetails = () => {
                                 <Button
                                     text="Create Encounter"
                                     className="mt-[20px] !w-full !h-[45px] !border-none !bg-main-primary"
-                                    onClick={() => setViewState(ViewState.VERIFICATION_SELECTION)}
+                                    onClick={()=>handleCreateEncounterMutation()}
+                                    // onClick={() => setViewState(ViewState.VERIFICATION_SELECTION)}
+                                    loading={isPending}
                                 />
                             </div>
                             <div className="absolute top-[15px] right-[15px]">

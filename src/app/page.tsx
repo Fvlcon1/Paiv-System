@@ -13,6 +13,8 @@ export default function Home() {
   const {searchValue, setSearchValue, setShowNhisDetails, showNhisDetails} = useContext(mainContext)
   return (
     <>
+      <NhisDetails />
+      <Disposition />
       {/* <VerificationSelection /> */}
       <div className="flex flex-col gap-[30px]">
         <Hero />

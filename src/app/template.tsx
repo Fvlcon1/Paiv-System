@@ -17,8 +17,6 @@ const Template = ({
     
     return (
         <>
-            <NhisDetails />
-            <Disposition />
             {
                 showTemplate &&
                 <Topbar />
