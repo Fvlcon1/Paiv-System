@@ -10,11 +10,11 @@ import { MdVerifiedUser } from "react-icons/md"
 import { RiCameraLensFill } from "react-icons/ri"
 import { TbFaceId } from "react-icons/tb"
 import { DispositionViewState, ViewState } from "@/app/utils/types"
-import { useMainContext } from "@/app/context/context"
+import { useEncounterContext } from "../../../context/encounter.context"
 
 const Instructions = () => {
     const [isVisible, setIsVisible] = useState(true)
-    const {setDispositionViewState} = useMainContext()
+    const {setDispositionViewState} = useEncounterContext()
 
     useEffect(()=>{
         if(!isVisible)

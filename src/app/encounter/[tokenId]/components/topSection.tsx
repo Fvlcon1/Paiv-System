@@ -7,6 +7,7 @@ import Image from "next/image"
 import { FaUserCircle } from "react-icons/fa"
 import { RiVerifiedBadgeFill } from "react-icons/ri"
 import { getAgeFromDate } from "../utils/getAgeFromDate"
+import { useEncounterContext } from "../context/encounter.context"
 
 const TopSection = ({
     userDetails
@@ -14,6 +15,7 @@ const TopSection = ({
     userDetails? : INhisDetails
 }) => {
     console.log({userDetails})
+    const {storedCapture} = useEncounterContext()
     const data = [
         [
             <div className="flex">
@@ -78,23 +80,35 @@ const TopSection = ({
                         <FaUserCircle color={theme.colors.text.tetiary} size={105} />
                     }
                 </div>
-                <div className="absolute right-0 top-0 p-2 w-[140px] h-[140px] bg-[#24242F] rounded-full border-b-[1px] border-solid border-border-tetiary">
-                    <div className="relative overflow-hidden rounded-full w-full h-full">
-                        <Image
-                            src={'/assets/dev/profile.png'}
-                            alt="profile"
-                            width={130}
-                            height={130}
-                        />
-                    </div>
+                <div className="absolute flex justify-center items-center right-0 top-0 p-2 w-[140px] h-[140px] bg-[#24242F] rounded-full border-b-[1px] border-solid border-border-tetiary">
+                    {
+                        storedCapture ?
+                        <div className="relative overflow-hidden rounded-full w-full h-full">
+                            <Image
+                                src={storedCapture}
+                                alt="profile"
+                                width={130}
+                                height={130}
+                            />
+                        </div>
+                        :
+                        <FaUserCircle color={theme.colors.text.tetiary} size={105} />
+                    }
                 </div>
                 <div className="absolute right-0 top-0 w-full h-full flex justify-center items-center">
                     <div className="relative overflow-hidden rounded-full bg-[#ffffff1e] p-1">
-                        <div className="relative overflow-hidden rounded-full bg-[#24242fb7] p-1">
-                            <RiVerifiedBadgeFill
-                                color="#60B956"
-                                size={30}
-                            />
+                        <div className="relative overflow-hidden h-[30px] w-[30px] flex justify-center items-center rounded-full bg-[#24242fb7] p-1">
+                            {
+                                storedCapture ?
+                                <RiVerifiedBadgeFill
+                                    color="#60B956"
+                                    size={30}
+                                />
+                                :
+                                <Text>
+                                    ?
+                                </Text>
+                            }
                         </div>
                     </div>
                 </div>

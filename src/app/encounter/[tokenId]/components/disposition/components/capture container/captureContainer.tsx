@@ -2,19 +2,15 @@ import ClickableTab from "@components/clickable/clickabletab"
 import Overlay from "@components/overlay/overlay"
 import Text from "@styles/components/text"
 import theme from "@styles/theme"
-import Image from "next/image"
-import { FaCheckSquare } from "react-icons/fa"
 import { IoMdCloseCircle } from "react-icons/io"
 import { TbFaceId } from "react-icons/tb"
 import Rules from "./components/rules"
 import CamContainer from "./components/camContainer"
 import CamCapture from "./components/camCapture"
-import { Dispatch, SetStateAction } from "react"
-import { ViewState } from "@/app/utils/types"
-import { useMainContext } from "@/app/context/context"
+import { useEncounterContext } from "@/app/encounter/[tokenId]/context/encounter.context"
 
 const CaptureContainer = () => {
-    const {setDispositionViewState} = useMainContext()
+    const {setDispositionViewState} = useEncounterContext()
 
     return (
         <div>

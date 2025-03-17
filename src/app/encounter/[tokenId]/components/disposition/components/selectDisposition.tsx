@@ -1,6 +1,5 @@
 'use client'
 
-import { useMainContext } from "@/app/context/context"
 import { protectedApi } from "@/app/utils/apis/api"
 import { DispositionViewState } from "@/app/utils/types"
 import { DropdownItem } from "@/utils/@types"
@@ -18,9 +17,10 @@ import { useEffect, useState } from "react"
 import { BiSolidCategoryAlt } from "react-icons/bi"
 import { FaAngleDown } from "react-icons/fa"
 import { IDispositionType } from "@/app/components/results table/utils/type"
+import { useEncounterContext } from "../../../context/encounter.context"
 
 const SelectDisposition = () => {
-    const {setDispositionViewState, setSelectedDisposition} = useMainContext()
+    const {setDispositionViewState, setSelectedDisposition} = useEncounterContext()
     const [isVisible, setIsVisible] = useState(true)
     const [dropdownItems, setDropdownItems] = useState<DropdownItem[]>([])
     const [dispositionValue, setDispositionValue] = useState<string>()

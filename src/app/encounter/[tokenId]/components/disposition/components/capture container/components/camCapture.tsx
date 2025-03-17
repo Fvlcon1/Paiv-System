@@ -1,6 +1,5 @@
 'use client'
 
-import { mainContext } from "@/app/context/context"
 import Button from "@components/button/button"
 import Text from "@styles/components/text"
 import theme from "@styles/theme"
@@ -11,6 +10,7 @@ import { Dispatch, SetStateAction, useContext, useEffect, useRef, useState } fro
 import { DispositionViewState, ViewState } from "@/app/utils/types"
 import VeficationFailed from "./verificationFailed"
 import { protectedApi } from "@/app/utils/apis/api"
+import { useEncounterContext } from "@/app/encounter/[tokenId]/context/encounter.context"
 
 const CamCapture = ({
     setDispositionViewState
@@ -20,7 +20,8 @@ const CamCapture = ({
     const videoRef = useRef<HTMLVideoElement>(null)
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const [stream, setStream] = useState<MediaStream | null>(null)
-    const { nhisDetails, setCaptureImageUrl, capturedImageUrl, selectedDisposition } = useContext(mainContext)
+    const { nhisDetails, setCaptureImageUrl, setStoredCapture, capturedImageUrl, selectedDisposition } = useEncounterContext()
+    const [imageUrl, setImageUrl] = useState("")
 
     // Start Camera (Ensures no duplicate streams)
     const startCamera = async () => {
@@ -66,6 +67,7 @@ const CamCapture = ({
                 const imageData = canvas.toDataURL("image/png")
                 const binaryData = dataURLToUint8Array(imageData)
                 setCaptureImageUrl(imageData)
+                setImageUrl(imageData)
                 stopCamera(); // Stop camera after capturing
                 return binaryData
             }
@@ -99,6 +101,8 @@ const CamCapture = ({
             return response.data;
         },
         onSuccess : (data) => {
+            console.log({imageUrl})
+            setStoredCapture(imageUrl)
             setDispositionViewState(
                 data.final_verification_status
                     ? DispositionViewState.VERIFICATION_SUCCESS

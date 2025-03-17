@@ -1,6 +1,5 @@
 'use client'
 
-import { mainContext } from "@/app/context/context"
 import Button from "@components/button/button"
 import Text from "@styles/components/text"
 import theme from "@styles/theme"
@@ -13,6 +12,7 @@ import { ViewState } from "../../../utils/types"
 import VeficationFailed from "./verificationFailed"
 import { protectedApi } from "@/app/utils/apis/api"
 import { useParams } from "next/navigation"
+import { useEncounterContext } from "../../../context/encounter.context"
 
 const CamCapture = ({
     setViewState
@@ -23,7 +23,7 @@ const CamCapture = ({
     const videoRef = useRef<HTMLVideoElement>(null)
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const [stream, setStream] = useState<MediaStream | null>(null)
-    const { nhisDetails, setCaptureImageUrl, capturedImageUrl } = useContext(mainContext)
+    const { nhisDetails, setCaptureImageUrl, capturedImageUrl } = useEncounterContext()
 
     // Start Camera (Ensures no duplicate streams)
     const startCamera = async () => {

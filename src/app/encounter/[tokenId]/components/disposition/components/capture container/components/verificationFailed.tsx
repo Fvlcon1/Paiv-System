@@ -1,4 +1,5 @@
 import { mainContext } from "@/app/context/context"
+import { useEncounterContext } from "@/app/encounter/[tokenId]/context/encounter.context"
 import { DispositionViewState, ViewState } from "@/app/utils/types"
 import Button from "@components/button/button"
 import OutlineButton from "@components/button/outlineButton"
@@ -12,7 +13,7 @@ import { TbFaceIdError } from "react-icons/tb"
 
 const VeficationFailed = () => {
     const [isVisible, setIsVisible] = useState(true)
-    const {nhisDetails, setCaptureImageUrl, capturedImageUrl, setDispositionViewState} = useContext(mainContext)
+    const {nhisDetails, setCaptureImageUrl, capturedImageUrl, setDispositionViewState} = useEncounterContext()
 
     useEffect(()=>{
         if(!isVisible)

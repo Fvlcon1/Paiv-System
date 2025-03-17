@@ -8,15 +8,16 @@ import Table from "./table/table"
 import Button from "@components/button/button"
 import { useContext, useEffect, useRef, useState } from "react"
 import { mainContext, useMainContext } from "@/app/context/context"
-import { ViewState } from "@/app/utils/types"
+import { ViewState } from "@/app/encounter/[tokenId]/utils/types"
 import theme from "@styles/theme"
 import { FaUserCircle } from "react-icons/fa"
+import { useEncounterContext } from "@/app/encounter/[tokenId]/context/encounter.context"
 
 const VerificationSuccessfulContainer = () => {
     const [show, setShow] = useState(true)
-    const {setViewState, nhisDetails, capturedImageUrl, setCaptureImageUrl} = useContext(mainContext)
+    const {setViewState, nhisDetails, capturedImageUrl, setCaptureImageUrl} = useEncounterContext()
     const firstRender = useRef(true);
-    const {setDispositionViewState} = useMainContext()
+    const {setDispositionViewState} = useEncounterContext()
 
     useEffect(()=>{
         if(!show)

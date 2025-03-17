@@ -19,6 +19,7 @@ import { INhisDetails } from "@/app/components/results table/utils/type"
 import NoData from "@components/NoData/noData"
 import RecentTable from "./components/recent table/recentTable"
 import { DispositionViewState } from "@/app/utils/types"
+import Disposition from "./components/disposition/disposition"
 
 const Encounter = () => {
     const { tokenId } = useParams();
@@ -38,6 +39,7 @@ const Encounter = () => {
         onSuccess: (data) => {
             if (data) {
                 const userDetails = getNHISDetails(data);
+                setNhisDetails(userDetails)
                 setUserDetails(userDetails);
             }
         },
@@ -51,10 +53,6 @@ const Encounter = () => {
             getEncounterMutation();
         }
     }, [tokenId]);
-
-    useEffect(() => {
-        console.log({ data });
-    }, [data]);
 
     if (isPending) {
         return (
@@ -75,6 +73,7 @@ const Encounter = () => {
     return (
         <>
             <VerificationStates />
+            <Disposition />
             <div className="flex flex-col gap-6">
                 <div className="w-full bg-[#ffffff05] border-b-[1px] border-solid border-b-border-tetiary justify-center pt-[30px] h-[300px] flex items-center">
                     <div className="max-w-[1024px] w-full flex flex-col justify-center gap-6">
@@ -92,7 +91,7 @@ const Encounter = () => {
                             />
                             <Button
                                 text="Close Encounter"
-                                disabled={data.final_time}
+                                disabled={data.final_time !== null}
                                 onClick={() => setDispositionViewState(DispositionViewState.SELECT_DISPOSITION)}
                             />
                         </div>

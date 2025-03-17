@@ -1,5 +1,4 @@
-import { mainContext } from "@/app/context/context"
-import { ViewState } from "@/app/utils/types"
+import { ViewState } from "../../../utils/types"
 import Button from "@components/button/button"
 import OutlineButton from "@components/button/outlineButton"
 import Container from "@components/container/container"
@@ -9,10 +8,11 @@ import { TypographySize } from "@styles/style.types"
 import { useContext, useEffect, useState } from "react"
 import { MdSmsFailed } from "react-icons/md"
 import { TbFaceIdError } from "react-icons/tb"
+import { useEncounterContext } from "../../../context/encounter.context"
 
 const VeficationFailed = () => {
     const [isVisible, setIsVisible] = useState(true)
-    const {nhisDetails, setCaptureImageUrl, capturedImageUrl, setViewState} = useContext(mainContext)
+    const {nhisDetails, setCaptureImageUrl, capturedImageUrl, setViewState} = useEncounterContext()
 
     useEffect(()=>{
         if(!isVisible)

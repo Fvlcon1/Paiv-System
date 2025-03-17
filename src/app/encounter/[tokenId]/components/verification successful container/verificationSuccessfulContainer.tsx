@@ -15,7 +15,7 @@ import { useEncounterContext } from "../../context/encounter.context"
 
 const VerificationSuccessfulContainer = () => {
     const [show, setShow] = useState(true)
-    const {nhisDetails, capturedImageUrl, setCaptureImageUrl} = useContext(mainContext)
+    const {nhisDetails, capturedImageUrl, setCaptureImageUrl} = useEncounterContext()
     const {setViewState} = useEncounterContext()
     const firstRender = useRef(true);
 
