@@ -1,3 +1,5 @@
+import { INhisDetails } from "@/app/components/results table/utils/type";
+
 export const enum ViewState {
     NHIS_DETAILS = "NHIS_DETAILS",
     INSTRUCTIONS = "INSTRUCTIONS",
@@ -5,4 +7,10 @@ export const enum ViewState {
     VERIFICATION_SUCCESS = "VERIFICATION_SUCCESS",
     VERIFICATION_FAILED = "VERIFICATION_FAILED",
     VERIFICATION_SELECTION = "VERIFICATION_SELECTION"
+}
+
+export interface IEncounterDetails extends INhisDetails {
+    checkinImageUrl : string
+    checkoutImageUrl : string
+    createdAt : string
 }

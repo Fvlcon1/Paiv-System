@@ -1,10 +1,12 @@
 'use client'
 
 import { createContext, useState, ReactNode, useContext, Dispatch, SetStateAction } from "react";
-import { ViewState } from "../utils/types";
+import { IEncounterDetails, ViewState } from "../utils/types";
 import { IDispositionType, INhisDetails } from "@/app/components/results table/utils/type";
 import React from "react";
 import { DispositionViewState } from "@/app/utils/types";
+import useGetEncounter from "../utils/useGetEncounter";
+import { UseMutateFunction } from "@tanstack/react-query";
 
 // Create the context with default values
 const encounterContext = createContext<{
@@ -20,6 +22,11 @@ const encounterContext = createContext<{
     selectedDisposition: IDispositionType | undefined
     setStoredCapture: Dispatch<SetStateAction<string | null>>
     storedCapture: string | null
+    getEncounterMutation : UseMutateFunction<any, Error, void, unknown>
+    encounterData: any
+    getEncounterPending: boolean
+    setEncounterDetails: Dispatch<SetStateAction<IEncounterDetails | undefined>>
+    encounterDetails: IEncounterDetails | undefined
 }>({
     viewState : null,
     setViewState : ()=>{},
@@ -33,6 +40,11 @@ const encounterContext = createContext<{
     selectedDisposition : undefined,
     setStoredCapture : ()=>{},
     storedCapture : null,
+    getEncounterMutation : ()=>{},
+    encounterData : undefined,
+    getEncounterPending : false,
+    encounterDetails : undefined,
+    setEncounterDetails : ()=>{}
 });
 
 // Context provider component
@@ -43,6 +55,8 @@ export const EncounterProvider = ({ children }: { children: ReactNode }) => {
   const [storedCapture, setStoredCapture] = useState<string | null>(null)
   const [dispositionViewState, setDispositionViewState] = useState<DispositionViewState | null>(null);
   const [selectedDisposition, setSelectedDisposition] = useState<IDispositionType>()
+  const {getEncounterMutation, getEncounterPending, encounterData} = useGetEncounter()
+  const [encounterDetails, setEncounterDetails] = useState<IEncounterDetails>()
 
   return (
     <encounterContext.Provider
@@ -58,7 +72,12 @@ export const EncounterProvider = ({ children }: { children: ReactNode }) => {
             selectedDisposition,
             setSelectedDisposition,
             storedCapture,
-            setStoredCapture
+            setStoredCapture,
+            getEncounterMutation,
+            getEncounterPending,
+            encounterData,
+            setEncounterDetails,
+            encounterDetails
          }}
     >
       {children}

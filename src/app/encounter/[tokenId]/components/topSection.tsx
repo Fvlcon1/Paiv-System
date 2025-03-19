@@ -8,19 +8,18 @@ import { FaUserCircle } from "react-icons/fa"
 import { RiVerifiedBadgeFill } from "react-icons/ri"
 import { getAgeFromDate } from "../utils/getAgeFromDate"
 import { useEncounterContext } from "../context/encounter.context"
+import { useEffect } from "react"
 
-const TopSection = ({
-    userDetails
-} : {
-    userDetails? : INhisDetails
-}) => {
-    console.log({userDetails})
-    const {storedCapture} = useEncounterContext()
+const TopSection = () => {
+    const {storedCapture, encounterDetails} = useEncounterContext()
+    useEffect(()=>{
+        console.log({encounterDetails})
+    },[])
     const data = [
         [
             <div className="flex">
                 <Text>
-                    &nbsp;{userDetails?.gender} | {userDetails?.dob && getAgeFromDate(new Date(userDetails?.dob))} years | {userDetails?.maritalStatus}
+                    &nbsp;{encounterDetails?.gender} | {encounterDetails?.dob && getAgeFromDate(new Date(encounterDetails?.dob))} years | {encounterDetails?.maritalStatus}
                 </Text>
             </div>,
             <div className="flex">
@@ -28,7 +27,7 @@ const TopSection = ({
                     Insurance Type:
                 </Text>
                 <Text>
-                    &nbsp;{userDetails?.insuranceType}
+                    &nbsp;{encounterDetails?.insuranceType}
                 </Text>
             </div>
         ],
@@ -38,7 +37,7 @@ const TopSection = ({
                     Address:
                 </Text>
                 <Text>
-                    &nbsp;{userDetails?.residentialAddress}
+                    &nbsp;{encounterDetails?.residentialAddress}
                 </Text>
             </div>,
             <div className="flex">
@@ -46,7 +45,7 @@ const TopSection = ({
                     Ghana Card Number:
                 </Text>
                 <Text>
-                    &nbsp;{userDetails?.ghanaCardNumber}
+                    &nbsp;{encounterDetails?.ghanaCardNumber}
                 </Text>
             </div>,
         ],
@@ -56,7 +55,7 @@ const TopSection = ({
                     NHIS Number:
                 </Text>
                 <Text>
-                    &nbsp;{userDetails?.nhisId}
+                    &nbsp;{encounterDetails?.nhisId}
                 </Text>
             </div>
         ],
@@ -67,10 +66,10 @@ const TopSection = ({
             <div className="relative h-[200px] w-[280px] flex justify-center">
                 <div className="absolute flex justify-center items-center bottom-0 left-0 p-2 w-[140px] h-[140px] bg-[#24242F] rounded-full border-b-[1px] border-solid border-border-tetiary">
                     {
-                        userDetails?.imageUrl ?
+                        encounterDetails?.imageUrl ?
                         <div className="relative overflow-hidden rounded-full w-full h-full">
                             <Image
-                                src={userDetails.imageUrl}
+                                src={encounterDetails.imageUrl}
                                 alt="profile"
                                 width={130}
                                 height={130}
@@ -82,10 +81,10 @@ const TopSection = ({
                 </div>
                 <div className="absolute flex justify-center items-center right-0 top-0 p-2 w-[140px] h-[140px] bg-[#24242F] rounded-full border-b-[1px] border-solid border-border-tetiary">
                     {
-                        storedCapture ?
+                        encounterDetails?.checkinImageUrl ?
                         <div className="relative overflow-hidden rounded-full w-full h-full">
                             <Image
-                                src={storedCapture}
+                                src={"https://national-health.s3.us-east-1.amazonaws.com/uploads/2/1742387713.jpg"}
                                 alt="profile"
                                 width={130}
                                 height={130}
@@ -121,7 +120,7 @@ const TopSection = ({
                         textColor={theme.colors.text.primary}
                         className="pl-[20px]"
                     >
-                        {`${userDetails?.firstname}${userDetails?.othernames ? ` ${userDetails?.othernames}` : ''} ${userDetails?.lastname}`}
+                        {`${encounterDetails?.firstname}${encounterDetails?.othernames ? ` ${encounterDetails?.othernames}` : ''} ${encounterDetails?.lastname}`}
                     </Text>
                     <table className="w-full">
                         <tbody>

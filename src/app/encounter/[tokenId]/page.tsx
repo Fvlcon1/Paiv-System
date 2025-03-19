@@ -12,7 +12,7 @@ import { useMutation } from "@tanstack/react-query"
 import { mainContext } from "@/app/context/context"
 import toast from "react-hot-toast"
 import { useEncounterContext } from "./context/encounter.context"
-import { ViewState } from "./utils/types"
+import { IEncounterDetails, ViewState } from "./utils/types"
 import VerificationStates from "./components/verificationStates"
 import useRecentVisits from "./components/recent table/utils/useRecentVisits"
 import { INhisDetails } from "@/app/components/results table/utils/type"
@@ -20,33 +20,11 @@ import NoData from "@components/NoData/noData"
 import RecentTable from "./components/recent table/recentTable"
 import { DispositionViewState } from "@/app/utils/types"
 import Disposition from "./components/disposition/disposition"
+import { getTime, getRelativeTime } from "@/utils/getDate"
 
 const Encounter = () => {
     const { tokenId } = useParams();
-    const { nhisDetails } = useContext(mainContext);
-    const { viewState, setViewState, setNhisDetails, setDispositionViewState } = useEncounterContext();
-    const { getNHISDetails } = useRecentVisits();
-    const [userDetails, setUserDetails] = useState<INhisDetails>();
-
-    const getEncounter = async () => {
-        if (!tokenId) return null; // Ensure tokenId exists before fetching
-        const response = await protectedApi.GET(`api/encounter/${tokenId}`);
-        return response.verification_record;
-    };
-
-    const { mutate: getEncounterMutation, isPending, data } = useMutation({
-        mutationFn: getEncounter,
-        onSuccess: (data) => {
-            if (data) {
-                const userDetails = getNHISDetails(data);
-                setNhisDetails(userDetails)
-                setUserDetails(userDetails);
-            }
-        },
-        onError: () => {
-            toast.error("Something happened, Please try again later");
-        }
-    });
+    const { viewState, setViewState, setDispositionViewState, getEncounterMutation, getEncounterPending, encounterData } = useEncounterContext();
 
     useEffect(() => {
         if (tokenId) {
@@ -54,7 +32,7 @@ const Encounter = () => {
         }
     }, [tokenId]);
 
-    if (isPending) {
+    if (getEncounterPending) {
         return (
             <div className="w-full h-screen flex justify-center items-center">
                 <div className="normal-loader"></div>
@@ -62,7 +40,7 @@ const Encounter = () => {
         );
     }
 
-    if (!data) {
+    if (!encounterData) {
         return (
             <div className="w-full h-screen flex justify-center items-center">
                 <NoData />
@@ -77,7 +55,7 @@ const Encounter = () => {
             <div className="flex flex-col gap-6">
                 <div className="w-full bg-[#ffffff05] border-b-[1px] border-solid border-b-border-tetiary justify-center pt-[30px] h-[300px] flex items-center">
                     <div className="max-w-[1024px] w-full flex flex-col justify-center gap-6">
-                        <TopSection userDetails={userDetails} />
+                        <TopSection />
                     </div>
                 </div>
                 <div className="w-full flex justify-center gap-1">
@@ -87,11 +65,11 @@ const Encounter = () => {
                                 text="Verify Visit"
                                 className="!bg-main-primary"
                                 onClick={() => setViewState(ViewState.VERIFICATION_SELECTION)}
-                                disabled={data.verification_status === true}
+                                disabled={encounterData.verification_status === true}
                             />
                             <Button
                                 text="Close Encounter"
-                                disabled={data.final_time !== null}
+                                disabled={encounterData.final_time !== null}
                                 onClick={() => setDispositionViewState(DispositionViewState.SELECT_DISPOSITION)}
                             />
                         </div>

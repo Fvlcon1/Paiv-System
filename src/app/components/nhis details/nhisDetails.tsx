@@ -36,6 +36,7 @@ const NhisDetails = () => {
         onSuccess : (data)=>{
             toast.success("Encounter created successfully")
             router.push(`/encounter/${data.token}`)
+            setViewState(null)
         },
         onError : ()=>{
             toast.error("Error creating encounter")

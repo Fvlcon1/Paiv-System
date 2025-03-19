@@ -9,10 +9,12 @@ import Button from "@components/button/button";
 import Text from "@styles/components/text";
 import { TbAlertSquareFilled } from "react-icons/tb";
 import theme from "@styles/theme";
+import { useAuth } from "../authContext";
 
 const SessionTimeoutAlert = ({ show }: { show: boolean }) => {
     const router = useRouter();
     const [isVisible, setIsVisible] = useState(show);
+    const {logout} = useAuth()
 
     useEffect(() => {
         setIsVisible(show);
@@ -44,7 +46,7 @@ const SessionTimeoutAlert = ({ show }: { show: boolean }) => {
                         Your session has expired. Please log in again.
                     </Text>
                     <Button
-                        onClick={() => router.push("/auth/login")}
+                        onClick={() => logout(false)}
                         text="Relogin"
                         className="!bg-bg-quantinary hover:!bg-bg-tetiary mt-2"
                     />

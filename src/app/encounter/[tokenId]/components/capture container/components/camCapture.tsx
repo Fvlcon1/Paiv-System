@@ -13,6 +13,7 @@ import VeficationFailed from "./verificationFailed"
 import { protectedApi } from "@/app/utils/apis/api"
 import { useParams } from "next/navigation"
 import { useEncounterContext } from "../../../context/encounter.context"
+import useGetEncounter from "../../../utils/useGetEncounter"
 
 const CamCapture = ({
     setViewState
@@ -24,6 +25,7 @@ const CamCapture = ({
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const [stream, setStream] = useState<MediaStream | null>(null)
     const { nhisDetails, setCaptureImageUrl, capturedImageUrl } = useEncounterContext()
+    const {getEncounterMutation} = useGetEncounter()
 
     // Start Camera (Ensures no duplicate streams)
     const startCamera = async () => {
@@ -101,6 +103,7 @@ const CamCapture = ({
             return response.data;
         },
         onSuccess : (data) => {
+            getEncounterMutation()
             setViewState(
                 data.match_summary?.is_match
                     ? ViewState.VERIFICATION_SUCCESS
