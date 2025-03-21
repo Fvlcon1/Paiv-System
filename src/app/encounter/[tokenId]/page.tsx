@@ -22,6 +22,7 @@ import { DispositionViewState } from "@/app/utils/types"
 import Disposition from "./components/disposition/disposition"
 import { getTime, getRelativeTime } from "@/utils/getDate"
 import ClaimsForm from "./components/claims/claimsForm"
+import { AnimatePresence } from "framer-motion"
 
 const Encounter = () => {
     const { tokenId } = useParams();
@@ -52,12 +53,14 @@ const Encounter = () => {
 
     return (
         <>
-            {
-                showClaims &&
-                <ClaimsForm
-                    close={()=>setShowClaims(false)}
-                />
-            }
+            <AnimatePresence>
+                {
+                    showClaims &&
+                    <ClaimsForm
+                        close={()=>setShowClaims(false)}
+                    />
+                }
+            </AnimatePresence>
             <VerificationStates />
             <Disposition />
             <div className="flex flex-col gap-6">
