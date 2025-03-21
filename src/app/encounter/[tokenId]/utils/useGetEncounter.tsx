@@ -12,8 +12,9 @@ import { IEncounterDetails } from "./types";
 const useGetEncounter = () => {
     const { tokenId } = useParams();
     const { getNHISDetails } = useRecentVisits()
-    const { setNhisDetails, setEncounterDetails } = useEncounterContext();
+    const { setNhisDetails } = useEncounterContext();
     const [userDetails, setUserDetails] = useState<INhisDetails>();
+    const [encounterDetails, setEncounterDetails] = useState<IEncounterDetails>()
 
     const extractEncounterDetails = (data : any) => {
         const encounterDetails: IEncounterDetails = {
@@ -68,6 +69,6 @@ const useGetEncounter = () => {
             getEncounterMutation();
         }
     }, [tokenId]);
-    return { getEncounterMutation, getEncounterPending, encounterData}
+    return { getEncounterMutation, getEncounterPending, encounterData, encounterDetails, setEncounterDetails}
 }
 export default useGetEncounter

@@ -14,7 +14,7 @@ const TopSection = () => {
     const {storedCapture, encounterDetails} = useEncounterContext()
     useEffect(()=>{
         console.log({encounterDetails})
-    },[])
+    },[encounterDetails])
     const data = [
         [
             <div className="flex">
@@ -84,7 +84,7 @@ const TopSection = () => {
                         encounterDetails?.checkinImageUrl ?
                         <div className="relative overflow-hidden rounded-full w-full h-full">
                             <Image
-                                src={"https://national-health.s3.us-east-1.amazonaws.com/uploads/2/1742387713.jpg"}
+                                src={encounterDetails.checkinImageUrl}
                                 alt="profile"
                                 width={130}
                                 height={130}
@@ -94,11 +94,26 @@ const TopSection = () => {
                         <FaUserCircle color={theme.colors.text.tetiary} size={105} />
                     }
                 </div>
+                <div className="absolute flex justify-center items-center right-[50px] bottom-[-40px] p-2 w-[110px] h-[110px] bg-[#24242F] rounded-full border-b-[1px] border-solid border-border-tetiary">
+                    {
+                        encounterDetails?.checkoutImageUrl ?
+                        <div className="relative overflow-hidden rounded-full w-full h-full">
+                            <Image
+                                src={encounterDetails.checkoutImageUrl}
+                                alt="profile"
+                                width={100}
+                                height={100}
+                            />
+                        </div>
+                        :
+                        <FaUserCircle color={theme.colors.text.tetiary} size={105} />
+                    }
+                </div>
                 <div className="absolute right-0 top-0 w-full h-full flex justify-center items-center">
-                    <div className="relative overflow-hidden rounded-full bg-[#ffffff1e] p-1">
+                    <div className="relative mt-[50px] ml-[10px] overflow-hidden rounded-full bg-[#898686d6] p-1">
                         <div className="relative overflow-hidden h-[30px] w-[30px] flex justify-center items-center rounded-full bg-[#24242fb7] p-1">
                             {
-                                storedCapture ?
+                                encounterDetails?.checkoutImageUrl ?
                                 <RiVerifiedBadgeFill
                                     color="#60B956"
                                     size={30}

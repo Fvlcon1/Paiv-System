@@ -53,7 +53,7 @@ const Encounter = () => {
             <VerificationStates />
             <Disposition />
             <div className="flex flex-col gap-6">
-                <div className="w-full bg-[#ffffff05] border-b-[1px] border-solid border-b-border-tetiary justify-center pt-[30px] h-[300px] flex items-center">
+                <div className="w-full bg-[#ffffff05] border-b-[1px] border-solid border-b-border-tetiary justify-center pt-[30px] h-[350px] flex items-center">
                     <div className="max-w-[1024px] w-full flex flex-col justify-center gap-6">
                         <TopSection />
                     </div>

@@ -55,8 +55,7 @@ export const EncounterProvider = ({ children }: { children: ReactNode }) => {
   const [storedCapture, setStoredCapture] = useState<string | null>(null)
   const [dispositionViewState, setDispositionViewState] = useState<DispositionViewState | null>(null);
   const [selectedDisposition, setSelectedDisposition] = useState<IDispositionType>()
-  const {getEncounterMutation, getEncounterPending, encounterData} = useGetEncounter()
-  const [encounterDetails, setEncounterDetails] = useState<IEncounterDetails>()
+  const {getEncounterMutation, getEncounterPending, encounterData, encounterDetails, setEncounterDetails} = useGetEncounter()
 
   return (
     <encounterContext.Provider
