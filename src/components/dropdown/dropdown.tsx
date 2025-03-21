@@ -57,7 +57,7 @@ const Dropdown = (
                         initial={{ opacity: 0, y : -10 }}
                         animate={{ opacity: 1, y : 0 }}
                         exit={{ opacity: 0, y : -10 }}
-                        className={`absolute overflow-y-auto right-0 mt-2 min-w-[150px] w-full bg-bg-tetiary border border-border-quantinary rounded-xl shadow-lg z-50 py-1 pt-[6px] ${className}`}
+                        className={`absolute overflow-y-auto right-0 mt-2 min-w-[150px] max-h-[300px] w-full bg-bg-tetiary border border-border-quantinary rounded-xl shadow-lg z-50 py-1 pt-[6px] ${className}`}
                     >
                         {
                             menuItems &&

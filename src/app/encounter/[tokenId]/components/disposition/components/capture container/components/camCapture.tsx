@@ -20,8 +20,7 @@ const CamCapture = ({
     const videoRef = useRef<HTMLVideoElement>(null)
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const [stream, setStream] = useState<MediaStream | null>(null)
-    const { nhisDetails, setCaptureImageUrl, setStoredCapture, capturedImageUrl, selectedDisposition } = useEncounterContext()
-    const [imageUrl, setImageUrl] = useState("")
+    const { nhisDetails, setCaptureImageUrl, capturedImageUrl, selectedDisposition, getEncounterMutation } = useEncounterContext()
 
     // Start Camera (Ensures no duplicate streams)
     const startCamera = async () => {
@@ -67,7 +66,6 @@ const CamCapture = ({
                 const imageData = canvas.toDataURL("image/png")
                 const binaryData = dataURLToUint8Array(imageData)
                 setCaptureImageUrl(imageData)
-                setImageUrl(imageData)
                 stopCamera(); // Stop camera after capturing
                 return binaryData
             }
@@ -101,8 +99,7 @@ const CamCapture = ({
             return response.data;
         },
         onSuccess : (data) => {
-            console.log({imageUrl})
-            setStoredCapture(imageUrl)
+            getEncounterMutation()
             setDispositionViewState(
                 data.final_verification_status
                     ? DispositionViewState.VERIFICATION_SUCCESS

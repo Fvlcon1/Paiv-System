@@ -10,6 +10,9 @@ export const enum ViewState {
 }
 
 export interface IEncounterDetails extends INhisDetails {
+    checkinTime? : Date,
+    checkoutTime? : Date,
+    disposition? : string
     checkinImageUrl : string
     checkoutImageUrl : string
     createdAt : string

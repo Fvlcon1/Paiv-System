@@ -9,6 +9,7 @@ import { RiVerifiedBadgeFill } from "react-icons/ri"
 import { getAgeFromDate } from "../utils/getAgeFromDate"
 import { useEncounterContext } from "../context/encounter.context"
 import { useEffect } from "react"
+import { getTime, getRelativeTime } from "@/utils/getDate"
 
 const TopSection = () => {
     const {storedCapture, encounterDetails} = useEncounterContext()
@@ -59,6 +60,38 @@ const TopSection = () => {
                 </Text>
             </div>
         ],
+        [
+            <div className="flex gap-1">
+                <Text
+                    textColor={theme.colors.text.tetiary}
+                >
+                    Check in time:
+                </Text>
+                <Text>
+                    {encounterDetails?.checkinTime ? `${(new Date(encounterDetails.checkinTime)).toDateString()} | ${getRelativeTime(encounterDetails.checkinTime)}` : '-'}
+                </Text>
+            </div>,
+            <div className="flex gap-1">
+                <Text
+                    textColor={theme.colors.text.tetiary}
+                >
+                    Check in time:
+                </Text>
+                <Text>
+                    {encounterDetails?.checkoutTime ? `${(new Date(encounterDetails.checkoutTime)).toDateString()} | ${getRelativeTime(encounterDetails.checkoutTime)}` : '-'}
+                </Text>
+            </div>
+        ],
+        [
+            <div className="flex">
+                <Text textColor={theme.colors.text.tetiary}>
+                    Disposition:
+                </Text>
+                <Text>
+                    &nbsp;{encounterDetails?.disposition ?? '-'}
+                </Text>
+            </div>
+        ]
     ]
 
     return (
@@ -91,7 +124,7 @@ const TopSection = () => {
                             />
                         </div>
                         :
-                        <FaUserCircle color={theme.colors.text.tetiary} size={105} />
+                        <FaUserCircle color={theme.colors.text.tetiary} size={130} />
                     }
                 </div>
                 <div className="absolute flex justify-center items-center right-[50px] bottom-[-40px] p-2 w-[110px] h-[110px] bg-[#24242F] rounded-full border-b-[1px] border-solid border-border-tetiary">
@@ -106,25 +139,21 @@ const TopSection = () => {
                             />
                         </div>
                         :
-                        <FaUserCircle color={theme.colors.text.tetiary} size={105} />
+                        <FaUserCircle color={theme.colors.text.tetiary} size={100} />
                     }
                 </div>
                 <div className="absolute right-0 top-0 w-full h-full flex justify-center items-center">
-                    <div className="relative mt-[50px] ml-[10px] overflow-hidden rounded-full bg-[#898686d6] p-1">
-                        <div className="relative overflow-hidden h-[30px] w-[30px] flex justify-center items-center rounded-full bg-[#24242fb7] p-1">
-                            {
-                                encounterDetails?.checkoutImageUrl ?
+                    {
+                        encounterDetails?.checkoutImageUrl &&
+                        <div className="relative mt-[50px] ml-[10px] overflow-hidden rounded-full bg-[#898686d6] p-1">
+                            <div className="relative overflow-hidden h-[30px] w-[30px] flex justify-center items-center rounded-full bg-[#24242fb7] p-1">
                                 <RiVerifiedBadgeFill
                                     color="#60B956"
                                     size={30}
                                 />
-                                :
-                                <Text>
-                                    ?
-                                </Text>
-                            }
+                            </div>
                         </div>
-                    </div>
+                    }
                 </div>
             </div>
             <div className="flex gap-4 flex-1 justify-between items-end h-fit">
@@ -137,41 +166,43 @@ const TopSection = () => {
                     >
                         {`${encounterDetails?.firstname}${encounterDetails?.othernames ? ` ${encounterDetails?.othernames}` : ''} ${encounterDetails?.lastname}`}
                     </Text>
-                    <table className="w-full">
-                        <tbody>
-                            {
-                                data.map((item, index) => (
-                                    <tr className={`${index % 2 === 0 ? 'bg-[#4f4f631d]' : ''}`} key={index}>
-                                        <td className={`pl-[20px] py-[10px] rounded-l-lg`}>
-                                            {
-                                                typeof item[0] === 'string' ?
-                                                <Text  
-                                                    textColor={theme.colors.text.tetiary}
-                                                    bold={TypographyBold.md}
-                                                >
-                                                    {item[0]}
-                                                </Text>
-                                                :
-                                                item[0]
-                                            }
-                                        </td>
-                                        <td className="rounded-r-lg">
-                                            <div className="flex gap-6 items-center">
+                    <div className="w-full flex flex-col gap-2">
+                        <table className="w-full">
+                            <tbody>
+                                {
+                                    data.map((item, index) => (
+                                        <tr className={`${index % 2 === 0 ? 'bg-[#4f4f631d]' : ''}`} key={index}>
+                                            <td className={`pl-[20px] py-[10px] rounded-l-lg`}>
                                                 {
-                                                    typeof item[1] === 'string' ?
-                                                    <Text>
-                                                        {item[1]}
+                                                    typeof item[0] === 'string' ?
+                                                    <Text  
+                                                        textColor={theme.colors.text.tetiary}
+                                                        bold={TypographyBold.md}
+                                                    >
+                                                        {item[0]}
                                                     </Text>
                                                     :
-                                                    item[1]
+                                                    item[0]
                                                 }
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))
-                            }
-                        </tbody>
-                </table>
+                                            </td>
+                                            <td className="rounded-r-lg">
+                                                <div className="flex gap-6 items-center">
+                                                    {
+                                                        typeof item[1] === 'string' ?
+                                                        <Text>
+                                                            {item[1]}
+                                                        </Text>
+                                                        :
+                                                        item[1]
+                                                    }
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

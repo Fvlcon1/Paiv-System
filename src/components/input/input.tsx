@@ -63,7 +63,7 @@ const Input = ({
 
     return (
         <div
-            className={`flex w-full flex-1 gap-2 px-[15px] py-[10px] items-center rounded-xl bg-bg-secondary border-border-tetiary border-[1px] border-solid duration-200 ${className}`}
+            className={`flex w-full h-fit flex-1 gap-2 px-[15px] py-[10px] items-center rounded-xl bg-bg-secondary border-border-tetiary border-[1px] border-solid duration-200 ${className}`}
             onClick={onClick}
             style={{
                 borderColor: (inputFocus || hover) ? theme.colors.main.primary : borderColor || theme.colors.border.secondary
@@ -72,11 +72,11 @@ const Input = ({
             {PreIcon && PreIcon}
             <input
                 {...inputProps}
-                ref={ref ?? inputRef} // ✅ Ensure the correct ref is used
+                ref={ref ?? inputRef}
                 placeholder={placeholder ?? inputProps?.placeholder ?? "Input text"}
                 type={type ?? inputProps?.type ?? "text"}
                 required={required ?? inputProps?.required}
-                className={`flex w-full flex-1 bg-transparent outline-none placeholder:text-[12px] placeholder:text-text-tetiary text-text-primary md:text-[12px] text-[16px] ${inputClassName}`}
+                className={`flex w-full flex-1 bg-transparent h-fit outline-none placeholder:text-[12px] placeholder:text-text-tetiary text-text-primary md:text-[12px] text-[16px] ${inputClassName}`}
                 onFocus={(e) => {
                     setInputFocus(true);
                     inputProps?.onFocus?.(e);

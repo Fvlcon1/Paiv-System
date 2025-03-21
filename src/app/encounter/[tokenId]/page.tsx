@@ -21,9 +21,11 @@ import RecentTable from "./components/recent table/recentTable"
 import { DispositionViewState } from "@/app/utils/types"
 import Disposition from "./components/disposition/disposition"
 import { getTime, getRelativeTime } from "@/utils/getDate"
+import ClaimsForm from "./components/claims/claimsForm"
 
 const Encounter = () => {
     const { tokenId } = useParams();
+    const [showClaims, setShowClaims] = useState(false)
     const { viewState, setViewState, setDispositionViewState, getEncounterMutation, getEncounterPending, encounterData } = useEncounterContext();
 
     useEffect(() => {
@@ -50,6 +52,12 @@ const Encounter = () => {
 
     return (
         <>
+            {
+                showClaims &&
+                <ClaimsForm
+                    close={()=>setShowClaims(false)}
+                />
+            }
             <VerificationStates />
             <Disposition />
             <div className="flex flex-col gap-6">
@@ -61,17 +69,29 @@ const Encounter = () => {
                 <div className="w-full flex justify-center gap-1">
                     <div className="max-w-[1024px] w-full flex flex-col gap-6">
                         <div className="flex gap-2">
-                            <Button
-                                text="Verify Visit"
-                                className="!bg-main-primary"
-                                onClick={() => setViewState(ViewState.VERIFICATION_SELECTION)}
-                                disabled={encounterData.verification_status === true}
-                            />
-                            <Button
-                                text="Close Encounter"
-                                disabled={encounterData.final_time !== null}
-                                onClick={() => setDispositionViewState(DispositionViewState.SELECT_DISPOSITION)}
-                            />
+                            {
+                                !encounterData.verification_status &&
+                                <Button
+                                    text="Verify Visit"
+                                    className="!bg-main-primary"
+                                    onClick={() => setViewState(ViewState.VERIFICATION_SELECTION)}
+                                />
+                            }
+                            {
+                                !encounterData.final_time &&
+                                <Button
+                                    text="Close Encounter"
+                                    onClick={() => setDispositionViewState(DispositionViewState.SELECT_DISPOSITION)}
+                                />
+                            }
+                            {
+                                encounterData.final_time && encounterData.verification_status &&
+                                <Button
+                                    text="Submit Claim"
+                                    className="!bg-main-primary"
+                                    onClick={()=>setShowClaims(true)}
+                                />
+                            }
                         </div>
                         <RecentTable />
                     </div>

@@ -24,12 +24,8 @@ const CamCapture = ({
     const videoRef = useRef<HTMLVideoElement>(null)
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const [stream, setStream] = useState<MediaStream | null>(null)
-    const { nhisDetails, setCaptureImageUrl, capturedImageUrl, setEncounterDetails } = useEncounterContext()
-    const {getEncounterMutation, encounterDetails} = useGetEncounter()
-
-    useEffect(()=>{
-        setEncounterDetails(encounterDetails)
-    },[encounterDetails])
+    const { nhisDetails, setCaptureImageUrl, capturedImageUrl, setEncounterDetails, getEncounterMutation } = useEncounterContext()
+    const { encounterDetails} = useGetEncounter()
 
     // Start Camera (Ensures no duplicate streams)
     const startCamera = async () => {

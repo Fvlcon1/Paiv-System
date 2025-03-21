@@ -22,7 +22,7 @@ const useGetEncounter = () => {
             othernames: data.middle_name,
             lastname: data.last_name,
             nhisId: data.nhis_number,
-            lastVisit: `${(new Date(data.last_data)).toDateString()} | ${getTime(data.last_data)} | ${getRelativeTime(data.last_data)}`,
+            lastVisit: `${(new Date(data.verification_date)).toDateString()} | ${getTime(data.verification_date)} | ${getRelativeTime(data.verification_date)}`,
             gender: data.gender,
             dob: new Date(data.date_of_birth).toDateString(),
             maritalStatus: data.marital_status,
@@ -38,7 +38,10 @@ const useGetEncounter = () => {
             token : data.token,
             checkinImageUrl : data.compare_image_url,
             checkoutImageUrl : data.encounter_image_url,
-            createdAt : data.created_at
+            createdAt : data.created_at,
+            checkinTime : data.verification_date && new Date(data.verification_date),
+            checkoutTime : data.final_time && new Date(data.final_time),
+            disposition : data.disposition_name
         };
         return encounterDetails
     }
@@ -46,6 +49,7 @@ const useGetEncounter = () => {
     const getEncounter = async () => {
         if (!tokenId) return null; // Ensure tokenId exists before fetching
         const response = await protectedApi.GET(`api/encounter/${tokenId}`);
+        console.log({response})
         return response.verification_record;
     };
 
@@ -54,9 +58,14 @@ const useGetEncounter = () => {
         onSuccess: (data) => {
             if (data) {
                 const userDetails = getNHISDetails(data);
+                console.log({data})
+                const extractedEncounterDetails = extractEncounterDetails(data)
+                console.log({extractedEncounterDetails})
                 setEncounterDetails(extractEncounterDetails(data))
+                console.log("work")
                 setNhisDetails(userDetails)
                 setUserDetails(userDetails);
+                return extractedEncounterDetails
             }
         },
         onError: () => {
