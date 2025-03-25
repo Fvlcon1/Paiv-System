@@ -10,6 +10,7 @@ import { getAgeFromDate } from "../utils/getAgeFromDate"
 import { useEncounterContext } from "../context/encounter.context"
 import { useEffect } from "react"
 import { getTime, getRelativeTime } from "@/utils/getDate"
+import { getLengthOfStay } from "../utils/getLengthOfStay"
 
 const TopSection = () => {
     const {storedCapture, encounterDetails} = useEncounterContext()
@@ -89,6 +90,18 @@ const TopSection = () => {
                 </Text>
                 <Text>
                     &nbsp;{encounterDetails?.disposition ?? '-'}
+                </Text>
+            </div>,
+            <div className="flex">
+                <Text textColor={theme.colors.text.tetiary}>
+                    Length of stay:
+                </Text>
+                <Text>
+                    &nbsp;{
+                        (encounterDetails?.checkinTime && encounterDetails?.checkoutTime)
+                        ? getLengthOfStay(encounterDetails?.checkinTime, encounterDetails?.checkoutTime)
+                        : '-'
+                    }
                 </Text>
             </div>
         ]
