@@ -1,6 +1,6 @@
 import { message } from "antd"
 import axios from "axios"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useMutation } from "@tanstack/react-query"
 import { IRecentVisitsTable, IRecentVisits } from '../type';
 import Image from "next/image"
