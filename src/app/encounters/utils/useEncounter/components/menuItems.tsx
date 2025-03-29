@@ -10,7 +10,7 @@ import { FaPowerOff } from "react-icons/fa"
 import { IoMdSettings } from "react-icons/io"
 
 const useDropdownItems = () => {
-    const { setDispositionViewState, setViewState } = useContext(mainContext);
+    const { setDispositionViewState, nhisDetails } = useContext(mainContext);
     const {setShowClaims, setShowEncounterDetails} = useEncounterContext()
 
     const menuItems: DropdownItem[] = [
@@ -20,8 +20,9 @@ const useDropdownItems = () => {
         { key: "2", label: "Submit Claim", onClick : ()=>{
             setShowClaims(true)
         }},
+        { key: "3", label: "Visit Encounter", type : "link", href : `/encounter/${nhisDetails?.token}`},
         { type: "divider", key: "divider-1" },
-        { key: "3", label: "More Details...", onClick : () => {
+        { key: "4", label: "More Details...", onClick : () => {
             setShowEncounterDetails(true)
         } },
     ]

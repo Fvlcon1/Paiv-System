@@ -24,10 +24,6 @@ const Encounters = () => {
       getRecentVisits({})
     },[])
 
-    useEffect(()=>{
-      console.log({recentVisitsTableData})
-    },[recentVisitsTableData])
-
     return (
         <>
             {
