@@ -14,9 +14,7 @@ import { getLengthOfStay } from "../utils/getLengthOfStay"
 
 const TopSection = () => {
     const {storedCapture, encounterDetails} = useEncounterContext()
-    useEffect(()=>{
-        console.log({encounterDetails})
-    },[encounterDetails])
+    
     const data = [
         [
             <div className="flex">

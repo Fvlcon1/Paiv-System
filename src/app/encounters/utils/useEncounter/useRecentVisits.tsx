@@ -22,7 +22,7 @@ import useDropdownItems from "./components/menuItems";
 
 const useRecentVisits = () => {
     const [recentVisitsTableData, setRecentVisitsTableData] = useState<IRecentVisitsTable[]>([])
-    const { setSearchMembersResult, setNhisDetails, setViewState, setDispositionViewState } = useContext(mainContext);
+    const { setSearchMembersResult, setNhisDetails, nhisDetails, setViewState, setDispositionViewState } = useContext(mainContext);
     const {menuItems} = useDropdownItems()
 
     const fetchRecentVisits = async ({
@@ -38,6 +38,35 @@ const useRecentVisits = () => {
         })
         return response.results
     }
+
+    //Update actions column when token is set
+    useEffect(()=>{
+        setRecentVisitsTableData(prev => {
+            return prev.map((item) => {
+                if(nhisDetails?.token === item.token)
+                    return {
+                        ...item,
+                        actions : (
+                            <Dropdown
+                                menuItems={menuItems}
+                                onClick={(e) => {
+                                    setNhisDetails({ ...nhisDetails, imageUrl: nhisDetails.imageUrl });
+                                    e.stopPropagation()
+                                }}
+                            >
+                                <ClickableTab>
+                                    <HiOutlineDotsHorizontal 
+                                        color={theme.colors.text.secondary}
+                                        size={20}
+                                    />
+                                </ClickableTab>
+                            </Dropdown>
+                        )
+                    }
+                return item
+            })
+        })
+    },[menuItems])
 
     const { mutate: getRecentVisits, isPending, isError, error } = useMutation({
         mutationFn: fetchRecentVisits,

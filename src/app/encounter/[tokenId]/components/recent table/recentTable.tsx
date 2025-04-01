@@ -18,7 +18,6 @@ const RecentTable = () => {
 
   const getPastEncounters = async () => {
       const response = await protectedApi.GET(`/api/encounter/members/${tokenId}`)
-      console.log({response})
       return response
   }
 

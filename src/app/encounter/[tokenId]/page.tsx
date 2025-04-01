@@ -20,9 +20,8 @@ import NoData from "@components/NoData/noData"
 import RecentTable from "./components/recent table/recentTable"
 import { DispositionViewState } from "@/app/utils/types"
 import Disposition from "./components/disposition/disposition"
-import { getTime, getRelativeTime } from "@/utils/getDate"
-import ClaimsForm from "./components/claims/claimsForm"
 import { AnimatePresence } from "framer-motion"
+import ClaimsFormLayout from "./components/claims/claimsFormLayout"
 
 const Encounter = () => {
     const { tokenId } = useParams();
@@ -56,7 +55,7 @@ const Encounter = () => {
             <AnimatePresence>
                 {
                     showClaims &&
-                    <ClaimsForm
+                    <ClaimsFormLayout
                         close={()=>setShowClaims(false)}
                     />
                 }

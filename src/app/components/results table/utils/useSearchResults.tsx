@@ -68,20 +68,20 @@ const useSearchResults = () => {
                     </div>
                     : <Text>-</Text>
                 ),
-                checkout : (
-                    visit.last_visit && !visit.disposition_name ?
-                    <Button
-                        text="Checkout"
-                        className="!bg-bg-secondary hover:!bg-bg-quantinary"
-                        onClick={(e) => {
-                            e.stopPropagation()
-                            setNhisDetails({ ...NHISDetails, imageUrl: visit.profile_image_url });
-                            setDispositionViewState(DispositionViewState.NHIS_DETAILS);
-                        }}
-                    />
-                    :
-                    "-"
-                ),
+                // checkout : (
+                //     visit.last_visit && !visit.disposition_name ?
+                //     <Button
+                //         text="Checkout"
+                //         className="!bg-bg-secondary hover:!bg-bg-quantinary"
+                //         onClick={(e) => {
+                //             e.stopPropagation()
+                //             setNhisDetails({ ...NHISDetails, imageUrl: visit.profile_image_url });
+                //             setDispositionViewState(DispositionViewState.NHIS_DETAILS);
+                //         }}
+                //     />
+                //     :
+                //     "-"
+                // ),
                 image: (
                     <div className="rounded-lg overflow-hidden relative w-[50px] h-[50px]">
                         <Image

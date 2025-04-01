@@ -24,9 +24,6 @@ const RecentVisitsDetails = ({
     data? : IRecentVisitsTable
 }) => {
     const [zoomProfile, setZoomProfile] = useState(false)
-    useEffect(()=>{
-        console.log({data})
-    },[data])
     
     return (
         <>

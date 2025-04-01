@@ -51,7 +51,7 @@ export interface DropdownItem {
     key: string;
     label?: ReactNode | string;
     disabled?: boolean;
-    type?: "divider" | "title" | "link"
+    type?: "divider" | "title" | "link" | "loading"
     href? : string
     icon?: ReactNode;
     onClick? : ()=>void

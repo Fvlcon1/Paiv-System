@@ -65,7 +65,11 @@ const Dropdown = (
                                 {menuItems.map((item) =>
                                     item.type === "divider" ? (
                                         <div key={item.key} className="border-t border-border-quantinary my-1" />
-                                    ) : (
+                                    ) 
+                                    : item.type === "loading" ? (
+                                        <div key={item.key} className="pl-2 h-5 overflow-hidden"><div className="normal-loader !w-5" /></div>
+                                    )
+                                    : (
                                         <div
                                             key={item.key}
                                             className={` ${item.type === "title" ? "px-3" : "px-1"} gap-2 ${

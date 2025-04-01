@@ -11,12 +11,14 @@ import { DispositionViewState, ViewState } from "@/app/utils/types"
 import VeficationFailed from "./verificationFailed"
 import { protectedApi } from "@/app/utils/apis/api"
 import { useEncounterContext } from "@/app/encounter/[tokenId]/context/encounter.context"
+import { useParams } from "next/navigation"
 
 const CamCapture = ({
     setDispositionViewState
 } : {
     setDispositionViewState: Dispatch<SetStateAction<DispositionViewState | null>>
 }) => {
+    const {tokenId} = useParams()
     const videoRef = useRef<HTMLVideoElement>(null)
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const [stream, setStream] = useState<MediaStream | null>(null)
@@ -90,18 +92,18 @@ const CamCapture = ({
     const verifyVisitMutation = useMutation({
         mutationFn: async (binaryImage: Uint8Array) => {
             const formData = new FormData();
-            formData.append("token_id", nhisDetails?.token || "");
+            formData.append("token_id", tokenId as string);
             formData.append("disposition_id", selectedDisposition?.id || "");
             formData.append("webcam_image", new Blob([binaryImage], { type: "image/png" }), "image.png");
 
             const response = await protectedApi.POST("/api/encounter", formData)
 
-            return response.data;
+            return response;
         },
-        onSuccess : (data) => {
+        onSuccess : (response) => {
             getEncounterMutation()
             setDispositionViewState(
-                data.final_verification_status
+                response.status
                     ? DispositionViewState.VERIFICATION_SUCCESS
                     : DispositionViewState.VERIFICATION_FAILED
             );

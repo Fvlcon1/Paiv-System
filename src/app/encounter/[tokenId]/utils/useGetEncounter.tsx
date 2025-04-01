@@ -49,7 +49,6 @@ const useGetEncounter = () => {
     const getEncounter = async () => {
         if (!tokenId) return null; // Ensure tokenId exists before fetching
         const response = await protectedApi.GET(`api/encounter/${tokenId}`);
-        console.log({response})
         return response.verification_record;
     };
 
@@ -58,11 +57,8 @@ const useGetEncounter = () => {
         onSuccess: (data) => {
             if (data) {
                 const userDetails = getNHISDetails(data);
-                console.log({data})
                 const extractedEncounterDetails = extractEncounterDetails(data)
-                console.log({extractedEncounterDetails})
                 setEncounterDetails(extractEncounterDetails(data))
-                console.log("work")
                 setNhisDetails(userDetails)
                 setUserDetails(userDetails);
                 return extractedEncounterDetails

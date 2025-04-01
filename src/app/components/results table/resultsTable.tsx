@@ -21,7 +21,7 @@ const ResultsTable = () => {
 
     return (
         <div className="w-full flex flex-col px-[30px] gap-[15px] items-center">
-          <div className="flex gap-[15px] flex-col min-w-[800px] w-full max-w-[1200px]">
+          <div className="flex gap-[15px] flex-col min-w-[800px] w-full max-w-[1024px]">
             <div className="flex gap-[15px] flex-col w-full">
               <div className="w-full flex items-center justify-between">
                 <Text
