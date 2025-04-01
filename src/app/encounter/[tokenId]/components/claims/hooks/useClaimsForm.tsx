@@ -14,28 +14,9 @@ import { useEncounterContext } from "../../../context/encounter.context";
 const useClaimsForm = () => {
     const [labTestValue, setLabtestValue] = useState("")
     const [medicalProcedure, setMedicalProcedure] = useState<string>("")
-    const {getEncounterMutation} = useEncounterContext()
+    const {getEncounterMutation, setShowClaims} = useEncounterContext()
     const {tokenId} = useParams()
-    
-    const getServices = async () => {
-        const response = await protectedApi.GET("services/search?query=AS&limit=10")
-        console.log({services : response})
-        return response
-    }
-    
-    const {mutate : getServicesMutation, isPending : isGetServicesPending} = useMutation({
-        mutationFn : getServices,
-    })
-
-    useEffect(()=>{
-        getServicesMutation()
-    },[])
-    
-    const [isLoading, setIsLoading] = useState(isGetServicesPending)
-
-    useEffect(()=>{
-        setIsLoading(isGetServicesPending)
-    },[isGetServicesPending])
+    const [isLoading, setIsLoading] = useState(false)
 
     const formik = useFormik({
         initialValues: {
@@ -65,6 +46,7 @@ const useClaimsForm = () => {
     const {mutate : handleClaimSubmitMutation, isPending : isClaimSubmissionPending} = useMutation({
         mutationFn : handleClaimsSubmit,
         onSuccess : (data) => {
+            setShowClaims(false)
             toast.success("Claims submitted successfully")
             getEncounterMutation()
         }
@@ -83,6 +65,7 @@ const useClaimsForm = () => {
         formik.setFieldValue("drugs", newDrugs)
         drugFormik.setFieldValue("code", "")
         drugFormik.setFieldValue("dosage", "")
+        drugFormik.touched.dosage = false
     }
 
     const drugFormik = useFormik({

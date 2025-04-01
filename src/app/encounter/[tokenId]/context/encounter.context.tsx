@@ -27,6 +27,8 @@ const encounterContext = createContext<{
     getEncounterPending: boolean
     setEncounterDetails: Dispatch<SetStateAction<IEncounterDetails | undefined>>
     encounterDetails: IEncounterDetails | undefined
+    setShowClaims: Dispatch<SetStateAction<boolean>>
+    showClaims: boolean
 }>({
     viewState : null,
     setViewState : ()=>{},
@@ -44,7 +46,9 @@ const encounterContext = createContext<{
     encounterData : undefined,
     getEncounterPending : false,
     encounterDetails : undefined,
-    setEncounterDetails : ()=>{}
+    setEncounterDetails : ()=>{},
+    setShowClaims : ()=>{},
+    showClaims: false
 });
 
 // Context provider component
@@ -56,6 +60,7 @@ export const EncounterProvider = ({ children }: { children: ReactNode }) => {
   const [dispositionViewState, setDispositionViewState] = useState<DispositionViewState | null>(null);
   const [selectedDisposition, setSelectedDisposition] = useState<IDispositionType>()
   const {getEncounterMutation, getEncounterPending, encounterData, encounterDetails, setEncounterDetails} = useGetEncounter()
+  const [showClaims, setShowClaims] = useState(false)
 
   return (
     <encounterContext.Provider
@@ -76,7 +81,9 @@ export const EncounterProvider = ({ children }: { children: ReactNode }) => {
             getEncounterPending,
             encounterData,
             setEncounterDetails,
-            encounterDetails
+            encounterDetails,
+            showClaims,
+            setShowClaims
          }}
     >
       {children}

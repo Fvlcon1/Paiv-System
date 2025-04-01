@@ -25,8 +25,7 @@ import ClaimsFormLayout from "./components/claims/claimsFormLayout"
 
 const Encounter = () => {
     const { tokenId } = useParams();
-    const [showClaims, setShowClaims] = useState(false)
-    const { viewState, setViewState, setDispositionViewState, getEncounterMutation, getEncounterPending, encounterData } = useEncounterContext();
+    const { viewState, setViewState, setDispositionViewState, getEncounterMutation, getEncounterPending, encounterData, showClaims, setShowClaims } = useEncounterContext();
 
     useEffect(() => {
         if (tokenId) {
@@ -80,7 +79,7 @@ const Encounter = () => {
                                 />
                             }
                             {
-                                !encounterData.final_time &&
+                                encounterData.verification_status && !encounterData.final_time &&
                                 <Button
                                     text="Close Encounter"
                                     onClick={() => setDispositionViewState(DispositionViewState.SELECT_DISPOSITION)}

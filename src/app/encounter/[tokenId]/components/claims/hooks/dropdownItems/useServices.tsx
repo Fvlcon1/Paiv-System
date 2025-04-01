@@ -47,9 +47,7 @@ const useServices = () => {
     const controllerRef = useRef<AbortController | null>(null);
     
     useEffect(() => {
-        if (labTestValue) {
-            useServicesMutation(labTestValue);
-        }
+        useServicesMutation(labTestValue);
     }, [labTestValue]);
 
     return {serviceItems}

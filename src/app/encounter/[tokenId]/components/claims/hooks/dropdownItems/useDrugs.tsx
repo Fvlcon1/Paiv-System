@@ -44,9 +44,7 @@ const useDrugs = () => {
     const controllerRef = useRef<AbortController | null>(null);
     
     useEffect(() => {
-        if (drugFormik.values.code) {
-            useDrugsMutation(drugFormik.values.code);
-        }
+        useDrugsMutation(drugFormik.values.code)
     }, [drugFormik.values.code]);
 
     return {drugItems}

@@ -56,12 +56,13 @@ const Drugs = () => {
                     <Input
                         value={drugFormik?.values?.dosage}
                         onChange={drugFormik?.handleChange}
+                        className={`${drugFormik.touched.dosage && drugFormik?.errors?.dosage ? "!border-[#db3e1f]" : ""}`}
                         name="dosage"
                         placeholder="Dosage"
                     />
                     {
                         drugFormik.touched.dosage && drugFormik?.errors?.dosage &&
-                        <Text textColor="#db3e1f">
+                        <Text className="!pl-2" textColor="#db3e1f">
                             {drugFormik?.errors?.dosage}
                         </Text>
                     }
