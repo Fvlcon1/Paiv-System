@@ -25,8 +25,7 @@ const Instructions = () => {
         <Overlay onClick={()=>setDispositionViewState(null)}>
             <Container  
                 className="w-[450px] !px-10 !py-6"
-                display={isVisible}
-                setDisplay={setIsVisible}
+                close={() => setDispositionViewState(null)}
             >
                 <div className="flex w-full flex-col gap-2">
                     <Image

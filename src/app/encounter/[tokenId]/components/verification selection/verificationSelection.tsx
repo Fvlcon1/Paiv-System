@@ -6,6 +6,8 @@ import { mainContext } from '@/app/context/context';
 import Selection from './components/selection';
 import FingerPrintError from './components/fingerPrintError';
 import { useEncounterContext } from '../../context/encounter.context';
+import { AnimatePresence } from 'framer-motion';
+import PopupAnimation from '@components/popup/popupAnimation';
 
 export type VerificationTypes = "fingerPrint" | "facialRecognition"
 export type viewState = "selection" | "FingerPrintError" | null
@@ -22,25 +24,28 @@ const VerificationSelection = () => {
 
     return (
         <Overlay 
-            onClick={() => {
-                setViewState(null)
-                setSelectionViewState(null)
-            }}
+            onClick={close}
         >
-            {
-                selectionViewState === "selection" ?
-                <Selection 
-                    setSelectionViewState={setSelectionViewState}
-                    close={close}
-                />
-                : selectionViewState === "FingerPrintError" ?
-                <FingerPrintError 
-                    setSelectionViewState={setSelectionViewState}
-                    close={close}
-                />
-                :
-                <></>
-            }
+            <AnimatePresence>
+                {
+                    selectionViewState === "selection" ?
+                    <PopupAnimation key={1}>
+                        <Selection 
+                            setSelectionViewState={setSelectionViewState}
+                            close={close}
+                        />
+                    </PopupAnimation>
+                    : selectionViewState === "FingerPrintError" ?
+                    <PopupAnimation key={2}>
+                        <FingerPrintError 
+                            setSelectionViewState={setSelectionViewState}
+                            close={close}
+                        />
+                    </PopupAnimation>
+                    :
+                    <></>
+                }
+            </AnimatePresence>
         </Overlay>
     );
 };

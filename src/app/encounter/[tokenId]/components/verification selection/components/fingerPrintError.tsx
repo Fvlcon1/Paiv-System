@@ -21,7 +21,7 @@ const FingerPrintError = ({
     const [isVisible, setIsVisible] = useState(true);
 
     return (
-        <Container className="!px-4 !py-6 !h-fit" display={isVisible} setDisplay={setIsVisible}>
+        <Container className="!px-4 !py-6 !h-fit" close={close}>
             <Pressable
                 className="w-full mb-[20px] flex items-center gap-1 hover:opacity-70 !cursor-pointer duration-200"
                 scaleFactor={0.99}

@@ -18,7 +18,6 @@ const ClaimsForm = ({
 } : {
     close : ()=>void
 }) => {
-    const [display, setDisplay] = useState(true)
     const {formik, isLoading, isClaimSubmissionPending} = useClaimsFormContext()
     
     const handleSubmit = (e:any) => {
@@ -28,10 +27,8 @@ const ClaimsForm = ({
     
     return (
         <Overlay onClick={close}>
-            <Container 
-                display={display}
-                setDisplay={setDisplay}
-                onClose={close}
+            <Container
+                close={close}
                 className="!w-[700px] !h-[700px]"
             >
                 {

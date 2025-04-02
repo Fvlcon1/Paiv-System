@@ -40,7 +40,7 @@ const Selection = ({
     };
 
     return (
-        <Container onClose={close} className="w-[450px] !px-10 !py-6 !h-fit" display={isVisible} setDisplay={setIsVisible}>
+        <Container close={close} className="w-[450px] !px-10 !py-6 !h-fit">
             <div className="flex flex-col gap-4 items-center w-full">
                 <div className="flex flex-col gap-0 items-center">
                     <MdVerifiedUser size={35} color={theme.colors.text.primary} className="pb-2" />

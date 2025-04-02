@@ -7,22 +7,24 @@ import { IoMdCloseCircle } from "react-icons/io"
 const Container = ({
     children,
     className,
-    display,
+    display = true,
     setDisplay,
     closable = true,
+    close,
     onClose
 } : {
     children? : ReactNode,
     className? : string
-    display : boolean,
-    setDisplay : Dispatch<SetStateAction<boolean>>
+    display? : boolean,
+    setDisplay? : Dispatch<SetStateAction<boolean>>
     closable? : boolean
+    close? : ()=>void
     onClose? : ()=> void
 }) => {
     const handleClose = () => {
-        setDisplay(false)
-        if(onClose)
-            onClose()
+        if(setDisplay) setDisplay(false)
+        if(close) close()
+        if(onClose) onClose()
     }
 
     return (

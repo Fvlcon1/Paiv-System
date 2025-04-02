@@ -40,8 +40,7 @@ const VerificationSuccessfulContainer = () => {
             <Overlay onClick={()=>setViewState(null)}>
                 <Container 
                     className="!w-[500px] pb-[30px]"
-                    display={show}
-                    setDisplay={(setShow)}
+                    close={()=>setViewState(null)}
                 >
                     <div className="py-[30px]">
                         <div className="relative h-[200px] w-[280px] flex justify-center">
@@ -97,11 +96,11 @@ const VerificationSuccessfulContainer = () => {
                         <div className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-t from-[#1F1F28] via-[#1F1F28]/80 to-transparent">
                             
                         </div>
-                        <div className="absolute bottom-0 w-full flex justify-center">
+                        <div className="absolute bottom-0 w-full flex justify-center pr-[40px]">
                             <Button 
-                                text="View NHIS Details"
-                                className="!border-none !bg-bg-quantinary hover:!bg-bg-tetiary"
-                                onClick={()=>setViewState(ViewState.NHIS_DETAILS)}
+                                text="Close"
+                                className="!border-none !bg-bg-quantinary hover:!bg-bg-tetiary !min-w-[200px]"
+                                onClick={()=>setViewState(null)}
                             />
                         </div>
                     </div>

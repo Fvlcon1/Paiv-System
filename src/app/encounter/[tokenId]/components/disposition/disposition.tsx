@@ -16,17 +16,17 @@ const Disposition = () => {
         <AnimatePresence>
             {
                 dispositionViewState === DispositionViewState.NHIS_DETAILS ? 
-                <NhisDetails />
+                <NhisDetails key={0} />
                 : dispositionViewState === DispositionViewState.SELECT_DISPOSITION ? 
-                <SelectDisposition />
+                <SelectDisposition key={1} />
                 : dispositionViewState === DispositionViewState.INSTRUCTIONS ? 
-                <Instructions />
+                <Instructions key={3} />
                 : dispositionViewState === DispositionViewState.CAPTURE ? 
-                <CaptureContainer />
+                <CaptureContainer key={4} />
                 : dispositionViewState === DispositionViewState.VERIFICATION_SUCCESS ? 
-                <VerificationSuccessfulContainer />
+                <VerificationSuccessfulContainer key={5} />
                 : dispositionViewState === DispositionViewState.VERIFICATION_FAILED ? 
-                <VeficationFailed />
+                <VeficationFailed key={6} />
                 :
                 <></>
             }

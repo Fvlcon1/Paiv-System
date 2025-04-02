@@ -1,3 +1,4 @@
+import { AnimatePresence } from "framer-motion"
 import { useEncounterContext } from "../context/encounter.context"
 import { ViewState } from "../utils/types"
 import CaptureContainer from "./capture container/captureContainer"
@@ -9,17 +10,21 @@ import VerificationSuccessfulContainer from "./verification successful container
 const VerificationStates = () => {
     const {viewState} = useEncounterContext()
     return (
-        viewState === ViewState.VERIFICATION_SELECTION
-        ? <VerificationSelection />
-        : viewState === ViewState.INSTRUCTIONS
-        ? <Instructions />
-        : viewState === ViewState.CAPTURE
-        ? <CaptureContainer />
-        : viewState === ViewState.VERIFICATION_SUCCESS
-        ? <VerificationSuccessfulContainer />
-        : viewState === ViewState.VERIFICATION_FAILED
-        ? <VeficationFailed />
-        : <></>
+        <AnimatePresence>
+            {
+                viewState === ViewState.VERIFICATION_SELECTION
+                ? <VerificationSelection key={1} />
+                : viewState === ViewState.INSTRUCTIONS
+                ? <Instructions key={2} />
+                : viewState === ViewState.CAPTURE
+                ? <CaptureContainer key={3} />
+                : viewState === ViewState.VERIFICATION_SUCCESS
+                ? <VerificationSuccessfulContainer key={4} />
+                : viewState === ViewState.VERIFICATION_FAILED
+                ? <VeficationFailed key={5} />
+                : <></>
+            }
+        </AnimatePresence>
     )
 }
 export default VerificationStates
