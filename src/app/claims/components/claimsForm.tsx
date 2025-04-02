@@ -92,21 +92,6 @@ const ClaimsForm = ({
         { type: "divider", key: "divider-20" }
     ];
 
-    const medicalProcedureItems: DropdownItem[] = [
-        { key: "99123", label: "CT Scan (99123)", onClick: () => formik.setFieldValue("medicalProcedures", "99123") },
-        { type: "divider", key: "divider-1" },
-        { key: "93000", label: "Electrocardiogram (ECG) (93000)", onClick: () => formik.setFieldValue("medicalProcedures", "93000") },
-        { type: "divider", key: "divider-2" },
-        { key: "72148", label: "MRI Scan (72148)", onClick: () => formik.setFieldValue("medicalProcedures", "72148") },
-        { type: "divider", key: "divider-3" },
-        { key: "85025", label: "Complete Blood Count (CBC) (85025)", onClick: () => formik.setFieldValue("medicalProcedures", "85025") },
-        { type: "divider", key: "divider-4" },
-        { key: "31600", label: "Endoscopy (31600)", onClick: () => formik.setFieldValue("medicalProcedures", "31600") },
-        { type: "divider", key: "divider-5" },
-        { key: "99213", label: "General Consultation (99213)", onClick: () => formik.setFieldValue("medicalProcedures", "99213") },
-        { type: "divider", key: "divider-6" }
-    ];
-
     const labTestItems: DropdownItem[] = [
         { key: "R79.0", label: "Blood Glucose Test (R79.0)", onClick: () => formik.setFieldValue("labTests", "R79.0") },
         { type: "divider", key: "divider-1" },

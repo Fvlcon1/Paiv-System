@@ -8,7 +8,7 @@ const axiosInstance = axios.create({
 });
 
 // Axios Interceptor: Handles Unauthorized Errors (401)
-export const setupInterceptors = (logout: () => void) => {
+export const setupInterceptors = (logout: (showAlert?: boolean) => void) => {
     console.log("interceptor")
     axiosInstance.interceptors.response.use(
         (response) => response,
@@ -16,7 +16,7 @@ export const setupInterceptors = (logout: () => void) => {
             if (error.response?.status === 401) {
                 console.log("instance")
                 toast.error("Please login to continue")
-                logout();
+                logout(false);
                 return null
             }
             

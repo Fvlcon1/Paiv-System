@@ -35,6 +35,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         cookies.remove("accessToken");
 
         if (pathname.startsWith("/auth")) {
+            console.log({pathname})
             setShowSessionAlert(false); // Hide session alert immediately
             return;
         }

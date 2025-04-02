@@ -12,8 +12,6 @@ type ClaimsFormContextType = {
     drugFormik: any;
     setMedicalProcedure: Dispatch<SetStateAction<string>>;
     medicalProcedure: string;
-    isLoading: boolean
-    setIsLoading: Dispatch<SetStateAction<boolean>>
     isClaimSubmissionPending: boolean
     labTestValue: string
     setLabtestValue: Dispatch<SetStateAction<string>>
@@ -34,8 +32,6 @@ export const ClaimsContextProvider = ({ children }: { children: ReactNode }) => 
         drugFormik,
         setMedicalProcedure,
         medicalProcedure,
-        isLoading, 
-        setIsLoading,
         isClaimSubmissionPending,
         labTestValue,
         setLabtestValue
@@ -54,8 +50,6 @@ export const ClaimsContextProvider = ({ children }: { children: ReactNode }) => 
                 drugFormik,
                 setMedicalProcedure,
                 medicalProcedure,
-                isLoading, 
-                setIsLoading,
                 isClaimSubmissionPending,
                 labTestValue,
                 setLabtestValue

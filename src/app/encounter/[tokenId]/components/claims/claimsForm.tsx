@@ -18,7 +18,7 @@ const ClaimsForm = ({
 } : {
     close : ()=>void
 }) => {
-    const {formik, isLoading, isClaimSubmissionPending} = useClaimsFormContext()
+    const {formik, isClaimSubmissionPending} = useClaimsFormContext()
     
     const handleSubmit = (e:any) => {
         e.preventDefault();
@@ -32,9 +32,6 @@ const ClaimsForm = ({
                 className="!w-[700px] !h-[700px]"
             >
                 {
-                    isLoading ?
-                    <div className="w-full flex h-full justify-center items-center"><div className="normal-loader"></div></div>
-                    :
                     <form onSubmit={handleSubmit} className="flex flex-col gap-6 w-full py-8 px-8 overflow-y-auto">
                         <div className="flex flex-col w-full gap-2">
                             <Text 
