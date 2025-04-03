@@ -22,10 +22,14 @@ import { DispositionViewState } from "@/app/utils/types"
 import Disposition from "./components/disposition/disposition"
 import { AnimatePresence } from "framer-motion"
 import ClaimsFormLayout from "./components/claims/claimsFormLayout"
+import Slidein from "@styles/components/slidein"
 
 const Encounter = () => {
     const { tokenId } = useParams();
-    const { viewState, setViewState, setDispositionViewState, getEncounterMutation, getEncounterPending, encounterData, showClaims, setShowClaims } = useEncounterContext();
+    const { viewState, setViewState, setDispositionViewState, getEncounterMutation, getEncounterPending, encounterData, encounterDetails, showClaims, setShowClaims } = useEncounterContext();
+    const checkinFailed = encounterDetails?.checkinImageUrl && !encounterDetails.checkinStatus
+    const checkinSuccessful = encounterDetails?.checkinStatus
+    const checkoutSuccessful = encounterDetails?.checkoutStatus
 
     useEffect(() => {
         if (tokenId) {
@@ -61,7 +65,7 @@ const Encounter = () => {
             </AnimatePresence>
             <VerificationStates />
             <Disposition />
-            <div className="flex flex-col gap-6">
+            <Slidein className="flex flex-col gap-6">
                 <div className="w-full bg-[#ffffff05] border-b-[1px] border-solid border-b-border-tetiary justify-center pt-[30px] h-[350px] flex items-center">
                     <div className="max-w-[1024px] w-full flex flex-col justify-center gap-6">
                         <TopSection />
@@ -71,7 +75,7 @@ const Encounter = () => {
                     <div className="max-w-[1024px] w-full flex flex-col gap-6">
                         <div className="flex gap-2">
                             {
-                                !encounterData.verification_status &&
+                                !checkinSuccessful &&
                                 <Button
                                     text="Verify Visit"
                                     className="!bg-main-primary"
@@ -79,25 +83,26 @@ const Encounter = () => {
                                 />
                             }
                             {
-                                encounterData.verification_status && !encounterData.final_time &&
+                                checkinSuccessful && !checkoutSuccessful &&
                                 <Button
                                     text="Close Encounter"
+                                    className="!bg-main-primary"
                                     onClick={() => setDispositionViewState(DispositionViewState.SELECT_DISPOSITION)}
                                 />
                             }
                             {
-                                encounterData.final_time && encounterData.verification_status &&
+                                checkinFailed || checkinSuccessful || checkoutSuccessful ?
                                 <Button
                                     text="Submit Claim"
-                                    className="!bg-main-primary"
                                     onClick={()=>setShowClaims(true)}
                                 />
+                                : <></>
                             }
                         </div>
                         <RecentTable />
                     </div>
                 </div>
-            </div>
+            </Slidein>
         </>
     );
 };

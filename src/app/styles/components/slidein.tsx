@@ -16,7 +16,7 @@ const Slidein = ({
 }) => {
     return (
         <motion.div
-            className={`w-fit ${className}`}
+            className={`${className}`}
             initial={{ 
                 opacity: 0, 
                 y : direction === 'top'

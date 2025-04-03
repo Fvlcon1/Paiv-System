@@ -16,4 +16,6 @@ export interface IEncounterDetails extends INhisDetails {
     checkinImageUrl : string
     checkoutImageUrl : string
     createdAt : string
+    checkinStatus? : boolean
+    checkoutStatus? : boolean
 }

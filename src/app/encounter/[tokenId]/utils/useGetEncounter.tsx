@@ -41,7 +41,9 @@ const useGetEncounter = () => {
             createdAt : data.created_at,
             checkinTime : data.verification_date && new Date(data.verification_date),
             checkoutTime : data.final_time && new Date(data.final_time),
-            disposition : data.disposition_name
+            disposition : data.disposition_name,
+            checkinStatus : data.verification_status,
+            checkoutStatus : data.final_verification_status
         };
         return encounterDetails
     }

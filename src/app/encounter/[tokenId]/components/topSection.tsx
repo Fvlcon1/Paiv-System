@@ -11,6 +11,7 @@ import { useEncounterContext } from "../context/encounter.context"
 import { useEffect } from "react"
 import { getTime, getRelativeTime } from "@/utils/getDate"
 import { getLengthOfStay } from "../utils/getLengthOfStay"
+import { GiCancel } from "react-icons/gi"
 
 const TopSection = () => {
     const {storedCapture, encounterDetails} = useEncounterContext()
@@ -155,7 +156,7 @@ const TopSection = () => {
                 </div>
                 <div className="absolute right-0 top-0 w-full h-full flex justify-center items-center">
                     {
-                        encounterDetails?.checkoutImageUrl &&
+                        encounterDetails?.checkoutImageUrl ?
                         <div className="relative mt-[50px] ml-[10px] overflow-hidden rounded-full bg-[#898686d6] p-1">
                             <div className="relative overflow-hidden h-[30px] w-[30px] flex justify-center items-center rounded-full bg-[#24242fb7] p-1">
                                 <RiVerifiedBadgeFill
@@ -164,6 +165,18 @@ const TopSection = () => {
                                 />
                             </div>
                         </div>
+                        :
+                        encounterDetails?.checkinImageUrl && !encounterDetails.checkinStatus ?
+                        <div className="relative mt-[50px] ml-[10px] overflow-hidden rounded-full bg-[#898686d6] p-1">
+                            <div className="relative overflow-hidden h-[30px] w-[30px] flex justify-center items-center rounded-full bg-[#24242fb7] p-1">
+                                <GiCancel
+                                    color="#e8362a"
+                                    size={30}
+                                />
+                            </div>
+                        </div>
+                        :
+                        <></>
                     }
                 </div>
             </div>

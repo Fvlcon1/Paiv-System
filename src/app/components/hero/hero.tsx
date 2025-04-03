@@ -10,6 +10,7 @@ import { useContext, useEffect, useState } from "react"
 import { FaMagnifyingGlass } from "react-icons/fa6"
 import useSearchResults from "../results table/utils/useSearchResults"
 import { SearchContext } from "@/app/context/searchContext"
+import Slidein from "@styles/components/slidein"
 
 const Hero = () => {
     const {searchValue, setSearchValue} = useContext(mainContext)
@@ -24,7 +25,7 @@ const Hero = () => {
         setSearchValue('')
     },[])
     return (
-        <div className="w-full bg-[#ffffff05] border-b-[1px] border-solid border-b-border-tetiary justify-center h-[300px] flex items-center">
+        <Slidein className="w-full bg-[#ffffff05] border-b-[1px] border-solid border-b-border-tetiary justify-center h-[300px] flex items-center">
             <div className="max-w-[1024px] w-full flex flex-col items-center justify-center gap-3">
                 <div className="max-w-[600px] w-full flex flex-col gap-[2px] items-center justify-center">
                     <Image
@@ -68,7 +69,7 @@ const Hero = () => {
                     }
                 />
             </div>
-        </div>
+        </Slidein>
     )
 }
 export default Hero

@@ -64,7 +64,15 @@ const useClaimsForm = () => {
             drugs = drugs.filter((item: any) => item.code !== drugFormik.values.code);
         }
 
-        const newDrugs = [...drugs, { code: drugFormik.values.code, dosage: `${drugFormik.values.dosage}` }];
+        const newDrugs = [
+            ...drugs, 
+            { 
+                code: drugFormik.values.code, 
+                dosage: `${drugFormik.values.dosage} mg`,
+                frequency: `${drugFormik.values.frequency} x Daily`,
+                duration: `${drugFormik.values.duration} Day(s)`
+             }
+        ];
         formik.setFieldValue("drugs", newDrugs);
         drugFormik.resetForm();
     };
@@ -73,6 +81,8 @@ const useClaimsForm = () => {
         initialValues: {
             code: "",
             dosage: "",
+            frequency : "",
+            duration : ""
         },
         validationSchema: drugValidationSchema,
         onSubmit: handleAddDrug,

@@ -20,18 +20,23 @@ const Drugs = () => {
 
     return (
         <div className="w-full flex flex-col justify-between gap-2">
+
+            {/* Head */}
             <div className="flex flex-col pl-1">
                 <Text>
-                    Drugs
+                    Prescription *
                 </Text>
                 <Text textColor={theme.colors.text.tetiary}>
                     Select prescribed medications (generic name, strength, dosage).
                 </Text>
             </div>
-            <div className="flex gap-2 justify-between">
+
+            <div className="flex gap-2 justify-between flex-col">
+
+                {/* Dropdown */}
                 <Dropdown
                     className="!w-full"
-                    outterContainerClassName="!w-[70%]"
+                    outterContainerClassName="!w-full"
                     menuItems={drugItems}
                 >
                     <div className="flex flex-col gap-1">
@@ -52,39 +57,91 @@ const Drugs = () => {
                         }
                     </div>
                 </Dropdown>
-                <div className="flex flex-col gap-1">
-                    <Input
-                        value={drugFormik?.values?.dosage}
-                        onChange={drugFormik?.handleChange}
-                        className={`${drugFormik.touched.dosage && drugFormik?.errors?.dosage ? "!border-[#db3e1f]" : ""}`}
-                        name="dosage"
-                        placeholder="Dosage"
+
+                {/* Dosages */}
+                <div className="flex gap-2 w-full">
+                    <div className="flex flex-col gap-1 flex-1">
+                        <Input
+                            value={drugFormik?.values?.dosage}
+                            onChange={drugFormik?.handleChange}
+                            className={`${drugFormik.touched.dosage && drugFormik?.errors?.dosage ? "!border-[#db3e1f]" : ""}`}
+                            name="dosage"
+                            type="number"
+                            PostIcon={(
+                                <Text textColor={theme.colors.text.tetiary}>mg</Text>
+                            )}
+                            placeholder="Dosage"
+                        />
+                        {
+                            drugFormik.touched.dosage && drugFormik?.errors?.dosage &&
+                            <Text className="!pl-2" textColor="#db3e1f">
+                                {drugFormik?.errors?.dosage}
+                            </Text>
+                        }
+                    </div>
+                    <div className="flex flex-col gap-1 flex-1">
+                        <Input
+                            value={drugFormik?.values?.frequency}
+                            onChange={drugFormik?.handleChange}
+                            className={`${drugFormik.touched.frequency && drugFormik?.errors?.frequency ? "!border-[#db3e1f]" : ""}`}
+                            name="frequency"
+                            type="number"
+                            PostIcon={(
+                                <Text textColor={theme.colors.text.tetiary}>x Daily</Text>
+                            )}
+                            placeholder="Frequency"
+                        />
+                        {
+                            drugFormik.touched.frequency && drugFormik?.errors?.frequency &&
+                            <Text className="!pl-2" textColor="#db3e1f">
+                                {drugFormik?.errors?.frequency}
+                            </Text>
+                        }
+                    </div>
+                    <div className="flex flex-col gap-1 flex-1">
+                        <Input
+                            value={drugFormik?.values?.duration}
+                            onChange={drugFormik?.handleChange}
+                            className={`${drugFormik.touched.duration && drugFormik?.errors?.duration ? "!border-[#db3e1f]" : ""}`}
+                            name="duration"
+                            type="number"
+                            PostIcon={(
+                                <Text textColor={theme.colors.text.tetiary}>Day(s)</Text>
+                            )}
+                            placeholder="Duration"
+                        />
+                        {
+                            drugFormik.touched.duration && drugFormik?.errors?.duration &&
+                            <Text className="!pl-2" textColor="#db3e1f">
+                                {drugFormik?.errors?.duration}
+                            </Text>
+                        }
+                    </div>
+                    
+                    {/* Add Button */}
+                    <Button
+                        text="Add Drug +"
+                        className="!w-fit !bg-main-primary"
+                        onClick={handleDrugSubmit}
                     />
-                    {
-                        drugFormik.touched.dosage && drugFormik?.errors?.dosage &&
-                        <Text className="!pl-2" textColor="#db3e1f">
-                            {drugFormik?.errors?.dosage}
-                        </Text>
-                    }
                 </div>
-                <Button
-                    text="+"
-                    className="!w-fit !bg-green-700"
-                    onClick={handleDrugSubmit}
-                />
             </div>
+
             {
+                //Errors
                 formik.touched.drugs && formik?.errors?.drugs &&
                 <Text textColor="#db3e1f" className="!pl-2">
                     {formik?.errors.drugs}
                 </Text>
             }
+
+            {/* Chips */}
             <div className="flex gap-2 flex-wrap">
                 {
                     formik?.values?.drugs.map((drug : any, index : number) => (
                         <Chip key={index} onClick={()=>handleRemoveDrug((drug as any).code)}>
                             <Text key={index}>
-                                {`${(drug as any).code} (Qty: ${(drug as any).dosage})`}
+                                {`${drug.code} (${drug.dosage}, ${drug.frequency} for ${drug.duration})`}
                             </Text>
                         </Chip>
                     ))

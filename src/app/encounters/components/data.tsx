@@ -45,17 +45,6 @@ export const columns = [
             )
         }
     },
-    // {
-    //     accessorKey : 'dob',
-    //     header : 'DOB',
-    //     cell : ({getValue} : {getValue : any}) => {
-    //         return (
-    //             <Text>
-    //                 {getValue()}
-    //             </Text>
-    //         )
-    //     }
-    // },
     {
         accessorKey : 'nhisId',
         header : 'NHIS Number',
@@ -90,8 +79,8 @@ export const columns = [
         }
     },
     {
-        accessorKey : 'gender',
-        header : 'Gender',
+        accessorKey : 'verificationStatus',
+        header : 'Status',
         cell : ({getValue} : {getValue : any}) => {
             return (
                 <Text>
@@ -100,6 +89,17 @@ export const columns = [
             )
         }
     },
+    // {
+    //     accessorKey : 'gender',
+    //     header : 'Gender',
+    //     cell : ({getValue} : {getValue : any}) => {
+    //         return (
+    //             <Text>
+    //                 {getValue()}
+    //             </Text>
+    //         )
+    //     }
+    // },
     {
         accessorKey : 'actions',
         header : 'Actions',

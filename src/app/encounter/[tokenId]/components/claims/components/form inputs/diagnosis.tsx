@@ -15,7 +15,7 @@ const Diagnosis = () => {
         <div className="w-full flex flex-col justify-between gap-2">
             <div className="flex flex-col pl-1">
                 <Text>
-                    Diagnosis
+                    Diagnosis *
                 </Text>
                 <Text textColor={theme.colors.text.tetiary}>
                     Select the main condition diagnosed (ICD-10 code).

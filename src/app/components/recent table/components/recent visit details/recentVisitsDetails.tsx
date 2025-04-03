@@ -13,6 +13,7 @@ import Button from "@components/button/button"
 import { ViewState } from "@/app/utils/types"
 import { IRecentVisits, IRecentVisitsTable } from "../../utils/type"
 import Text from "@styles/components/text"
+import Link from "next/link"
 
 const RecentVisitsDetails = ({
     setDisplay,
@@ -77,6 +78,14 @@ const RecentVisitsDetails = ({
                                     <Table 
                                         recentVisit={data}
                                     />
+                                </div>
+                                <div className="px-4 w-full">
+                                    <Link href={`encounter/${data.token}`}>
+                                        <Button
+                                            text="View Encounter"
+                                            className="mt-[20px] !w-full !h-[45px] !border-none !bg-main-primary"
+                                        />
+                                    </Link>
                                 </div>
                                 <div className="absolute top-[15px] right-[15px]">
                                     <ClickableTab

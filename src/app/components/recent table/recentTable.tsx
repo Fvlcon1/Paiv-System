@@ -6,6 +6,7 @@ import theme from "@styles/theme"
 import Table from "./components/table"
 import useRecentVisits from "./utils/useRecentVisits"
 import { useEffect } from "react"
+import Slidein from "@styles/components/slidein"
 
 const RecentTable = () => {
   const {getRecentVisits, recentVisitsTableData, isLoading, isError, error} = useRecentVisits()
@@ -20,7 +21,7 @@ const RecentTable = () => {
 
   return (
     <>
-      <div className="w-full flex flex-col px-[30px] items-center">
+      <Slidein className="w-full flex flex-col px-[30px] items-center">
         <div className="flex gap-[15px] flex-col min-w-[800px] w-full max-w-[1024px]">
           <div className="w-full">
             <Text
@@ -37,7 +38,7 @@ const RecentTable = () => {
             error={error}
           />
         </div>
-      </div>
+      </Slidein>
     </>
     )
 }

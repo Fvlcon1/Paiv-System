@@ -12,6 +12,10 @@ import MedicalProcedures from "./components/form inputs/medicalProcedures"
 import Drugs from "./components/form inputs/drugs"
 import LabTests from "./components/form inputs/labTests"
 import PatientBanner from "./components/patientBanner"
+import { MdSaveAs } from "react-icons/md"
+import ClaimDetails from "./components/claimDetails/claimDetails"
+import { IClaimsDetailType } from "./utils/types"
+import { convertToClaimsDetails } from "./utils/convertToClaimsDetails"
 
 const ClaimsForm = ({
     close
@@ -19,61 +23,86 @@ const ClaimsForm = ({
     close : ()=>void
 }) => {
     const {formik, isClaimSubmissionPending} = useClaimsFormContext()
-    
-    const handleSubmit = (e:any) => {
+    const [showClaimsDetails, setShowClaimsDetails] = useState(false)
+    const [claimDetails, setClaimDetails] = useState<IClaimsDetailType>()
+
+    const handleShowClaims = async (e:any) => {
+        console.log("what is going on")
         e.preventDefault();
-        formik.handleSubmit();
+        const errors = await formik.validateForm();
+        if (Object.keys(errors).length !== 0)
+            return formik.handleSubmit()
+        setShowClaimsDetails(true)
     };
+
+    useEffect(()=>{
+        const claimsDetails = convertToClaimsDetails(formik.values)
+        setClaimDetails(claimsDetails)
+    },[formik.values])
     
     return (
-        <Overlay onClick={close}>
-            <Container
-                close={close}
-                className="!w-[700px] !h-[700px]"
-            >
-                {
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-6 w-full py-8 px-8 overflow-y-auto">
-                        <div className="flex flex-col w-full gap-2">
-                            <Text 
-                                fontfamily="greater-theory"
-                                className="pl-1"
-                            >
-                                Add Claim
-                            </Text>
-                            <Divider />
-                        </div>
-                        
-                        <div className="flex flex-col gap-2 w-full">
-                            <Text
-                                fontfamily="greater-theory"
-                                className="!pl-1"
-                            >
-                                Diagnosis & Treatment Details
-                            </Text>
-                            <div className="flex flex-col gap-6 w-full">
-                                <PatientBanner />
-                                <Divider />
-                                <Diagnosis />
-                                <Divider />
-                                <MedicalProcedures />
-                                <Divider />
-                                <Drugs />
-                                <Divider />
-                                <LabTests />
+        <>
+            <ClaimDetails 
+                isVisible={showClaimsDetails}
+                close={()=>setShowClaimsDetails(false)}
+                claimDetails={claimDetails}
+                onSubmit={formik.handleSubmit}
+                loading={isClaimSubmissionPending}
+            />
+            <Overlay onClick={close}>
+                <Container
+                    close={close}
+                    className="!w-[700px] !h-[700px]"
+                >
+                    {
+                        <form onSubmit={handleShowClaims} className="flex flex-col gap-6 w-full py-8 px-8 overflow-y-auto">
+                            <div className="flex flex-col w-full gap-2">
+                                <Text 
+                                    fontfamily="greater-theory"
+                                    className="pl-1"
+                                >
+                                    Add Claim
+                                </Text>
                                 <Divider />
                             </div>
-                        </div>
-                        <div className="flex w-full justify-end">
-                            <Button 
-                                text="Submit Claim"
-                                className="!bg-main-primary !w-[120px]"
-                                loading={isClaimSubmissionPending}
-                            />
-                        </div>
-                    </form>
-                }
-            </Container>
-        </Overlay>
+                            
+                            <div className="flex flex-col gap-2 w-full">
+                                <Text
+                                    fontfamily="greater-theory"
+                                    className="!pl-1"
+                                >
+                                    Diagnosis & Treatment Details
+                                </Text>
+                                <div className="flex flex-col gap-6 w-full">
+                                    <PatientBanner />
+                                    <Divider />
+                                    <Diagnosis />
+                                    <Divider />
+                                    <MedicalProcedures />
+                                    <Divider />
+                                    <Drugs />
+                                    <Divider />
+                                    <LabTests />
+                                    <Divider />
+                                </div>
+                            </div>
+                            <div className="flex w-full justify-end gap-2">
+                                <Button 
+                                    text="Save Draft"
+                                    className="!bg-bg-quantinary"
+                                    type="button"
+                                    icon={<MdSaveAs size={15} />}
+                                />
+                                <Button 
+                                    text="Submit Claim"
+                                    className="!bg-main-primary !w-[120px]"
+                                />
+                            </div>
+                        </form>
+                    }
+                </Container>
+            </Overlay>
+        </>
     )
 }
 export default ClaimsForm
