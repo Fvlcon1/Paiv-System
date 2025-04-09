@@ -48,7 +48,7 @@ const MobileAuthCode = () => {
 
     const submitOTP = async (otp: string) => {
         console.log({ otp });
-        const response = await protectedApi.POST("2fa/enable", {
+        const response = await protectedApi.POST("/mfa/totp/enable", {
             totp_code: otp
         });
         return response

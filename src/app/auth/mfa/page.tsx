@@ -15,7 +15,7 @@ const MFA = () => {
     const [isEmail2faEnabled, setIsEmail2faEnabled] = useState(false)
 
     const checkMfaStatus = async () => {
-        const response = await protectedApi.GET("check-mfa")
+        const response = await protectedApi.GET("mfa/check-status")
         return response
     }
 

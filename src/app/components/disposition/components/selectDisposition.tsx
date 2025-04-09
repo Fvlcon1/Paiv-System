@@ -28,7 +28,7 @@ const SelectDisposition = () => {
     const [error, setError] = useState<string>()
 
     const getDisposition = async () => {
-        const response = await protectedApi.GET("/api/dispositions")
+        const response = await protectedApi.GET("/dispositions")
         return response.data
     }
 

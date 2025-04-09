@@ -94,7 +94,7 @@ const CamCapture = ({
             formData.append("membership_id", nhisDetails?.memberShipId || "");
             formData.append("webcam_image", new Blob([binaryImage], { type: "image/png" }), "image.png");
 
-            const response = await protectedApi.POST("/api/compare", formData)
+            const response = await protectedApi.POST("/encounter/compare", formData)
 
             return response.data;
         },

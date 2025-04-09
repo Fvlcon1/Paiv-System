@@ -1,7 +1,4 @@
-import { message } from "antd"
-import axios from "axios"
-import { useContext, useState } from "react"
-import { useMutation } from "@tanstack/react-query"
+import { useState } from "react"
 import { IRecentVisitsTable, IRecentVisits } from './type';
 import Image from "next/image"
 import { VscUnverified, VscVerified } from "react-icons/vsc"
@@ -9,16 +6,10 @@ import Text from "@styles/components/text"
 import { TypographyBold } from "@styles/style.types"
 import { getRelativeTime, getTime } from "@/utils/getDate"
 import theme from "@styles/theme"
-import toast from "react-hot-toast";
-import { protectedApi } from "@/app/utils/apis/api";
-import Button from "@components/button/button";
-import { mainContext } from "@/app/context/context";
-import { DispositionViewState } from "@/app/utils/types";
 import { INhisDetails } from "@/app/components/results table/utils/type";
 
 const useRecentVisits = () => {
     const [recentVisitsTableData, setRecentVisitsTableData] = useState<IRecentVisitsTable[]>([])
-    const { setSearchMembersResult, setNhisDetails, setViewState, setDispositionViewState } = useContext(mainContext);
     
     const getNHISDetails = (data : any) => {
         const NHISDetails: INhisDetails = {

@@ -27,7 +27,7 @@ const useRecentVisits = () => {
         pageSize?: number
         pageNumber?: number
     }) => {
-        const response = await protectedApi.GET("/my_verifications", {
+        const response = await protectedApi.GET("/encounter/my_verifications", {
             limit: pageSize ?? 15,
             skip: pageNumber ? pageNumber - 1 : undefined
         })

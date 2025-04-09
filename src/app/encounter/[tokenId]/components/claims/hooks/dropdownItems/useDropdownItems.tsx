@@ -1,11 +1,6 @@
 import { DropdownItem } from "@/utils/@types";
 import { useClaimsFormContext } from "../../context/context";
-import { protectedApi } from "@/app/utils/apis/api";
-import { useMutation } from "@tanstack/react-query";
-import { useEffect, useRef, useState } from "react";
 import useDrugs from "./useDrugs";
-import useServices from './useServices';
-import useMedicalProcedures from "./useMedicalProcedures";
 
 const useDropdownItems = () => {
     const {formik, handleAddMedicalProcedure, handleAddLabTest, drugFormik} = useClaimsFormContext()

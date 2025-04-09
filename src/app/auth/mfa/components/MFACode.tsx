@@ -34,12 +34,12 @@ const MFACode = ({
     const {userDetails} = useAuth()
 
     const enableEmailOtp = async () => {
-        const response = await protectedApi.POST("enable-email-2fa")
+        const response = await protectedApi.POST("mfa/email/enable")
         return response
     }
 
     const sendEmailOtp = async () => {
-        const response = await protectedApi.POST("send-otp")
+        const response = await protectedApi.POST("mfa/send-otp")
         return response
     }
 
@@ -127,7 +127,7 @@ const MFACode = ({
 
     const submitOTP = async (otp: string) => {
         console.log({ otp });
-        const response = await protectedApi.POST("verify-otp", {
+        const response = await protectedApi.POST("mfa/verify-otp", {
             otp: otp
         });
         return response

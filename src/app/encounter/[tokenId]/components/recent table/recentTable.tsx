@@ -17,7 +17,7 @@ const RecentTable = () => {
   const {tokenId} = useParams()
 
   const getPastEncounters = async () => {
-      const response = await protectedApi.GET(`/api/encounter/members/${tokenId}`)
+      const response = await protectedApi.GET(`/encounter/members/${tokenId}`)
       return response
   }
 

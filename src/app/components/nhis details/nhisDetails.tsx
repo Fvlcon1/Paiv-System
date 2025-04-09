@@ -27,7 +27,7 @@ const NhisDetails = () => {
     const router = useRouter()
 
     const handleCreateEncounter = async () => {
-        const response = await protectedApi.POST("api/initiate-encounter", {membership_id : nhisDetails?.memberShipId})
+        const response = await protectedApi.POST("encounter/initiate", {membership_id : nhisDetails?.memberShipId})
         return response
     }
 

@@ -30,7 +30,7 @@ const CamCapture = ({
     // Start Camera (Ensures no duplicate streams)
     const startCamera = async () => {
         try {
-            stopCamera(); // Stop any existing stream before starting a new one
+            stopCamera();
             
             const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false })
             setStream(mediaStream)
@@ -46,12 +46,12 @@ const CamCapture = ({
     // Stop Camera
     const stopCamera = () => {
         if (stream) {
-            stream.getTracks().forEach(track => track.stop()); // Stop all tracks
+            stream.getTracks().forEach(track => track.stop());
             setStream(null);
         }
 
         if (videoRef.current) {
-            videoRef.current.srcObject = null; // Release video feed
+            videoRef.current.srcObject = null;
         }
     }
 
@@ -71,7 +71,7 @@ const CamCapture = ({
                 const imageData = canvas.toDataURL("image/png")
                 const binaryData = dataURLToUint8Array(imageData)
                 setCaptureImageUrl(imageData)
-                stopCamera(); // Stop camera after capturing
+                stopCamera();
                 return binaryData
             }
         }
@@ -98,7 +98,7 @@ const CamCapture = ({
             formData.append("verification_token_str", tokenId as string);
             formData.append("webcam_image", new Blob([binaryImage], { type: "image/png" }), "image.png");
 
-            const response = await protectedApi.POST("/api/compare", formData)
+            const response = await protectedApi.POST("/encounter/compare", formData)
 
             return response.data;
         },

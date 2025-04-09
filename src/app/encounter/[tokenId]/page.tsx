@@ -1,21 +1,12 @@
 'use client'
 
 import Button from "@components/button/button"
-import Text from "@styles/components/text"
-import { TypographyBold, TypographySize } from "@styles/style.types"
-import theme from "@styles/theme"
 import { useParams } from "next/navigation"
-import { useContext, useEffect, useState } from "react"
+import { useEffect, } from "react"
 import TopSection from "./components/topSection"
-import { protectedApi } from "@/app/utils/apis/api"
-import { useMutation } from "@tanstack/react-query"
-import { mainContext } from "@/app/context/context"
-import toast from "react-hot-toast"
 import { useEncounterContext } from "./context/encounter.context"
-import { IEncounterDetails, ViewState } from "./utils/types"
+import { ViewState } from "./utils/types"
 import VerificationStates from "./components/verificationStates"
-import useRecentVisits from "./components/recent table/utils/useRecentVisits"
-import { INhisDetails } from "@/app/components/results table/utils/type"
 import NoData from "@components/NoData/noData"
 import RecentTable from "./components/recent table/recentTable"
 import { DispositionViewState } from "@/app/utils/types"
@@ -26,10 +17,11 @@ import Slidein from "@styles/components/slidein"
 
 const Encounter = () => {
     const { tokenId } = useParams();
-    const { viewState, setViewState, setDispositionViewState, getEncounterMutation, getEncounterPending, encounterData, encounterDetails, showClaims, setShowClaims } = useEncounterContext();
+    const { setViewState, setDispositionViewState, getEncounterMutation, getEncounterPending, encounterData, encounterDetails, showClaims, setShowClaims } = useEncounterContext();
     const checkinFailed = encounterDetails?.checkinImageUrl && !encounterDetails.checkinStatus
     const checkinSuccessful = encounterDetails?.checkinStatus
     const checkoutSuccessful = encounterDetails?.checkoutStatus
+    const checkoutTime = encounterDetails?.checkoutTime
 
     useEffect(() => {
         if (tokenId) {
@@ -83,7 +75,7 @@ const Encounter = () => {
                                 />
                             }
                             {
-                                checkinSuccessful && !checkoutSuccessful &&
+                                checkinSuccessful && !checkoutTime &&
                                 <Button
                                     text="Close Encounter"
                                     className="!bg-main-primary"

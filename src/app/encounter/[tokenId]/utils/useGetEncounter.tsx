@@ -50,7 +50,7 @@ const useGetEncounter = () => {
 
     const getEncounter = async () => {
         if (!tokenId) return null; // Ensure tokenId exists before fetching
-        const response = await protectedApi.GET(`api/encounter/${tokenId}`);
+        const response = await protectedApi.GET(`/encounter/${tokenId}`);
         return response.verification_record;
     };
 

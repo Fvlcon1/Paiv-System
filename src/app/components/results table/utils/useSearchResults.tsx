@@ -26,7 +26,7 @@ const useSearchResults = () => {
         fetchResultsControllerRef.current?.abort();
         fetchResultsControllerRef.current = new AbortController();
         
-        const {results:data} = await protectedApi.GET("/autocomplete/memberships", { query: searchValue }, fetchResultsControllerRef.current.signal )
+        const {results:data} = await protectedApi.GET("/members/autocomplete", { query: searchValue }, fetchResultsControllerRef.current.signal )
 
         if (!data || data.length === 0) return [];
 

@@ -30,7 +30,7 @@ const Login = () => {
     const router = useRouter()
 
     const handleSubmit = async (values : SignupType) => {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/signup`, {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/signup`, {
             hospital_name: values.hospitalName,
             email: values.email,
             password: values.password,

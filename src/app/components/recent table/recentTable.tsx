@@ -11,6 +11,7 @@ import Slidein from "@styles/components/slidein"
 const RecentTable = () => {
   const {getRecentVisits, recentVisitsTableData, isLoading, isError, error} = useRecentVisits()
 
+  
   useEffect(()=>{
     getRecentVisits({})
   },[])
