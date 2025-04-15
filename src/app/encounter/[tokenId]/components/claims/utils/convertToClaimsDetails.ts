@@ -12,7 +12,7 @@ export const convertToClaimsDetails = (claim:any) : IClaimsDetailType => {
         }],
         drugs : claim.drugs.map((drug:any) => ({
             code : drug.code,
-            dosage : `${drug.dosage}, ${drug.duration}, ${drug.frequency}`,
+            dosage : `${drug.frequency} hourly for ${drug.duration} day(s)`,
             description : drug.code,
             date : new Date()
         }))

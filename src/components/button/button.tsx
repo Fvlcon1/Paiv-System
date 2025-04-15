@@ -3,7 +3,6 @@ import theme, { colors } from "@styles/theme";
 import { ButtonProps } from "@/utils/@types";
 import Text from "@styles/components/text";
 import { useState } from "react";
-import Flex from "@styles/components/flex";
 import { TypographyBold } from "@styles/style.types";
 
 const Button = ({
@@ -87,14 +86,10 @@ const Button = ({
             ellipsis
             whiteSpace="nowrap"
           >
-            <Flex 
-                width="fit-content"
-                align="center"
-                gap={8}
-            >
+            <div className="flex w-fit gap-[8px]">
                 {icon}
                 {text ?? 'Button'}
-            </Flex>
+            </div>
           </Text>
         }
       </div>

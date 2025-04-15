@@ -9,9 +9,8 @@ const validationSchema = Yup.object({
 
 export const drugValidationSchema = Yup.object({
   code: Yup.string().required("Drug name is required"),
-  dosage: Yup.number().required("Dosage is required"),
   frequency: Yup.number().required("Frequency is required"),
-  duration: Yup.number().required("Duration is required"),
+  duration: Yup.number(),
 })
 
 export default validationSchema;

@@ -60,7 +60,7 @@ const Drugs = () => {
 
                 {/* Dosages */}
                 <div className="flex gap-2 w-full">
-                    <div className="flex flex-col gap-1 flex-1">
+                    {/* <div className="flex flex-col gap-1 flex-1">
                         <Input
                             value={drugFormik?.values?.dosage}
                             onChange={drugFormik?.handleChange}
@@ -78,7 +78,7 @@ const Drugs = () => {
                                 {drugFormik?.errors?.dosage}
                             </Text>
                         }
-                    </div>
+                    </div> */}
                     <div className="flex flex-col gap-1 flex-1">
                         <Input
                             value={drugFormik?.values?.frequency}
@@ -87,7 +87,7 @@ const Drugs = () => {
                             name="frequency"
                             type="number"
                             PostIcon={(
-                                <Text textColor={theme.colors.text.tetiary}>x Daily</Text>
+                                <Text textColor={theme.colors.text.tetiary}>hourly</Text>
                             )}
                             placeholder="Frequency"
                         />
@@ -106,7 +106,7 @@ const Drugs = () => {
                             name="duration"
                             type="number"
                             PostIcon={(
-                                <Text textColor={theme.colors.text.tetiary}>Day(s)</Text>
+                                <Text textColor={theme.colors.text.tetiary}>day(s)</Text>
                             )}
                             placeholder="Duration"
                         />
@@ -141,7 +141,7 @@ const Drugs = () => {
                     formik?.values?.drugs.map((drug : any, index : number) => (
                         <Chip key={index} onClick={()=>handleRemoveDrug((drug as any).code)}>
                             <Text key={index}>
-                                {`${drug.code} (${drug.dosage}, ${drug.frequency} for ${drug.duration})`}
+                                {`${drug.code} (${drug.frequency} hourly for ${drug.duration} day(s))`}
                             </Text>
                         </Chip>
                     ))

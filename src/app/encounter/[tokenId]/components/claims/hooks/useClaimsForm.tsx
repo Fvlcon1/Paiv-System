@@ -68,9 +68,8 @@ const useClaimsForm = () => {
             ...drugs, 
             { 
                 code: drugFormik.values.code, 
-                dosage: `${drugFormik.values.dosage} mg`,
-                frequency: `${drugFormik.values.frequency} x Daily`,
-                duration: `${drugFormik.values.duration} Day(s)`
+                frequency: drugFormik.values.frequency,
+                duration: drugFormik.values.duration
              }
         ];
         formik.setFieldValue("drugs", newDrugs);
@@ -80,7 +79,6 @@ const useClaimsForm = () => {
     const drugFormik = useFormik({
         initialValues: {
             code: "",
-            dosage: "",
             frequency : "",
             duration : ""
         },

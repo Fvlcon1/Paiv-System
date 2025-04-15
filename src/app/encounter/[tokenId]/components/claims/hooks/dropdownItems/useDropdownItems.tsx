@@ -9,21 +9,21 @@ const useDropdownItems = () => {
     // const {serviceItems : medicalProcedureItems} = useMedicalProcedures()
 
     const mainConditionItems: DropdownItem[] = [
-        { key: "I10", label: "Chronic diarrhoea (> 2 weeks)", onClick: () => formik.setFieldValue("diagnosis", "Chronic diarrhoea (> 2 weeks)") },
+        { key: "I10", label: "I10 - Chronic diarrhoea (> 2 weeks)", onClick: () => formik.setFieldValue("diagnosis", "I10") },
         { type: "divider", key: "divider-1" },
-        { key: "E11", label: "Haemorrhoids", onClick: () => formik.setFieldValue("diagnosis", "Haemorrhoids") },
+        { key: "bacterial_gastroenteritis", label: "bacterial_gastroenteritis", onClick: () => formik.setFieldValue("diagnosis", "bacterial_gastroenteritis") },
         { type: "divider", key: "divider-2" },
-        { key: "N18", label: "Acute Hepatitis", onClick: () => formik.setFieldValue("diagnosis", "Acute Hepatitis") },
+        { key: "N18", label: "N18 - Acute Hepatitis", onClick: () => formik.setFieldValue("diagnosis", "N18") },
         { type: "divider", key: "divider-3" },
-        { key: "I25", label: "Plasma Cell Myeloma", onClick: () => formik.setFieldValue("diagnosis", "Plasma Cell Myeloma") },
+        { key: "I25", label: "I25 - Plasma Cell Myeloma", onClick: () => formik.setFieldValue("diagnosis", "I25") },
         { type: "divider", key: "divider-4" },
-        { key: "J45", label: "Asthma (J45)", onClick: () => formik.setFieldValue("diagnosis", "Asthma") },
+        { key: "J45", label: "J45 - Asthma", onClick: () => formik.setFieldValue("diagnosis", "J45") },
         { type: "divider", key: "divider-5" },
-        { key: "J44", label: "Chronic Obstructive Pulmonary Disease (COPD) (J44)", onClick: () => formik.setFieldValue("diagnosis", "Chronic Obstructive Pulmonary Disease") },
+        { key: "J44", label: "J44 - Chronic Obstructive Pulmonary Disease (COPD)", onClick: () => formik.setFieldValue("diagnosis", "J44") },
         { type: "divider", key: "divider-6" },
-        { key: "J18", label: "Pneumonia (J18)", onClick: () => formik.setFieldValue("diagnosis", "Pneumonia") },
+        { key: "J18", label: "J18 - Pneumonia (J18)", onClick: () => formik.setFieldValue("diagnosis", "J18 - Pneumonia") },
         { type: "divider", key: "divider-7" },
-        { key: "I63", label: "Stroke (Cerebrovascular Accident) (I63)", onClick: () => formik.setFieldValue("diagnosis", "Stroke (Cerebrovascular Accident)") },
+        { key: "I63", label: "I63 - Stroke (Cerebrovascular Accident) (I63)", onClick: () => formik.setFieldValue("diagnosis", "I63") },
     ];
 
     const medicalProcedureItems: DropdownItem[] = [
