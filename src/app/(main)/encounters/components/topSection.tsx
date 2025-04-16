@@ -26,36 +26,34 @@ const TopSection = () => {
     }, []);
 
     return (
-        <div className="w-full bg-[#ffffff05] border-b-[1px] border-solid border-b-border-tetiary justify-center pt-[30px] h-[200px] flex items-center">
-            <div className="max-w-[1024px] w-full flex flex-col justify-center gap-2">
-                <Text
-                    size={TypographySize.HL}
-                    bold={TypographyBold.lg}
-                    textColor={theme.colors.text.primary}
-                    fontfamily="greater-theory"
-                    className="pl-1"
-                >
-                    Encounters
-                </Text>
-                <Input
-                    value={searchValue}
-                    setValue={setSearchValue}
-                    inputClassName="!h-[25px]"
-                    className="!bg-bg-tetiary"
-                    ref={inputRef}
-                    placeholder="Search card ID or patient name..."
-                    PreIcon={<FaMagnifyingGlass color={theme.colors.text.tetiary} />}
-                    PostIcon={
-                        <div className="py-[1px] px-2 border-[1px] border-solid border-[#3A3A46] rounded-lg bg-[#30303D]">
-                            <div className="mt-[-2px]">
-                                <Text bold={TypographyBold.md}>
-                                    ⌘ K
-                                </Text>
-                            </div>
+        <div className="flex flex-col w-full gap-1">
+            <Text
+                size={TypographySize.HL}
+                bold={TypographyBold.lg}
+                textColor={theme.colors.text.secondary}
+                fontfamily="greater-theory"
+                className="pl-[2px]"
+            >
+                Encounters
+            </Text>
+            <Input
+                value={searchValue}
+                setValue={setSearchValue}
+                inputClassName="!h-[30px]"
+                className="!h-[45px] !bg-bg-primary"
+                ref={inputRef}
+                placeholder="Search card ID or patient name..."
+                PreIcon={<FaMagnifyingGlass color={theme.colors.text.tetiary} />}
+                PostIcon={
+                    <div className="py-[1px] px-2 border-[1px] border-solid border-border-primary rounded-lg bg-bg-secondary">
+                        <div className="mt-[-2px]">
+                            <Text bold={TypographyBold.md}>
+                                ⌘ K
+                            </Text>
                         </div>
-                    }
-                />
-            </div>
+                    </div>
+                }
+            />
         </div>
     )
 }

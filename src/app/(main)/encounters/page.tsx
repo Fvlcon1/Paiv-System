@@ -5,13 +5,14 @@ import { TypographyBold, TypographySize } from "@styles/style.types"
 import theme from "@styles/theme"
 import Table from "./components/table"
 import { useContext, useEffect, useRef, useState } from "react"
-import Controls from "./components/controls"
-import Button from "@components/button/button"
 import TopSection from "./components/topSection"
 import { AnimatePresence } from "framer-motion"
 import useRecentVisits from "./utils/useEncounter/useRecentVisits"
-import ClaimsForm from "./components/claims/components/claimsForm"
 import { useEncounterContext } from "./context/encounterContext"
+import ClaimsForm from "../components/claimsForm/claimsForm"
+import Slidein from "@styles/components/slidein"
+import Controls from "@components/table/controls"
+import { columns } from "./components/data"
 
 const Encounters = () => {
     const [pageSize, setPageSize] = useState(15)
@@ -32,30 +33,35 @@ const Encounters = () => {
                     close={()=>setShowClaims(false)}
                 />
             }
-            <AnimatePresence>
-                <div className="flex flex-col gap-10 items-center">
-                    <TopSection />
-                    <div className="w-full max-w-[1024px] flex flex-col gap-3">
-                        <div className="w-full flex items-center justify-end">
-                            <Controls 
+
+            <div className="w-full px-8 pt-4 flex flex-col">
+
+                {/* Top Section */}
+                <TopSection />
+
+                {/* Table Section */}
+                <Slidein className="w-full flex flex-col items-center">
+                    <div className="flex gap-[15px] flex-col min-w-[800px] w-full py-4">
+                        <div className="w-full">
+                            <Controls
                                 pageSize={pageSize}
                                 setPageSize={setPageSize}
                                 pageNumber={pageNumber}
                                 setPageNumber={setPageNumber}
                                 view={view}
                                 setView={setView}
-                                refresh={()=>getRecentVisits({})}
+                                handleReload={()=>getRecentVisits({})}
                             />
                         </div>
                         <Table
-                          data={recentVisitsTableData}
-                          isError={isError}
-                          isLoading={isLoading}
-                          error={error}
+                            data={recentVisitsTableData}
+                            isError={isError}
+                            isLoading={isLoading}
+                            error={error}
                         />
                     </div>
-                </div>
-            </AnimatePresence>
+                </Slidein>
+            </div>
         </>
     )
 }
