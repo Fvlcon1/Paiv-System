@@ -1,5 +1,3 @@
-import { message } from "antd"
-import axios from "axios"
 import { useContext, useEffect, useState } from "react"
 import { useMutation } from "@tanstack/react-query"
 import { IRecentVisitsTable, IRecentVisits } from '../type';
@@ -14,7 +12,7 @@ import { protectedApi } from "@/app/utils/apis/api";
 import Button from "@components/button/button";
 import { mainContext } from "@/app/context/context";
 import { DispositionViewState } from "@/app/utils/types";
-import { INhisDetails } from "@/app/(main)/components/results table/utils/type";
+import { INhisDetails } from "@/app/(main)/components/main/components/results table/utils/type";
 import { HiMenuAlt3, HiOutlineDotsHorizontal } from "react-icons/hi";
 import ClickableTab from "@components/clickable/clickabletab";
 import Dropdown from "@components/dropdown/dropdown";

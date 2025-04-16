@@ -16,6 +16,7 @@ import toast from "react-hot-toast"
 import Cookies from "universal-cookie"
 import { useAuth } from "@/app/context/authContext"
 import { IoMdPulse } from "react-icons/io"
+import Logo from "@components/logo/logo"
 
 interface LoginType {
     hospitalId : string,
@@ -79,10 +80,7 @@ const Login = () => {
 
                 {/* Title */}
                 <div className="w-full flex flex-col items-center gap-1 justify-center">
-                    <IoMdPulse 
-                        color={theme.colors.main.primary}
-                        size={20}
-                    />
+                    <Logo />
                     <div className="flex flex-col items-center gap-0">
                         <Text
                             size={TypographySize.HM}

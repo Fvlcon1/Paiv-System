@@ -17,7 +17,7 @@ import Image from "next/image"
 import { useEffect, useState } from "react"
 import { BiSolidCategoryAlt } from "react-icons/bi"
 import { FaAngleDown } from "react-icons/fa"
-import { IDispositionType } from "../../results table/utils/type"
+import { IDispositionType } from "../../main/components/results table/utils/type"
 
 const SelectDisposition = () => {
     const {setDispositionViewState, setSelectedDisposition} = useMainContext()
