@@ -3,26 +3,29 @@
 @tailwind utilities;
 
 :root {
-	--text-primary : #E7E7EB;
-  --text-secondary : #C6C6C8;
-  --text-tetiary : #7C7C88;
-
-  --bg-primary : #15151F;
-  --bg-secondary : #191923;
-  --bg-tetiary : #25252E;
-  --bg-quantinary : #32323e;
-
-  --border-primary : #272737;
-  --border-secondary : #2C2C3F;
-  --border-tetiary : #3A3A46;
-  --border-quantinary : #2f2f39;
-
-  --main-primary : #6060D0;
+  --text-primary: #0A2540;      /* Main text, headings */
+  --text-secondary: #425466;    /* Secondary text, labels */
+  --text-tetiary: #8E98A3;      /* Tertiary text, placeholders */
+  
+  /* Background colors */
+  --bg-primary: #FFFFFF;        /* Main background, cards */
+  --bg-secondary: #F7F7FA;      /* Page background */
+  --bg-tetiary: #EDEDF2;        /* Secondary UI elements, active state bg */
+  --bg-quantinary: #DADAE0;     /* Additional UI elements */
+  
+  /* Border colors */
+  --border-primary: #E0E0E7;    /* Main borders */
+  --border-secondary: #D0D0D8;  /* Secondary borders */
+  --border-tetiary: #BDBDC7;    /* Tertiary borders */
+  --border-quantinary: #C6C6D0; /* Additional borders */
+  
+  /* Accent colors */
+  --main-primary: #4D4DDC;  
 }
 
 body {
-  background-image: url('/assets/prod/bg-gradient.webp');
-  background-color: #15151F;
+  /* background-image: url('/assets/prod/bg-gradient.webp'); */
+  background-color: var(--bg-secondary);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

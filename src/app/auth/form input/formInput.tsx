@@ -1,5 +1,6 @@
 import Input from "@components/input/input"
 import Text from "@styles/components/text"
+import { TypographyBold } from "@styles/style.types"
 import theme from "@styles/theme"
 import { ChangeEvent, DetailedHTMLProps, HTMLInputAutoCompleteAttribute, InputHTMLAttributes, ReactNode } from "react"
 
@@ -37,7 +38,8 @@ const FormInput = ({
     return (
         <div className="flex flex-col gap-[6px] w-full h-fit">
             <Text
-                textColor={theme.colors.text.primary} 
+                textColor={theme.colors.text.secondary} 
+                bold={TypographyBold.md}
                 className="pl-1"
             >
                 {label}
@@ -52,8 +54,9 @@ const FormInput = ({
                 value={value}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className={`${error && touched ? '!border-[#d44848]' : ''}`}
-                inputClassName="!h-[25px]"
+                className={`${error && touched ? '!border-[#d44848]' : ''} `}
+                borderColor={theme.colors.border.primary}
+                inputClassName="!h-[20px]"
                 autoComplete={autoComplete}
                 inputProps={inputProps}
             />

@@ -4,7 +4,7 @@ const Divider = ({
     className? : string
 }) => {
     return (
-        <div className={`${className} w-full h-[1px] bg-border-quantinary rounded-full`}>
+        <div className={`${className} w-full h-[1px] bg-border-primary rounded-full`}>
 
         </div>
     )

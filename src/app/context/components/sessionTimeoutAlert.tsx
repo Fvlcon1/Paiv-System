@@ -27,10 +27,10 @@ const SessionTimeoutAlert = ({ show }: { show: boolean }) => {
             <Container
                 display={isVisible}
                 setDisplay={setIsVisible}
-                className="!w-fit"
+                className="!w-fit border-[1px] border-solid border-border-primary"
                 closable={false}
             >
-                <div className="p-6 rounded-lg h-[200px] bg-[#ffffff08] border-[1px] border-solid border-border-tetiary flex flex-col justify-center items-center text-center w-[300px]">
+                <div className="p-6 rounded-lg h-[200px flex flex-col justify-center items-center text-center w-[300px]">
                     <TbAlertSquareFilled 
                         color={theme.colors.text.primary}
                         size={20}
@@ -48,7 +48,7 @@ const SessionTimeoutAlert = ({ show }: { show: boolean }) => {
                     <Button
                         onClick={() => logout(false)}
                         text="Relogin"
-                        className="!bg-bg-quantinary hover:!bg-bg-tetiary mt-2"
+                        className="mt-2"
                     />
                 </div>
             </Container>

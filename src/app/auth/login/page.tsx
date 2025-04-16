@@ -3,7 +3,7 @@
 import Input from "@components/input/input"
 import Text from "@styles/components/text"
 import { TypographyBold, TypographySize } from "@styles/style.types"
-import theme from "@styles/theme"
+import { theme } from "@styles/theme"
 import { useFormik } from "formik"
 import Image from "next/image"
 import validationSchema from './utils/validationSchema'
@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 import Cookies from "universal-cookie"
 import { useAuth } from "@/app/context/authContext"
+import { IoMdPulse } from "react-icons/io"
 
 interface LoginType {
     hospitalId : string,
@@ -74,22 +75,27 @@ const Login = () => {
 
     return (
         <div className="w-full h-screen flex justify-center items-center mt-[-50px]">
-            <div className="w-[350px] flex flex-col gap-3">
+            <div className="w-[380px] flex flex-col gap-3">
+
+                {/* Title */}
                 <div className="w-full flex flex-col items-center gap-1 justify-center">
-                    <Image 
-                        src={"/assets/prod/logo.png"}
-                        alt="logo"
-                        width={25}
-                        height={25}
+                    <IoMdPulse 
+                        color={theme.colors.main.primary}
+                        size={20}
                     />
-                    <Text
-                        size={TypographySize.HM}
-                        textColor={theme.colors.text.primary}
-                        bold={TypographyBold.md}
-                    >
-                        Login
-                    </Text>
+                    <div className="flex flex-col items-center gap-0">
+                        <Text
+                            size={TypographySize.HM}
+                            textColor={theme.colors.text.primary}
+                            bold={TypographyBold.md}
+                        >
+                            Welcome Back
+                        </Text>
+                        <Text>Please login to continue</Text>
+                    </div>
                 </div>
+
+                {/* Form */}
                 <Form
                     formik={formik}
                     loading={isPending}
@@ -97,6 +103,8 @@ const Login = () => {
                     setStayLoggedIn={setStayLoggedIn}
                 />
             </div>
+
+            {/* Footer */}
             <div className="absolute bottom-[30px]">
                 <Text
                     textColor={theme.colors.text.tetiary}
