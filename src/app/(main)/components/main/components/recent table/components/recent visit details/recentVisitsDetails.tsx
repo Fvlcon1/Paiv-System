@@ -1,3 +1,4 @@
+
 import Overlay from "@components/overlay/overlay"
 import Image from "next/image"
 import Table from "./components/table/table"
@@ -74,7 +75,7 @@ const RecentVisitsDetails = ({
                                     />
                                 </div>
                                 <div className="px-4 w-full">
-                                    <Link href={`encounters/encounter/${data.token}`}>
+                                    <Link href={`/encounters/encounter/${data.token}`}>
                                         <Button
                                             text="View Encounter"
                                             className="mt-[20px] !w-full !h-[45px] !border-none !bg-main-primary"

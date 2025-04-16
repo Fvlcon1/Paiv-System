@@ -16,7 +16,7 @@ const Buttons = () => {
                 !checkinSuccessful &&
                 <Button
                     text="Verify Visit"
-                    className="!bg-main-primary"
+                    className="!bg-main-primary !h-[33px]"
                     onClick={() => setViewState(ViewState.VERIFICATION_SELECTION)}
                 />
             }

@@ -38,27 +38,47 @@ const Button = ({
   const [onHover, setOnHover] = useState<boolean>(false)
   const [onPress, setOnPress] = useState<boolean>(false)
 
-  return (
-    <button
-      style={{
-        background : (onHover && !disabled)
-                      ? hover?.background 
-                      ?? background 
-                      ?? theme.colors.main.primary
-                      : theme.colors.main.primary,
+  const getBackground = () => {
+    return (onHover && !disabled)
+      ?  hover?.background 
+      ?? background 
+      ?? theme.colors.main.primary
+      :  background 
+      ?? theme.colors.main.primary
+  }
+
+  const getOpacity = () => {
+    return (onHover && !disabled)
+      ?  hover?.opacity 
+      ?? 0.8
+      :  disabled 
+      ?  0.5 : 1
+  }
+
+  const getTextColor = () => {
+    return onHover ? hover?.color
+      ? hover.color
+      : color ?? "white"
+      : color ?? "white"
+  }
+
+  const getButtonStyle = () => {
+    return {
+      background : getBackground(),
         padding : padding ?? '7px 15px',
         border : border,
         borderRadius : radius ? `${radius}px` : '7px',
         maxWidth,
         width : size?.width ?? 'fit-content',
         height : size?.height ?? '35px',
-        opacity : (onHover && !disabled)
-                  ? hover?.opacity 
-                  ?? 0.8
-                  : disabled 
-                  ? 0.5 : 1,
-        transform : `scale(${onPress ? 0.97 : 1})`,
-      }}
+        opacity : getOpacity(),
+        transform : `scale(${onPress ? 0.97 : 1})`
+    }
+  }
+
+  return (
+    <button
+      style={getButtonStyle()}
       onClick={onClick}
       onMouseOver={()=>setOnHover(true)}
       onMouseLeave={()=>setOnHover(false)}
@@ -76,12 +96,7 @@ const Button = ({
           <Text
             size={textSize}
             bold={textBold ?? TypographyBold.md}
-            textColor={
-              onHover ? hover?.color
-                ? hover.color
-                : color ?? "white"
-                : "white"
-            }
+            textColor={getTextColor()}
             maxLines={1}
             ellipsis
             whiteSpace="nowrap"

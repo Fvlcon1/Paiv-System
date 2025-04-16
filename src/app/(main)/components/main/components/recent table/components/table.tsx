@@ -8,7 +8,7 @@ import { TypographyBold } from "@styles/style.types"
 import { IRecentVisitsTable } from "../utils/type"
 import NoData from "@components/NoData/noData"
 import RecentVisitsDetails from "./recent visit details/recentVisitsDetails"
-import { JSX, useState } from "react"
+import {useState } from "react"
 
 const Table = ({
     data,

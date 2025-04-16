@@ -69,7 +69,7 @@ const useRecentVisits = () => {
                     </Text>
                 ),
                 lastVisit: (
-                    <div className="flex flex-col gap-1">
+                    <div className="flex flex-col">
                         <Text>
                             {`${(new Date(visit.verification_date)).toDateString()}`}
                         </Text>

@@ -12,6 +12,7 @@ import Drugs from "./components/drugs/drugs";
 import Button from "@components/button/button";
 import theme from "@styles/theme";
 import { IClaimsDetailType } from "../../utils/types";
+import OutlineButton from "@components/button/outlineButton";
 
 const ClaimDetails = ({
     claimDetails,
@@ -47,7 +48,7 @@ const ClaimDetails = ({
             {isVisible && claimDetails && (
                 <Overlay 
                     onClick={close} 
-                    className="!px-6 !z-[11]"
+                    className="!px-6 !z-[13]"
                 >
                     <Container 
                         display={isVisible} 
@@ -57,7 +58,9 @@ const ClaimDetails = ({
                         <div
                             className="md:w-[800px] w-full flex flex-col"
                         >
-                            <div className="bg-[#1F1F28] border-solid border-b-[1px] border-border-secondary rounded-t-[20px] h-[55px] flex items-center pl-6">
+
+                            {/* Title */}
+                            <div className="bg-bg-tetiary border-solid border-b-[1px] border-border-secondary rounded-t-[20px] h-[55px] flex items-center pl-6">
                                 <Text bold={TypographyBold.md}>
                                     Claim Details
                                 </Text>
@@ -93,11 +96,13 @@ const ClaimDetails = ({
                             </div>
 
                             {/* Actions */}
-                            <div className="bg-[#1F1F28] border-solid border-t-[1px] border-border-secondary rounded-b-[20px] h-[55px] flex items-center pl-6">
+                            <div className="bg-bg-tetiary border-solid border-t-[1px] border-border-secondary rounded-b-[20px] h-[55px] flex items-center pl-6">
                                 <div className="w-full flex justify-end gap-2 items-center h-full px-6">
                                     <Button 
                                         text="Cancel"
-                                        className="!bg-bg-quantinary !border-none"
+                                        background={theme.colors.bg.primary}
+                                        color={theme.colors.main.primary}
+                                        className="border-[1px] border-border-primary"
                                         onClick={close}
                                     />
                                     <Button 

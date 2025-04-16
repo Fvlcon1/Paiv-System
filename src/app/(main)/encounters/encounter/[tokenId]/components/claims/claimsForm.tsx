@@ -16,6 +16,7 @@ import { MdSaveAs } from "react-icons/md"
 import ClaimDetails from "./components/claimDetails/claimDetails"
 import { IClaimsDetailType } from "./utils/types"
 import { convertToClaimsDetails } from "./utils/convertToClaimsDetails"
+import OutlineButton from "@components/button/outlineButton"
 
 const ClaimsForm = ({
     close
@@ -87,9 +88,8 @@ const ClaimsForm = ({
                                 </div>
                             </div>
                             <div className="flex w-full justify-end gap-2">
-                                <Button 
+                                <OutlineButton 
                                     text="Save Draft"
-                                    className="!bg-bg-quantinary"
                                     type="button"
                                     icon={<MdSaveAs size={15} />}
                                 />

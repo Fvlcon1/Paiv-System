@@ -147,7 +147,7 @@ const CamCapture = ({
                             <div className="flex absolute justify-center items-center h-full w-full top-0 left-0 bg-[#15151fca] backdrop-filter backdrop-blur-sm">
                                 <div className="flex flex-col justify-center items-center gap-2 animate-pulse">
                                     <div className="face-loader"></div> 
-                                    <Text textColor={theme.colors.text.primary}>
+                                    <Text textColor={theme.colors.bg.primary}>
                                         Verifying Visit...
                                     </Text>
                                 </div>
@@ -173,13 +173,13 @@ const CamCapture = ({
                             setCaptureImageUrl(null);
                             startCamera();
                         }}
-                        className="absolute bottom-5 !bg-bg-quantinary"
+                        className="absolute bottom-12"
                     />
                 ) : (
                     <Button 
                         text="Capture"
                         onClick={handleCapture}
-                        className="absolute bottom-5 !bg-bg-quantinary"
+                        className="absolute bottom-12"
                     />
                 )}
             </div>

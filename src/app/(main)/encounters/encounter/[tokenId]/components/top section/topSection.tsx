@@ -12,7 +12,7 @@ import { getTime, getRelativeTime } from "@/utils/getDate"
 import { getLengthOfStay } from "../../utils/getLengthOfStay"
 import { GiCancel } from "react-icons/gi"
 import Images from "./components/images"
-import useGetUserData from "./hooks/useGetUserData"
+import useGetUserData from "./utils/useGetUserData"
 import Details from "./components/details"
 
 const TopSection = () => {
@@ -25,6 +25,7 @@ const TopSection = () => {
 
             {/* Details */}
             <Details />
+            
         </div>
     )
 }

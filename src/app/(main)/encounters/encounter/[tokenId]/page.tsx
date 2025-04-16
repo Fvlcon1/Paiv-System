@@ -50,15 +50,14 @@ const Encounter = () => {
             </AnimatePresence>
             <VerificationStates />
             <Disposition />
-            <Slidein className="flex flex-col gap-6">
-                <div className="w-full bg-[#ffffff05] border-b-[1px] border-solid border-b-border-tetiary justify-center pt-[30px] h-[350px] flex items-center">
-                    <div className="max-w-[1024px] w-full flex flex-col justify-center gap-6">
+            <Slidein className="flex flex-col gap-6 px-8">
+                <div className="w-full bg-[#ffffff05] border-b-[1px] border-solid border-b-border-tetiary justify-center py-[30px] flex items-center">
+                    <div className="w-full flex flex-col justify-center gap-6">
                         <TopSection />
                     </div>
                 </div>
                 <div className="w-full flex justify-center gap-1">
-                    <div className="max-w-[1024px] w-full flex flex-col gap-6">
-                        
+                    <div className="w-full flex flex-col gap-6">
                         <RecentTable />
                     </div>
                 </div>
