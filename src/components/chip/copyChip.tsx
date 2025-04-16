@@ -40,7 +40,7 @@ const Copychip = ({
 
             <Pressable scaleFactor={1.015}>
                 <div
-                    className={`relative px-3 py-1 bg-bg-tetiary flex justify-center items-center overflow-hidden hover:bg-bg-quantinary rounded-lg cursor-pointer w-fit group ${containerClassName}`}
+                    className={`relative px-3 py-1 bg-bg-secondary flex justify-center items-center overflow-hidden hover:bg-bg-quantinary duration-150 rounded-lg cursor-pointer w-fit group ${containerClassName}`}
                     onClick={handleCopy}
                 >
                     {children ?? <Text>{text}</Text>}

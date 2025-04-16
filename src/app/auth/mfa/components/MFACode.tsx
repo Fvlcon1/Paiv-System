@@ -179,7 +179,7 @@ const MFACode = ({
                 <div className="flex flex-col gap-0 items-center">
                     <Text
                         fontfamily="greater-theory"
-                        textColor={theme.colors.text.primary}
+                        textColor={theme.colors.main.primary}
                         size={TypographySize.HM}
                     >
                         MFA
@@ -212,7 +212,7 @@ const MFACode = ({
                     submitOTPPending &&
                     <div className="normal-loader"></div>
                 }
-                <Button text="Resend code" disabled={!canResend} onClick={handleResendCode} />
+                <Button text="Resend code" disabled={!canResend} color={theme.colors.text.secondary} onClick={handleResendCode} />
                 <Text textColor={theme.colors.main.primary}>
                     Code will expire in 
                     <Text

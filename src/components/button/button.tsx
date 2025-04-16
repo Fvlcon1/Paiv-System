@@ -44,8 +44,8 @@ const Button = ({
         background : (onHover && !disabled)
                       ? hover?.background 
                       ?? background 
-                      ?? theme.colors.bg.quantinary
-                      : theme.colors.bg.tetiary,
+                      ?? theme.colors.main.primary
+                      : theme.colors.main.primary,
         padding : padding ?? '7px 15px',
         border : border,
         borderRadius : radius ? `${radius}px` : '7px',
@@ -64,14 +64,14 @@ const Button = ({
       onMouseLeave={()=>setOnHover(false)}
       onMouseDown={()=>setOnPress(true)}
       onMouseUp={()=>setOnPress(false)}
-      className={`${className} duration-200 border-[1px] border-solid border-border-tetiary ${disabled && 'cursor-not-allowed'}`}
+      className={`${className} duration-200 ${disabled && 'cursor-not-allowed'}`}
       disabled={disabled ?? loading}
       type={type ?? 'submit'}
     >
       <div className="w-full justify-center items-center flex gap-[8px]">
         {
           loading ?
-          <div className="normal-loader !w-[20px]"></div>
+          <div className="normal-loader !bg-[white] !w-[20px]"></div>
           :
           <Text
             size={textSize}
@@ -79,8 +79,8 @@ const Button = ({
             textColor={
               onHover ? hover?.color
                 ? hover.color
-                : color ?? theme.colors.text.primary
-                : theme.colors.text.primary
+                : color ?? "white"
+                : "white"
             }
             maxLines={1}
             ellipsis

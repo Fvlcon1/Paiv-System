@@ -27,72 +27,74 @@ const Form = ({
 
     return (
         <form onSubmit={formik.handleSubmit} className="flex flex-col gap-2">
-            <FormInput
-                value={formik.values.hospitalId}
-                handleChange={formik.handleChange}
-                autofocus
-                handleBlur={formik.handleBlur}
-                touched={formik.touched.hospitalId}
-                error={formik.errors.hospitalId}
-                PreIcon={<GiHospitalCross color={theme.colors.text.tetiary}/>}
-                name="hospitalId"
-                type="text"
-                placeholder="Enter hospital id"
-                label="Hospital Id"
-            />
-            <FormInput
-                value={formik.values.email}
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-                touched={formik.touched.email}
-                error={formik.errors.email}
-                PreIcon={<MdEmail color={theme.colors.text.tetiary}/>}
-                name="email"
-                type="text"
-                placeholder="Eg: johndoe@paiv.com"
-                label="Email"
-                autoComplete="username"
-            />
-            <FormInput 
-                value={formik.values.password}
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-                touched={formik.touched.password}
-                error={formik.errors.password}
-                PreIcon={<RiLockPasswordFill color={theme.colors.text.tetiary}/>}
-                name="password"
-                type={showPassword ? "text" : "password"}
-                placeholder="Enter password"
-                label="Password"
-                autoComplete="password"
-                PostIcon={
-                    showPassword ? 
-                    <FaEyeSlash
-                        color={theme.colors.text.secondary}
-                        onClick={()=>setShowPassword(false)}
-                        className='cursor-pointer'
-                    /> 
-                    : 
-                    <FaEye
-                        color={theme.colors.text.secondary}
-                        onClick={()=>setShowPassword(true)}
-                        className='cursor-pointer'
-                    />
-                }
-            />
-            <div className="pl-1 text-main-primary w-fit cursor-pointer">
-                <Text
-                    textColor={theme.colors.main.primary}
-                    clickableLink
-                >
-                    Forgot Password?
-                </Text>
+            <div className="flex flex-col gap-2 px-6 py-6 bg-white rounded-[12px] shadow-sm shadow-[#4d4ddc15] border-[1px] border-border-primary">
+                <FormInput
+                    value={formik.values.hospitalId}
+                    handleChange={formik.handleChange}
+                    autofocus
+                    handleBlur={formik.handleBlur}
+                    touched={formik.touched.hospitalId}
+                    error={formik.errors.hospitalId}
+                    PreIcon={<GiHospitalCross color={theme.colors.text.tetiary}/>}
+                    name="hospitalId"
+                    type="text"
+                    placeholder="Enter hospital id"
+                    label="Hospital Id"
+                />
+                <FormInput
+                    value={formik.values.email}
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                    touched={formik.touched.email}
+                    error={formik.errors.email}
+                    PreIcon={<MdEmail color={theme.colors.text.tetiary}/>}
+                    name="email"
+                    type="text"
+                    placeholder="Eg: johndoe@paiv.com"
+                    label="Email"
+                    autoComplete="username"
+                />
+                <FormInput 
+                    value={formik.values.password}
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                    touched={formik.touched.password}
+                    error={formik.errors.password}
+                    PreIcon={<RiLockPasswordFill color={theme.colors.text.tetiary}/>}
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Enter password"
+                    label="Password"
+                    autoComplete="password"
+                    PostIcon={
+                        showPassword ? 
+                        <FaEyeSlash
+                            color={theme.colors.text.secondary}
+                            onClick={()=>setShowPassword(false)}
+                            className='cursor-pointer'
+                        /> 
+                        : 
+                        <FaEye
+                            color={theme.colors.text.secondary}
+                            onClick={()=>setShowPassword(true)}
+                            className='cursor-pointer'
+                        />
+                    }
+                />
+                <div className="pl-1 text-main-primary w-fit cursor-pointer">
+                    <Text
+                        textColor={theme.colors.main.primary}
+                        clickableLink
+                    >
+                        Forgot Password?
+                    </Text>
+                </div>
+                <Button
+                    text="Login"
+                    className="!w-full !h-[45px] !rounded-xl !bg-main-primary border-none"
+                    loading={loading}
+                />
             </div>
-            <Button
-                text="Login"
-                className="!w-full !h-[45px] !rounded-xl !bg-main-primary"
-                loading={loading}
-            />
             <PrivacyText />
             <StayLoggedIn 
                 stayLoggedIn={stayLoggedIn}

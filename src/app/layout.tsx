@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import "./components/loader.css";
+import "./(main)/components/loader.css";
 import Topbar from "@components/topbar/topbar";
 import { MainContextProvider } from "./context/context";
 import QueryProvider from "./QueryProvider";

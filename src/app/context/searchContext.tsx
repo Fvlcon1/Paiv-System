@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, ReactNode, useContext, useState } from "react";
-import useSearchResults from "../components/results table/utils/useSearchResults";
+import useSearchResults from "../(main)/components/main/components/results table/utils/useSearchResults";
 import { UseMutateFunction } from "@tanstack/react-query";
 
 export const SearchContext = createContext<{

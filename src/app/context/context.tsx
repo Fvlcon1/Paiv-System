@@ -2,8 +2,8 @@
 import { message } from 'antd';
 import React, { createContext, useState, ReactNode, useContext } from 'react';
 import { Dispatch } from 'react';
-import { IDispositionType, INhisDetails, IRearchResults } from '../components/results table/utils/type';
 import { DispositionViewState, ViewState } from '../utils/types';
+import { IDispositionType, INhisDetails, IRearchResults } from '../(main)/components/main/components/results table/utils/type';
 
 export const mainContext = createContext<{
     searchMembersResult : any[]
