@@ -21,6 +21,7 @@ import ServiceType from "./components/form inputs/serviceType"
 import ServiceOutcome from "./components/form inputs/serviceOutcome.tsx"
 import TypeofAttendance from "./components/form inputs/typeofAttendance"
 import Specialties from "./components/form inputs/specialties"
+import '@ant-design/v5-patch-for-react-19';
 
 const ClaimsForm = ({
     close
