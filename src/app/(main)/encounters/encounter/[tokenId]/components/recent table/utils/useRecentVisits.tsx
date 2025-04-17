@@ -7,6 +7,7 @@ import { TypographyBold } from "@styles/style.types"
 import { getRelativeTime, getTime } from "@/utils/getDate"
 import theme from "@styles/theme"
 import { INhisDetails } from "@/app/(main)/components/main/components/results table/utils/type";
+import Status from "@/app/(main)/components/status/status";
 
 const useRecentVisits = () => {
     const [recentVisitsTableData, setRecentVisitsTableData] = useState<IRecentVisitsTable[]>([])
@@ -59,17 +60,11 @@ const useRecentVisits = () => {
             return {
                 ...recentVisit,
                 othernames : recentVisit.othernames ?? '-',
-                verificationStatus : recentVisit.verificationStatus ? (
-                    <Text textColor="#60B956">
-                        Successful
-                    </Text>
-                ) : (
-                    <Text textColor="#db4040">
-                        Failed
-                    </Text>
-                ),
+                verificationStatus : recentVisit.verificationStatus 
+                    ? (<Status status="successful" />) 
+                    : (<Status status="failed" />),
                 lastVisit: (
-                    <div className="flex flex-col gap-1">
+                    <div className="flex flex-col">
                         <Text>
                             {`${(new Date(visit.verification_date)).toDateString()}`}
                         </Text>

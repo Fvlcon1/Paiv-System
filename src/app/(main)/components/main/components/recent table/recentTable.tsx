@@ -48,6 +48,7 @@ const RecentTable = () => {
               setPageNumber={setPageNumber}
               view={view}
               setView={setView}
+              handleReload={()=>getRecentVisits({})}
             />
           </div>
           <Table

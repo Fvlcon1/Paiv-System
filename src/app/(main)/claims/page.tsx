@@ -1,24 +1,11 @@
 'use client'
 
-import Text from "@styles/components/text"
-import { TypographyBold, TypographySize } from "@styles/style.types"
-import theme from "@styles/theme"
-import Table from "./components/table"
-import Input from "@components/input/input"
-import { FaMagnifyingGlass } from "react-icons/fa6"
-import { useContext, useEffect, useRef, useState } from "react"
-import Controls from "./components/controls"
-import Button from "@components/button/button"
+import { useState } from "react"
 import TopSection from "./components/topSection"
-import ClaimsForm from "./components/claimsForm"
-import { AnimatePresence } from "framer-motion"
-import { data } from './components/claimsTable/data';
+import ClaimsForm from "../components/claimsForm/claimsForm"
 import ClaimsTable from "./components/claimsTable/claimsTable"
 
 const Claims = () => {
-    const [pageSize, setPageSize] = useState(15)
-    const [pageNumber, setPageNumber] = useState(1)
-    const [view, setView] = useState<"list" | "grid">("list")
     const [showClaims, setShowClaims] = useState(false)
 
     return (
@@ -44,7 +31,6 @@ const Claims = () => {
                 </div> */}
                 <ClaimsTable />
             </div>
-
         </>
     )
 }

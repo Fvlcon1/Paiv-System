@@ -51,7 +51,7 @@ const FingerPrintError = ({
                 </Text>
                 <Button
                     text="Cancel"
-                    className="!bg-bg-quantinary hover:!bg-bg-tetiary mt-2"
+                    className="mt-2"
                     onClick={close}
                 />
             </div>

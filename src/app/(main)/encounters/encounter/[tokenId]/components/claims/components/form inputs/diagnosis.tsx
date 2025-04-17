@@ -6,6 +6,7 @@ import { useClaimsFormContext } from "../../context/context"
 import useDropdownItems from "../../hooks/dropdownItems/useDropdownItems"
 import { FaChevronDown } from "react-icons/fa"
 import { GiCaduceus } from "react-icons/gi"
+import { TypographyBold } from "@styles/style.types"
 
 const Diagnosis = () => {
     const {formik} = useClaimsFormContext()
@@ -14,7 +15,7 @@ const Diagnosis = () => {
     return (
         <div className="w-full flex flex-col justify-between gap-2">
             <div className="flex flex-col pl-1">
-                <Text>
+                <Text bold={TypographyBold.md2}>
                     Diagnosis *
                 </Text>
                 <Text textColor={theme.colors.text.tetiary}>
@@ -32,7 +33,7 @@ const Diagnosis = () => {
                         onChange={formik?.handleChange}
                         name="diagnosis"
                         placeholder="Select primary diagnosis"
-                        className={`!flex !flex-1 ${formik.touched.diagnosis && formik?.errors.diagnosis ? "!border-[#db3e1f]" : ""}`}
+                        className={`!flex !flex-1 !bg-bg ${formik.touched.diagnosis && formik?.errors.diagnosis ? "!border-[#db3e1f]" : ""}`}
                         PostIcon={<FaChevronDown color={theme.colors.text.tetiary} size={12} />}
                         PreIcon={<GiCaduceus color={theme.colors.text.tetiary} size={12} />}
                     />

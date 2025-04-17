@@ -2,11 +2,7 @@
 
 import { useState, useRef, ReactNode } from "react";
 import { useClickAway } from "react-use";
-import { FiMenu } from "react-icons/fi";
-import { IoMdSettings } from "react-icons/io";
-import ClickableTab from "@components/clickable/clickabletab";
 import Text from "@styles/components/text";
-import theme from "@styles/theme";
 import Link from "next/link";
 import { DropdownItem } from "@/utils/@types";
 import { AnimatePresence, motion } from 'framer-motion';
@@ -40,6 +36,7 @@ const Dropdown = (
 
     return (
         <div className={`relative inline-block ${outterContainerClassName}`} ref={menuRef}>
+
             {/* Toggle Button */}
             <div
                 onClick={(e) => {
@@ -57,14 +54,14 @@ const Dropdown = (
                         initial={{ opacity: 0, y : -10 }}
                         animate={{ opacity: 1, y : 0 }}
                         exit={{ opacity: 0, y : -10 }}
-                        className={`absolute overflow-y-auto right-0 mt-2 min-w-[150px] max-h-[300px] w-full bg-bg-tetiary border border-border-quantinary rounded-xl shadow-lg z-50 py-1 pt-[6px] ${className}`}
+                        className={`absolute overflow-y-auto right-0 mt-2 min-w-[150px] max-h-[300px] w-full bg-bg-primary border border-border-primary rounded-xl shadow-lg shadow-[#4d4ddc11] z-50 py-1 pt-[6px] ${className}`}
                     >
                         {
                             menuItems &&
                             <div className="flex flex-col">
                                 {menuItems.map((item) =>
                                     item.type === "divider" ? (
-                                        <div key={item.key} className="border-t border-border-quantinary my-1" />
+                                        <div key={item.key} className="border-t border-border-primary my-1" />
                                     ) 
                                     : item.type === "loading" ? (
                                         <div key={item.key} className="pl-2 h-5 overflow-hidden"><div className="normal-loader !w-5" /></div>

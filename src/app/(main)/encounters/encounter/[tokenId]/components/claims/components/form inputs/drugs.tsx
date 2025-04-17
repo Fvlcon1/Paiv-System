@@ -8,6 +8,7 @@ import { useClaimsFormContext } from "../../context/context"
 import useDropdownItems from "../../hooks/dropdownItems/useDropdownItems"
 import Button from "@components/button/button"
 import Chip from "../chip/chip"
+import { TypographyBold } from "@styles/style.types"
 
 const Drugs = () => {
     const {formik, drugFormik, handleRemoveDrug} = useClaimsFormContext()
@@ -23,7 +24,7 @@ const Drugs = () => {
 
             {/* Head */}
             <div className="flex flex-col pl-1">
-                <Text>
+                <Text bold={TypographyBold.md2}>
                     Prescription *
                 </Text>
                 <Text textColor={theme.colors.text.tetiary}>

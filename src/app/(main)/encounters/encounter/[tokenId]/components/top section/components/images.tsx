@@ -5,15 +5,28 @@ import { FaUserCircle } from "react-icons/fa"
 import { GiCancel } from "react-icons/gi"
 import { RiVerifiedBadgeFill } from "react-icons/ri"
 import { useEncounterContext } from "../../../context/encounter.context"
+import { ReactNode } from "react"
+
+const OutterContainer = ({
+    children
+} : {
+    children? : ReactNode
+}) => {
+    return (
+        <div className="flex justify-center items-center shadow-lg hover:shadow-xl border-border-primary border-[1px] hover:shadow-[#5d5bb82a] duration-500 shadow-[#5d5bb816] p-2 w-[140px] h-[140px] bg-bg-tetiary rounded-full">
+            {children}
+        </div>
+    )
+}
 
 const Images = () => {
     const {encounterDetails} = useEncounterContext()
     
     return (
-        <div className="relative h-[200px] w-[280px] flex justify-center">
+        <div className="relative gap-2 flex justify-center">
 
             {/* Profile Image */}
-            <div className="absolute flex justify-center items-center bottom-0 left-0 p-2 w-[140px] h-[140px] bg-[#24242F] rounded-full border-b-[1px] border-solid border-border-tetiary">
+            <OutterContainer>
                 {
                     encounterDetails?.imageUrl ?
                     <div className="relative overflow-hidden rounded-full w-full h-full">
@@ -27,10 +40,10 @@ const Images = () => {
                     :
                     <FaUserCircle color={theme.colors.text.tetiary} size={105} />
                 }
-            </div>
+            </OutterContainer>
 
             {/* Checkin Image */}
-            <div className="absolute flex justify-center items-center right-0 top-0 p-2 w-[140px] h-[140px] bg-[#24242F] rounded-full border-b-[1px] border-solid border-border-tetiary">
+            <OutterContainer>
                 {
                     encounterDetails?.checkinImageUrl ?
                     <div className="relative overflow-hidden rounded-full w-full h-full">
@@ -44,10 +57,10 @@ const Images = () => {
                     :
                     <FaUserCircle color={theme.colors.text.tetiary} size={130} />
                 }
-            </div>
+            </OutterContainer>
 
             {/* Checkout Image */}
-            <div className="absolute flex justify-center items-center right-[50px] bottom-[-40px] p-2 w-[110px] h-[110px] bg-[#24242F] rounded-full border-b-[1px] border-solid border-border-tetiary">
+            <OutterContainer>
                 {
                     encounterDetails?.checkoutImageUrl ?
                     <div className="relative overflow-hidden rounded-full w-full h-full">
@@ -59,16 +72,16 @@ const Images = () => {
                         />
                     </div>
                     :
-                    <FaUserCircle color={theme.colors.text.tetiary} size={100} />
+                    <FaUserCircle color={theme.colors.text.tetiary} size={130} />
                 }
-            </div>
+            </OutterContainer>
 
             {/* Status */}
-            <div className="absolute right-0 top-0 w-full h-full flex justify-center items-center">
+            <div className="h-full flex justify-center items-center">
                 {
                     encounterDetails?.checkoutImageUrl ?
-                    <div className="relative mt-[50px] ml-[10px] overflow-hidden rounded-full bg-[#898686d6] p-1">
-                        <div className="relative overflow-hidden h-[30px] w-[30px] flex justify-center items-center rounded-full bg-[#24242fb7] p-1">
+                    <div className="relative mt-[50px] ml-[10px] overflow-hidden rounded-full bg-[#8986866e] p-1">
+                        <div className="relative overflow-hidden h-[30px] w-[30px] flex justify-center items-center rounded-full bg-bg-primary p-1">
                             <RiVerifiedBadgeFill
                                 color="#60B956"
                                 size={30}
@@ -77,8 +90,8 @@ const Images = () => {
                     </div>
                     :
                     encounterDetails?.checkinImageUrl && !encounterDetails.checkinStatus ?
-                    <div className="relative mt-[50px] ml-[10px] overflow-hidden rounded-full bg-[#898686d6] p-1">
-                        <div className="relative overflow-hidden h-[30px] w-[30px] flex justify-center items-center rounded-full bg-[#24242fb7] p-1">
+                    <div className="relative mt-[50px] ml-[10px] overflow-hidden rounded-full bg-[#8986866e] p-1">
+                        <div className="relative overflow-hidden h-[30px] w-[30px] flex justify-center items-center rounded-full bg-bg-primary p-1">
                             <GiCancel
                                 color="#e8362a"
                                 size={30}

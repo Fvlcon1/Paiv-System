@@ -7,21 +7,15 @@ import { RiVerifiedBadgeFill } from "react-icons/ri"
 import Table from "./table/table"
 import Button from "@components/button/button"
 import { useContext, useEffect, useRef, useState } from "react"
-import { mainContext, useMainContext } from "@/app/context/context"
 import theme from "@styles/theme"
 import { FaUserCircle } from "react-icons/fa"
-import { useEncounterContext } from "@/app/(main)/encounters/encounter/[tokenId]/context/encounter.context"
+import { useEncounterContext } from "../../../../context/encounter.context"
 
 const VerificationSuccessfulContainer = () => {
     const [show, setShow] = useState(true)
-    const {setViewState, nhisDetails, capturedImageUrl, setCaptureImageUrl} = useEncounterContext()
+    const {nhisDetails, capturedImageUrl, setCaptureImageUrl} = useEncounterContext()
+    const {setViewState} = useEncounterContext()
     const firstRender = useRef(true);
-    const {setDispositionViewState} = useEncounterContext()
-
-    const close = () => {
-        setDispositionViewState(null)
-        setViewState(null)
-    }
 
     useEffect(()=>{
         if(!show)
@@ -41,19 +35,19 @@ const VerificationSuccessfulContainer = () => {
     },[])
     return (
         <>
-            <Overlay onClick={close}>
+            <Overlay onClick={()=>setViewState(null)}>
                 <Container 
                     className="!w-[500px] pb-[30px]"
-                    close={close}
+                    close={()=>setViewState(null)}
                 >
                     <div className="py-[30px]">
                         <div className="relative h-[200px] w-[280px] flex justify-center">
-                            <div className="absolute flex justify-center items-center bottom-0 left-0 p-2 w-[140px] h-[140px] bg-[#24242F] rounded-full border-b-[1px] border-solid border-border-tetiary">
+                            <div className="absolute flex justify-center items-center bottom-0 left-0 p-2 w-[140px] h-[140px] bg-[#16a34c1e] rounded-full">
                                 {
                                     capturedImageUrl ?
                                     <div className="relative overflow-hidden rounded-full w-full h-full">
                                         <Image
-                                            src={capturedImageUrl ?? ''}
+                                            src={capturedImageUrl}
                                             alt="profile"
                                             width={130}
                                             height={130}
@@ -63,19 +57,22 @@ const VerificationSuccessfulContainer = () => {
                                     <FaUserCircle color={theme.colors.text.tetiary} size={105} />
                                 }
                             </div>
-                            <div className="absolute right-0 top-0 p-2 w-[140px] h-[140px] bg-[#24242F] rounded-full border-b-[1px] border-solid border-border-tetiary">
-                                <div className="relative overflow-hidden rounded-full w-full h-full">
-                                    <Image
-                                        src={nhisDetails?.imageUrl ?? ''}
-                                        alt="profile"
-                                        width={130}
-                                        height={130}
-                                    />
+                            {
+                                nhisDetails?.imageUrl &&
+                                <div className="absolute right-0 top-0 p-2 w-[140px] h-[140px] bg-[#16a34c1e] rounded-full">
+                                    <div className="relative overflow-hidden rounded-full w-full h-full">
+                                        <Image
+                                            src={nhisDetails?.imageUrl}
+                                            alt="profile"
+                                            width={130}
+                                            height={130}
+                                        />
+                                    </div>
                                 </div>
-                            </div>
+                            }
                             <div className="absolute right-0 top-0 w-full h-full flex justify-center items-center">
-                                <div className="relative overflow-hidden rounded-full bg-[#ffffff1e] p-1">
-                                    <div className="relative overflow-hidden rounded-full bg-[#24242fb7] p-1">
+                                <div className="relative overflow-hidden rounded-full bg-[#16a34c40] p-1">
+                                    <div className="relative overflow-hidden rounded-full bg-[#ffffffb7] p-1">
                                         <RiVerifiedBadgeFill
                                             color="#60B956"
                                             size={30}
@@ -94,14 +91,14 @@ const VerificationSuccessfulContainer = () => {
                     </Text>
                     <div className="w-full relative h-[350px] px-4 overflow-hidden">
                         <Table />
-                        <div className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-t from-[#1F1F28] via-[#1F1F28]/80 to-transparent">
+                        <div className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-t from-[#ffffff] via-[#ffffff]/80 to-transparent">
                             
                         </div>
-                        <div className="absolute bottom-0 w-full flex justify-center pr-[40px]">
+                        <div className="absolute bottom-0 w-full flex justify-center pr-[30px]">
                             <Button 
                                 text="Close"
-                                className="!border-none !bg-bg-quantinary hover:!bg-bg-tetiary !min-w-[200px]"
-                                onClick={close}
+                                className="!min-w-[200px]"
+                                onClick={()=>setViewState(null)}
                             />
                         </div>
                     </div>

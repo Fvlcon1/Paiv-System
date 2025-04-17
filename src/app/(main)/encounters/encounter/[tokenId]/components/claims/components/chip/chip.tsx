@@ -14,7 +14,7 @@ const Chip = ({
             onClick={onClick && onClick}
         >
             <div 
-                className="flex px-2 py-1 gap-1 items-center rounded-full bg-bg-quantinary hover:opacity-[0.7] duration-150"
+                className="flex px-2 py-1 gap-1 items-center rounded-full bg-bg-tetiary border-[1px] border-border-primary hover:opacity-[0.7] duration-150"
             >
                 {children}
                 <div className="">

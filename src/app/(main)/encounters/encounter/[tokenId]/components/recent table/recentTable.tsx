@@ -11,6 +11,7 @@ import { protectedApi } from "@/app/utils/apis/api"
 import { useMutation } from "@tanstack/react-query"
 import { FaHistory } from "react-icons/fa"
 import NoData from "@components/NoData/noData"
+import Top from "./components/top"
 
 const RecentTable = () => {
   const {getRecentVisits, recentVisitsTableData} = useRecentVisits()
@@ -47,23 +48,13 @@ const RecentTable = () => {
   return (
     <>
       <div className="w-full flex flex-col items-center">
-        <div className="flex gap-[15px] flex-col min-w-[800px] w-full max-w-[1024px]">
-            <div className="flex gap-1 items-center">
-              <div className="w-[20px] h-[20px] flex justify-center items-center bg-main-primary rounded-[5px]">
-                  <FaHistory
-                      color="white"
-                      size={12}
-                  />
-              </div>
-              <Text>
-                  Past Encounters
-              </Text>
-          </div>
+        <div className="flex gap-[15px] flex-col min-w-[800px] w-full">
+          <Top handleReload={getPastEncountersMutation} />
           <Table
             data={recentVisitsTableData}
             error={null}
             isError={false}
-            isLoading={false}
+            isLoading={isPending}
           />
         </div>
       </div>

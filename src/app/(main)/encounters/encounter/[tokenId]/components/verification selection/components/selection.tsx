@@ -43,8 +43,8 @@ const Selection = ({
         <Container close={close} className="w-[450px] !px-10 !py-6 !h-fit">
             <div className="flex flex-col gap-4 items-center w-full">
                 <div className="flex flex-col gap-0 items-center">
-                    <MdVerifiedUser size={35} color={theme.colors.text.primary} className="pb-2" />
-                    <Text fontfamily="greater-theory" textColor={theme.colors.text.primary}>
+                    <MdVerifiedUser size={35} color={theme.colors.text.secondary} className="pb-2" />
+                    <Text fontfamily="greater-theory" textColor={theme.colors.text.secondary}>
                         Select Verification Type
                     </Text>
                 </div>
