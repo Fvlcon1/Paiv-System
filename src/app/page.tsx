@@ -1,4 +1,4 @@
-import Home from "./(main)/page"
+import Home from "./(main)/main"
 import MainTemplate from "./(main)/template"
 
 const Main = () => {
