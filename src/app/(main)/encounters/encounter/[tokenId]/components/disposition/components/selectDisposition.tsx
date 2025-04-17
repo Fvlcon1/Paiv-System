@@ -29,7 +29,7 @@ const SelectDisposition = () => {
 
     const getDisposition = async () => {
         const response = await protectedApi.GET("/dispositions")
-        return response.data
+        return response
     }
 
     const setDispositionDropdown = (data: IDispositionType[]) => {
@@ -132,7 +132,7 @@ const SelectDisposition = () => {
                         }
                         <Button
                             text="Continue"
-                            className="!bg-bg-quantinary !mt-1"
+                            className="!mt-1"
                             onClick={handleContinue}
                         />
                     </div>

@@ -1,5 +1,5 @@
 import Text from "@styles/components/text"
-import { TypographyBold } from "@styles/style.types"
+import { TypographyBold, TypographySize } from "@styles/style.types"
 import { useClaimsFormContext } from "../context/context"
 import { useEncounterContext } from "../../../context/encounter.context"
 import theme from "@styles/theme"
@@ -14,11 +14,12 @@ const PatientBanner = () => {
     }     
 
     return (
-        <div className="flex gap-1 py-1 pl-1 pr-3 rounded-full w-fit bg-bg-quantinary items-center">
-            <div className="rounded-full bg-main-primary flex h-[30px] w-[30px] justify-center items-center">
+        <div className="flex gap-1 py-1 pl-1 pr-3 rounded-full w-fit bg-bg-tetiary items-center">
+            <div className="rounded-full bg-main-primary flex h-[25px] w-[25px] justify-center items-center">
                 <Text
-                    bold={TypographyBold.md2}
-                    textColor={theme.colors.text.primary}
+                    bold={TypographyBold.md}
+                    textColor={theme.colors.bg.primary}
+                    size={TypographySize.xs}
                 >
                     {getInitials(`${encounterDetails?.firstname} ${encounterDetails?.lastname}`)}
                 </Text>

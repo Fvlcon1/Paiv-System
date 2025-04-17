@@ -16,8 +16,9 @@ const Details = () => {
                 <Text
                     size={TypographySize.HL}
                     bold={TypographyBold.md}
-                    textColor={theme.colors.text.primary}
+                    textColor={theme.colors.text.secondary}
                     className="pl-[20px]"
+                    fontfamily="greater-theory"
                 >
                     {`${encounterDetails?.firstname}${encounterDetails?.othernames ? ` ${encounterDetails?.othernames}` : ''} ${encounterDetails?.lastname}`}
                 </Text>
@@ -28,7 +29,7 @@ const Details = () => {
                         <tbody>
                             {
                                 data.map((item, index) => (
-                                    <tr className={`${index % 2 === 0 ? 'bg-bg-tetiary' : ''}`} key={index}>
+                                    <tr className={`${index % 2 === 0 ? 'bg-bg-primary' : ''}`} key={index}>
                                         <td className={`pl-[20px] py-[10px] rounded-l-lg`}>
                                             {
                                                 typeof item[0] === 'string' ?

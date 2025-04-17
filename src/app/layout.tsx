@@ -4,10 +4,11 @@ import "./globals.css";
 import "./(main)/components/loader.css";
 import Topbar from "@components/topbar/topbar";
 import { MainContextProvider } from "./context/context";
-import QueryProvider from "./QueryProvider";
+import QueryProvider from "./utils/QueryProvider";
 import { SearchProvider } from "./context/searchContext";
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from "./context/authContext";
+import AntdConfigProvider from "./utils/antdConfigProvider";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -29,12 +30,14 @@ export default function RootLayout({
       <body className={`${montserrat.variable} antialiased`}>
         <AuthProvider>
           <QueryProvider>
-            <MainContextProvider>
-              <Toaster />
-              <SearchProvider>
-                {children}
-              </SearchProvider>
-            </MainContextProvider>
+            <AntdConfigProvider>
+              <MainContextProvider>
+                <Toaster />
+                <SearchProvider>
+                  {children}
+                </SearchProvider>
+              </MainContextProvider>
+            </AntdConfigProvider>
           </QueryProvider>
         </AuthProvider>
       </body>

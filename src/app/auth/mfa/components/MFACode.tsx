@@ -210,9 +210,13 @@ const MFACode = ({
                 </div>
                 {
                     submitOTPPending &&
-                    <div className="normal-loader"></div>
+                    <div className="normal-loader !w-[20px]"></div>
                 }
-                <Button text="Resend code" disabled={!canResend} color={theme.colors.text.secondary} onClick={handleResendCode} />
+                <Button 
+                    text="Resend code" 
+                    disabled={!canResend} 
+                    onClick={handleResendCode}
+                />
                 <Text textColor={theme.colors.main.primary}>
                     Code will expire in 
                     <Text

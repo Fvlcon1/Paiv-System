@@ -37,12 +37,12 @@ const MFASelection = () => {
             <div className="flex flex-col gap-4 items-center mt-[-50px] w-[500px]">
                 <TbShieldLockFilled 
                     size={40}
-                    color={theme.colors.text.primary}
+                    color={theme.colors.text.secondary}
                 />
                 <div className="flex flex-col gap-0 items-center">
                     <Text
                         fontfamily="greater-theory"
-                        textColor={theme.colors.text.primary}
+                        textColor={theme.colors.text.secondary}
                         size={TypographySize.HM}
                     >
                         Two-Factor authentication

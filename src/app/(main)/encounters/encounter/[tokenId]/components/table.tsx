@@ -54,7 +54,7 @@ const Table = ({
                     <tbody>
                         {
                             getRowModel().rows.map((row, index) => (
-                                <tr className={`${index % 2 === 1 ? 'bg-bg-secondary' : ''}`} key={row.id}>
+                                <tr className={`${index % 2 === 1 ? "bg-gray-50" : ""} hover:bg-bg-secondary cursor-pointer transition-colors duration-200`}>
                                     {
                                         row.getVisibleCells().map((cell, index) => (
                                             <td className={`py-[16px] ${index === 0 ? 'pl-[30px] rounded-l-xl' : ''}`} key={cell.id}>

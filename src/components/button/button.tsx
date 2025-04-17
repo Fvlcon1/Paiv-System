@@ -58,8 +58,8 @@ const Button = ({
   const getTextColor = () => {
     return onHover ? hover?.color
       ? hover.color
-      : color ?? "white"
-      : color ?? "white"
+      : color ?? theme.colors.bg.primary
+      : color ?? theme.colors.bg.primary
   }
 
   const getButtonStyle = () => {

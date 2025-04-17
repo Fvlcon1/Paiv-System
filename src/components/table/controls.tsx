@@ -27,11 +27,11 @@ const Controls = ({
         <div className="flex items-center gap-2">
             {
                 handleReload ?
-                <div className="flex h-[33px] items-center p-1 px-2 border-[1px] border-solid border-border-primary rounded-lg gap-[1px] cursor-pointer bg-bg-primary hover:bg-bg-tetiary">
-                    <IoReload
-                        color={theme.colors.text.primary}
-                        onClick={handleReload}
-                    />
+                <div 
+                    className="flex h-[33px] items-center p-1 px-2 border-[1px] border-solid border-border-primary rounded-lg gap-[1px] cursor-pointer bg-bg-primary hover:bg-bg-tetiary"
+                    onClick={handleReload}
+                >
+                    <IoReload color={theme.colors.text.primary}/>
                 </div>
                 : <></>
             }

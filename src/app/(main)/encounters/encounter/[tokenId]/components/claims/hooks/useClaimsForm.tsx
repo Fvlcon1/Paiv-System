@@ -18,7 +18,12 @@ const useClaimsForm = () => {
     const formik = useFormik({
         initialValues: {
             diagnosis: "",
-            medicalProcedures: [] as string[], // Explicitly type as string array
+            medicalProcedures: [] as string[],
+            serviceOutcome : "",
+            serviceType1 : "",
+            serviceType2 : "",
+            specialties : [] as string[],
+            typeofAttendance : "",
             drugs: [] as any[],
             labTests: [] as string[],
         },
@@ -37,6 +42,11 @@ const useClaimsForm = () => {
                 drugs: values.drugs,
                 medical_procedures: values.medicalProcedures,
                 lab_tests: values.labTests,
+                serviceOutcome : values.serviceOutcome,
+                serviceType1 : values.serviceType1,
+                serviceType2 : values.serviceType2,
+                specialties : values.specialties,
+                typeofAttendance : values.typeofAttendance,
             });
             return response;
         } catch (error) {

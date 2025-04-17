@@ -10,6 +10,7 @@ import { useClaimsFormContext } from "../../context/context"
 import useDropdownItems from "../../hooks/dropdownItems/useDropdownItems"
 import Chip from "../chip/chip"
 import { useState } from "react"
+import { TypographyBold } from "@styles/style.types"
 
 const LabTests = () => {
     const {formik, handleRemoveLabTest, labTestValue, setLabtestValue} = useClaimsFormContext()
@@ -19,7 +20,7 @@ const LabTests = () => {
     return (
         <div className="w-full flex flex-col justify-between gap-2">
             <div className="flex flex-col pl-1">
-                <Text>
+                <Text bold={TypographyBold.md2}>
                     Lab Tests
                 </Text>
                 <Text textColor={theme.colors.text.tetiary}>

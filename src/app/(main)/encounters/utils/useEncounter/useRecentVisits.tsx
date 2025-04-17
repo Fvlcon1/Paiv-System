@@ -17,6 +17,7 @@ import { HiMenuAlt3, HiOutlineDotsHorizontal } from "react-icons/hi";
 import ClickableTab from "@components/clickable/clickabletab";
 import Dropdown from "@components/dropdown/dropdown";
 import useDropdownItems from "./components/menuItems";
+import Status from "@/app/(main)/components/status/status";
 
 const useRecentVisits = () => {
     const [recentVisitsTableData, setRecentVisitsTableData] = useState<IRecentVisitsTable[]>([])
@@ -112,15 +113,9 @@ const useRecentVisits = () => {
                     return {
                         ...recentVisit,
                         othernames : recentVisit.othernames ?? '-',
-                        verificationStatus : recentVisit.verificationStatus ? (
-                            <Text textColor="#60B956">
-                                Successful
-                            </Text>
-                        ) : (
-                            <Text textColor="#db4040">
-                                Failed
-                            </Text>
-                        ),
+                        verificationStatus : recentVisit.verificationStatus 
+                            ? (<Status status="successful" />) 
+                            : (<Status status="failed" />),
                         checkIn: (
                             <div className="flex flex-col gap-1">
                                 <Text>

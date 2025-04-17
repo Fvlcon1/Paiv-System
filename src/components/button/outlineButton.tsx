@@ -5,7 +5,7 @@ import { ButtonProps } from "@/utils/@types"
 const OutlineButton = (props: ButtonProps) => {
     return (
         <Button 
-            className="!bg-transparent border-[1px] border-border-primary hover:!bg-bg-secondary"
+            className="!bg-transparent border-[1px] border-main-primary hover:!bg-bg-secondary"
             color={theme.colors.main.primary}
             {...props}
         >

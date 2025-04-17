@@ -17,6 +17,10 @@ import ClaimDetails from "./components/claimDetails/claimDetails"
 import { IClaimsDetailType } from "./utils/types"
 import { convertToClaimsDetails } from "./utils/convertToClaimsDetails"
 import OutlineButton from "@components/button/outlineButton"
+import ServiceType from "./components/form inputs/serviceType"
+import ServiceOutcome from "./components/form inputs/serviceOutcome.tsx"
+import TypeofAttendance from "./components/form inputs/typeofAttendance"
+import Specialties from "./components/form inputs/specialties"
 
 const ClaimsForm = ({
     close
@@ -53,7 +57,7 @@ const ClaimsForm = ({
             <Overlay onClick={close}>
                 <Container
                     close={close}
-                    className="!w-[700px] !h-[700px]"
+                    className="!w-[700px] !h-[90%]"
                 >
                     {
                         <form onSubmit={handleShowClaims} className="flex flex-col gap-6 w-full py-8 px-8 overflow-y-auto">
@@ -76,6 +80,14 @@ const ClaimsForm = ({
                                 </Text>
                                 <div className="flex flex-col gap-6 w-full">
                                     <PatientBanner />
+                                    <Divider />
+                                    <ServiceType />
+                                    <Divider />
+                                    <ServiceOutcome />
+                                    <Divider />
+                                    <TypeofAttendance />
+                                    <Divider />
+                                    <Specialties />
                                     <Divider />
                                     <Diagnosis />
                                     <Divider />

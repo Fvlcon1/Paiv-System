@@ -32,7 +32,7 @@ const Container = ({
         <div 
             className={`min-w-[300px] flex flex-col items-center relative rounded-[20px] border-[1px] border-solid border-border-tetiary bg-bg-primary ${className}`}
             style={{
-                backgroundImage: "url('/assets/prod/bg-gradient.webp')",
+                // backgroundImage: "url('/assets/prod/bg-gradient.webp')",
                 backgroundSize: "cover",
                 backgroundPosition: "center"
             }}                    
@@ -41,7 +41,7 @@ const Container = ({
                 closable &&
                 <div className="absolute top-[10px] right-[10px]">
                     <ClickableTab 
-                        className="!rounded-full hover:!bg-bg-tetiary"
+                        className="!rounded-full hover:!bg-bg-tetiary !px-1"
                         onClick={handleClose}
                     >
                         <IoMdCloseCircle color={theme.colors.text.secondary} />

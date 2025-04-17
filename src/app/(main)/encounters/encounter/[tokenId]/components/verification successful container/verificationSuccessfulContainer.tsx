@@ -44,7 +44,7 @@ const VerificationSuccessfulContainer = () => {
                 >
                     <div className="py-[30px]">
                         <div className="relative h-[200px] w-[280px] flex justify-center">
-                            <div className="absolute flex justify-center items-center bottom-0 left-0 p-2 w-[140px] h-[140px] bg-[#24242F] rounded-full border-b-[1px] border-solid border-border-tetiary">
+                            <div className="absolute flex justify-center items-center bottom-0 left-0 p-2 w-[140px] h-[140px] bg-[#16a34c1e] rounded-full">
                                 {
                                     capturedImageUrl ?
                                     <div className="relative overflow-hidden rounded-full w-full h-full">
@@ -61,7 +61,7 @@ const VerificationSuccessfulContainer = () => {
                             </div>
                             {
                                 nhisDetails?.imageUrl &&
-                                <div className="absolute right-0 top-0 p-2 w-[140px] h-[140px] bg-[#24242F] rounded-full border-b-[1px] border-solid border-border-tetiary">
+                                <div className="absolute right-0 top-0 p-2 w-[140px] h-[140px] bg-[#16a34c1e] rounded-full">
                                     <div className="relative overflow-hidden rounded-full w-full h-full">
                                         <Image
                                             src={nhisDetails?.imageUrl}
@@ -73,8 +73,8 @@ const VerificationSuccessfulContainer = () => {
                                 </div>
                             }
                             <div className="absolute right-0 top-0 w-full h-full flex justify-center items-center">
-                                <div className="relative overflow-hidden rounded-full bg-[#ffffff1e] p-1">
-                                    <div className="relative overflow-hidden rounded-full bg-[#24242fb7] p-1">
+                                <div className="relative overflow-hidden rounded-full bg-[#16a34c40] p-1">
+                                    <div className="relative overflow-hidden rounded-full bg-[#ffffffb7] p-1">
                                         <RiVerifiedBadgeFill
                                             color="#60B956"
                                             size={30}
@@ -93,13 +93,13 @@ const VerificationSuccessfulContainer = () => {
                     </Text>
                     <div className="w-full relative h-[350px] px-4 overflow-hidden">
                         <Table />
-                        <div className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-t from-[#1F1F28] via-[#1F1F28]/80 to-transparent">
+                        <div className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-t from-[#ffffff] via-[#ffffff]/80 to-transparent">
                             
                         </div>
-                        <div className="absolute bottom-0 w-full flex justify-center pr-[40px]">
+                        <div className="absolute bottom-0 w-full flex justify-center pr-[30px]">
                             <Button 
                                 text="Close"
-                                className="!border-none !bg-bg-quantinary hover:!bg-bg-tetiary !min-w-[200px]"
+                                className="!min-w-[200px]"
                                 onClick={()=>setViewState(null)}
                             />
                         </div>

@@ -32,13 +32,13 @@ const SessionTimeoutAlert = ({ show }: { show: boolean }) => {
             >
                 <div className="p-6 rounded-lg h-[200px flex flex-col justify-center items-center text-center w-[300px]">
                     <TbAlertSquareFilled 
-                        color={theme.colors.text.primary}
+                        color={theme.colors.text.secondary}
                         size={20}
                         className="mb-1"
                     />
                     <Text
                         fontfamily="greater-theory"
-                        textColor={theme.colors.text.primary}
+                        textColor={theme.colors.text.secondary}
                     >
                         Session Expired
                     </Text>

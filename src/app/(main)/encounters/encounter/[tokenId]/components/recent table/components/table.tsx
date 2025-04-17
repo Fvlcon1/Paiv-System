@@ -38,7 +38,7 @@ const Table = ({
             />
             <div className="overflow-hidden w-full rounded-lg border border-border-primary bg-bg-primary">
                 <table className="w-full">
-                    <thead className="bg-bg-secondary">
+                    <thead className="bg-gray-50">
                         {
                             getHeaderGroups().map((headerGroup) => (
                                 <tr key={headerGroup.id}>
@@ -68,7 +68,7 @@ const Table = ({
                             {
                                 getRowModel().rows.map((row, index) => (
                                     <tr 
-                                        className="hover:bg-gray-50 cursor-pointer transition-colors duration-200" 
+                                    className={`${index % 2 === 1 ? "bg-gray-50" : ""} hover:bg-bg-secondary cursor-pointer transition-colors duration-200`}
                                         key={row.id}
                                         onClick={()=>{
                                             setDisplayRecentVisitsDetails(true)

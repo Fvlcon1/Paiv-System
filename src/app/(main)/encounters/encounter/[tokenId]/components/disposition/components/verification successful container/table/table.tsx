@@ -4,9 +4,10 @@ import { TypographyBold } from "@styles/style.types"
 import theme from "@styles/theme"
 import { useContext, useEffect, useState } from "react"
 import { RiVerifiedBadgeFill } from "react-icons/ri"
+import { useEncounterContext } from "../../../../../context/encounter.context"
 
 const Table = () => {
-    const {nhisDetails} = useContext(mainContext)
+    const {nhisDetails} = useEncounterContext()
     const [data, setData] = useState<any[][]>([])
 
     useEffect(()=>{
