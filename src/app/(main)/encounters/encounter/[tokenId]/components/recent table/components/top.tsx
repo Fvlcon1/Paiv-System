@@ -2,7 +2,7 @@ import Controls from "@components/table/controls"
 import Text from "@styles/components/text"
 import { useState } from "react"
 import { FaHistory } from "react-icons/fa"
-import Buttons from "../../buttons"
+import Buttons from "./buttons"
 
 const Top = ({
     handleReload

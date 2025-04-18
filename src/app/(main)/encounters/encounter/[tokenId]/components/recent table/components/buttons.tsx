@@ -1,6 +1,6 @@
 import Button from "@components/button/button"
-import { useEncounterContext } from "../context/encounter.context";
-import { ViewState } from "../utils/types";
+import { useEncounterContext } from "../../../context/encounter.context";
+import { ViewState } from "../../../utils/types";
 import { DispositionViewState } from "@/app/utils/types";
 
 const Buttons = () => {
@@ -9,6 +9,7 @@ const Buttons = () => {
     const checkinSuccessful = encounterDetails?.checkinStatus
     const checkoutSuccessful = encounterDetails?.checkoutStatus
     const checkoutTime = encounterDetails?.checkoutTime
+    const claimSubmittedAt = encounterDetails?.claimSubmissionAt
 
     return (
         <div className="flex gap-2">
