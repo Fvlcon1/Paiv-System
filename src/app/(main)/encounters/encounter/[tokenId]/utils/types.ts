@@ -18,4 +18,5 @@ export interface IEncounterDetails extends INhisDetails {
     createdAt : string
     checkinStatus? : boolean
     checkoutStatus? : boolean
+    claimSubmissionAt? : Date
 }

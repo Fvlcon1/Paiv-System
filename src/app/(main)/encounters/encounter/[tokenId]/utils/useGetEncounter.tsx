@@ -6,7 +6,7 @@ import { useEncounterContext } from "../context/encounter.context";
 import { INhisDetails } from "@/app/(main)/components/main/components/results table/utils/type";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { getRelativeTime, getTime } from "@/utils/getDate";
+import { getDateTime, getRelativeTime, getTime } from "@/utils/getDate";
 import { IEncounterDetails } from "./types";
 
 const useGetEncounter = () => {
@@ -17,50 +17,82 @@ const useGetEncounter = () => {
     const [encounterDetails, setEncounterDetails] = useState<IEncounterDetails>()
 
     const extractEncounterDetails = (data : any) => {
+        const {verification_record, claim_submission_time} = data
+        const {
+            first_name, 
+            middle_name, 
+            last_name, 
+            nhis_number, 
+            verification_date, 
+            gender, 
+            date_of_birth, 
+            marital_status,
+            profile_image_url,
+            current_expiry_date,
+            enrolment_status,
+            insurance_type,
+            issue_date,
+            residential_address,
+            phone_number,
+            ghana_card_number,
+            membership_id,
+            token,
+            compare_image_url,
+            encounter_image_url,
+            created_at,
+            final_time,
+            disposition_name,
+            verification_status,
+            final_verification_status
+        } = verification_record
+
         const encounterDetails: IEncounterDetails = {
-            firstname: data.first_name,
-            othernames: data.middle_name,
-            lastname: data.last_name,
-            nhisId: data.nhis_number,
-            lastVisit: `${(new Date(data.verification_date)).toDateString()} | ${getTime(data.verification_date)} | ${getRelativeTime(data.verification_date)}`,
-            gender: data.gender,
-            dob: new Date(data.date_of_birth).toDateString(),
-            maritalStatus: data.marital_status,
-            imageUrl : data.profile_image_url,
-            expirtyDate: data.current_expiry_date,
-            enrolementStatus: data.enrolment_status,
-            insuranceType: data.insurance_type,
-            issueDate: data.issue_date,
-            residentialAddress: data.residential_address,
-            phoneNumber: data.phone_number,
-            ghanaCardNumber: data.ghana_card_number,
-            memberShipId: data.membership_id,
-            token : data.token,
-            checkinImageUrl : data.compare_image_url,
-            checkoutImageUrl : data.encounter_image_url,
-            createdAt : data.created_at,
-            checkinTime : data.verification_date && new Date(data.verification_date),
-            checkoutTime : data.final_time && new Date(data.final_time),
-            disposition : data.disposition_name,
-            checkinStatus : data.verification_status,
-            checkoutStatus : data.final_verification_status
+            firstname: first_name,
+            othernames: middle_name,
+            lastname: last_name,
+            nhisId: nhis_number,
+            lastVisit: getDateTime(verification_date),
+            gender: gender,
+            dob: new Date(date_of_birth).toDateString(),
+            maritalStatus: marital_status,
+            imageUrl : profile_image_url,
+            expirtyDate: current_expiry_date,
+            enrolementStatus: enrolment_status,
+            insuranceType: insurance_type,
+            issueDate: issue_date,
+            residentialAddress: residential_address,
+            phoneNumber: phone_number,
+            ghanaCardNumber: ghana_card_number,
+            memberShipId: membership_id,
+            token : token,
+            checkinImageUrl : compare_image_url,
+            checkoutImageUrl : encounter_image_url,
+            createdAt : created_at,
+            checkinTime : verification_date && new Date(verification_date),
+            checkoutTime : final_time && new Date(final_time),
+            disposition : disposition_name,
+            checkinStatus : verification_status,
+            checkoutStatus : final_verification_status,
+            claimSubmissionAt :  claim_submission_time && new Date(claim_submission_time),
         };
+        console.log({encounterDetails})
         return encounterDetails
     }
 
     const getEncounter = async () => {
         if (!tokenId) return null; // Ensure tokenId exists before fetching
         const response = await protectedApi.GET(`/encounter/${tokenId}`);
-        return response.verification_record;
+        return response;
     };
 
     const { mutate: getEncounterMutation, isPending : getEncounterPending, data : encounterData } = useMutation({
         mutationFn: getEncounter,
         onSuccess: (data) => {
             if (data) {
-                const userDetails = getNHISDetails(data);
+                const {verification_record} = data
+                const userDetails = getNHISDetails(verification_record);
                 const extractedEncounterDetails = extractEncounterDetails(data)
-                setEncounterDetails(extractEncounterDetails(data))
+                setEncounterDetails(extractedEncounterDetails)
                 setNhisDetails(userDetails)
                 setUserDetails(userDetails);
                 return extractedEncounterDetails
