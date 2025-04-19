@@ -13,13 +13,12 @@ import { useEncounterContext } from "../../../../context/encounter.context"
 
 const VerificationSuccessfulContainer = () => {
     const [show, setShow] = useState(true)
-    const {nhisDetails, capturedImageUrl, setCaptureImageUrl} = useEncounterContext()
-    const {setViewState} = useEncounterContext()
+    const {nhisDetails, capturedImageUrl, setCaptureImageUrl, setDispositionViewState} = useEncounterContext()
     const firstRender = useRef(true);
 
     useEffect(()=>{
         if(!show)
-            setViewState(null)
+            setDispositionViewState(null)
     },[show])
 
     useEffect(()=>{
@@ -35,10 +34,10 @@ const VerificationSuccessfulContainer = () => {
     },[])
     return (
         <>
-            <Overlay onClick={()=>setViewState(null)}>
+            <Overlay onClick={()=>setDispositionViewState(null)}>
                 <Container 
                     className="!w-[500px] pb-[30px]"
-                    close={()=>setViewState(null)}
+                    close={()=>setDispositionViewState(null)}
                 >
                     <div className="py-[30px]">
                         <div className="relative h-[200px] w-[280px] flex justify-center">
@@ -98,7 +97,7 @@ const VerificationSuccessfulContainer = () => {
                             <Button 
                                 text="Close"
                                 className="!min-w-[200px]"
-                                onClick={()=>setViewState(null)}
+                                onClick={()=>setDispositionViewState(null)}
                             />
                         </div>
                     </div>
