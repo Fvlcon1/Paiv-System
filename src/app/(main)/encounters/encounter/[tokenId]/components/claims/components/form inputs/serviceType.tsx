@@ -12,10 +12,12 @@ export type IOptions1 = "Outpatient" | "Inpatient" | "Diagnostic"
 export type IOptions2 = "Unbandled" | "All-Inclusive"
 
 const ServiceType = () => {
-    const {formik} = useClaimsFormContext()
+    const { formik } = useClaimsFormContext();
+    const serviceType1 = formik.values.serviceType1 ?? "";
+    const serviceType2 = formik.values.serviceType2 ?? "";
     const {mainConditionItems} = useDropdownItems()
-    const [selectedOption1, setSelectedOption1] = useState<IOptions1>("Outpatient")
-    const [selectedOption2, setSelectedOption2] = useState<IOptions2>("Unbandled")
+    const [selectedOption1, setSelectedOption1] = useState<IOptions1>(serviceType1 as IOptions1)
+    const [selectedOption2, setSelectedOption2] = useState<IOptions2>(serviceType2 as IOptions2)
     
     const isError = formik.touched.serviceType1 && formik?.errors.serviceType1
     const isServiceType2Error = formik.touched.serviceType2 && formik?.errors.serviceType2
@@ -66,8 +68,8 @@ const ServiceType = () => {
 
     // Set initial formik value
     useEffect(()=>{
-        formik.setFieldValue("serviceType1", "Outpatient")
-        formik.setFieldValue("serviceType2", "Unbandled")
+        if(!formik.values.serviceType1) formik.setFieldValue("serviceType1", "Outpatient")
+        if(!formik.values.serviceType2) formik.setFieldValue("serviceType2", "Unbandled")
     },[])
 
     return (
@@ -84,7 +86,7 @@ const ServiceType = () => {
                 className="custom-radio"
                 options={options}
                 block
-                defaultValue="Outpatient"
+                defaultValue={serviceType1}
                 onChange={(e)=>handleOption1Change(e.target.value)}
                 optionType="button"
                 buttonStyle="solid"
@@ -101,7 +103,7 @@ const ServiceType = () => {
                 options={options2}
                 block
                 onChange={(e)=>handleOption2Change(e.target.value)}
-                defaultValue="Unbandled"
+                defaultValue={serviceType2}
                 optionType="button"
                 buttonStyle="solid"
             />

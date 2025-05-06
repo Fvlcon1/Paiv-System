@@ -19,7 +19,11 @@ const useServices = () => {
         const newServices : DropdownItem[] = []
         services.map((service, index) => {
             newServices.push({ key: service.code, label: `${service.code} (${service.service})`, onClick: () => {
-                handleAddLabTest(service.code)
+                handleAddLabTest({
+                    code: service.code,
+                    service: service.service,
+                    tariff : service.tariff
+                })
                 setLabtestValue("")
             }})
             if(services.length - 1 !== index)

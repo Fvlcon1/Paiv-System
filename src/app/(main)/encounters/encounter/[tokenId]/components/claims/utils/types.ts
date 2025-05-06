@@ -16,6 +16,13 @@ export interface IDrugsType {
     description : string
     dosage : string
     date : Date
+    frequency : string
+    duration : string
+    tariff : number
+    unitOfPricing : string
+    levelOfPriscription : string
+    quantity : number
+    total : number
 }
 export interface IDiagonosisType {
     GRDG : string
@@ -25,10 +32,20 @@ export interface IDiagonosisType {
 }
 
 export interface IClaimsDetailType {
-    totalPayout : number
+    expectedPayout : number
     reasons? : string[]
     diagnosis : IDiagonosisType[],
-    drugs : IDrugsType[]
+    drugs : IDrugsType[],
+    serviceOutcome: string;
+    serviceType1: string;
+    serviceType2: string;
+    specialties: string[];
+    typeofAttendance: string;
+    medicalProcedures: string[];
+    labTests: string[];
+    medicalProceduresTotal : number
+    labTestsTotal : number
+    drugsTotal : number
 }
 export interface IClaimsDetailsTableData {
     id: string;
@@ -42,3 +59,25 @@ export interface IClaimsDetailsTableData {
 }
 
 export type IClaimStatus = 'declined' | 'successful' | 'pending'
+
+export interface IServicesType {
+    code : string,
+    service : string,
+    tariff : number
+}
+
+export interface IDiagnosisType {
+    description : string
+    GRDG : string
+    GDRGName : string
+    ICD10 : string
+}
+
+export interface IDrugType {
+    levelOfPriscription : string
+    description : string
+    tariff : number
+    code : string
+    unitOfPricing : string
+}
+

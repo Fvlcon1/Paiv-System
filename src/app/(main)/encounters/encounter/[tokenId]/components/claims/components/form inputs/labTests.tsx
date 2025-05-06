@@ -54,7 +54,7 @@ const LabTests = () => {
                     formik?.values.labTests.map((test : any, index : number) => (
                         <Chip key={index} onClick={()=>handleRemoveLabTest(test)}>
                             <Text key={index}>
-                                {test}
+                                {`${test.code} - (${test.service})`}
                             </Text>
                         </Chip>
                     ))

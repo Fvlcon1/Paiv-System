@@ -18,7 +18,13 @@ const useDrugs = () => {
     const convertToDrugItem = (drugs : any[]) => {
         const newDrugs : DropdownItem[] = []
         drugs.map((drug, index) => {
-            newDrugs.push({ key: drug.code, label: `${drug.code} (${drug.generic_name})`, onClick: () => drugFormik.setFieldValue("code", drug.code) })
+            newDrugs.push({ key: drug.code, label: `${drug.code} (${drug.generic_name})`, onClick: () => {
+                drugFormik.setFieldValue("code", drug.code)
+                drugFormik.setFieldValue("description", drug.generic_name)
+                drugFormik.setFieldValue("tariff", drug.price)
+                drugFormik.setFieldValue("unitOfPricing", drug.unit_of_pricing)
+                drugFormik.setFieldValue("levelOfPriscription", drug.level_of_prescribing)
+            }})
             if(drugs.length - 1 !== index)
                 newDrugs.push({ type: "divider", key: `divider-${drug.code}` })
         })

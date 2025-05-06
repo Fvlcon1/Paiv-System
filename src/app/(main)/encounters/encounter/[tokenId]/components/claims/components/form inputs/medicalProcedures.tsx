@@ -50,7 +50,7 @@ const MedicalProcedures = () => {
                     formik?.values.medicalProcedures.map((procedure : any, index : number) => (
                         <Chip key={index} onClick={()=>handleRemoveMedicalProcedure(procedure)}>
                             <Text key={index}>
-                                {procedure}
+                                {`${procedure.code} - (${procedure.service})`}
                             </Text>
                         </Chip>
                     ))

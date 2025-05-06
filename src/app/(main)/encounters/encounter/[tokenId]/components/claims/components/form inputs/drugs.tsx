@@ -61,25 +61,6 @@ const Drugs = () => {
 
                 {/* Dosages */}
                 <div className="flex gap-2 w-full">
-                    {/* <div className="flex flex-col gap-1 flex-1">
-                        <Input
-                            value={drugFormik?.values?.dosage}
-                            onChange={drugFormik?.handleChange}
-                            className={`${drugFormik.touched.dosage && drugFormik?.errors?.dosage ? "!border-[#db3e1f]" : ""}`}
-                            name="dosage"
-                            type="number"
-                            PostIcon={(
-                                <Text textColor={theme.colors.text.tetiary}>mg</Text>
-                            )}
-                            placeholder="Dosage"
-                        />
-                        {
-                            drugFormik.touched.dosage && drugFormik?.errors?.dosage &&
-                            <Text className="!pl-2" textColor="#db3e1f">
-                                {drugFormik?.errors?.dosage}
-                            </Text>
-                        }
-                    </div> */}
                     <div className="flex flex-col gap-1 flex-1">
                         <Input
                             value={drugFormik?.values?.frequency}

@@ -8,12 +8,12 @@ const Table = ({
 } : {
     drugs : IDrugsType[]
 }) => {
-    const tableHeads = ["Code", "Description", "Quantity", "Date"]
+    const tableHeads = ["Code", "Description", "Dosage", "Quantity", "Tariff", "Total"]
     const [tableBody, setTableBody] = useState<string[][]>([])
 
     useEffect(()=>{
-        setTableBody(drugs.map((item) => [item.code, item.code, item.dosage, (new Date()).toDateString()]))
-    },[])
+        setTableBody(drugs.map((item) => [item.code, item.description, item.dosage, item.quantity?.toString(), item.tariff?.toString(), item.total?.toString()]))
+    },[drugs])
     
     return (
         <table>

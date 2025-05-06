@@ -6,13 +6,9 @@ import Overlay from "@components/overlay/overlay";
 import Text from "@styles/components/text";
 import { TypographyBold } from "@styles/style.types";
 import { AnimatePresence } from "framer-motion";
-import Reason from "./components/reason";
-import Diagnosis from "./components/diagnosis/diagnosis";
-import Drugs from "./components/drugs/drugs";
-import Button from "@components/button/button";
-import theme from "@styles/theme";
 import { IClaimsDetailType } from "../../utils/types";
-import OutlineButton from "@components/button/outlineButton";
+import Actions from "./components/actions";
+import Main from "./components/main";
 
 const ClaimDetails = ({
     claimDetails,
@@ -67,52 +63,17 @@ const ClaimDetails = ({
                             </div>
 
                             {/* Scrollable Content */}
-                            <div 
-                                className="flex flex-col gap-3 pb-4 px-4 overflow-y-auto pt-4"
-                                style={{
-                                    maxHeight: maxHeight ? `${maxHeight}px` : "800px",
-                                }}
-                            >
-                                {
-                                    claimDetails.reasons ?
-                                    <Reason reasons={claimDetails.reasons}/> : <></>
-                                }
-                                <Diagnosis diagnosis={claimDetails.diagnosis} />
-                                <Drugs drugs={claimDetails.drugs} />
-                                
-                                {/* Payout */}
-                                <div className="flex gap-2 items-center">
-                                    <Text
-                                        textColor={theme.colors.text.tetiary}
-                                    >
-                                        Expected Payout:
-                                    </Text>
-                                    <Text
-                                        bold={TypographyBold.md2}
-                                    >
-                                        GHS {claimDetails.totalPayout ?? 0}
-                                    </Text>
-                                </div>
-                            </div>
+                            <Main
+                                maxHeight={maxHeight}
+                                claimDetails={claimDetails}
+                            />
 
                             {/* Actions */}
-                            <div className="bg-bg-tetiary border-solid border-t-[1px] border-border-secondary rounded-b-[20px] h-[55px] flex items-center pl-6">
-                                <div className="w-full flex justify-end gap-2 items-center h-full px-6">
-                                    <Button 
-                                        text="Cancel"
-                                        background={theme.colors.bg.primary}
-                                        color={theme.colors.main.primary}
-                                        className="border-[1px] border-border-primary"
-                                        onClick={close}
-                                    />
-                                    <Button 
-                                        text="Submit Claim"
-                                        className="!bg-main-primary !border-none"
-                                        onClick={onSubmit}
-                                        loading={loading}
-                                    />
-                                </div>
-                            </div>
+                            <Actions
+                                close={close}
+                                onSubmit={onSubmit}
+                                loading={loading}
+                            />
                         </div>
                     </Container>
                 </Overlay>

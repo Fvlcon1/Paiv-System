@@ -15,13 +15,13 @@ import PatientBanner from "./components/patientBanner"
 import { MdSaveAs } from "react-icons/md"
 import ClaimDetails from "./components/claimDetails/claimDetails"
 import { IClaimsDetailType } from "./utils/types"
-import { convertToClaimsDetails } from "./utils/convertToClaimsDetails"
 import OutlineButton from "@components/button/outlineButton"
 import ServiceType from "./components/form inputs/serviceType"
 import ServiceOutcome from "./components/form inputs/serviceOutcome.tsx"
 import TypeofAttendance from "./components/form inputs/typeofAttendance"
 import Specialties from "./components/form inputs/specialties"
 import '@ant-design/v5-patch-for-react-19';
+import { convertToClaimsDetails } from "./utils/convertToClaimsDetails"
 
 const ClaimsForm = ({
     close
@@ -33,7 +33,6 @@ const ClaimsForm = ({
     const [claimDetails, setClaimDetails] = useState<IClaimsDetailType>()
 
     const handleShowClaims = async (e:any) => {
-        console.log("what is going on")
         e.preventDefault();
         const errors = await formik.validateForm();
         if (Object.keys(errors).length !== 0)
@@ -118,4 +117,5 @@ const ClaimsForm = ({
         </>
     )
 }
+
 export default ClaimsForm

@@ -12,6 +12,7 @@ const Table = ({
     const [tableBody, setTableBody] = useState<string[][]>([])
 
     useEffect(()=>{
+        console.log({diagnosis})
         setTableBody(diagnosis.map((item) => [item.GRDG, item.description, item.diagnosis, item.ICD10]))
     },[])
     

@@ -1,7 +1,7 @@
 import * as Yup from 'yup'
 
 const validationSchema = Yup.object({
-  diagnosis: Yup.string().required("Required"),
+  diagnosis: Yup.array().min(1, "Must add at least one diagnosis"),
   medicalProcedures: Yup.array(),
   drugs: Yup.array().min(1, "Must add at least one drug"),
   labTests: Yup.array(),
@@ -17,6 +17,10 @@ export const drugValidationSchema = Yup.object({
   code: Yup.string().required("Drug name is required"),
   frequency: Yup.number().required("Frequency is required"),
   duration: Yup.number(),
+  unitOfPricing : Yup.string().required("Required"),
+  levelOfPriscription : Yup.string().required("Required"),
+  tariff : Yup.number().required("Required"),
+  description : Yup.string().required("Required"),
 })
 
 export default validationSchema;

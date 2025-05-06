@@ -7,9 +7,10 @@ import useDropdownItems from "../../hooks/dropdownItems/useDropdownItems"
 import { FaChevronDown } from "react-icons/fa"
 import { GiCaduceus } from "react-icons/gi"
 import { TypographyBold } from "@styles/style.types"
+import Chip from "../chip/chip"
 
 const Diagnosis = () => {
-    const {formik} = useClaimsFormContext()
+    const {formik, handleRemoveDiagnosis, diagnosis, setDiagnosis} = useClaimsFormContext()
     const {mainConditionItems} = useDropdownItems()
 
     return (
@@ -23,15 +24,14 @@ const Diagnosis = () => {
                 </Text>
             </div>
             <Dropdown
-                className="flex-1 !h-[300px]"
+                className="flex-1"
                 outterContainerClassName="flex-1"
                 menuItems={mainConditionItems}
             >
                 <div className="flex flex-col gap-1">
                     <Input
-                        value={formik?.values.diagnosis}
-                        onChange={formik?.handleChange}
-                        name="diagnosis"
+                        value={diagnosis}
+                        setValue={setDiagnosis}
                         placeholder="Select primary diagnosis"
                         className={`!flex !flex-1 !bg-bg ${formik.touched.diagnosis && formik?.errors.diagnosis ? "!border-[#db3e1f]" : ""}`}
                         PostIcon={<FaChevronDown color={theme.colors.text.tetiary} size={12} />}
@@ -45,6 +45,17 @@ const Diagnosis = () => {
                     }
                 </div>
             </Dropdown>
+            <div className="flex gap-2 flex-wrap">
+                {
+                    formik?.values.diagnosis.map((diagnosis : any, index : number) => (
+                        <Chip key={index} onClick={()=>handleRemoveDiagnosis(diagnosis)}>
+                            <Text key={index}>
+                                {`${diagnosis.ICD10} (${diagnosis.description})`}
+                            </Text>
+                        </Chip>
+                    ))
+                }
+            </div>
         </div>
     )
 }

@@ -1,13 +1,14 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useContext } from "react";
 import useClaimsForm from "../hooks/useClaimsForm";
+import { IDiagnosisType, IServicesType } from "../utils/types";
 
 type ClaimsFormContextType = {
     formik: any;
     handleRemoveDrug: (drugName: string) => void;
-    handleAddMedicalProcedure: (procedure: string) => void;
-    handleRemoveLabTest: (test: string) => void;
-    handleAddLabTest: (test: string) => void;
-    handleRemoveMedicalProcedure: (procedure: string) => void;
+    handleAddMedicalProcedure: (procedure: IServicesType) => void;
+    handleRemoveLabTest: (test: IServicesType) => void;
+    handleAddLabTest: (test: IServicesType) => void;
+    handleRemoveMedicalProcedure: (procedure: IServicesType) => void;
     handleAddDrug: () => void;
     drugFormik: any;
     setMedicalProcedure: Dispatch<SetStateAction<string>>;
@@ -15,6 +16,10 @@ type ClaimsFormContextType = {
     isClaimSubmissionPending: boolean
     labTestValue: string
     setLabtestValue: Dispatch<SetStateAction<string>>
+    handleRemoveDiagnosis: (diagnosis: IDiagnosisType) => void;
+    handleAddDiagnosis: (diagnosis: IDiagnosisType) => void;
+    diagnosis: string
+    setDiagnosis: Dispatch<SetStateAction<string>>
 };
 
 // Create context with a better default value
@@ -34,7 +39,11 @@ export const ClaimsContextProvider = ({ children }: { children: ReactNode }) => 
         medicalProcedure,
         isClaimSubmissionPending,
         labTestValue,
-        setLabtestValue
+        setLabtestValue,
+        handleRemoveDiagnosis,
+        handleAddDiagnosis,
+        diagnosis,
+        setDiagnosis
     } = useClaimsForm();
 
     return (
@@ -52,7 +61,11 @@ export const ClaimsContextProvider = ({ children }: { children: ReactNode }) => 
                 medicalProcedure,
                 isClaimSubmissionPending,
                 labTestValue,
-                setLabtestValue
+                setLabtestValue,
+                handleRemoveDiagnosis,
+                handleAddDiagnosis,
+                diagnosis,
+                setDiagnosis
             }}
         >
             {children}

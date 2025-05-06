@@ -7,8 +7,7 @@ import useDropdownItems from "../../hooks/dropdownItems/useDropdownItems"
 import { FaChevronDown } from "react-icons/fa"
 import { GiCaduceus } from "react-icons/gi"
 import { TypographyBold } from "@styles/style.types"
-import { Radio } from "antd"
-import Checkbox, { CheckboxGroupProps, CheckboxProps } from "antd/es/checkbox"
+import { Checkbox, CheckboxOptionType } from "antd"
 import { useEffect, useState } from "react"
 
 export type IOptions = 'ASUR' | 'DENT' | 'ENTH' | 'MEDI' | 'OBGY' | 'OPDC' | 'OPHT' | 'ORTH' | 'PAED' | 'PSUR' | 'RSUR';
@@ -20,12 +19,12 @@ const Specialties = () => {
 
     const isError = formik.touched.specialties && formik?.errors.specialties
 
-    const handleOptionChange = (option : IOptions) => {
-        setSelectedOption(prev => [...prev, option])
-        formik.setFieldValue("typeofAttendance", option)
+    const handleOptionChange = (checkedValues: IOptions[]) => {
+        setSelectedOption(checkedValues)
+        formik.setFieldValue("specialties", checkedValues)
     }
 
-    const options: CheckboxGroupProps<string>['options'] = [
+    const options : CheckboxOptionType<IOptions>[] = [
         { label: <Text>ASUR</Text>, value: 'ASUR' },
         { label: <Text>DENT</Text>, value: 'DENT' },
         { label: <Text>ENTH</Text>, value: 'ENTH' },
@@ -42,6 +41,7 @@ const Specialties = () => {
     // Set initial formik value
     useEffect(()=>{
         formik.setFieldValue("specialties", ["OPDC"])
+        setSelectedOption(["OPDC"])
     },[])
 
     return (
@@ -55,11 +55,10 @@ const Specialties = () => {
                 </Text>
             </div>
             <div className="pl-[3px]">
-                <Radio.Group
+                <Checkbox.Group
                     options={options}
-                    buttonStyle="solid"
-                    defaultValue="OPDC"
-                    onChange={({target})=>handleOptionChange(target.value)}
+                    defaultValue={["OPDC"]}
+                    onChange={handleOptionChange}
                 />
             </div>
             {
