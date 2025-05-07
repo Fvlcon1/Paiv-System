@@ -20,19 +20,9 @@ const calculateDrugsTotal = (drugs : any[]) => {
     return total
 }
 
-const calculateExpectedPayout = (values: any) => {
-    const drugsTotal = calculateDrugsTotal(values.drugs)
-    const medicalProceduresTotal = calculateMedicalProcedureTotal(values.medicalProcedures)
-    const labTestsTotal = calculateLabTestTotal(values.labTests)
-    const expectedPayout = drugsTotal + medicalProceduresTotal + labTestsTotal
-    return expectedPayout
-}
-    
-    
-
 export const convertToClaimsDetails = (values: any) : IClaimsDetailType => {
     const details =  {
-        expectedPayout: calculateExpectedPayout(values),
+        get expectedPayout() : number {return (this.medicalProceduresTotal + this.labTestsTotal + this.drugsTotal).toFixed(2)},
         diagnosis: values.diagnosis ?? [],
         drugs: values.drugs?.map((drug: any) => ({
             code: drug.code,
@@ -45,7 +35,7 @@ export const convertToClaimsDetails = (values: any) : IClaimsDetailType => {
             duration : drug.duration,
             quantity : calculateQuantity(drug.frequency, drug.duration),
             date: new Date(),
-            total : calculateQuantity(drug.frequency, drug.duration) * drug.tariff
+            get total() : number { return this.quantity * this.tariff },
         })) || [],
         medicalProcedures: values.medicalProcedures ?? [],
         medicalProceduresTotal : calculateMedicalProcedureTotal(values.medicalProcedures),

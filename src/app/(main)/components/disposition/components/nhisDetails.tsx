@@ -53,7 +53,7 @@ const NhisDetails = () => {
                         <Button
                             text="Close Encounter"
                             className="mt-[20px] !w-full !h-[45px] !border-none !bg-main-primary"
-                            onClick={() => setDispositionViewState(DispositionViewState.SELECT_DISPOSITION)}
+                            onClick={() => setDispositionViewState(DispositionViewState.INSTRUCTIONS)}
                         />
                     </div>
                     <div className="absolute top-[15px] right-[15px]">

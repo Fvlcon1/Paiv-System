@@ -54,7 +54,6 @@ const VeficationFailed = () => {
                                     setCaptureImageUrl(null)
                                     setDispositionViewState(DispositionViewState.CAPTURE)
                                 }}
-                                className="!bg-bg-quantinary"
                             />
                         </div>
                     </div>

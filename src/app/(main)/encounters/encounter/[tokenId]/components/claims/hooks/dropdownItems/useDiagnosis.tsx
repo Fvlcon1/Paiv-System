@@ -25,7 +25,7 @@ const useDiagnosis = () => {
             newDiagnosis.push({ key: `${item.icd_code}-${index}`, label: `${item.icd_code} (${item.diagnosis_description})`, onClick: () => {
                 handleAddDiagnosis({
                     description : item.diagnosis_description,
-                    GRDG : item.gdrg,
+                    GRDG : item.gdrg_code,
                     GDRGName : item.gdrg_name,
                     ICD10 : item.icd_code
                 })

@@ -16,8 +16,8 @@ const Disposition = () => {
             {
                 dispositionViewState === DispositionViewState.NHIS_DETAILS ? 
                 <NhisDetails />
-                : dispositionViewState === DispositionViewState.SELECT_DISPOSITION ? 
-                <SelectDisposition />
+                // : dispositionViewState === DispositionViewState.SELECT_DISPOSITION ? 
+                // <SelectDisposition />
                 : dispositionViewState === DispositionViewState.INSTRUCTIONS ? 
                 <Instructions />
                 : dispositionViewState === DispositionViewState.CAPTURE ? 

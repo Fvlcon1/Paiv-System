@@ -168,7 +168,7 @@ const CamCapture = ({
                             setCaptureImageUrl(null);
                             startCamera();
                         }}
-                        className="absolute bottom-5 !bg-bg-quantinary"
+                        className="absolute bottom-5"
                     />
                 ) : (
                     <Button 

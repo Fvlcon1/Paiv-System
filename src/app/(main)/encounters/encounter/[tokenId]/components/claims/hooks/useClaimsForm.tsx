@@ -9,6 +9,7 @@ import { useParams } from "next/navigation";
 import toast from "react-hot-toast";
 import { useEncounterContext } from "../../../context/encounter.context";
 import { IDiagnosisType, IServicesType } from "../utils/types";
+import { convertToClaimsDetails } from "../utils/convertToClaimsDetails";
 
 const useClaimsForm = () => {
     const { getEncounterMutation, setShowClaims } = useEncounterContext();
@@ -42,23 +43,29 @@ const useClaimsForm = () => {
         formikRef.current = formik;
     }, [formik]);
 
+    "string".slice
+
     const handleClaimsSubmit = async (values: typeof formik.values) => {
         try {
-            // const response = await protectedApi.POST("claims/submit", {
-            //     diagnosis: values.diagnosis,
-            //     encounter_token: tokenId,
-            //     service_type: ["any"],
-            //     drugs: values.drugs,
-            //     medical_procedures: values.medicalProcedures,
-            //     lab_tests: values.labTests,
-            //     serviceOutcome : values.serviceOutcome,
-            //     serviceType1 : values.serviceType1,
-            //     serviceType2 : values.serviceType2,
-            //     specialties : values.specialties,
-            //     typeofAttendance : values.typeofAttendance,
-            // });
-            // return response;
-            console.log({values})
+            const details = convertToClaimsDetails(values)
+            const response = await protectedApi.POST("claims/submit", {
+                ...details,
+                encounter_token: tokenId,
+                service_type: ["any"],
+                drugs : details.drugs.map((drug) => ({
+                    ...drug, 
+                    generic_name : drug.description,
+                    duration : `${drug.duration}`,
+                    frequency : `${drug.frequency}`,
+                })),
+                medical_procedures : details.medicalProcedures,
+                lab_tests : details.labTests,
+                expected_payout : details.expectedPayout,
+                medical_procedures_total : details.medicalProceduresTotal,
+                lab_tests_total : details.labTestsTotal,
+                drugs_total : details.drugsTotal,
+            });
+            return response;
         } catch (error) {
             toast.error("Failed to submit claims. Please try again.");
             throw error;

@@ -4,8 +4,8 @@ import Diagnosis from "./diagnosis/diagnosis"
 import Drugs from "./drugs/drugs"
 import MedicalProcedures from "./medicalProcedures"
 import LabTests from "./labTests"
-import { IClaimsDetailType } from "../../../utils/types"
 import theme from "@styles/theme"
+import { IClaimsDetailType } from '../utils/types';
 
 const Main = ({
     maxHeight,
@@ -110,4 +110,4 @@ const SummaryList = ({ label, items }: { label: string; items: string[] }) => (
     </div>
 );
 
-export default Main
+export default Main;

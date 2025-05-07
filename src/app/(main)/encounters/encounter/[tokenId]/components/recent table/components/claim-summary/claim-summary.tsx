@@ -6,25 +6,22 @@ import Overlay from "@components/overlay/overlay";
 import Text from "@styles/components/text";
 import { TypographyBold } from "@styles/style.types";
 import { AnimatePresence } from "framer-motion";
-import { IClaimsDetailType } from "../../utils/types";
-import Actions from "./components/actions";
 import Main from "./components/main";
+import { IClaimsType } from "../claim-details/utils/types";
+import Actions from "./components/actions";
 
-const ClaimDetails = ({
+const ClaimSummary = ({
     claimDetails,
     isVisible,
     close,
-    onSubmit,
     loading
 } : {
-    claimDetails?: IClaimsDetailType
+    claimDetails?: IClaimsType
     isVisible : boolean
     close : ()=>void
-    onSubmit? : ()=>void
     loading? : boolean
 }) => {
     const [maxHeight, setMaxHeight] = useState<number | null>(null);
-    const [isReasonVisible, setIsReasonVisible] = useState(false)
 
     useEffect(() => {
         const updateHeight = () => {
@@ -58,7 +55,7 @@ const ClaimDetails = ({
                             {/* Title */}
                             <div className="bg-bg-tetiary border-solid border-b-[1px] border-border-secondary rounded-t-[20px] h-[55px] flex items-center pl-6">
                                 <Text bold={TypographyBold.md}>
-                                    Claim Details
+                                    Claim Summary
                                 </Text>
                             </div>
 
@@ -70,10 +67,7 @@ const ClaimDetails = ({
 
                             {/* Actions */}
                             <Actions
-                                close={close}
-                                onSubmit={onSubmit}
-                                loading={loading}
-                                expectedPayout={claimDetails.expectedPayout}
+                                expectedPayout={claimDetails?.expectedPayout}
                             />
                         </div>
                     </Container>
@@ -83,4 +77,4 @@ const ClaimDetails = ({
     );
 };
 
-export default ClaimDetails;
+export default ClaimSummary;

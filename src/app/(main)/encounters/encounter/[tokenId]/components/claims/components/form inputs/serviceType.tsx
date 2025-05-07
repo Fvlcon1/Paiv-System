@@ -6,7 +6,7 @@ import { Radio } from "antd"
 import Checkbox, { CheckboxGroupProps, CheckboxProps } from "antd/es/checkbox"
 import { AppTypographyProps, TypographyBold } from "@styles/style.types"
 import { useEffect, useState } from "react"
-import { IOptions } from "./serviceOutcome.tsx"
+import Divider from "@components/divider/divider"
 
 export type IOptions1 = "Outpatient" | "Inpatient" | "Diagnostic"
 export type IOptions2 = "Unbandled" | "All-Inclusive"
@@ -82,37 +82,45 @@ const ServiceType = () => {
                     Select appropriate service type
                 </Text>
             </div>
-            <Radio.Group
-                className="custom-radio"
-                options={options}
-                block
-                defaultValue={serviceType1}
-                onChange={(e)=>handleOption1Change(e.target.value)}
-                optionType="button"
-                buttonStyle="solid"
-            />
-            {
-                isError &&
-                <Text textColor="#db3e1f">
-                    {formik.errors.serviceType1}
-                </Text>
-            }
+            <div className="w-full flex flex-col gap-6">
+                <div className="w-full flex flex-col gap-2">
+                    <Radio.Group
+                        className="custom-radio"
+                        options={options}
+                        block
+                        defaultValue={serviceType1}
+                        onChange={(e)=>handleOption1Change(e.target.value)}
+                        optionType="button"
+                        buttonStyle="solid"
+                    />
+                    {
+                        isError &&
+                        <Text textColor="#db3e1f">
+                            {formik.errors.serviceType1}
+                        </Text>
+                    }
+                </div>
+                
+                <Divider />
 
-            <Radio.Group
-                className="custom-radio"
-                options={options2}
-                block
-                onChange={(e)=>handleOption2Change(e.target.value)}
-                defaultValue={serviceType2}
-                optionType="button"
-                buttonStyle="solid"
-            />
-            {
-                isServiceType2Error &&
-                <Text textColor="#db3e1f">
-                    {formik.errors.serviceType2}
-                </Text>
-            }
+                <div className="w-full flex flex-col gap-2">
+                    <Radio.Group
+                        className="custom-radio"
+                        options={options2}
+                        block
+                        onChange={(e)=>handleOption2Change(e.target.value)}
+                        defaultValue={serviceType2}
+                        optionType="button"
+                        buttonStyle="solid"
+                    />
+                    {
+                        isServiceType2Error &&
+                        <Text textColor="#db3e1f">
+                            {formik.errors.serviceType2}
+                        </Text>
+                    }
+                </div>
+            </div>
 
             <Checkbox onChange={handleCheckboxChange}>
                 <Text>Pharmacy</Text>

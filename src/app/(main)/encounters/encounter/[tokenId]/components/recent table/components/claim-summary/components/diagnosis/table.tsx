@@ -1,7 +1,7 @@
 import Text from "@styles/components/text"
 import theme from "@styles/theme"
 import { useEffect, useState } from "react"
-import { IDiagonosisType } from '../../../../utils/types';
+import { IDiagonosisType } from "../../utils/types"
 
 const Table = ({
     diagnosis

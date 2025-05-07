@@ -53,7 +53,6 @@ const VeficationFailed = () => {
                                     setCaptureImageUrl(null)
                                     setViewState(ViewState.CAPTURE)
                                 }}
-                                className="!bg-bg-quantinary"
                             />
                         </div>
                     </div>

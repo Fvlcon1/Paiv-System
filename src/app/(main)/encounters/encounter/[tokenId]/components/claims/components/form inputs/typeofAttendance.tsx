@@ -36,7 +36,7 @@ const TypeofAttendance = () => {
 
     const options: CheckboxGroupProps<string>['options'] = [
         { label: <Text {...getTextPropsOption("Chronic Follow-up")}>Chronic Follow-up</Text>, value: 'Chronic Follow-up' },
-        { label: <Text {...getTextPropsOption("Emergency/Acute Episode")}>Emergency/Acute Episod</Text>, value: 'Emergency/Acute Episode' },
+        { label: <Text {...getTextPropsOption("Emergency/Acute Episode")}>Emergency/Acute Episode</Text>, value: 'Emergency/Acute Episode' },
         { label: <Text {...getTextPropsOption("Ante-natal")}>Ante-natal</Text>, value: 'Ante-natal' },
         { label: <Text {...getTextPropsOption("Post-natal")}>Post-natal</Text>, value: 'Post-natal' },
     ];

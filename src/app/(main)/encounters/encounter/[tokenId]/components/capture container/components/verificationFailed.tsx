@@ -53,7 +53,6 @@ const VeficationFailed = () => {
                                     setCaptureImageUrl(null)
                                     setViewState(ViewState.CAPTURE)
                                 }}
-                                className=""
                             />
                         </div>
                     </div>
