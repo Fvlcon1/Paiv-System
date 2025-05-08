@@ -1,6 +1,6 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useContext } from "react";
 import useClaimsForm from "../hooks/useClaimsForm";
-import { IDiagnosisType, IServicesType } from "../utils/types";
+import { IDiagnosisType, IServicesType, IClaimsDetailType } from "../utils/types";
 
 type ClaimsFormContextType = {
     formik: any;
@@ -20,6 +20,10 @@ type ClaimsFormContextType = {
     handleAddDiagnosis: (diagnosis: IDiagnosisType) => void;
     diagnosis: string
     setDiagnosis: Dispatch<SetStateAction<string>>
+    handleDraftSubmitMutation: (values: any) => void;
+    isDraftSubmissionPending: boolean
+    draft?: IClaimsDetailType
+    draftLoading: boolean
 };
 
 // Create context with a better default value
@@ -43,7 +47,11 @@ export const ClaimsContextProvider = ({ children }: { children: ReactNode }) => 
         handleRemoveDiagnosis,
         handleAddDiagnosis,
         diagnosis,
-        setDiagnosis
+        setDiagnosis,
+        handleDraftSubmitMutation,
+        isDraftSubmissionPending,
+        draft,
+        draftLoading
     } = useClaimsForm();
 
     return (
@@ -65,7 +73,11 @@ export const ClaimsContextProvider = ({ children }: { children: ReactNode }) => 
                 handleRemoveDiagnosis,
                 handleAddDiagnosis,
                 diagnosis,
-                setDiagnosis
+                setDiagnosis,
+                handleDraftSubmitMutation,
+                isDraftSubmissionPending,
+                draft,
+                draftLoading
             }}
         >
             {children}

@@ -7,6 +7,7 @@ const OutlineButton = (props: ButtonProps) => {
         <Button 
             className="!bg-transparent border-[1px] border-main-primary hover:!bg-bg-secondary"
             color={theme.colors.main.primary}
+            loadingColor={theme.colors.main.primary}
             {...props}
         >
             {props.children}

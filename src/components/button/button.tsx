@@ -32,7 +32,8 @@ const Button = ({
   disableElevation,
   hover,
   text,
-  icon
+  icon,
+  loadingColor
 }: ButtonProps) => {
 
   const [onHover, setOnHover] = useState<boolean>(false)
@@ -91,7 +92,8 @@ const Button = ({
       <div className="w-full justify-center items-center flex gap-[8px]">
         {
           loading ?
-          <div className="normal-loader !bg-[white] !w-[20px]"></div>
+          <div className={`normal-loader ${loadingColor ? `!bg-[${loadingColor}]` : "!bg-white"} !w-[20px]`}>
+          </div>
           :
           <Text
             size={textSize}

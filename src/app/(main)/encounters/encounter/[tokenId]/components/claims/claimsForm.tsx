@@ -28,7 +28,7 @@ const ClaimsForm = ({
 } : {
     close : ()=>void
 }) => {
-    const {formik, isClaimSubmissionPending} = useClaimsFormContext()
+    const {formik, isClaimSubmissionPending, handleDraftSubmitMutation, isDraftSubmissionPending, draftLoading} = useClaimsFormContext()
     const [showClaimsDetails, setShowClaimsDetails] = useState(false)
     const [claimDetails, setClaimDetails] = useState<IClaimsDetailType>()
 
@@ -60,6 +60,9 @@ const ClaimsForm = ({
                     className="!w-[700px] !h-[90%]"
                 >
                     {
+                        draftLoading ? 
+                        <div className="flex items-center justify-center w-full h-full"><div className="normal-loader !bg-main-primary" /></div>
+                        : 
                         <form onSubmit={handleShowClaims} className="flex flex-col gap-6 w-full py-8 px-8 overflow-y-auto">
                             <div className="flex flex-col w-full gap-2">
                                 <Text 
@@ -104,6 +107,8 @@ const ClaimsForm = ({
                                     text="Save Draft"
                                     type="button"
                                     icon={<MdSaveAs size={15} />}
+                                    onClick={()=>handleDraftSubmitMutation(formik.values)}
+                                    loading={isDraftSubmissionPending}
                                 />
                                 <Button 
                                     text="Submit Claim"

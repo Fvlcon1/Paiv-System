@@ -13,8 +13,8 @@ export type IOptions2 = "Unbandled" | "All-Inclusive"
 
 const ServiceType = () => {
     const { formik } = useClaimsFormContext();
-    const serviceType1 = formik.values.serviceType1 ?? "";
-    const serviceType2 = formik.values.serviceType2 ?? "";
+    const serviceType1 = "Outpatient";
+    const serviceType2 = "Unbandled";
     const {mainConditionItems} = useDropdownItems()
     const [selectedOption1, setSelectedOption1] = useState<IOptions1>(serviceType1 as IOptions1)
     const [selectedOption2, setSelectedOption2] = useState<IOptions2>(serviceType2 as IOptions2)
@@ -73,16 +73,18 @@ const ServiceType = () => {
     },[])
 
     return (
-        <div className="w-full flex flex-col justify-between gap-2">
-            <div className="flex flex-col pl-1">
-                <Text bold={TypographyBold.md2}>
-                    Service Type *
-                </Text>
-                <Text textColor={theme.colors.text.tetiary}>
-                    Select appropriate service type
-                </Text>
-            </div>
-            <div className="w-full flex flex-col gap-6">
+        <div className="w-full flex flex-col justify-between gap-6">
+
+            {/* Service type option 1 */}
+            <div className="w-full flex flex-col justify-between gap-1">
+                <div className="flex flex-col">
+                    <Text bold={TypographyBold.md2}>
+                        Service Type (Option 1) *
+                    </Text>
+                    <Text textColor={theme.colors.text.tetiary}>
+                        Select appropriate service type
+                    </Text>
+                </div>
                 <div className="w-full flex flex-col gap-2">
                     <Radio.Group
                         className="custom-radio"
@@ -100,38 +102,50 @@ const ServiceType = () => {
                         </Text>
                     }
                 </div>
-                
-                <Divider />
-
-                <div className="w-full flex flex-col gap-2">
-                    <Radio.Group
-                        className="custom-radio"
-                        options={options2}
-                        block
-                        onChange={(e)=>handleOption2Change(e.target.value)}
-                        defaultValue={serviceType2}
-                        optionType="button"
-                        buttonStyle="solid"
-                    />
-                    {
-                        isServiceType2Error &&
-                        <Text textColor="#db3e1f">
-                            {formik.errors.serviceType2}
-                        </Text>
-                    }
-                </div>
             </div>
 
-            <Checkbox onChange={handleCheckboxChange}>
-                <Text>Pharmacy</Text>
-            </Checkbox>
-            {
-                isPharmacyError &&
-                <Text textColor="#db3e1f">
-                    {formik.errors.pharmacy}
-                </Text>
-            }
+            <Divider />
 
+            {/* Service type option 2 */}
+            <div className="w-full flex flex-col justify-between gap-1">
+                <div className="flex flex-col">
+                    <Text bold={TypographyBold.md2}>
+                        Service Type (Option 2) *
+                    </Text>
+                    <Text textColor={theme.colors.text.tetiary}>
+                        Select appropriate service type
+                    </Text>
+                </div>
+                <div className="w-full flex flex-col gap-6">
+                    <div className="w-full flex flex-col gap-2">
+                        <Radio.Group
+                            className="custom-radio"
+                            options={options2}
+                            block
+                            onChange={(e)=>handleOption2Change(e.target.value)}
+                            defaultValue={serviceType2}
+                            optionType="button"
+                            buttonStyle="solid"
+                        />
+                        {
+                            isServiceType2Error &&
+                            <Text textColor="#db3e1f">
+                                {formik.errors.serviceType2}
+                            </Text>
+                        }
+                    </div>
+                </div>
+
+                <Checkbox onChange={handleCheckboxChange}>
+                    <Text>Pharmacy</Text>
+                </Checkbox>
+                {
+                    isPharmacyError &&
+                    <Text textColor="#db3e1f">
+                        {formik.errors.pharmacy}
+                    </Text>
+                }
+            </div>
         </div>
     )
 }

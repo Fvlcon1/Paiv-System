@@ -4,11 +4,11 @@ import { useFormik } from "formik";
 import validationSchema, { drugValidationSchema } from "../utils/validationSchema";
 import { useState, useCallback, useEffect, useRef } from "react";
 import { protectedApi } from "@/app/utils/apis/api";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import toast from "react-hot-toast";
 import { useEncounterContext } from "../../../context/encounter.context";
-import { IDiagnosisType, IServicesType } from "../utils/types";
+import { IClaimsDetailType, IDiagnosisType, IServicesType } from "../utils/types";
 import { convertToClaimsDetails } from "../utils/convertToClaimsDetails";
 
 const useClaimsForm = () => {
@@ -17,6 +17,7 @@ const useClaimsForm = () => {
     const [labTestValue, setLabtestValue] = useState("");
     const [medicalProcedure, setMedicalProcedure] = useState("");
     const [diagnosis, setDiagnosis] = useState("")
+    const [draft, setDraft] = useState<IClaimsDetailType>()
 
     const formik = useFormik({
         initialValues: {
@@ -43,28 +44,69 @@ const useClaimsForm = () => {
         formikRef.current = formik;
     }, [formik]);
 
-    "string".slice
+    const convertToClaimSubmissionData = (values: typeof formik.values) => {
+        const details = convertToClaimsDetails(values)
+        return {
+            ...details,
+            encounter_token: tokenId,
+            service_type: [values.serviceType1],
+            drugs : details.drugs.map((drug) => ({
+                ...drug, 
+                generic_name : drug.description,
+                duration : `${drug.duration}`,
+                frequency : `${drug.frequency}`,
+            })),
+            medical_procedures : details.medicalProcedures,
+            lab_tests : details.labTests,
+            expected_payout : details.expectedPayout,
+            medical_procedures_total : details.medicalProceduresTotal,
+            lab_tests_total : details.labTestsTotal,
+            drugs_total : details.drugsTotal,
+            service_type_1 : values.serviceType1,
+            service_type_2 : values.serviceType2,
+            service_outcome : values.serviceOutcome,
+            typeof_attendance : values.typeofAttendance,
+        }
+    }
+
+    const getDraft = async () => {
+        const response = await protectedApi.GET("claim-drafts")
+        return response
+    }
+
+    const { data: draftData, isLoading: draftLoading } = useQuery({
+        queryKey: ["claim-drafts", tokenId],
+        queryFn: getDraft,
+    })
+
+    useEffect(() => {
+        if (draftData) {
+            setDraft(convertToClaimsDetails(draftData.data))
+        }
+    }, [draftData])
+
+    const handleDraftSubmit = async (values: typeof formik.values) => {
+        const details = convertToClaimSubmissionData(values)
+        const response = await protectedApi.POST("claim-drafts", {...details});
+        return response;
+    }
+
+    const { mutate: handleDraftSubmitMutation, isPending: isDraftSubmissionPending } = useMutation({
+        mutationFn: handleDraftSubmit,
+        onSuccess: () => {
+            setShowClaims(false);
+            toast.success("Draft Saved Successfully");
+            getEncounterMutation();
+        },
+        onError: () => {
+            toast.error("Failed to save draft. Please try again.");
+        }
+    });
 
     const handleClaimsSubmit = async (values: typeof formik.values) => {
         try {
-            const details = convertToClaimsDetails(values)
-            const response = await protectedApi.POST("claims/submit", {
-                ...details,
-                encounter_token: tokenId,
-                service_type: ["any"],
-                drugs : details.drugs.map((drug) => ({
-                    ...drug, 
-                    generic_name : drug.description,
-                    duration : `${drug.duration}`,
-                    frequency : `${drug.frequency}`,
-                })),
-                medical_procedures : details.medicalProcedures,
-                lab_tests : details.labTests,
-                expected_payout : details.expectedPayout,
-                medical_procedures_total : details.medicalProceduresTotal,
-                lab_tests_total : details.labTestsTotal,
-                drugs_total : details.drugsTotal,
-            });
+            const details = convertToClaimSubmissionData(values)
+            const response = await protectedApi.POST("claims/submit", {...details});
             return response;
         } catch (error) {
             toast.error("Failed to submit claims. Please try again.");
@@ -181,7 +223,11 @@ const useClaimsForm = () => {
         labTestValue,
         setLabtestValue,
         diagnosis,
-        setDiagnosis
+        setDiagnosis,
+        handleDraftSubmitMutation,
+        isDraftSubmissionPending,
+        draft,
+        draftLoading,
     };
 };
 
