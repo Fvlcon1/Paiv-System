@@ -7,7 +7,6 @@ import { IClaimsType } from "../utils/types";
 import { useState } from "react";
 
 const useClaims = () => {
-    const params = useParams() 
     const { tokenId } = useParams();
     const [claimDetails, setClaimDetails] = useState<IClaimsType>()
 

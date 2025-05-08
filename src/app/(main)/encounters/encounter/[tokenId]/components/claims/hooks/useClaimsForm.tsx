@@ -18,6 +18,7 @@ const useClaimsForm = () => {
     const [medicalProcedure, setMedicalProcedure] = useState("");
     const [diagnosis, setDiagnosis] = useState("")
     const [draft, setDraft] = useState<IClaimsDetailType>()
+    const {encounterDetails} = useEncounterContext()
 
     const formik = useFormik({
         initialValues: {
@@ -70,33 +71,33 @@ const useClaimsForm = () => {
     }
 
     const getDraft = async () => {
-        const response = await protectedApi.GET("claim-drafts")
+        const response = await protectedApi.GET(`/claim-drafts/${tokenId}`)
         return response
     }
 
-    const { data: draftData, isLoading: draftLoading } = useQuery({
-        queryKey: ["claim-drafts", tokenId],
-        queryFn: getDraft,
+    const { mutate: getDraftMutation, isPending: draftLoading } = useMutation({
+        mutationFn: getDraft,
+        onSuccess: (data) => {
+            setDraft(convertToClaimsDetails(data.data))
+        }
     })
 
     useEffect(() => {
-        if (draftData) {
-            setDraft(convertToClaimsDetails(draftData.data))
+        if (!encounterDetails?.claimSubmissionAt) {
+            getDraftMutation()
         }
-    }, [draftData])
+    }, [encounterDetails])
 
     const handleDraftSubmit = async (values: typeof formik.values) => {
         const details = convertToClaimSubmissionData(values)
-        const response = await protectedApi.POST("claim-drafts", {...details});
+        const response = await protectedApi.POST("/claim-drafts/", {encounter_token : tokenId});
         return response;
     }
 
     const { mutate: handleDraftSubmitMutation, isPending: isDraftSubmissionPending } = useMutation({
         mutationFn: handleDraftSubmit,
         onSuccess: () => {
-            setShowClaims(false);
             toast.success("Draft Saved Successfully");
-            getEncounterMutation();
         },
         onError: () => {
             toast.error("Failed to save draft. Please try again.");

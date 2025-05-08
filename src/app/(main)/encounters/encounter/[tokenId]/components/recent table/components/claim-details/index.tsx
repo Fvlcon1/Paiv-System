@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import useClaims from "./hooks/useClaims"
 import ClaimSummary from "../claim-summary/claim-summary"
 import { useState } from "react"
+import { useEncounterContext } from "../../../../context/encounter.context"
 
 const ClaimsDetails = ({
     isVisible,
@@ -11,10 +12,13 @@ const ClaimsDetails = ({
     close : () => void
 }) => {
     const { getClaimsMutation, claimDetails, getClaimsLoading } = useClaims()
+    const {encounterDetails} = useEncounterContext()
     
     useEffect(() => {
-        getClaimsMutation()
-    }, [])
+        if (encounterDetails?.claimSubmissionAt) {
+            getClaimsMutation()
+        }
+    }, [encounterDetails])
 
     return (
         <>
