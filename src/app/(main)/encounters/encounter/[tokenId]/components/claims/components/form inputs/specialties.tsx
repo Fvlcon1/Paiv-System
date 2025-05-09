@@ -15,7 +15,7 @@ export type IOptions = 'ASUR' | 'DENT' | 'ENTH' | 'MEDI' | 'OBGY' | 'OPDC' | 'OP
 const Specialties = () => {
     const {formik} = useClaimsFormContext()
     const {mainConditionItems} = useDropdownItems()
-    const [selectedOption, setSelectedOption] = useState<IOptions[]>([])
+    const [selectedOption, setSelectedOption] = useState<IOptions[]>(formik.values.specialties as IOptions[])
 
     const isError = formik.touched.specialties && formik?.errors.specialties
 
@@ -57,7 +57,7 @@ const Specialties = () => {
             <div className="pl-[3px]">
                 <Checkbox.Group
                     options={options}
-                    defaultValue={["OPDC"]}
+                    defaultValue={selectedOption}
                     onChange={handleOptionChange}
                 />
             </div>

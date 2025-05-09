@@ -13,11 +13,9 @@ export type IOptions2 = "Unbandled" | "All-Inclusive"
 
 const ServiceType = () => {
     const { formik } = useClaimsFormContext();
-    const serviceType1 = "Outpatient";
-    const serviceType2 = "Unbandled";
     const {mainConditionItems} = useDropdownItems()
-    const [selectedOption1, setSelectedOption1] = useState<IOptions1>(serviceType1 as IOptions1)
-    const [selectedOption2, setSelectedOption2] = useState<IOptions2>(serviceType2 as IOptions2)
+    const [selectedOption1, setSelectedOption1] = useState<IOptions1>(formik.values.serviceType1 as IOptions1)
+    const [selectedOption2, setSelectedOption2] = useState<IOptions2>(formik.values.serviceType2 as IOptions2)
     
     const isError = formik.touched.serviceType1 && formik?.errors.serviceType1
     const isServiceType2Error = formik.touched.serviceType2 && formik?.errors.serviceType2
@@ -90,7 +88,7 @@ const ServiceType = () => {
                         className="custom-radio"
                         options={options}
                         block
-                        defaultValue={serviceType1}
+                        defaultValue={selectedOption1}
                         onChange={(e)=>handleOption1Change(e.target.value)}
                         optionType="button"
                         buttonStyle="solid"
@@ -123,7 +121,7 @@ const ServiceType = () => {
                             options={options2}
                             block
                             onChange={(e)=>handleOption2Change(e.target.value)}
-                            defaultValue={serviceType2}
+                            defaultValue={selectedOption2}
                             optionType="button"
                             buttonStyle="solid"
                         />

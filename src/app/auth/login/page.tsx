@@ -50,7 +50,6 @@ const Login = () => {
         onSuccess : (data)=>{
             const token =  data.access_token ||  data.temp_token
             cookies.set("accessToken", token, {path : "/"})
-            setUserDetails({email : formik.values.email})
             toast.success("Login successful")
             router.push("/auth/mfa")
         },

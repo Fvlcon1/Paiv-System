@@ -6,23 +6,23 @@ const calculateQuantity = (frequency : number, duration : number) => {
 }
 
 const calculateMedicalProcedureTotal = (procedures : any[]) => {
-    const total = procedures.reduce((acc : number, procedure : any) => acc + procedure.tariff, 0)
-    return total
+    const total = procedures?.reduce((acc : number, procedure : any) => acc + procedure.tariff, 0)
+    return Number(total.toFixed(2))
 }
 
 const calculateLabTestTotal = (tests : any[]) => {
-    const total = tests.reduce((acc : number, test : any) => acc + test.tariff, 0)
-    return total
+    const total = tests?.reduce((acc : number, test : any) => acc + test.tariff, 0)
+    return Number(total.toFixed(2))
 }
 
 const calculateDrugsTotal = (drugs : any[]) => {
-    const total = drugs.reduce((acc : number, drug : any) => acc + calculateQuantity(drug.frequency, drug.duration) * drug.tariff, 0)
-    return total
+    const total = drugs?.reduce((acc : number, drug : any) => acc + calculateQuantity(drug.frequency, drug.duration) * drug.tariff, 0)
+    return Number(total.toFixed(2))
 }
 
 export const convertToClaimsDetails = (values: any) : IClaimsDetailType => {
     const details =  {
-        get expectedPayout() : number {return (this.medicalProceduresTotal + this.labTestsTotal + this.drugsTotal).toFixed(2)},
+        get expectedPayout() : number {return Number((this.medicalProceduresTotal + this.labTestsTotal + this.drugsTotal).toFixed(2))},
         diagnosis: values.diagnosis ?? [],
         drugs: values.drugs?.map((drug: any) => ({
             code: drug.code,

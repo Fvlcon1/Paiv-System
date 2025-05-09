@@ -19,8 +19,11 @@ const RecentTable = () => {
   const {setShowEncounterDetails, showEncounterDetilas} = useEncounterContext()
   
   useEffect(()=>{
-    getRecentVisits({})
-  },[])
+    getRecentVisits({
+      pageSize,
+      pageNumber
+    })
+  },[pageSize, pageNumber])
 
   useEffect(()=>{
     console.log({recentVisitsTableData})
@@ -48,7 +51,10 @@ const RecentTable = () => {
               setPageNumber={setPageNumber}
               view={view}
               setView={setView}
-              handleReload={()=>getRecentVisits({})}
+              handleReload={()=>getRecentVisits({
+                pageSize,
+                pageNumber
+              })}
             />
           </div>
           <Table

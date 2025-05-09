@@ -62,7 +62,7 @@ const RenderMenuSection = ({
                                 />
                                 <Text
                                     textColor={getActiveJsStyle(item)}
-                                    bold={pathname.startsWith(item.path) ? TypographyBold.md : TypographyBold.sm2}
+                                    bold={isActive(pathname, item.path) ? TypographyBold.md : TypographyBold.sm2}
                                 >
                                     {item.title}
                                 </Text>

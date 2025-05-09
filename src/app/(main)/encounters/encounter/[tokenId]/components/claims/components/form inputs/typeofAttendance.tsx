@@ -16,7 +16,7 @@ export type IOptions = "Chronic Follow-up" | "Emergency/Acute Episode" | "Ante-n
 const TypeofAttendance = () => {
     const {formik} = useClaimsFormContext()
     const {mainConditionItems} = useDropdownItems()
-    const [selectedOption, setSelectedOption] = useState<IOptions>()
+    const [selectedOption, setSelectedOption] = useState<IOptions>(formik.values.typeofAttendance as IOptions)
 
     const isError = formik.touched.typeofAttendance && formik?.errors.typeofAttendance
 
@@ -56,6 +56,7 @@ const TypeofAttendance = () => {
                 onChange={(e)=>handleOptionChange(e.target.value)}
                 optionType="button"
                 buttonStyle="solid"
+                defaultValue={selectedOption}
             />
             {
                 isError &&

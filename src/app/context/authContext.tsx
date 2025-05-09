@@ -18,7 +18,8 @@ const AuthContext = createContext<{
 
 const cookies = new Cookies();
 interface IUserDetails {
-    email : string
+    email? : string
+    hospitalName? : string
 }
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {

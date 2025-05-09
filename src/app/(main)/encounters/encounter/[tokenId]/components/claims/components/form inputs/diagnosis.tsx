@@ -7,10 +7,13 @@ import useDropdownItems from "../../hooks/dropdownItems/useDropdownItems"
 import { FaChevronDown } from "react-icons/fa"
 import { GiCaduceus } from "react-icons/gi"
 import { TypographyBold } from "@styles/style.types"
-import Chip from "../chip/chip"
+import PrimaryChip from "../chip/primary-chip"
+import SelectableChip from "../chip/selectable-chip"
+import { useState } from "react"
 
 const Diagnosis = () => {
-    const {formik, handleRemoveDiagnosis, diagnosis, setDiagnosis} = useClaimsFormContext()
+    const {formik, handleRemoveDiagnosis, diagnosis, setDiagnosis, draft, updatePrimaryDiagnosis} = useClaimsFormContext()
+    const [primaryDiagnosis, setPrimaryDiagnosis] = useState<string>("")
     const {mainConditionItems} = useDropdownItems()
 
     return (
@@ -48,11 +51,26 @@ const Diagnosis = () => {
             <div className="flex gap-2 flex-wrap">
                 {
                     formik?.values.diagnosis.map((diagnosis : any, index : number) => (
-                        <Chip key={index} onClick={()=>handleRemoveDiagnosis(diagnosis)}>
+                        diagnosis.primary ?
+                        <PrimaryChip 
+                            key={index} 
+                            onClick={()=>updatePrimaryDiagnosis(diagnosis)}
+                            handleDelete={()=>handleRemoveDiagnosis(diagnosis)}
+                        >
+                            <Text key={index} textColor={theme.colors.bg.primary}>
+                                {`${diagnosis.ICD10} (${diagnosis.description})`}
+                            </Text>
+                        </PrimaryChip> 
+                        :
+                        <SelectableChip 
+                            key={index} 
+                            onClick={()=>updatePrimaryDiagnosis(diagnosis)}
+                            handleDelete={()=>handleRemoveDiagnosis(diagnosis)}
+                        >
                             <Text key={index}>
                                 {`${diagnosis.ICD10} (${diagnosis.description})`}
                             </Text>
-                        </Chip>
+                        </SelectableChip> 
                     ))
                 }
             </div>

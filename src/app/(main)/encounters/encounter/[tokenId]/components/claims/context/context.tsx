@@ -20,6 +20,7 @@ type ClaimsFormContextType = {
     handleAddDiagnosis: (diagnosis: IDiagnosisType) => void;
     diagnosis: string
     setDiagnosis: Dispatch<SetStateAction<string>>
+    updatePrimaryDiagnosis: (diagnosis: IDiagnosisType) => void
     handleDraftSubmitMutation: (values: any) => void;
     isDraftSubmissionPending: boolean
     draft?: IClaimsDetailType
@@ -48,6 +49,7 @@ export const ClaimsContextProvider = ({ children }: { children: ReactNode }) => 
         handleAddDiagnosis,
         diagnosis,
         setDiagnosis,
+        updatePrimaryDiagnosis,
         handleDraftSubmitMutation,
         isDraftSubmissionPending,
         draft,
@@ -74,6 +76,7 @@ export const ClaimsContextProvider = ({ children }: { children: ReactNode }) => 
                 handleAddDiagnosis,
                 diagnosis,
                 setDiagnosis,
+                updatePrimaryDiagnosis,
                 handleDraftSubmitMutation,
                 isDraftSubmissionPending,
                 draft,

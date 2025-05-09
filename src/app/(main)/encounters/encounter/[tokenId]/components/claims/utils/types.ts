@@ -70,6 +70,7 @@ export interface IDiagnosisType {
     GRDG : string
     GDRGName : string
     ICD10 : string
+    primary : boolean
 }
 
 export interface IDrugType {

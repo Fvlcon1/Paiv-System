@@ -22,6 +22,7 @@ import TypeofAttendance from "./components/form inputs/typeofAttendance"
 import Specialties from "./components/form inputs/specialties"
 import '@ant-design/v5-patch-for-react-19';
 import { convertToClaimsDetails } from "./utils/convertToClaimsDetails"
+import theme from "@styles/theme"
 
 const ClaimsForm = ({
     close
@@ -61,7 +62,12 @@ const ClaimsForm = ({
                 >
                     {
                         draftLoading ? 
-                        <div className="flex items-center justify-center w-full h-full"><div className="normal-loader !bg-main-primary" /></div>
+                        <div className="flex items-center justify-center w-full h-full flex-col gap-2">
+                            <div className="normal-loader !bg-main-primary" />
+                            <Text textColor={theme.colors.text.primary}>
+                                Loading Draft...
+                            </Text>
+                        </div>
                         : 
                         <form onSubmit={handleShowClaims} className="flex flex-col gap-6 w-full py-8 px-8 overflow-y-auto">
                             <div className="flex flex-col w-full gap-2">
