@@ -61,7 +61,6 @@ const ServiceOutcome = () => {
                 options={options}
                 onChange={(e)=>handleOptionChange(e.target.value)}
                 defaultValue="Discharged"
-                disabled
                 optionType="button"
                 buttonStyle="solid"
             />

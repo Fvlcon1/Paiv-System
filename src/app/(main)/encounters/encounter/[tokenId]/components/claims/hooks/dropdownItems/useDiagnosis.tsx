@@ -28,6 +28,7 @@ const useDiagnosis = () => {
                     GRDG : item.gdrg_code,
                     GDRGName : item.gdrg_name,
                     ICD10 : item.icd_code,
+                    tariff : item.tariff ?? 0,
                     primary : false
                 })
                 setDiagnosis("")

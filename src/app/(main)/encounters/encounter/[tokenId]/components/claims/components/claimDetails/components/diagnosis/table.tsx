@@ -1,18 +1,18 @@
 import Text from "@styles/components/text"
 import theme from "@styles/theme"
 import { useEffect, useState } from "react"
-import { IDiagonosisType } from '../../../../utils/types';
+import { IDiagnosisType } from '../../../../utils/types';
 
 const Table = ({
     diagnosis
 } : {
-    diagnosis : IDiagonosisType[]
+    diagnosis : IDiagnosisType[]
 }) => {
-    const tableHeads = ["GRDG", "Description", "ICD-10"]
+    const tableHeads = ["GRDG", "Description", "ICD-10", "Tariff"]
     const [tableBody, setTableBody] = useState<string[][]>([])
 
     useEffect(()=>{
-        setTableBody(diagnosis.map((item) => [item.GRDG, item.description, item.ICD10]))
+        setTableBody(diagnosis.map((item) => [item.GRDG, item.description, item.ICD10, `GHS ${item.tariff}`]))
     },[])
     
     return (

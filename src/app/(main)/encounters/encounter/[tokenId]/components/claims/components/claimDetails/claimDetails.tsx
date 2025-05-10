@@ -9,6 +9,7 @@ import { AnimatePresence } from "framer-motion";
 import { IClaimsDetailType } from "../../utils/types";
 import Actions from "./components/actions";
 import Main from "./components/main";
+import theme from "@styles/theme";
 
 const ClaimDetails = ({
     claimDetails,
@@ -50,6 +51,7 @@ const ClaimDetails = ({
                         display={isVisible} 
                         close={close} 
                         className={``}
+                        closeButtonClassName="!top-[15px]"
                     >
                         <div
                             className="md:w-[800px] w-full flex flex-col"

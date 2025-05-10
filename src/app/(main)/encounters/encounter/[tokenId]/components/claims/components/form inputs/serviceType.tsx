@@ -9,7 +9,7 @@ import { useEffect, useState } from "react"
 import Divider from "@components/divider/divider"
 
 export type IOptions1 = "Outpatient" | "Inpatient" | "Diagnostic"
-export type IOptions2 = "Unbandled" | "All-Inclusive"
+export type IOptions2 = "Unbundled" | "All-Inclusive"
 
 const ServiceType = () => {
     const { formik } = useClaimsFormContext();
@@ -56,7 +56,7 @@ const ServiceType = () => {
     ];
 
     const options2: CheckboxGroupProps<string>['options'] = [
-        { label: <Text {...getTextPropsOption2("Unbandled")}>Unbandled</Text>, value: 'Unbandled' },
+        { label: <Text {...getTextPropsOption2("Unbundled")}>Unbundled</Text>, value: 'Unbundled' },
         { label: <Text {...getTextPropsOption2("All-Inclusive")}>All-Inclusive</Text>, value: 'All-Inclusive' },
     ];
 
@@ -67,7 +67,7 @@ const ServiceType = () => {
     // Set initial formik value
     useEffect(()=>{
         if(!formik.values.serviceType1) formik.setFieldValue("serviceType1", "Outpatient")
-        if(!formik.values.serviceType2) formik.setFieldValue("serviceType2", "Unbandled")
+        if(!formik.values.serviceType2) formik.setFieldValue("serviceType2", "Unbundled")
     },[])
 
     return (

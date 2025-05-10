@@ -41,7 +41,9 @@ const Main = ({
                 label="Specialties" 
                 items={claimDetails.specialties} 
             />
-            <Diagnosis diagnosis={claimDetails.diagnosis} />
+            <WithTotal total={claimDetails.diagnosisTotal}>
+                <Diagnosis diagnosis={claimDetails.diagnosis} />
+            </WithTotal>
             <WithTotal total={claimDetails.medicalProceduresTotal}>
                 <MedicalProcedures procedures={claimDetails.medicalProcedures} />
             </WithTotal>

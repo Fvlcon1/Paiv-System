@@ -49,6 +49,7 @@ const useClaimsForm = () => {
         const details = convertToClaimsDetails(values)
         return {
             ...details,
+            diagnosis_total : details.diagnosisTotal,
             encounter_token: tokenId,
             service_type: [values.serviceType1],
             drugs : details.drugs?.map((drug) => ({

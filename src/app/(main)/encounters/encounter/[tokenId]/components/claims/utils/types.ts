@@ -24,16 +24,12 @@ export interface IDrugsType {
     quantity : number
     total : number
 }
-export interface IDiagonosisType {
-    GRDG : string
-    description : string
-    ICD10 : string
-}
 
 export interface IClaimsDetailType {
     expectedPayout : number
     reasons? : string[]
-    diagnosis : IDiagonosisType[],
+    diagnosis : IDiagnosisType[],
+    diagnosisTotal : number,
     drugs : IDrugsType[],
     serviceOutcome: string;
     serviceType1: string;
@@ -70,6 +66,7 @@ export interface IDiagnosisType {
     GRDG : string
     GDRGName : string
     ICD10 : string
+    tariff : number
     primary : boolean
 }
 

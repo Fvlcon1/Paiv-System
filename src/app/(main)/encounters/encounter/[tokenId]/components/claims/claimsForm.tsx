@@ -117,7 +117,7 @@ const ClaimsForm = ({
                                     loading={isDraftSubmissionPending}
                                 />
                                 <Button 
-                                    text="Submit Claim"
+                                    text="Preview Claim"
                                     className="!bg-main-primary !w-[120px]"
                                 />
                             </div>

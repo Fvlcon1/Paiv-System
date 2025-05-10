@@ -1,12 +1,12 @@
 import Text from "@styles/components/text"
 import { TypographyBold } from "@styles/style.types"
 import Table from "./table"
-import { IDiagonosisType } from "../../../../utils/types"
+import { IDiagnosisType } from "../../../../utils/types"
 
 const Diagnosis = ({
     diagnosis
 } : {
-    diagnosis : IDiagonosisType[]
+    diagnosis : IDiagnosisType[]
 }) => {
     return (
         <div className="w-full border-solid border-[1px] border-border-tetiary rounded-xl flex flex-col">

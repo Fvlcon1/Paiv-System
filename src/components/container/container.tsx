@@ -11,7 +11,9 @@ const Container = ({
     setDisplay,
     closable = true,
     close,
-    onClose
+    onClose,
+    closeButtonColor,
+    closeButtonClassName
 } : {
     children? : ReactNode,
     className? : string
@@ -20,6 +22,8 @@ const Container = ({
     closable? : boolean
     close? : ()=>void
     onClose? : ()=> void
+    closeButtonColor? : string
+    closeButtonClassName? : string
 }) => {
     const handleClose = () => {
         if(setDisplay) setDisplay(false)
@@ -39,12 +43,12 @@ const Container = ({
         >
             {
                 closable &&
-                <div className="absolute top-[10px] right-[10px]">
+                <div className={`absolute top-[10px] right-[10px] ${closeButtonClassName}`}>
                     <ClickableTab 
-                        className="!rounded-full hover:!bg-bg-tetiary !px-1"
+                        className={`!rounded-full hover:!bg-bg-tetiary !px-1`}
                         onClick={handleClose}
                     >
-                        <IoMdCloseCircle color={theme.colors.text.secondary} />
+                        <IoMdCloseCircle color={closeButtonColor || theme.colors.text.secondary} />
                     </ClickableTab>
                 </div>
             }
