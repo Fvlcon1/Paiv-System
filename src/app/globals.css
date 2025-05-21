@@ -3,21 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --text-primary: #0A2540;      /* Main text, headings */
-  --text-secondary: #425466;    /* Secondary text, labels */
-  --text-tetiary: #8E98A3;      /* Tertiary text, placeholders */
+  --text-primary: #0A2540;
+  --text-secondary: #425466;
+  --text-tetiary: #8E98A3;
   
   /* Background colors */
-  --bg-primary: #FFFFFF;        /* Main background, cards */
-  --bg-secondary: #F7F7FA;      /* Page background */
-  --bg-tetiary: #EDEDF2;        /* Secondary UI elements, active state bg */
-  --bg-quantinary: #DADAE0;     /* Additional UI elements */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F7F7FA;
+  --bg-tetiary: #EDEDF2;
+  --bg-quantinary: #DADAE0;
   
   /* Border colors */
-  --border-primary: #E0E0E7;    /* Main borders */
-  --border-secondary: #D0D0D8;  /* Secondary borders */
-  --border-tetiary: #BDBDC7;    /* Tertiary borders */
-  --border-quantinary: #C6C6D0; /* Additional borders */
+  --border-primary: #E0E0E7;
+  --border-secondary: #D0D0D8;
+  --border-tetiary: #BDBDC7;
+  --border-quantinary: #C6C6D0;
   
   /* Accent colors */
   --main-primary: #5c5bb8;  

@@ -20,7 +20,7 @@ const useDropdownItems = () => {
             { key: "2", label: "Submit Claim", onClick: () => {
                 setShowClaims(true);
             }},
-            { key: "3", label: "Visit Encounter", type: "link", href: nhisDetails?.token ? `/encounter/${nhisDetails.token}` : "#" },
+            { key: "3", label: "Visit Encounter", type: "link", href: nhisDetails?.token ? `/encounters/encounter/${nhisDetails.token}` : "#" },
             { type: "divider", key: "divider-1" },
             { key: "4", label: "More Details...", onClick: () => {
                 setShowEncounterDetails(true);

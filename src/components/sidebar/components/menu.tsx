@@ -22,21 +22,21 @@ const Menu = () => {
             icon : RiHome6Fill,
             path : "/",
         },
-        {
-            title : "Claims",
-            icon : PiFilesFill,
-            path : '/claims',
-        },
+        // {
+        //     title : "Claims",
+        //     icon : PiFilesFill,
+        //     path : '/claims',
+        // },
         {
             title : "Encounters",
             icon : FaUsers,
             path : '/encounters',
         },
-        {
-            title : "Imported Claims",
-            icon : GoFileSubmodule,
-            path : '/importedencounters',
-        },
+        // {
+        //     title : "Imported Claims",
+        //     icon : GoFileSubmodule,
+        //     path : '/importedencounters',
+        // },
     ]
 
     const otherMenu = [
@@ -62,15 +62,15 @@ const Menu = () => {
                     menuItems={mainMenu}
                 />
 
-                <Divider />
+                {/* <Divider /> */}
 
                 {/* Other */}
-                <RenderMenuSection 
+                {/* <RenderMenuSection 
                     title="Other"
                     menuItems={otherMenu}
-                />
+                /> */}
 
-                <Divider />
+                {/* <Divider /> */}
             </div>
         </div>
     )

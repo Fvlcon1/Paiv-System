@@ -93,7 +93,7 @@ const CamCapture = ({
         mutationFn: async (binaryImage: Uint8Array) => {
             const formData = new FormData();
             formData.append("token_id", tokenId as string);
-            formData.append("disposition_id", selectedDisposition?.id || "");
+            formData.append("disposition_id", selectedDisposition?.id || 1 as any);
             formData.append("webcam_image", new Blob([binaryImage], { type: "image/png" }), "image.png");
 
             const response = await protectedApi.POST("/encounter/finalize", formData)
