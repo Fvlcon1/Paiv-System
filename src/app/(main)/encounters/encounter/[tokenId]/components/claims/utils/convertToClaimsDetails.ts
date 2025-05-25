@@ -38,7 +38,7 @@ export const convertToClaimsDetails = (values: any) : IClaimsDetailType => {
             levelOfPriscription : drug.levelOfPriscription,
             frequency : drug.frequency,
             duration : drug.duration,
-            quantity : calculateQuantity(drug.frequency, drug.duration),
+            quantity : Math.round(calculateQuantity(drug.frequency, drug.duration)),
             date: new Date(),
             get total() : number { return Number((this.quantity * this.tariff).toFixed(2)) },
         })) || [],

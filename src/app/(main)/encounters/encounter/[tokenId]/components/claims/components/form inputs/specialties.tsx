@@ -44,7 +44,7 @@ const SpecialtiesTooltip = ({
                     <FiInfo
                         color={theme.colors.main.primary + hexOpacity(isHovered ? 70 : 0)}
                         size={14}
-                        className="mt-[-2px]"
+                        className="mt-[-2px] duration-200"
                     />
                 </Tooltip>
             </div>
