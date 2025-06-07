@@ -89,26 +89,4 @@ export const columns = [
             )
         }
     },
-    // {
-    //     accessorKey : 'gender',
-    //     header : 'Gender',
-    //     cell : ({getValue} : {getValue : any}) => {
-    //         return (
-    //             <Text>
-    //                 {getValue()}
-    //             </Text>
-    //         )
-    //     }
-    // },
-    {
-        accessorKey : 'actions',
-        header : 'Actions',
-        cell : ({getValue} : {getValue : any}) => {
-            return (
-                <Text>
-                    {getValue()}
-                </Text>
-            )
-        }
-    },
 ]

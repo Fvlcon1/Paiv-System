@@ -9,6 +9,7 @@ import { AnimatePresence } from "framer-motion";
 import Main from "./components/main";
 import { IClaimsType } from "../claim-details/utils/types";
 import Actions from "./components/actions";
+import theme from "@styles/theme";
 
 const ClaimSummary = ({
     claimDetails,
@@ -53,8 +54,12 @@ const ClaimSummary = ({
                         >
 
                             {/* Title */}
-                            <div className="bg-bg-tetiary border-solid border-b-[1px] border-border-secondary rounded-t-[20px] h-[55px] flex items-center pl-6">
-                                <Text bold={TypographyBold.md}>
+                            <div className="bg-bg-secondary border-solid border-b-[1px] border-border-secondary rounded-t-[20px] h-[55px] flex items-center pl-4">
+                                <Text 
+                                    bold={TypographyBold.md2}
+                                    textColor={theme.colors.main.primary}
+                                    size={theme.typography.size.body2}
+                                >
                                     Claim Summary
                                 </Text>
                             </div>

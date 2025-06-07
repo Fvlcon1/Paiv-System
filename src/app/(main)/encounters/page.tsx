@@ -1,36 +1,49 @@
 'use client'
 
-import Text from "@styles/components/text"
-import { TypographyBold, TypographySize } from "@styles/style.types"
-import theme from "@styles/theme"
 import Table from "./components/table"
-import { useContext, useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import TopSection from "./components/topSection"
-import { AnimatePresence } from "framer-motion"
 import useRecentVisits from "./utils/useEncounter/useRecentVisits"
 import { useEncounterContext } from "./context/encounterContext"
 import ClaimsForm from "../components/claimsForm/claimsForm"
 import Slidein from "@styles/components/slidein"
 import Controls from "@components/table/controls"
-import { columns } from "./components/data"
 
 const Encounters = () => {
-    const [pageSize, setPageSize] = useState(15)
-    const [pageNumber, setPageNumber] = useState(1)
     const [view, setView] = useState<"list" | "grid">("list")
-    const {showClaims, setShowClaims} = useEncounterContext()
-    const {getRecentVisits, recentVisitsTableData, isLoading, isError, error} = useRecentVisits()
+    const { showClaims, setShowClaims } = useEncounterContext()
+    const { getRecentVisits, recentVisitsTableData, isLoading, isError, error, pageSize, pageNumber, setPageSize, setPageNumber, isRefetching } = useRecentVisits()
+    const [manualRefetching, setManualRefetching] = useState(false)
 
-    useEffect(()=>{
-      getRecentVisits({})
-    },[])
+    const handleManualRefetch = async () => {
+        setManualRefetching(true);
+        try {
+            await getRecentVisits();
+        } finally {
+            setManualRefetching(false);
+        }
+    };
+
+    let firstload = false
+    useEffect(() => {
+        if(!firstload){
+            firstload = true
+            return
+        }
+        setManualRefetching(false)
+    }, [pageNumber, pageSize])
+
+    useEffect(() => {
+        if (!isRefetching)
+            setManualRefetching(false)
+    }, [isRefetching])
 
     return (
         <>
             {
                 showClaims &&
                 <ClaimsForm
-                    close={()=>setShowClaims(false)}
+                    close={() => setShowClaims(false)}
                 />
             }
 
@@ -50,13 +63,13 @@ const Encounters = () => {
                                 setPageNumber={setPageNumber}
                                 view={view}
                                 setView={setView}
-                                handleReload={()=>getRecentVisits({})}
+                                handleReload={handleManualRefetch}
                             />
                         </div>
                         <Table
                             data={recentVisitsTableData}
                             isError={isError}
-                            isLoading={isLoading}
+                            isLoading={isLoading || manualRefetching}
                             error={error}
                         />
                     </div>

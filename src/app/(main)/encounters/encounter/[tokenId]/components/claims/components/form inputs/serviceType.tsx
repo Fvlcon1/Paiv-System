@@ -134,7 +134,7 @@ const ServiceType = () => {
                     </div>
                 </div>
 
-                <Checkbox onChange={handleCheckboxChange}>
+                {/* <Checkbox onChange={handleCheckboxChange}>
                     <Text>Pharmacy</Text>
                 </Checkbox>
                 {
@@ -142,7 +142,7 @@ const ServiceType = () => {
                     <Text textColor="#db3e1f">
                         {formik.errors.pharmacy}
                     </Text>
-                }
+                } */}
             </div>
         </div>
     )

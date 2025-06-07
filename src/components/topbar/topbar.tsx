@@ -31,7 +31,7 @@ const Topbar = () => {
     
     return (
         <div className="w-full pl-[250px] h-[60px] border-b-[1px] border-solid border-border-primary fixed top-0 left-0 transition-all duration-300 z-[10]">
-            <div className={`w-full h-full flex justify-center bg-bg-secondary`}>
+            <div className={`w-full h-full flex justify-center bg-bg-primary`}>
                 <div className="px-8 w-full h-full flex items-center justify-between">
                     <div className="flex gap-2 items-center">
                         {

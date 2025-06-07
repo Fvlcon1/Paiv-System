@@ -33,8 +33,9 @@ const Images = () => {
                         <Image
                             src={encounterDetails.imageUrl}
                             alt="profile"
-                            width={130}
-                            height={130}
+                            fill
+                            className="object-cover"
+                            sizes="100px"
                         />
                     </div>
                     :
@@ -50,8 +51,9 @@ const Images = () => {
                         <Image
                             src={encounterDetails.checkinImageUrl}
                             alt="profile"
-                            width={130}
-                            height={130}
+                            fill
+                            className="object-cover"
+                            sizes="100px"
                         />
                     </div>
                     :
@@ -67,8 +69,9 @@ const Images = () => {
                         <Image
                             src={encounterDetails.checkoutImageUrl}
                             alt="profile"
-                            width={100}
-                            height={100}
+                            fill
+                            className="object-cover"
+                            sizes="100px"
                         />
                     </div>
                     :

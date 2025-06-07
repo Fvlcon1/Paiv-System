@@ -9,12 +9,12 @@ import VerificationSelection from "./components/verification selection/verificat
 import Main from "./components/main/main";
 
 export default function Home() {
-  const {searchValue, setSearchValue, setShowNhisDetails, showNhisDetails} = useContext(mainContext)
-  return (
-    <>
-      <NhisDetails />
-      <Disposition />
-      <Main />
-    </>
-  );
+	const { searchValue, setSearchValue, setShowNhisDetails, showNhisDetails } = useContext(mainContext)
+	return (
+		<>
+			<NhisDetails />
+			<Disposition />
+			<Main />
+		</>
+	);
 }

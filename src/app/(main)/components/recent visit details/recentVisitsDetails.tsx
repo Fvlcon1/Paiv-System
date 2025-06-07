@@ -1,3 +1,4 @@
+
 import Overlay from "@components/overlay/overlay"
 import Image from "next/image"
 import Table from "./components/table/table"
@@ -11,8 +12,9 @@ import { FaUserCircle } from "react-icons/fa"
 import ZoomImage from "@components/zoomImage/zoomImage"
 import Button from "@components/button/button"
 import { ViewState } from "@/app/utils/types"
-import { IRecentVisits, IRecentVisitsTable } from "../../utils/type"
+import { IRecentVisits, IRecentVisitsTable } from "../main/components/recent table/utils/type"
 import Text from "@styles/components/text"
+import Link from "next/link"
 
 const RecentVisitsDetails = ({
     setDisplay,
@@ -34,24 +36,18 @@ const RecentVisitsDetails = ({
                 {
                     data && display &&
                     <Overlay onClick={() => setDisplay(false)}>
-                        <div className="w-[500px] flex flex-col items-center p-2 relative rounded-[20px] border-[1px] border-solid border-border-tetiary pb-8 bg-[#1F1F28]"
+                        <div className="w-[500px] flex flex-col items-center p-2 relative rounded-[20px] border-[1px] border-solid border-border-primary pb-8 bg-bg-primary"
                             style={{
                                 backgroundImage: "url('/assets/prod/bg-gradient.webp')",
                                 backgroundSize: "cover",
                                 backgroundPosition: "center"
                             }}
                         >
-                            <div className="absolute left-[-3px] top-[-3px] w-[70px] h-[70px] rounded-tl-[20px] border-t-[5px] border-l-[5px] border-solid border-[#3C3C53]">
-
-                            </div>
-                            <div className="absolute right-[-3px] bottom-[-3px] w-[70px] h-[70px] rounded-br-[20px] border-b-[5px] border-r-[5px] border-solid border-[#3C3C53]">
-
-                            </div>
-                            <div className="w-full rounded-[10px] flex justify-center h-[100px] border-[1px] py-4 border-solid border-border-secondary bg-[#4f4f631d]">
+                            <div className="w-full rounded-[10px] flex justify-center h-[100px] border-[1px] py-4 border-solid border-border-primary bg-bg-tetiary">
                                 
                             </div>
                             <div className="flex flex-col gap-[10px] w-full items-center">
-                                <div className="p-2 w-[120px] h-[120px] bg-[#24242F] rounded-full mt-[-60px] border-b-[1px] border-solid border-border-tetiary">
+                                <div className="p-2 w-[120px] h-[120px] bg-bg-secondary rounded-full mt-[-60px]">
                                     {data.imageUrl ? (
                                         <div className="relative overflow-hidden rounded-full w-full h-full">
                                             <Image
@@ -78,9 +74,17 @@ const RecentVisitsDetails = ({
                                         recentVisit={data}
                                     />
                                 </div>
+                                <div className="px-4 w-full">
+                                    <Link href={`/encounters/encounter/${data.token}`}>
+                                        <Button
+                                            text="View Encounter"
+                                            className="mt-[20px] !w-full !h-[45px] !border-none !bg-main-primary"
+                                        />
+                                    </Link>
+                                </div>
                                 <div className="absolute top-[15px] right-[15px]">
                                     <ClickableTab
-                                        className="!rounded-full hover:!bg-bg-tetiary"
+                                        className="!rounded-full hover:!bg-bg-quantinary !px-1"
                                         onClick={() => setDisplay(false)}
                                     >
                                         <IoMdCloseCircle color={theme.colors.text.secondary} />

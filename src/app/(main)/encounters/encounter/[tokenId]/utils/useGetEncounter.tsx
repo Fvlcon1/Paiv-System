@@ -75,12 +75,11 @@ const useGetEncounter = () => {
             checkoutStatus : final_verification_status,
             claimSubmissionAt :  claim_submission_time && new Date(claim_submission_time),
         };
-        console.log({encounterDetails})
         return encounterDetails
     }
 
     const getEncounter = async () => {
-        if (!tokenId) return null; // Ensure tokenId exists before fetching
+        if (!tokenId) return null;
         const response = await protectedApi.GET(`/encounter/${tokenId}`);
         return response;
     };

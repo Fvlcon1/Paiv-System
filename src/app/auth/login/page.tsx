@@ -106,7 +106,7 @@ const Login = () => {
                 <Text
                     textColor={theme.colors.text.tetiary}
                 >
-                    © 2025 NHIS Visitor Management System. All rights reserved. | Privacy Policy | Terms of Service
+                    © 2025 PAIV Hospital. All rights reserved. | Privacy Policy | Terms of Service
                 </Text>
             </div>
         </div>

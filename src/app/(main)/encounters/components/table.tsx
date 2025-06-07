@@ -7,7 +7,7 @@ import theme from "@styles/theme"
 import { TypographyBold } from "@styles/style.types"
 import { IRecentVisitsTable } from "../utils/type"
 import NoData from "@components/NoData/noData"
-import RecentVisitsDetails from "./recent visit details/recentVisitsDetails"
+import RecentVisitsDetails from "@/app/(main)/components/recent visit details/recentVisitsDetails"
 import { useState } from "react"
 import { useEncounterContext } from "../context/encounterContext"
 
@@ -70,6 +70,10 @@ const Table = ({
                                     <tr 
                                         className={`${index % 2 === 1 ? "bg-gray-50" : ""} hover:bg-bg-secondary cursor-pointer transition-colors duration-200`}
                                         key={row.id}
+                                        onClick={()=>{
+                                            setShowEncounterDetails(true)
+                                            setSelectedVisit(data[index])
+                                        }}
                                     >
                                         {
                                             row.getVisibleCells().map((cell) => {

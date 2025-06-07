@@ -7,7 +7,7 @@ import theme from "@styles/theme"
 import { TypographyBold } from "@styles/style.types"
 import { IRecentVisitsTable } from "../utils/type"
 import NoData from "@components/NoData/noData"
-import RecentVisitsDetails from "./recent visit details/recentVisitsDetails"
+import RecentVisitsDetails from "@/app/(main)/components/recent visit details/recentVisitsDetails"
 import {useState } from "react"
 
 const Table = ({

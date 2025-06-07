@@ -1,5 +1,4 @@
-import { mainContext } from "@/app/context/context"
-import { IRecentVisitsTable } from "@/app/(main)/encounters/utils/type"
+import { IRecentVisitsTable } from "../../../main/components/recent table/utils/type"
 import { getRelativeTime, getTime } from "@/utils/getDate"
 import Copychip from "@components/chip/copyChip"
 import Text from "@styles/components/text"
@@ -26,11 +25,10 @@ const Table = ({
             ["Checkout Date", `${recentVisit.finalTime ? (new Date(recentVisit.finalTime)).toDateString() : '-'}`],
             ["Checkout Time", recentVisit.finalTime ? `${getTime(new Date(recentVisit.finalTime))} | ${getRelativeTime(new Date(recentVisit.finalTime))}` : '-'],
             ["Disposition", recentVisit.dispositionName ?? "-"],
-            ["Token", recentVisit.token ? <Copychip containerClassName="!bg-bg-quantinary">{recentVisit.token}</Copychip> : '-'],
+            ["Token", recentVisit.token ? <Copychip>{recentVisit.token}</Copychip> : '-'],
             ["Verification Status", recentVisit.verificationStatus],
             ["Card Expiry Date", `${(new Date(recentVisit.cardExpiryDate)).toDateString()}`],
             ["Card Validity", recentVisit.cardValidity],
-            
         ])
     },[recentVisit])
     return (
@@ -38,7 +36,7 @@ const Table = ({
             <tbody>
                 {
                     data.map((item, index) => (
-                        <tr className={`${index % 2 === 1 ? 'bg-[#4f4f631d]' : ''}`} key={index}>
+                        <tr className={`${index % 2 === 1 ? 'bg-bg-tetiary' : ''}`} key={index}>
                             <td className="pl-[40px] py-2">
                                 <Text  
                                     textColor={theme.colors.text.tetiary}

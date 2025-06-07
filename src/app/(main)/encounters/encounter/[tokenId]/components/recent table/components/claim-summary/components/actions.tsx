@@ -8,7 +8,7 @@ const Actions = ({
     expectedPayout: number
 }) => {
     return (
-        <div className="bg-bg-tetiary border-solid border-t-[1px] justify-between border-border-secondary rounded-b-[20px] h-[55px] flex items-center pl-6">
+        <div className="bg-bg-secondary border-solid border-t-[1px] justify-between border-border-secondary rounded-b-[20px] h-[55px] flex items-center pl-6">
             <ExpectedPayout expectedPayout={expectedPayout}/>
             <div className="flex gap-2 items-center h-full px-6">
                 

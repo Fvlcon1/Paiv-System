@@ -12,11 +12,13 @@ export interface IRecentVisits {
     gender : string,
     dob : string,
     cardExpiryDate : string
-    verificationStatus : boolean
+    verificationStatus : any
     token : string
+    isExpired : boolean
 }
 export interface IRecentVisitsTable extends IRecentVisits {
     image : ReactNode,
-    lastVisit : ReactNode,
+    lastVisit? : ReactNode,
+    verificationStatus : ReactNode,
     cardValidity : ReactNode
 }

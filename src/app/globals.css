@@ -14,9 +14,9 @@
   --bg-quantinary: #DADAE0;
   
   /* Border colors */
-  --border-primary: #E0E0E7;
-  --border-secondary: #D0D0D8;
-  --border-tetiary: #BDBDC7;
+  --border-primary: #E4E4E4;
+  --border-secondary: #F2F2F2;
+  --border-tetiary: #DDDDDD;
   --border-quantinary: #C6C6D0;
   
   /* Accent colors */
@@ -25,7 +25,7 @@
 
 body {
   /* background-image: url('/assets/prod/bg-gradient.webp'); */
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-primary);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

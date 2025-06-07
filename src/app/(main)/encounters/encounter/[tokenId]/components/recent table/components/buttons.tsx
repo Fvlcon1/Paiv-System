@@ -36,7 +36,7 @@ const Buttons = ({
                 />
             }
             {
-                showSubmitClaimButton &&
+                // showSubmitClaimButton &&
                 <Button
                     text="Submit Claim"
                     onClick={()=>setShowClaims(true)}

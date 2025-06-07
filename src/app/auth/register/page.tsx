@@ -15,13 +15,13 @@ import { message } from "antd"
 import toast from "react-hot-toast"
 
 interface SignupType {
-    hospitalName : string,
-    location : string,
-    email : string
-    password : string
-    longitude : number
-    latitude : number
-    manual : boolean
+    hospitalName: string,
+    location: string,
+    email: string
+    password: string
+    longitude: number
+    latitude: number
+    manual: boolean
 }
 
 const Login = () => {
@@ -29,7 +29,7 @@ const Login = () => {
 
     const router = useRouter()
 
-    const handleSubmit = async (values : SignupType) => {
+    const handleSubmit = async (values: SignupType) => {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/signup`, {
             hospital_name: values.hospitalName,
             email: values.email,
@@ -47,32 +47,32 @@ const Login = () => {
     }
 
     const handleSubmitMutation = useMutation({
-        mutationFn : handleSubmit,
-        onSuccess : ()=>{
+        mutationFn: handleSubmit,
+        onSuccess: () => {
             toast.success("registration successful")
             router.push('/auth/login')
         },
         onError: (error) => {
             toast.error(error.message)
-            console.error({error});
+            console.error({ error });
         }
     })
 
-    const {isError, isPending, error, mutate} = handleSubmitMutation
+    const { isError, isPending, error, mutate } = handleSubmitMutation
 
     const formik = useFormik({
         initialValues: {
-            location : '',
-            hospitalName : '',
-            longitude : 0,
-            latitude : 0,
+            location: '',
+            hospitalName: '',
+            longitude: 0,
+            latitude: 0,
             email: '',
             password: '',
-            manual : false
+            manual: false
         },
         validationSchema,
         onSubmit: async (values) => {
-            console.log({values})
+            console.log({ values })
             mutate(values)
         }
     })
@@ -81,7 +81,7 @@ const Login = () => {
         <div className="w-full h-screen flex justify-center items-center mt-[-50px]">
             <div className="w-[350px] flex flex-col gap-3">
                 <div className="w-full flex flex-col items-center gap-1 justify-center">
-                    <Image 
+                    <Image
                         src={"/assets/prod/logo.png"}
                         alt="logo"
                         width={25}
@@ -104,7 +104,7 @@ const Login = () => {
                 <Text
                     textColor={theme.colors.text.tetiary}
                 >
-                    © 2025 NHIS Visitor Management System. All rights reserved. | Privacy Policy | Terms of Service
+                    © 2025 PAIV Hospital. All rights reserved. | Privacy Policy | Terms of Service
                 </Text>
             </div>
         </div>
