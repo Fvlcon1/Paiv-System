@@ -13,6 +13,7 @@ import { useMutation } from "@tanstack/react-query"
 import { useRouter } from "next/navigation"
 import { message } from "antd"
 import toast from "react-hot-toast"
+import Logo from "@components/logo/logo"
 
 interface SignupType {
     hospitalName: string,
@@ -79,22 +80,22 @@ const Login = () => {
 
     return (
         <div className="w-full h-screen flex justify-center items-center mt-[-50px]">
-            <div className="w-[350px] flex flex-col gap-3">
+            <div className="w-[380px] flex flex-col gap-3">
+                {/* Title */}
                 <div className="w-full flex flex-col items-center gap-1 justify-center">
-                    <Image
-                        src={"/assets/prod/logo.png"}
-                        alt="logo"
-                        width={25}
-                        height={25}
-                    />
-                    <Text
-                        size={TypographySize.HM}
-                        textColor={theme.colors.text.primary}
-                        bold={TypographyBold.md}
-                    >
-                        Register
-                    </Text>
+                    <Logo />
+                    <div className="flex flex-col items-center gap-0">
+                        <Text
+                            size={TypographySize.HM}
+                            textColor={theme.colors.text.primary}
+                            bold={TypographyBold.md}
+                        >
+                            Register
+                        </Text>
+                        <Text>Please register to continue</Text>
+                    </div>
                 </div>
+
                 <Form
                     formik={formik}
                     loading={isPending}
