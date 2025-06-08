@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { IRecentVisitsTable, IRecentVisits } from './type';
 import Image from "next/image"
 import { VscUnverified, VscVerified } from "react-icons/vsc"
 import Text from "@styles/components/text"
@@ -8,6 +7,7 @@ import { getRelativeTime, getTime } from "@/utils/getDate"
 import theme from "@styles/theme"
 import { INhisDetails } from "@/app/(main)/components/main/components/results table/utils/type";
 import Status from "@/app/(main)/components/status/status";
+import { IRecentVisits, IRecentVisitsTable } from "@/app/(main)/components/main/components/recent table/utils/type"
 
 const useRecentVisits = () => {
     const [recentVisitsTableData, setRecentVisitsTableData] = useState<IRecentVisitsTable[]>([])
@@ -52,7 +52,8 @@ const useRecentVisits = () => {
                 verificationStatus : visit.verification_status,
                 token : visit.token,
                 finalTime : visit.final_time,
-                dispositionName : visit.disposition_name
+                dispositionName : visit.disposition_name,
+                isExpired
             }
 
             const NHISDetails: INhisDetails = getNHISDetails(visit)

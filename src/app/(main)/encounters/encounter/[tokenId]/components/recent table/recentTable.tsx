@@ -14,51 +14,51 @@ import NoData from "@components/NoData/noData"
 import Top from "./components/top"
 
 const RecentTable = () => {
-  const {getRecentVisits, recentVisitsTableData} = useRecentVisits()
-  const {tokenId} = useParams()
+	const { getRecentVisits, recentVisitsTableData } = useRecentVisits()
+	const { tokenId } = useParams()
 
-  const getPastEncounters = async () => {
-      const response = await protectedApi.GET(`/encounter/members/${tokenId}`)
-      return response
-  }
+	const getPastEncounters = async () => {
+		const response = await protectedApi.GET(`/encounter/members/${tokenId}`)
+		return response
+	}
 
-  const {mutate : getPastEncountersMutation, isPending, data : pastEncounters} = useMutation({
-      mutationFn : getPastEncounters,
-      onSuccess : (data) => {
-        getRecentVisits(data.related_verifications)
-      }
-  })
+	const { mutate: getPastEncountersMutation, isPending, data: pastEncounters } = useMutation({
+		mutationFn: getPastEncounters,
+		onSuccess: (data) => {
+			getRecentVisits(data.related_verifications)
+		}
+	})
 
-  useEffect(()=>{
-      getPastEncountersMutation()
-  },[])
+	useEffect(() => {
+		getPastEncountersMutation()
+	}, [])
 
-  if(isPending)(
-      <div className="w-full flex h-[500px] justify-center items-center">
-          <div className="normal-loader"></div>
-      </div>
-  )
+	if (isPending) (
+		<div className="w-full flex h-[500px] justify-center items-center">
+			<div className="normal-loader"></div>
+		</div>
+	)
 
-  if(!pastEncounters)(
-      <div className="w-full flex h-[500px] justify-center items-center">
-          <NoData />
-      </div>
-  )
+	if (!pastEncounters) (
+		<div className="w-full flex h-[500px] justify-center items-center">
+			<NoData />
+		</div>
+	)
 
-  return (
-    <>
-      <div className="w-full flex flex-col items-center">
-        <div className="flex gap-[15px] flex-col min-w-[800px] w-full">
-          <Top handleReload={getPastEncountersMutation} />
-          <Table
-            data={recentVisitsTableData}
-            error={null}
-            isError={false}
-            isLoading={isPending}
-          />
-        </div>
-      </div>
-    </>
-    )
+	return (
+		<>
+			<div className="w-full flex flex-col items-center">
+				<div className="flex gap-[15px] flex-col min-w-[800px] w-full">
+					<Top handleReload={getPastEncountersMutation} />
+					<Table
+						data={recentVisitsTableData}
+						error={null}
+						isError={false}
+						isLoading={isPending}
+					/>
+				</div>
+			</div>
+		</>
+	)
 }
 export default RecentTable
