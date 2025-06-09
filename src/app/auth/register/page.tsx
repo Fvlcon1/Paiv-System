@@ -23,10 +23,29 @@ interface SignupType {
     longitude: number
     latitude: number
     manual: boolean
+    region: string
+    district: string
 }
 
 const Login = () => {
-    const [loading, setLoading] = useState<boolean>(false);
+    const formik = useFormik({
+        initialValues: {
+            location: '',
+            hospitalName: '',
+            longitude: 0,
+            latitude: 0,
+            email: '',
+            password: '',
+            manual: false,
+            region: "",
+            district: ""
+        },
+        validationSchema,
+        onSubmit: async (values) => {
+            console.log({ values })
+            mutate(values)
+        }
+    })
 
     const router = useRouter()
 
@@ -35,13 +54,12 @@ const Login = () => {
             hospital_name: values.hospitalName,
             email: values.email,
             password: values.password,
+            region: values.region,
+            district: values.district,
             location: {
                 place_name: values.manual ? undefined : values.location,
-                // address: "string",
-                coordinates: {
-                    lat: values.latitude,
-                    lng: values.longitude
-                }
+                lat: values.latitude,
+                lng: values.longitude
             }
         })
         return response.data
@@ -61,54 +79,50 @@ const Login = () => {
 
     const { isError, isPending, error, mutate } = handleSubmitMutation
 
-    const formik = useFormik({
-        initialValues: {
-            location: '',
-            hospitalName: '',
-            longitude: 0,
-            latitude: 0,
-            email: '',
-            password: '',
-            manual: false
-        },
-        validationSchema,
-        onSubmit: async (values) => {
-            console.log({ values })
-            mutate(values)
-        }
-    })
 
     return (
-        <div className="w-full h-screen flex justify-center items-center mt-[-50px]">
-            <div className="w-[380px] flex flex-col gap-3">
-                {/* Title */}
-                <div className="w-full flex flex-col items-center gap-1 justify-center">
-                    <Logo />
-                    <div className="flex flex-col items-center gap-0">
-                        <Text
-                            size={TypographySize.HM}
-                            textColor={theme.colors.text.primary}
-                            bold={TypographyBold.md}
-                        >
-                            Register
-                        </Text>
-                        <Text>Please register to continue</Text>
-                    </div>
-                </div>
-
-                <Form
-                    formik={formik}
-                    loading={isPending}
+        <>
+            <div className="absolute w-full h-[100vh] overflow-hidden">
+                <Image
+                    src="/assets/prod/doodle.svg"
+                    alt="doodle"
+                    width={2000}
+                    height={2000}
+                    className="absolute top-[-150px] right-[-150px] opacity-5 z-[-1]"
                 />
             </div>
-            <div className="absolute bottom-[30px]">
-                <Text
-                    textColor={theme.colors.text.tetiary}
-                >
-                    © 2025 PAIV Hospital. All rights reserved. | Privacy Policy | Terms of Service
-                </Text>
+
+            <div className="w-full h-screen flex justify-center items-center">
+                <div className="w-[400px] flex flex-col gap-3">
+                    {/* Title */}
+                    <div className="w-full flex flex-col items-center gap-1 justify-center">
+                        <Logo />
+                        <div className="flex flex-col items-center gap-0">
+                            <Text
+                                size={TypographySize.HM}
+                                textColor={theme.colors.text.primary}
+                                bold={TypographyBold.md}
+                            >
+                                Register
+                            </Text>
+                            <Text>Please register to continue</Text>
+                        </div>
+                    </div>
+
+                    <Form
+                        formik={formik}
+                        loading={isPending}
+                    />
+                </div>
+                <div className="absolute bottom-[30px]">
+                    <Text
+                        textColor={theme.colors.text.tetiary}
+                    >
+                        © 2025 PAIV Hospital. All rights reserved. | Privacy Policy | Terms of Service
+                    </Text>
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 export default Login

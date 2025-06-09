@@ -83,6 +83,7 @@ const Input = ({
                 }}
                 onBlur={(e) => {
                     setInputFocus(false);
+                    onBlur?.(e)
                     inputProps?.onBlur?.(e);
                 }}
                 onMouseOver={(e) => {
