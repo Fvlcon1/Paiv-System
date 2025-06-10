@@ -12,7 +12,7 @@ import { GiHospitalCross } from "react-icons/gi"
 import { IoLocation, IoMap } from "react-icons/io5"
 import Pressable from "@components/button/pressable"
 import { DropdownItem } from "@/utils/@types"
-import { FaEye, FaEyeSlash, FaPowerOff } from "react-icons/fa"
+import { FaAddressBook, FaEye, FaEyeSlash, FaPowerOff } from "react-icons/fa"
 import { IoMdSettings } from "react-icons/io"
 import Dropdown from "@components/dropdown/dropdown"
 import Coordinates from "./coordinates"
@@ -201,7 +201,7 @@ const Form = ({
                         PostIcon={<BiChevronDown color={theme.colors.text.tetiary} />}
                         name="region"
                         type="text"
-                        placeholder="Enter region"
+                        placeholder="Select region"
                         label="Region"
                         autoComplete="off"
                     />
@@ -220,11 +220,24 @@ const Form = ({
                         PostIcon={<BiChevronDown color={theme.colors.text.tetiary} />}
                         name="district"
                         type="text"
-                        placeholder="Enter district"
+                        placeholder="Select district"
                         label="District"
                         autoComplete="off"
                     />
                 </Dropdown>
+
+                <FormInput
+                    value={formik.values.address}
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                    touched={formik.touched.address}
+                    error={formik.errors.address}
+                    PreIcon={<FaAddressBook color={theme.colors.text.tetiary} />}
+                    name="address"
+                    type="text"
+                    placeholder="Plot 78, Achimota Mile 7"
+                    label="Street Address"
+                />
 
                 <Dropdown
                     className="w-full"

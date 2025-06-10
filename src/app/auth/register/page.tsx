@@ -25,6 +25,7 @@ interface SignupType {
     manual: boolean
     region: string
     district: string
+    address: string
 }
 
 const Login = () => {
@@ -38,7 +39,8 @@ const Login = () => {
             password: '',
             manual: false,
             region: "",
-            district: ""
+            district: "",
+            address: ""
         },
         validationSchema,
         onSubmit: async (values) => {
@@ -59,7 +61,8 @@ const Login = () => {
             location: {
                 place_name: values.manual ? undefined : values.location,
                 lat: values.latitude,
-                lng: values.longitude
+                lng: values.longitude,
+                address: values.address
             }
         })
         return response.data
@@ -71,8 +74,8 @@ const Login = () => {
             toast.success("registration successful")
             router.push('/auth/login')
         },
-        onError: (error) => {
-            toast.error(error.message)
+        onError: (error : any) => {
+            toast.error(error.response.data.detail)
             console.error({ error });
         }
     })
@@ -103,7 +106,7 @@ const Login = () => {
                                 textColor={theme.colors.text.primary}
                                 bold={TypographyBold.md}
                             >
-                                Register
+                                Create your account
                             </Text>
                             <Text>Please register to continue</Text>
                         </div>

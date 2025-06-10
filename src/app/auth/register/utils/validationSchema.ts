@@ -17,6 +17,9 @@ const validationSchema = Yup.object({
   district: Yup
     .string()
     .required("District is required."),
+  address: Yup
+    .string()
+    .required("Address is required."),
   password: Yup
     .string()
     .required("Password is required.")
