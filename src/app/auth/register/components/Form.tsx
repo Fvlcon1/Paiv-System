@@ -12,7 +12,7 @@ import { GiHospitalCross } from "react-icons/gi"
 import { IoLocation, IoMap } from "react-icons/io5"
 import Pressable from "@components/button/pressable"
 import { DropdownItem } from "@/utils/@types"
-import { FaAddressBook, FaEye, FaEyeSlash, FaPowerOff } from "react-icons/fa"
+import { FaAddressBook, FaBuilding, FaCity, FaEye, FaEyeSlash, FaPowerOff } from "react-icons/fa"
 import { IoMdSettings } from "react-icons/io"
 import Dropdown from "@components/dropdown/dropdown"
 import Coordinates from "./coordinates"
@@ -197,7 +197,7 @@ const Form = ({
                         handleBlur={formik.handleBlur as any}
                         touched={formik.touched.region}
                         error={formik.errors.region}
-                        PreIcon={<MdEmail color={theme.colors.text.tetiary} />}
+                        PreIcon={<FaCity color={theme.colors.text.tetiary} />}
                         PostIcon={<BiChevronDown color={theme.colors.text.tetiary} />}
                         name="region"
                         type="text"
@@ -216,7 +216,7 @@ const Form = ({
                         handleBlur={formik.handleBlur as any}
                         touched={formik.touched.district}
                         error={formik.errors.district}
-                        PreIcon={<MdEmail color={theme.colors.text.tetiary} />}
+                        PreIcon={<FaBuilding color={theme.colors.text.tetiary} />}
                         PostIcon={<BiChevronDown color={theme.colors.text.tetiary} />}
                         name="district"
                         type="text"
