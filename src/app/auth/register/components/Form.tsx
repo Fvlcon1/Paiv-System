@@ -24,6 +24,7 @@ import { Tooltip } from "antd"
 import { FaLocationDot } from "react-icons/fa6"
 import useRegion from "../hooks/useRegion"
 import { BiChevronDown } from "react-icons/bi"
+import useHospitalNames from "../hooks/useHospitalNames"
 
 // Password requirement type
 type PasswordRequirement = {
@@ -49,6 +50,7 @@ const Form = ({
     const [showRequirements, setShowRequirements] = useState(false)
     const { getLocation } = useGeoLocation()
     const { regionDropdown, districtDropdown, searchRegion, searchDistrict, setSearchRegion, setSearchDistrict } = useRegion(formik)
+    const { hospitalNamesDropdown, searchHospitalName, setSearchHospitalName} = useHospitalNames(formik)
 
     const setCoodinatesInput = (value: string) => {
         console.log({ value })
@@ -174,19 +176,24 @@ const Form = ({
     return (
         <form onSubmit={formik.handleSubmit} className="flex flex-col w-full gap-3">
             <div className="flex flex-col w-full gap-2 px-6 py-6 bg-white/30 backdrop-blur-lg rounded-[12px] border-[1px] border-border-primary">
-                <FormInput
-                    value={formik.values.hospitalName}
-                    handleChange={formik.handleChange}
-                    handleBlur={formik.handleBlur}
-                    touched={formik.touched.hospitalName}
-                    error={formik.errors.hospitalName}
-                    autofocus
-                    PreIcon={<GiHospitalCross color={theme.colors.text.tetiary} />}
-                    name="hospitalName"
-                    type="text"
-                    placeholder="Enter hospital name"
-                    label="Hospital Name"
-                />
+
+                <Dropdown
+                    menuItems={hospitalNamesDropdown}
+                >
+                    <FormInput
+                        value={searchHospitalName}
+                        handleChange={(e) => setSearchHospitalName(e?.target.value ?? "")}
+                        handleBlur={formik.handleBlur}
+                        touched={formik.touched.hospitalName}
+                        error={formik.errors.hospitalName}
+                        autofocus
+                        PreIcon={<GiHospitalCross color={theme.colors.text.tetiary} />}
+                        name="hospitalName"
+                        type="text"
+                        placeholder="Enter hospital name"
+                        label="Hospital Name"
+                    />
+                </Dropdown>
 
                 <Dropdown
                     menuItems={regionDropdown}
