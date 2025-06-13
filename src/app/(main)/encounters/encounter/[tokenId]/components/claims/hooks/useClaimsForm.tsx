@@ -31,6 +31,7 @@ const useClaimsForm = () => {
             typeofAttendance : "",
             drugs: [] as any[],
             labTests: [] as IServicesType[],
+            pharmacy : false
         },
         validationSchema,
         onSubmit: async (values) => {

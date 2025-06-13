@@ -9,6 +9,7 @@ import useDropdownItems from "../../hooks/dropdownItems/useDropdownItems"
 import Button from "@components/button/button"
 import Chip from "../chip/chip"
 import { TypographyBold } from "@styles/style.types"
+import { BsInfoCircle } from "react-icons/bs"
 
 const Drugs = () => {
     const {formik, drugFormik, handleRemoveDrug} = useClaimsFormContext()
@@ -32,7 +33,7 @@ const Drugs = () => {
                 </Text>
             </div>
 
-            <div className="flex gap-2 justify-between flex-col">
+            <div className={`${formik.values.pharmacy ? "" : "opacity-50 cursor-not-allowed"} flex gap-2 justify-between flex-col`}>
 
                 {/* Dropdown */}
                 <Dropdown
@@ -46,6 +47,7 @@ const Drugs = () => {
                             onChange={drugFormik?.handleChange}
                             name="code"
                             placeholder="Select prescribed drugs"
+                            inputProps={{disabled : !formik.values.pharmacy}}
                             className={`!flex !flex-1 ${drugFormik.touched.code && drugFormik?.errors?.code ? "!border-[#db3e1f]" : ""}`}
                             PostIcon={<FaChevronDown color={theme.colors.text.tetiary} size={12} />}
                             PreIcon={<GiCaduceus color={theme.colors.text.tetiary} size={12} />}
@@ -72,6 +74,7 @@ const Drugs = () => {
                                 <Text textColor={theme.colors.text.tetiary}>hourly</Text>
                             )}
                             placeholder="Frequency"
+                            inputProps={{disabled : !formik.values.pharmacy}}
                         />
                         {
                             drugFormik.touched.frequency && drugFormik?.errors?.frequency &&
@@ -91,6 +94,7 @@ const Drugs = () => {
                                 <Text textColor={theme.colors.text.tetiary}>day(s)</Text>
                             )}
                             placeholder="Duration"
+                            inputProps={{disabled : !formik.values.pharmacy}}
                         />
                         {
                             drugFormik.touched.duration && drugFormik?.errors?.duration &&
@@ -102,12 +106,24 @@ const Drugs = () => {
                     
                     {/* Add Button */}
                     <Button
+                        disabled={!formik.values.pharmacy}
                         text="Add Drug +"
                         className="!w-fit !bg-main-primary"
                         onClick={handleDrugSubmit}
                     />
                 </div>
             </div>
+
+            {
+                !formik.values.pharmacy && (
+                    <div className="flex items-center gap-2">
+                        <BsInfoCircle color={theme.colors.text.secondary} size={12} />
+                        <Text textColor={theme.colors.text.secondary}>
+                            Please select pharmacy
+                        </Text>
+                    </div>
+                )
+            }
 
             {
                 //Errors

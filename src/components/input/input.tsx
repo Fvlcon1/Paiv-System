@@ -101,6 +101,7 @@ const Input = ({
                     onChange ? onChange(e) : setValue && setValue(e.target.value as any);
                     inputProps?.onChange?.(e);
                 }}
+                disabled={inputProps?.disabled}
                 autoComplete={autoComplete ?? inputProps?.autoComplete}
             />
             {PostIcon && PostIcon}

@@ -14,7 +14,7 @@ const useRegion = (formik : any) => {
         return response
     }
 
-    const { data: regionsData, isLoading: regionsLoading } = useQuery({
+    const { data: regionsData, isLoading: regionsLoading, isRefetching : regionsRefetching } = useQuery({
         queryKey: ["regions"],
         queryFn: getRegions,
         refetchOnWindowFocus: false
@@ -75,9 +75,11 @@ const useRegion = (formik : any) => {
     }
 
     useEffect(()=>{
-        if(regionsLoading)
-            setRegionDropdown([{key : "1", label : <div className="normal-loader" />, disabled : true}])
-    },[regionsLoading])
+        if(regionsLoading){
+            console.log("loading")
+            setRegionDropdown([{key : "1", label : "Loading...", disabled : true}])
+        }
+    },[regionsLoading, regionsRefetching])
 
     useEffect(() => {
         getRegionsDropdown()

@@ -72,7 +72,7 @@ const Login = () => {
         mutationFn: handleSubmit,
         onSuccess: () => {
             toast.success("registration successful")
-            router.push('/auth/login')
+            router.push(`/auth/register/success?hospitalName=${formik.values.hospitalName}&email=${formik.values.email}`)
         },
         onError: (error : any) => {
             toast.error(error.response.data.detail)

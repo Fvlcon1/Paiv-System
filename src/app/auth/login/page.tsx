@@ -31,7 +31,7 @@ const Login = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [stayLoggedIn, setStayLoggedIn] = useState(true)
     const { setUserDetails } = useAuth()
-    const { location, getLocation } = useGeoLocation()
+    const { getLocation } = useGeoLocation()
 
     const router = useRouter()
 
