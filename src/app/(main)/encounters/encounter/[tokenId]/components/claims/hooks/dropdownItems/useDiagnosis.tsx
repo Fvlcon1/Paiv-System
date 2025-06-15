@@ -10,12 +10,17 @@ import { useDebouncedCallback } from "use-debounce";
 const useDiagnosis = () => {
     const [diagnosisItems, setDiagnosisItems] = useState<DropdownItem[]>([])
     const {handleAddDiagnosis, setDiagnosis, diagnosis} = useClaimsFormContext()
+    const { formik } = useClaimsFormContext();
     const controllerRef = useRef<AbortController | null>(null);
 
     const getDiagnosis = async (query? : string) => {
         controllerRef.current?.abort();
         controllerRef.current = new AbortController();
-        const response = await protectedApi.GET(`icd10/search?query=${query}&limit=10`, {}, controllerRef.current?.signal);
+        const response = await protectedApi.GET(`icd10/search`, {
+            query,
+            limit : 10,
+            category : formik.values.specialties[0]
+        }, controllerRef.current?.signal);
         return response;
     };
 
@@ -60,7 +65,7 @@ const useDiagnosis = () => {
         return () => {
             debouncedGetDiagnosis.cancel();
         };
-    }, [diagnosis, debouncedGetDiagnosis])
+    }, [diagnosis, debouncedGetDiagnosis, formik.values.specialties])
 
     useEffect(() => {
         return () => {

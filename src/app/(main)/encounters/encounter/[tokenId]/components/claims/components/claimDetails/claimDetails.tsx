@@ -26,11 +26,13 @@ const ClaimDetails = ({
 }) => {
     const [maxHeight, setMaxHeight] = useState<number | null>(null);
     const [isReasonVisible, setIsReasonVisible] = useState(false)
-
+console.log("sidjlkj")
     useEffect(() => {
         const updateHeight = () => {
-            setMaxHeight(window.innerHeight - 300);
+            setMaxHeight(window.innerHeight - 200);
         };
+
+        console.log({height : window.innerHeight})
 
         updateHeight(); // Set initial height
         window.addEventListener("resize", updateHeight);

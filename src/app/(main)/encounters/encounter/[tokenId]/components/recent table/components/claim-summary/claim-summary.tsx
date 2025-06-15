@@ -26,7 +26,7 @@ const ClaimSummary = ({
 
     useEffect(() => {
         const updateHeight = () => {
-            setMaxHeight(window.innerHeight - 300);
+            setMaxHeight(window.innerHeight - 200);
         };
 
         updateHeight(); // Set initial height

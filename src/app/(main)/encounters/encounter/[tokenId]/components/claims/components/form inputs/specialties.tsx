@@ -72,8 +72,8 @@ const Specialties = () => {
 
     // Set initial formik value
     useEffect(() => {
-        formik.setFieldValue("specialties", ["OPDC"]);
-        setSelectedOption(["OPDC"]);
+        formik.setFieldValue("specialties", ["PAED"]);
+        setSelectedOption(["PAED"]);
     }, []);
 
     return (
