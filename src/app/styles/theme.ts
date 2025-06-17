@@ -2,9 +2,9 @@ import { TypographyBold, TypographySize } from "./style.types"
 
 export const colors = {
 	text: {
-		primary: '#0A2540',
-		secondary: '#425466',
-		tetiary: '#8E98A3',
+		primary: '#284452',
+		secondary: '#3F6D84',
+		tetiary: '#95AAB6',
 	},
 	bg: {
 		primary: '#FFFFFF',
@@ -19,7 +19,7 @@ export const colors = {
 		quantinary: '#C6C6D0',
 	},
 	main: {
-		primary: '#5c5bb8',
+		primary: '#3F6D84',
 	},
 };
 

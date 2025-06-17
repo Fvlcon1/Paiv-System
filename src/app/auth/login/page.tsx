@@ -36,15 +36,14 @@ const Login = () => {
     const router = useRouter()
 
     const handeleSubmit = async (values: LoginType) => {
-        const {lat, lng} = await getLocation()
-        console.log({ lat, lng })
+        // const {lat, lng} = await getLocation()
         const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
             hospital_id: values.hospitalId,
             email: values.email,
             password: values.password,
             location: {
-                lat: lat,
-                lng: lng
+                lat: 0,
+                lng: 0
             }
         })
         return response.data
@@ -59,7 +58,7 @@ const Login = () => {
             router.push("/auth/mfa")
         },
         onError: (error: any) => {
-            toast.error(error.response.data.message)
+            toast.error(error.response.data.detail)
             console.log({ error })
         }
     })

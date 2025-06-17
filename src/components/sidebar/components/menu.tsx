@@ -13,6 +13,7 @@ import { HiDocumentReport } from "react-icons/hi"
 import { PiFilesFill } from "react-icons/pi"
 import { RiHome6Fill } from "react-icons/ri"
 import RenderMenuSection from "./renderMenuSection"
+import { IoIosBug } from "react-icons/io"
 
 
 const Menu = () => {
@@ -32,6 +33,12 @@ const Menu = () => {
             icon : FaUsers,
             path : '/encounters',
         },
+        {
+            title : "Issues",
+            icon : IoIosBug,
+            path : '/issues',
+        },
+        
         // {
         //     title : "Imported Claims",
         //     icon : GoFileSubmodule,

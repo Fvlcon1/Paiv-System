@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --text-primary: #0A2540;
-  --text-secondary: #425466;
-  --text-tetiary: #8E98A3;
+  --text-primary: #284452;
+  --text-secondary: #3F6D84;
+  --text-tetiary: #95AAB6;
   
   /* Background colors */
   --bg-primary: #FFFFFF;
@@ -20,7 +20,8 @@
   --border-quantinary: #C6C6D0;
   
   /* Accent colors */
-  --main-primary: #5c5bb8;  
+  /* --main-primary: linear-gradient(to right, #3B6980 0%, #77ABCB 100%);   */
+  --main-primary: #3F6D84;
 }
 
 body {
