@@ -36,14 +36,14 @@ const Login = () => {
     const router = useRouter()
 
     const handeleSubmit = async (values: LoginType) => {
-        // const {lat, lng} = await getLocation()
+        const {lat, lng} = await getLocation()
         const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
             hospital_id: values.hospitalId,
             email: values.email,
             password: values.password,
             location: {
-                lat: 0,
-                lng: 0
+                lat,
+                lng
             }
         })
         return response.data

@@ -16,13 +16,11 @@ export const transformIssue = (issue: any): Issue => {
         reasons: issue.error_data.error_reasons.map((reason: any) => {
             return {
                 description: reason.description,
-                detail: reason.detail,
+                detail: reason.details,
                 category: issueCategories[reason.category],
-                evidence: Object.entries(reason.evidence)
-                    .map(([key, value]) => `${key}: ${value}`)
-                    .join(" | "),
-                priority: reason.severity,
-                recommendations: reason.recommendations,
+                evidence: "",
+                priority: reason?.severity ?? "",
+                recommendations: reason?.recommendation ?? "",
             }
         }),
         status: issue.status,

@@ -17,7 +17,10 @@ const useIssues = () => {
             start_date : selectedDateRange?.split(" - ")[0] ? new Date(selectedDateRange?.split(" - ")[0]).toISOString() : undefined,
             end_date : selectedDateRange?.split(" - ")[1] ? new Date(selectedDateRange?.split(" - ")[1]).toISOString() : undefined,
         })
+        console.log({response})
         const transformedIssues: Issue[] = response.notifications.map((issue: any) => transformIssue(issue))
+        console.log("transformedIssues")
+        console.log({transformedIssues})
         setIssues(transformedIssues)
         return response
     }

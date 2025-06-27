@@ -10,6 +10,7 @@ import { MdPending } from "react-icons/md"
 import { FaCheckCircle, FaUserClock } from "react-icons/fa"
 import { IoMdAddCircle } from "react-icons/io"
 import { Issue } from "../../utils/types"
+import getDate from "@/utils/getDate"
 
 const Priority = ({
     priority
@@ -179,6 +180,8 @@ const IssueCard = ({
     title,
     status,
     id,
+    reasons,
+    createdAt,
 }: Issue) => {
     const [expanded, setExpanded] = useState(false)
     const color = getStatusColor({ status })
@@ -189,7 +192,7 @@ const IssueCard = ({
                 {/* left */}
                 <div className="flex flex-col pt-8">
                     <div className="flex items-center">
-                        <Text className="mr-2">2 hours ago</Text>
+                        <Text className="mr-2">{getDate(new Date(createdAt))}</Text>
                         <div className="w-[30px] h-[1px] bg-[#DFE7EA]" />
                         <div 
                             className="w-[35px] h-[35px] border-[3px] border-bg-primary rounded-full flex items-center justify-center"
@@ -251,10 +254,10 @@ const IssueCard = ({
                             <div className="h-full w-full gap-2 flex flex-col pl-4">
                                 <div className="flex flex-col">
                                     <Text>
-                                        STG violation detected in prescribed medication dosage.
+                                        {reasons[0]?.description}
                                     </Text>
                                     <Text>
-                                        Drug dosage prescribed exceeds STG maximum dosage guidelines.
+                                        {reasons[0]?.detail}
                                     </Text>
                                 </div>
 
@@ -270,14 +273,7 @@ const IssueCard = ({
                                         >
                                             <div className="w-full h-[1px] bg-[#DFE7EA]" />
                                             <Text>
-                                                <Text textColor={theme.colors.text.tetiary}>
-                                                    Prescribed dosage:&nbsp;
-                                                </Text>
-                                                67 hourly for 78 days  &nbsp;| &nbsp;
-                                                <Text textColor={theme.colors.text.tetiary}>
-                                                    Maximum allowed by STG: &nbsp;
-                                                </Text>
-                                                from provided legend
+                                                {reasons[0].evidence}
                                             </Text>
 
                                             <div 
@@ -290,7 +286,7 @@ const IssueCard = ({
                                                     Recommendation
                                                 </Text>
                                                 <Text>
-                                                    Review and adjust prescription to comply with STG
+                                                    {reasons[0].recommendations}
                                                 </Text>
                                             </div>
                                         </motion.div>
