@@ -51,7 +51,7 @@ const Encounter = () => {
             <VerificationStates />
             <Disposition />
             <Slidein className="flex flex-col gap-6 px-8">
-                <div className="w-full bg-[#ffffff05] border-b-[1px] border-solid border-b-border-tetiary justify-center py-[30px] flex items-center">
+                <div className="w-full bg-[#ffffff05] border-b-[1px] border-solid border-b-border-primary justify-center py-[30px] flex items-center">
                     <div className="w-full flex flex-col justify-center gap-6">
                         <TopSection />
                     </div>

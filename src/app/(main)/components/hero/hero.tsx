@@ -24,7 +24,7 @@ const Hero = () => {
         setSearchValue('')
     },[])
     return (
-        <Slidein className="w-full bg-[#ffffff05] border-b-[1px] border-solid border-b-border-tetiary justify-center h-[300px] flex items-center">
+        <Slidein className="w-full bg-[#ffffff05] border-b-[1px] border-solid border-b-border-primary justify-center h-[300px] flex items-center">
             <div className="max-w-[1024px] w-full flex flex-col items-center justify-center gap-3">
                 <div className="max-w-[600px] w-full flex flex-col gap-[2px] items-center justify-center">
                     <Image

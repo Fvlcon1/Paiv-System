@@ -19,7 +19,7 @@ const NhisDetails = () => {
     return (
         <>
             <Overlay onClick={() => setDispositionViewState(null)}>
-                <div className="w-[500px] flex flex-col items-center p-2 relative rounded-[20px] border-[1px] border-solid border-border-tetiary h-[750px] bg-[#1F1F28]"
+                <div className="w-[500px] flex flex-col items-center p-2 relative rounded-[20px] border-[1px] border-solid border-border-primary h-[750px] bg-[#1F1F28]"
                     style={{
                         backgroundImage: "url('/assets/prod/bg-gradient.webp')",
                         backgroundSize: "cover",
@@ -35,7 +35,7 @@ const NhisDetails = () => {
                     <div className="w-full rounded-[10px] h-[100px] border-[1px] border-solid border-border-secondary bg-[#4f4f631d]">
 
                     </div>
-                    <div className="p-2 w-[120px] h-[120px] bg-[#24242F] rounded-full mt-[-60px] border-b-[1px] border-solid border-border-tetiary">
+                    <div className="p-2 w-[120px] h-[120px] bg-[#24242F] rounded-full mt-[-60px] border-b-[1px] border-solid border-border-primary">
                         {nhisDetails?.imageUrl ? (
                             <div className="relative overflow-hidden rounded-full w-full h-full">
                                 <Image

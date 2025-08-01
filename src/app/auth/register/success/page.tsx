@@ -177,9 +177,9 @@ const HospitalRegistrationSuccess = () => {
                         </div>
 
                         <Text
-                            size={theme.typography.size.HL}
+                            size={theme.text.size.HL}
                             textColor={theme.colors.bg.primary}
-                            bold={theme.typography.bold.md}
+                            bold={theme.text.bold.md}
                             lineHeight={1}
                         >
                             Registration Successful!
@@ -202,8 +202,8 @@ const HospitalRegistrationSuccess = () => {
                             <BsMailbox className="w-6 h-6 text-green-600 mt-1 flex-shrink-0" />
                             <div className="flex-1">
                                 <Text
-                                    size={theme.typography.size.body2}
-                                    bold={theme.typography.bold.md}
+                                    size={theme.text.size.body2}
+                                    bold={theme.text.bold.md}
                                 >
                                     Check your email
                                 </Text>

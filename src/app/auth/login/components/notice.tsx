@@ -16,9 +16,9 @@ const Notice = () => {
                     color={theme.colors.main.primary}
                 />
                 <Text
-                    size={theme.typography.size.body2}
+                    size={theme.text.size.body2}
                     textColor={theme.colors.main.primary}
-                    bold={theme.typography.bold.md}
+                    bold={theme.text.bold.md}
                 >
                     Enhanced Security Active
                 </Text>

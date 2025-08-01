@@ -15,7 +15,7 @@ const CaptureContainer = () => {
                 onClick={()=>setViewState(null)}
             >
                 <div 
-                    className="w-[500px] flex flex-col items-center p-2 relative rounded-[20px] border-[1px] border-solid border-border-tetiary h-[650px] bg-bg-primary"
+                    className="w-[500px] flex flex-col items-center p-2 relative rounded-[20px] border-[1px] border-solid border-border-primary h-[650px] bg-bg-primary"
                     style={{
                         backgroundImage: "url('/assets/prod/bg-gradient.webp')",
                         backgroundSize: "cover",

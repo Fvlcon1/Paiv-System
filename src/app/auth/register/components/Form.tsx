@@ -390,7 +390,7 @@ const Form = ({
                                 <div className="space-y-2">
                                     <Text
                                         textColor={theme.colors.text.secondary}
-                                        bold={theme.typography.bold.md}
+                                        bold={theme.text.bold.md}
                                     >
                                         Password requirements:
                                     </Text>

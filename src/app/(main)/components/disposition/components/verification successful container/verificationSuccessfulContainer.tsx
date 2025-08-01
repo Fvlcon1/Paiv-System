@@ -44,7 +44,7 @@ const VerificationSuccessfulContainer = () => {
                 >
                     <div className="py-[30px]">
                         <div className="relative h-[200px] w-[280px] flex justify-center">
-                            <div className="absolute flex justify-center items-center bottom-0 left-0 p-2 w-[140px] h-[140px] bg-[#24242F] rounded-full border-b-[1px] border-solid border-border-tetiary">
+                            <div className="absolute flex justify-center items-center bottom-0 left-0 p-2 w-[140px] h-[140px] bg-[#24242F] rounded-full border-b-[1px] border-solid border-border-primary">
                                 {
                                     capturedImageUrl ?
                                     <div className="relative overflow-hidden rounded-full w-full h-full">
@@ -59,7 +59,7 @@ const VerificationSuccessfulContainer = () => {
                                     <FaUserCircle color={theme.colors.text.tetiary} size={105} />
                                 }
                             </div>
-                            <div className="absolute right-0 top-0 p-2 w-[140px] h-[140px] bg-[#24242F] rounded-full border-b-[1px] border-solid border-border-tetiary">
+                            <div className="absolute right-0 top-0 p-2 w-[140px] h-[140px] bg-[#24242F] rounded-full border-b-[1px] border-solid border-border-primary">
                                 <div className="relative overflow-hidden rounded-full w-full h-full">
                                     <Image
                                         src={nhisDetails?.imageUrl ?? ''}

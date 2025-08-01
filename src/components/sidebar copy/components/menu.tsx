@@ -6,61 +6,38 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { IconType } from "react-icons"
 import { FaFlag, FaUsers } from "react-icons/fa"
-import { FaAddressCard, FaCediSign, FaCircleCheck, FaFolderClosed, FaGear } from "react-icons/fa6"
+import { FaCediSign, FaCircleCheck, FaGear } from "react-icons/fa6"
 import { GiCancel } from "react-icons/gi"
 import { GoFileSubmodule } from "react-icons/go"
 import { HiDocumentReport } from "react-icons/hi"
 import { PiFilesFill } from "react-icons/pi"
-import { RiDashboardFill, RiHome6Fill } from "react-icons/ri"
+import { RiHome6Fill } from "react-icons/ri"
 import RenderMenuSection from "./renderMenuSection"
 import { IoIosBug } from "react-icons/io"
-import { HiMiniWrenchScrewdriver } from "react-icons/hi2"
-import { BsClipboardCheckFill } from "react-icons/bs"
-import { MdDashboard, MdSpaceDashboard } from "react-icons/md"
 
 
 const Menu = () => {
     const mainMenu = [
-        // {
-        //     title : "Home",
-        //     icon : RiHome6Fill,
-        //     path : "/",
-        // },
         {
-            title : "Dashboard",
-            icon : RiDashboardFill,
-            path : "/dashboard",
-        },
-        {
-            title : "Patient Verification",
-            icon : FaAddressCard,
-            path : "/patient-verification",
-        },
-        {
-            title : "Encounters",
-            icon : FaUsers,
-            path : "/encounters",
-        },
-        {
-            title : "Claims",
-            icon : FaFolderClosed,
-            path : "/claims",
-        },
-        {
-            title : "Issues",
-            icon : HiMiniWrenchScrewdriver,
-            path : "/issues",
-        },
-        {
-            title : "Claim Resolution",
-            icon : BsClipboardCheckFill,
-            path : '/claim-resolution',
+            title : "Home",
+            icon : RiHome6Fill,
+            path : "/",
         },
         // {
         //     title : "Claims",
         //     icon : PiFilesFill,
         //     path : '/claims',
         // },
+        {
+            title : "Encounters",
+            icon : FaUsers,
+            path : '/encounters',
+        },
+        {
+            title : "Issues",
+            icon : IoIosBug,
+            path : '/issues',
+        },
         
         // {
         //     title : "Imported Claims",
@@ -83,7 +60,7 @@ const Menu = () => {
     ]
 
     return (
-        <div className="flex gap-1 flex-col">
+        <div className="flex gap-1 flex-col pt-1">
             <div className="flex flex-col">
 
                 {/* Main */}

@@ -55,7 +55,7 @@ const MFASelection = () => {
                 </div>
                 <div className='w-full flex flex-col gap-2'>
                     <div 
-                        className={`w-full p-4  gap-4 flex items-center cursor-pointer hover:bg-bg-tetiary duration-200 h-[100px] bg-bg-secondary border-[1px] border-solid ${selectedMfa === MFAViewStates.EMAIL ? 'border-main-primary bg-[#6060d01e]' : 'border-border-tetiary'} rounded-xl`}
+                        className={`w-full p-4  gap-4 flex items-center cursor-pointer hover:bg-bg-tetiary duration-200 h-[100px] bg-bg-secondary border-[1px] border-solid ${selectedMfa === MFAViewStates.EMAIL ? 'border-main-primary bg-[#6060d01e]' : 'border-border-primary'} rounded-xl`}
                         onClick={()=>handleMFASelection(MFAViewStates.EMAIL)}    
                     >
                         {
@@ -81,7 +81,7 @@ const MFASelection = () => {
                         </div>
                     </div>
                     <div 
-                        className={`w-full p-4  gap-4 flex items-center cursor-pointer hover:bg-bg-tetiary duration-200 h-[100px] bg-bg-secondary border-[1px] border-solid ${selectedMfa === MFAViewStates.MOBILE_APP ? 'border-main-primary bg-[#6060d01e]' : 'border-border-tetiary'} rounded-xl`}
+                        className={`w-full p-4  gap-4 flex items-center cursor-pointer hover:bg-bg-tetiary duration-200 h-[100px] bg-bg-secondary border-[1px] border-solid ${selectedMfa === MFAViewStates.MOBILE_APP ? 'border-main-primary bg-[#6060d01e]' : 'border-border-primary'} rounded-xl`}
                         onClick={()=>handleMFASelection(MFAViewStates.MOBILE_APP)}    
                     >
                         {

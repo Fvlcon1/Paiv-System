@@ -52,7 +52,7 @@ const Selection = ({
                     {/* Facial Recognition Option */}
                     <div
                         className={`w-full p-4 gap-4 flex items-center cursor-pointer duration-200 h-[100px] bg-bg-secondary border-[1px] border-solid ${
-                            selectedVerification === "facialRecognition" ? "border-main-primary bg-[#6060d011]" : "hover:bg-bg-tetiary border-border-tetiary"
+                            selectedVerification === "facialRecognition" ? "border-main-primary bg-[#6060d011]" : "hover:bg-bg-tetiary border-border-primary"
                         } rounded-xl`}
                         onClick={() => handleOptionSelection("facialRecognition")}
                     >
@@ -73,7 +73,7 @@ const Selection = ({
                     {/* Fingerprint Option */}
                     <div
                         className={`w-full p-4 gap-4 flex items-center cursor-pointer duration-200 h-[100px] bg-bg-secondary border-[1px] border-solid ${
-                            selectedVerification === "fingerPrint" ? "border-main-primary bg-[#6060d011]" : "hover:bg-bg-tetiary border-border-tetiary"
+                            selectedVerification === "fingerPrint" ? "border-main-primary bg-[#6060d011]" : "hover:bg-bg-tetiary border-border-primary"
                         } rounded-xl`}
                         onClick={() => handleOptionSelection("fingerPrint")}
                     >

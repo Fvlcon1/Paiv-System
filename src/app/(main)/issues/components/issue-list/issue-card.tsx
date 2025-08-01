@@ -38,7 +38,7 @@ const Priority = ({
             }}
         >
             <Text
-                bold={theme.typography.bold.md}
+                bold={theme.text.bold.md}
                 textColor={getPriorityColor()}
             >
                 {priority.charAt(0).toUpperCase() + priority.slice(1)}
@@ -56,7 +56,7 @@ const Completed = () => {
             }}
         >
             <Text
-                bold={theme.typography.bold.md}
+                bold={theme.text.bold.md}
                 textColor={theme.colors.bg.primary}
             >
                 Completed
@@ -74,7 +74,7 @@ const Pending = () => {
             }}
         >
             <Text
-                bold={theme.typography.bold.md}
+                bold={theme.text.bold.md}
                 textColor={theme.colors.bg.primary}
             >
                 Pending
@@ -92,7 +92,7 @@ const Unassigned = () => {
             }}
         >
             <Text
-                bold={theme.typography.bold.md}
+                bold={theme.text.bold.md}
                 textColor={theme.colors.main.primary}
             >
                 Unassigned
@@ -110,7 +110,7 @@ const New = () => {
             }}
         >
             <Text
-                bold={theme.typography.bold.md}
+                bold={theme.text.bold.md}
                 textColor={theme.colors.bg.primary}
             >
                 New
@@ -223,7 +223,7 @@ const IssueCard = ({
                     >
                         {/* title */}
                         <div className="flex items-center gap-3 px-3 py-2">
-                            <Text bold={theme.typography.bold.md}>
+                            <Text bold={theme.text.bold.md}>
                                 {title} &nbsp;&nbsp;&nbsp;-
                             </Text>
                             <div 
@@ -232,7 +232,7 @@ const IssueCard = ({
                                     backgroundColor: color + hexOpacity(20)
                                 }}
                             >
-                                <Text bold={theme.typography.bold.md}>
+                                <Text bold={theme.text.bold.md}>
                                     #{id}
                                 </Text>
                             </div>

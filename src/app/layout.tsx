@@ -9,6 +9,7 @@ import { SearchProvider } from "./context/searchContext";
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from "./context/authContext";
 import AntdConfigProvider from "./utils/antdConfigProvider";
+import { ThemeProvider } from "@styles/theme-context";
 
 const montserrat = Montserrat({
 	variable: "--font-montserrat",
@@ -32,10 +33,12 @@ export default function RootLayout({
 					<QueryProvider>
 						<AntdConfigProvider>
 							<MainContextProvider>
-								<Toaster />
-								<SearchProvider>
-									{children}
-								</SearchProvider>
+								<ThemeProvider>
+									<Toaster />
+									<SearchProvider>
+										{children}
+									</SearchProvider>
+								</ThemeProvider>
 							</MainContextProvider>
 						</AntdConfigProvider>
 					</QueryProvider>

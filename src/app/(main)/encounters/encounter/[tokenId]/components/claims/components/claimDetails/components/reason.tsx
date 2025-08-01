@@ -7,8 +7,8 @@ const Reason = ({
     reasons : string[]
 }) => {
     return (
-        <div className="w-full border-solid border-[1px] border-border-tetiary rounded-xl bg-bg-tetiary flex flex-col gap-2">
-            <div className="flex w-full border-solid border-b-[1px] border-border-tetiary h-[55px] items-center pl-4">
+        <div className="w-full border-solid border-[1px] border-border-primary rounded-xl bg-bg-tetiary flex flex-col gap-2">
+            <div className="flex w-full border-solid border-b-[1px] border-border-primary h-[55px] items-center pl-4">
                 <Text
                     bold={TypographyBold.md}
                 >

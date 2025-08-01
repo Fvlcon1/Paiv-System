@@ -20,7 +20,7 @@ const EncounterDetails = ({
             <div className="w-full rounded-xl flex flex-col">
                 <div className="flex w-full min-h-[45px] items-center pl-4 rounded-t-xl bg-main-primary">
                     <Text
-                        bold={theme.typography.bold.md}
+                        bold={theme.text.bold.md}
                         textColor={theme.colors.bg.primary}
                     >
                         Patient Details

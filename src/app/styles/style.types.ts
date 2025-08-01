@@ -3,10 +3,12 @@ import { ReactNode } from "react";
 export enum TypographySize {
   xs2 = "8px",
   xs = "10px",
+  SM = "12px",
   body = "12px",
   body2 = "13px",
   HM = "16px",
-  HL = "22px",
+  HM2 = "22px",
+  HL = "30px",
 }
 
 export interface AppTypographyProps {
@@ -14,7 +16,7 @@ export interface AppTypographyProps {
   className? : string
   fontfamily? : 'montserrat' | 'greater-theory'
   bold?: TypographyBold;
-  size?: TypographySize;
+  size?: TypographySize | string | number;
   textColor?: string;
   colorTheme? : string;
   wrap?: boolean;

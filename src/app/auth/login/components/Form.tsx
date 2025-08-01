@@ -27,7 +27,7 @@ const Form = ({
 
     return (
         <form onSubmit={formik.handleSubmit} className="flex flex-col gap-2">
-            <div className="flex flex-col gap-2 px-6 py-6 bg-white/30 backdrop-blur-lg rounded-[12px] border-[1px] border-border-primary">
+            <div className="flex flex-col gap-2 px-6 py-6 bg-bg-primary/30 backdrop-blur-lg rounded-[12px] border-[1px] border-border-primary">
                 <FormInput
                     value={formik.values.hospitalId}
                     handleChange={formik.handleChange}

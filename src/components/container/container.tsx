@@ -34,7 +34,7 @@ const Container = ({
     return (
         display &&
         <div 
-            className={`min-w-[300px] flex flex-col items-center relative rounded-[20px] border-[1px] border-solid border-border-tetiary bg-bg-primary ${className}`}
+            className={`min-w-[300px] flex flex-col items-center relative rounded-[20px] border-[1px] border-solid border-border-primary bg-bg-primary ${className}`}
             style={{
                 // backgroundImage: "url('/assets/prod/bg-gradient.webp')",
                 backgroundSize: "cover",

@@ -13,7 +13,7 @@ const DateRange = () => {
     return (
         <div className="flex items-center gap-2">
             <Text
-                bold={theme.typography.bold.md}
+                bold={theme.text.bold.md}
             >
                 Date Range
             </Text>

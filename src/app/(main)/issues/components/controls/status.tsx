@@ -20,7 +20,7 @@ const Chip = ({
         >
             <Text 
                 textColor={isSelected ? theme.colors.bg.primary : theme.colors.text.secondary}
-                bold={isSelected ? theme.typography.bold.md : theme.typography.bold.sm2}
+                bold={isSelected ? theme.text.bold.md : theme.text.bold.sm2}
             >
                 {label}
             </Text>

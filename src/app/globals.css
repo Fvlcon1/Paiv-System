@@ -1,27 +1,49 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
-:root {
-  --text-primary: #284452;
-  --text-secondary: #3F6D84;
-  --text-tetiary: #95AAB6;
+@theme {
+  --color-text-primary: #284452;
+  --color-text-secondary: #3F6D84;
+  --color-text-tetiary: #95AAB6;
+  --color-text-danger: #b93b36;
+  --color-text-success: #29a333;
   
   /* Background colors */
-  --bg-primary: #FFFFFF;
-  --bg-secondary: #F7F7FA;
-  --bg-tetiary: #EDEDF2;
-  --bg-quantinary: #DADAE0;
+  --color-bg-primary: #FFFFFF;
+  --color-bg-primary-lighter: #FBFBFB;
+  --color-bg-secondary: #F4F4F4;
+  --color-bg-tetiary: #EBEBEB;
+  --color-bg-quantinary: #D0D0D0;
+  --color-bg-sidebar: #32586B;
   
   /* Border colors */
-  --border-primary: #E4E4E4;
-  --border-secondary: #F2F2F2;
-  --border-tetiary: #DDDDDD;
-  --border-quantinary: #C6C6D0;
+  --color-border-primary: #E8EDEF;
+  --color-border-secondary: #F2F2F2;
+  --color-border-tetiary: #DDDDDD;
+  --color-border-quantinary: #C6C6D0;
   
-  /* Accent colors */
-  /* --main-primary: linear-gradient(to right, #3B6980 0%, #77ABCB 100%);   */
-  --main-primary: #3F6D84;
+  --color-main-primary: #3F6D84;
+}
+
+.dark {
+	--color-text-primary: #F1FCFD;
+	--color-text-secondary: #CDD6D7;
+	--color-text-tetiary: #798586;
+	--color-text-danger: #b93b36;
+	--color-text-success: #29a333;
+
+	--color-bg-primary: #0B0A0A;
+	--color-bg-secondary: #1B1E1E;
+	--color-bg-tetiary: #323737;
+	--color-bg-quantinary: #373D3E;
+	--color-bg-primary-lighter: #141515;
+
+	--color-border-primary: #1D1D1D;
+	--color-border-secondary: #2F2F2F;
+	--color-border-primary: #4D4D4D;
+	--color-border-quantinary: #909090;
+
+	--color-main-primary: #3F6D84;
 }
 
 body {

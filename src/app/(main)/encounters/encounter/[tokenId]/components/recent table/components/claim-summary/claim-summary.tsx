@@ -58,7 +58,7 @@ const ClaimSummary = ({
                                 <Text 
                                     bold={TypographyBold.md2}
                                     textColor={theme.colors.main.primary}
-                                    size={theme.typography.size.body2}
+                                    size={theme.text.size.body2}
                                 >
                                     Claim Summary
                                 </Text>

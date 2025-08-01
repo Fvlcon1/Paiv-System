@@ -23,7 +23,7 @@ const Controls = ({
 }) => {
     return (
         <div className="flex items-center gap-2">
-            <div className="flex h-[33px] items-center p-1 px-2 border-[1px] border-solid border-border-tetiary rounded-lg gap-[1px] cursor-pointer hover:bg-bg-tetiary">
+            <div className="flex h-[33px] items-center p-1 px-2 border-[1px] border-solid border-border-primary rounded-lg gap-[1px] cursor-pointer hover:bg-bg-tetiary">
             <HiAdjustmentsHorizontal
                 color={theme.colors.text.primary}
             />
@@ -34,7 +34,7 @@ const Controls = ({
                 setPageSize={setPageSize}
                 setPageNumber={setPageNumber}
             />
-            <div className="flex h-[33px] p-1 border-[1px] border-solid border-border-tetiary rounded-lg gap-[1px]">
+            <div className="flex h-[33px] p-1 border-[1px] border-solid border-border-primary rounded-lg gap-[1px]">
             <Tooltip title='List'>
                 <div 
                 className={`${view === 'list' ? 'bg-bg-tetiary' : ''} p-1 px-2 rounded-md hover:bg-bg-tetiary cursor-pointer duration-150`}

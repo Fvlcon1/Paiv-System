@@ -43,7 +43,7 @@ const Instructions = () => {
                         Patient Identity Verification
                     </Text>
                     <div className="flex flex-col gap-2 w-full relative">
-                        <div className="flex gap-2 items-center border-[1px] border-solid border-border-tetiary rounded-[15px] px-3 py-3 bg-[#ffffff08]">
+                        <div className="flex gap-2 items-center border-[1px] border-solid border-border-primary rounded-[15px] px-3 py-3 bg-[#ffffff08]">
                             <RiCameraLensFill 
                                 color={theme.colors.text.tetiary}
                                 size={40}
@@ -57,7 +57,7 @@ const Instructions = () => {
                                 </Text>
                             </div>
                         </div>
-                        <div className="flex gap-2 items-center border-[1px] border-solid border-border-tetiary rounded-[15px] px-3 py-3 bg-[#ffffff08]">
+                        <div className="flex gap-2 items-center border-[1px] border-solid border-border-primary rounded-[15px] px-3 py-3 bg-[#ffffff08]">
                             <TbFaceId 
                                 color={theme.colors.text.tetiary}
                                 size={40}
@@ -72,7 +72,7 @@ const Instructions = () => {
                                 </Text>
                             </div>
                         </div>
-                        <div className="flex gap-2 items-center border-[1px] border-solid border-border-tetiary rounded-[15px] px-3 py-3 bg-[#ffffff08]">
+                        <div className="flex gap-2 items-center border-[1px] border-solid border-border-primary rounded-[15px] px-3 py-3 bg-[#ffffff08]">
                             <MdVerifiedUser 
                                 color={theme.colors.text.tetiary}
                                 size={40}

@@ -1,87 +1,95 @@
 'use client'
-import { useState } from "react"
-import { Montserrat } from "next/font/google"
-import theme from "@styles/theme"
 import { AppTypographyProps, TypographyBold, TypographySize } from "@styles/style.types"
+import { Montserrat } from "next/font/google"
+import { useState } from "react"
+import { useTheme } from "@/app/styles/theme-context"
 
 const montserrat = Montserrat({
     subsets: ["latin"],
-    weight: ["400", "600", "700"],
+    weight: ["400", "600", "700"], // Add required font weights
     variable: "--font-montserrat",
 });
 
-/**
- * Base Text component for typography needs
- */
 const Text = ({
     children,
     className = "",
-    bold = TypographyBold.sm2,
-    size = TypographySize.body,
-    textColor = theme.colors.text.secondary,
-    wrap = true,
-    underline = false,
-    clickable = false,
-    clickableLink = false,
-    italic = false,
+    bold,
+    size,
+    textColor,
+    wrap,
+    underline,
+    clickable,
+    clickableLink,
+    italic,
     textAlign,
     display,
-    ellipsis = false,
-    fontfamily = 'montserrat',
+    ellipsis,
+    fontfamily,
     maxLines,
     lineHeight,
     whiteSpace,
     onClick
 } : AppTypographyProps) => {
-    const [onHover, setOnHover] = useState<boolean>(false);
-    
-    const getFontFamily = () => {
-        if (fontfamily === 'montserrat') return montserrat.style.fontFamily;
-        if (fontfamily === 'greater-theory') return 'greater-theory';
-        return montserrat.style.fontFamily;
-    };
 
-    const getDisplay = () => {
-        if (display) return display;
-        if (maxLines) return '-webkit-box';
-        return 'inline-block';
-    };
-
-    const getWhiteSpace = () => {
-        if (maxLines) return 'normal';
-        if (ellipsis) return 'nowrap';
-        return 'normal';
-    };
+    const [onHover, setOnHover] = useState<boolean>(false)
+    const { theme } = useTheme()
 
     return (
         <span
-            className={`w-fit ${className} ${fontfamily === 'montserrat' ? montserrat.variable : ''}`}
+            className={`
+                ${className} 
+                w-fit duration-300
+                ${
+                    fontfamily === 'montserrat' 
+                    ? montserrat.variable 
+                    : fontfamily === 'greater-theory'
+                    ? 'greater-theory'
+                    : montserrat.style.fontFamily
+                }
+            `}
             style={{
-                fontFamily: getFontFamily(),
-                fontWeight: bold,
-                fontSize: size,
-                color: textColor,
-                flexWrap: wrap ? 'wrap' : 'nowrap',
-                textDecoration: (underline || (onHover && clickableLink)) ? 'underline' : 'none',
-                opacity: onHover && (clickable || clickableLink) ? 0.7 : 1,
-                fontStyle: italic ? 'italic' : 'normal',
+                fontFamily: fontfamily === 'montserrat' ? montserrat.style.fontFamily : fontfamily === 'greater-theory' ? 'greater-theory' : montserrat.style.fontFamily,
+                fontWeight : bold ?? TypographyBold.sm2,
+                fontSize : size ?? TypographySize.body,
+                color : onHover && clickableLink 
+                        ? textColor
+                        : textColor
+                        ?? theme.colors.text.secondary,
+                flexWrap : wrap ? 'wrap' : 'nowrap',
+                textDecoration : underline || (onHover && clickableLink) ? 'underline' : 'none',
+                opacity : onHover && (clickable || clickableLink) ? 0.7 : 1,
+                lineHeight : lineHeight || 1,
+                fontStyle : italic ? 'italic' : 'normal',
                 textAlign,
-                display: getDisplay(),
-                WebkitLineClamp: maxLines,
-                WebkitBoxOrient: maxLines ? 'vertical' : undefined,
-                textOverflow: ellipsis ? 'ellipsis' : 'clip',
-                cursor: (clickableLink || clickable) ? 'pointer' : 'inherit',
-                whiteSpace: getWhiteSpace(),
-                overflow: ellipsis ? 'hidden' : 'visible',
-                lineHeight
+                display: display ?? maxLines ? '-webkit-box' : 'inline-block',
+                WebkitLineClamp : maxLines ?? 6,
+                WebkitBoxOrient : 'vertical',
+                textOverflow : ellipsis ? 'ellipsis' : 'none',
+                cursor : (clickableLink || clickable) ? 'pointer' : '',
+                whiteSpace : whiteSpace ?? (maxLines ? 'none' : ellipsis ? 'nowrap' : 'none'),
+                overflow : ellipsis ? 'hidden' : 'inherit'
             }}
-            onMouseOver={() => setOnHover(true)}
-            onMouseLeave={() => setOnHover(false)}
+            onMouseOver={()=>setOnHover(true)}
+            onMouseLeave={()=>setOnHover(false)}
             onClick={onClick}
         >
             {children}
         </span>
-    );
-};
+    )
+}
 
-export default Text;
+export const Head1 = (props : AppTypographyProps) => {
+    const { theme } = useTheme()
+    return (
+        <Text
+            size={TypographySize.HL}
+            textColor={theme.colors.text.secondary}
+            lineHeight={1.3}
+            {...props}
+        >
+            {props.children}
+        </Text>
+    )
+}
+
+export default Text

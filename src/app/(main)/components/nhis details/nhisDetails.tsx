@@ -67,7 +67,7 @@ const NhisDetails = () => {
                 }
                 {viewState === ViewState.NHIS_DETAILS && (
                     <Overlay onClick={() => setViewState(null)}>
-                        <div className="w-[500px] flex flex-col items-center p-2 relative rounded-[20px] border-[1px] border-solid border-border-tetiary h-[750px] bg-bg-primary"
+                        <div className="w-[500px] flex flex-col items-center p-2 relative rounded-[20px] border-[1px] border-solid border-border-primary h-[750px] bg-bg-primary"
                             style={{
                                 backgroundImage: "url('/assets/prod/bg-gradient.webp')",
                                 backgroundSize: "cover",
