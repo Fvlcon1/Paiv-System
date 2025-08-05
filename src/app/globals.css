@@ -1,6 +1,11 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
+:root {
+  /* Width variables */
+  --max-page-width: 1200px;
+}
+
 @theme {
   --color-text-primary: #284452;
   --color-text-secondary: #3F6D84;
@@ -18,11 +23,12 @@
   
   /* Border colors */
   --color-border-primary: #E8EDEF;
-  --color-border-secondary: #F2F2F2;
+  --color-border-secondary: #C4D2D9;
   --color-border-tetiary: #DDDDDD;
   --color-border-quantinary: #C6C6D0;
   
   --color-main-primary: #3F6D84;
+  --color-main-primary-gradient: #77ABCB;
 }
 
 .dark {
@@ -44,6 +50,7 @@
 	--color-border-quantinary: #909090;
 
 	--color-main-primary: #3F6D84;
+  --color-main-primary-gradient: #77ABCB;
 }
 
 body {

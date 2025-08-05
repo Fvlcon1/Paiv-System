@@ -17,8 +17,8 @@ export const lightColors = {
 		sidebar : "#32586B"
     },
     border: {
-        primary: "#E4E4E4",
-        secondary: '#F2F2F2',
+        primary: "#E8EDEF",
+        secondary: '#C4D2D9',
         tetiary: '#DDDDDD',
         quantinary: '#C6C6D0',
     },

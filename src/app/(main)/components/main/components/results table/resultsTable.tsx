@@ -42,6 +42,7 @@ const RecentTable = () => {
 						isLoading={isLoading}
 						error={error}
 						columns={columns}
+						title="Search Results"
 					/>
 				</div>
 			</Slidein>

@@ -22,9 +22,9 @@ import { motion } from 'framer-motion';
 import useGeoLocation from "../../hooks/useGeoLocation"
 import { Tooltip } from "antd"
 import { FaLocationDot } from "react-icons/fa6"
-import useRegion from "../hooks/useRegion"
+import useRegion from "../hooks/use-region"
 import { BiChevronDown } from "react-icons/bi"
-import useHospitalNames from "../hooks/useHospitalNames"
+import useHospitalNames from "../hooks/use-hospital-names"
 
 // Password requirement type
 type PasswordRequirement = {

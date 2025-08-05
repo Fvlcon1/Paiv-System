@@ -19,13 +19,14 @@ const MainTemplate = ({
     return (
         <>
             <Sidebar />
+            <NhisDetails />
             {
                 showTemplate &&
                 <>
                     <Topbar />
                 </>
             }
-            <div className="w-full h-full pl-[250px] pt-[60px] relative">
+            <div className="w-full h-full pl-[250px] pt-[50px] relative">
                 {children}
             </div>
         </>

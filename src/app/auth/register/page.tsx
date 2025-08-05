@@ -1,131 +1,112 @@
 'use client'
 
-import Text from "@styles/components/text"
-import { TypographyBold, TypographySize } from "@styles/style.types"
-import theme from "@styles/theme"
-import { useFormik } from "formik"
 import Image from "next/image"
-import validationSchema from './utils/validationSchema'
-import { useEffect, useState } from "react"
-import Form from "./components/Form"
-import axios from "axios"
-import { useMutation } from "@tanstack/react-query"
+import Text from "@styles/components/text"
+import { gradientClass } from "@/utils/constants"
+import theme from "@styles/theme"
+import Left from "./components/left"
 import { useRouter } from "next/navigation"
-import { message } from "antd"
-import toast from "react-hot-toast"
-import Logo from "@components/logo/logo"
+import ClickableTab from "@components/clickable/clickabletab"
+import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6"
+import { useState } from "react"
+import { hexOpacity } from "@/utils/hexOpacity"
+import FormViewState from "./components/form-viewstate"
+import { useRegisterContext } from "./context/register-context"
 
-interface SignupType {
-    hospitalName: string,
-    location: string,
-    email: string
-    password: string
-    longitude: number
-    latitude: number
-    manual: boolean
-    region: string
-    district: string
-    address: string
-}
-
-const Login = () => {
-    const formik = useFormik({
-        initialValues: {
-            location: '',
-            hospitalName: '',
-            longitude: 0,
-            latitude: 0,
-            email: '',
-            password: '',
-            manual: false,
-            region: "",
-            district: "",
-            address: ""
-        },
-        validationSchema,
-        onSubmit: async (values) => {
-            console.log({ values })
-            mutate(values)
-        }
-    })
-
-    const router = useRouter()
-
-    const handleSubmit = async (values: SignupType) => {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/signup`, {
-            hospital_name: values.hospitalName,
-            email: values.email,
-            password: values.password,
-            region: values.region,
-            district: values.district,
-            location: {
-                place_name: values.manual ? undefined : values.location,
-                lat: values.latitude,
-                lng: values.longitude,
-                address: values.address
-            }
-        })
-        return response.data
-    }
-
-    const handleSubmitMutation = useMutation({
-        mutationFn: handleSubmit,
-        onSuccess: () => {
-            toast.success("registration successful")
-            router.push(`/auth/register/success?hospitalName=${formik.values.hospitalName}&email=${formik.values.email}`)
-        },
-        onError: (error : any) => {
-            toast.error(error.response.data.detail)
-            console.error({ error });
-        }
-    })
-
-    const { isError, isPending, error, mutate } = handleSubmitMutation
-
+const Logo = () => {
+    const LogoImage = () => (
+        <Image
+            src={"/assets/prod/logo-gradient.png"}
+            alt="logo"
+            width={25}
+            height={25}
+        />
+    )
 
     return (
-        <>
-            <div className="absolute w-full h-[100vh] overflow-hidden">
+        <div className="flex items-center gap-1">
+            <LogoImage />
+            <Text
+                bold={theme.text.bold.md}
+                size={theme.text.size.body2}
+                className={gradientClass}
+            >
+                PAIV System
+            </Text>
+        </div>
+    )
+}
+
+const Footer = () => {
+    return (
+        <div className="w-full justify-center items-center flex">
+            <Text
+                textColor={theme.colors.text.tetiary}
+            >
+                © 2025 PAIV Hospital. All rights reserved. | Privacy Policy | Terms of Service
+            </Text>
+        </div>
+    )
+}
+
+const Main = () => {
+    const { step, setStep } = useRegisterContext()
+
+    const Previous = () => (
+        step === 5 ? null : (
+            <ClickableTab
+                className="!w-fit !py-1.5"
+                onClick={() => setStep(prev => prev > 1 ? prev - 1 : prev)}
+            >
+                <div className="flex items-center gap-2">
+                    <FaArrowLeftLong size={12} color={theme.colors.text.secondary} />
+                    <Text
+                        textColor={theme.colors.text.secondary}
+                    >
+                        Previous
+                    </Text>
+                </div>
+            </ClickableTab>
+        )
+    )
+
+    return (
+        <div className="w-full max-w-[950px] h-[600px] flex rounded-2xl bg-bg-primary border border-border-primary shadow-xs-2xl shadow-xs-main-primary/20 p-2">
+            <div className="flex flex-1 relative h-full rounded-xl overflow-hidden bg-black">
                 <Image
-                    src="/assets/prod/doodle.svg"
-                    alt="doodle"
-                    width={2000}
-                    height={2000}
-                    className="absolute top-[-150px] right-[-150px] opacity-5 z-[-1]"
+                    src={"/assets/prod/auth-bg-3.jpg"}
+                    alt="auth-bg"
+                    width={1200}
+                    height={1200}
+                    className="absolute top-0 left-0 w-full h-full object-cover opacity-80"
                 />
+                <Left />
             </div>
 
-            <div className="w-full h-screen flex justify-center items-center">
-                <div className="w-[400px] flex flex-col gap-3">
-                    {/* Title */}
-                    <div className="w-full flex flex-col items-center gap-1 justify-center">
-                        <Logo />
-                        <div className="flex flex-col items-center gap-0">
-                            <Text
-                                size={TypographySize.HM}
-                                textColor={theme.colors.text.primary}
-                                bold={TypographyBold.md}
-                            >
-                                Create your account
-                            </Text>
-                            <Text>Please register to continue</Text>
-                        </div>
-                    </div>
-
-                    <Form
-                        formik={formik}
-                        loading={isPending}
-                    />
-                </div>
-                <div className="absolute bottom-[30px]">
+            <div className="flex flex-1 relative h-full rounded-xl p-4 justify-center items-center">
+                <div className="flex w-[80%] h-full flex-col gap-4 justify-between">
+                    <Previous />
+                    <FormViewState />
                     <Text
-                        textColor={theme.colors.text.tetiary}
+                        textColor={theme.colors.text.tetiary + hexOpacity(50)}
+                        size={theme.text.size.HM}
+                        bold={theme.text.bold.md2}
                     >
-                        © 2025 PAIV Hospital. All rights reserved. | Privacy Policy | Terms of Service
+                        Step {step} of 5
                     </Text>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
-export default Login
+
+const Register2 = () => {
+    return (
+        <div className="w-full h-full flex-col gap-[60px] flex items-center justify-center bg-main-primary/5">
+            <Logo />
+            <Main />
+            <Footer />
+        </div>
+    )
+}
+export default Register2

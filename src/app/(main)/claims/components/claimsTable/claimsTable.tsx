@@ -1,6 +1,6 @@
 import useRecentVisits from "@/app/(main)/components/main/components/recent table/utils/useRecentVisits"
 import Controls from "@components/table/controls"
-import Table from "@components/table/table"
+import Table from "@components/table/table3"
 import Slidein from "@styles/components/slidein"
 import { useState } from "react"
 import { columns } from "./data"

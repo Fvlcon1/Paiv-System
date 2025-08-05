@@ -1,0 +1,16 @@
+@keyframes confettiFall {
+    0% {
+        opacity: 1;
+        top: -10px;
+        transform: translateX(0) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        top: 100vh;
+        transform: translateX(var(--translateX)) rotate(var(--rotate));
+    }
+}
+
+.confettiParticle {
+    animation: confettiFall 4s ease-in forwards;
+}

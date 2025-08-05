@@ -52,9 +52,9 @@ const Menu = () => {
             path : "/issues",
         },
         {
-            title : "Claim Resolution",
+            title : "Claim Support",
             icon : BsClipboardCheckFill,
-            path : '/claim-resolution',
+            path : '/claim-support',
         },
         // {
         //     title : "Claims",

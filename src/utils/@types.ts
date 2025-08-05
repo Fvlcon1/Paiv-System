@@ -49,11 +49,13 @@ export interface baseProps {
 export type ButtonTypes = 'submit' | 'button'
 
 export interface DropdownItem {
-    key: string;
-    label?: ReactNode | string;
-    disabled?: boolean;
-    type?: "divider" | "title" | "link" | "loading"
-    href? : string
-    icon?: ReactNode;
-    onClick? : ()=>void
+	key: string;
+	label?: ReactNode | string;
+	disabled?: boolean;
+	type?: "divider" | "title" | "link" | "loading"
+	href?: string
+	icon?: ReactNode;
+	onClick?: () => void
+	isSelected?: boolean
+	value?: any
 }
