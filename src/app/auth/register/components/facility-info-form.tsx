@@ -14,16 +14,16 @@ const FacilityInfoForm = () => {
     const prescribingLevel = facilityInfoFormik.values.prescribingLevel
 
     const facilityTypeOptions: DropdownItem[] = [
-        { key: "Tertiary care hospital", label: "Tertiary care hospital", value: "Tertiary care hospital", isSelected: facilityType === "Tertiary care hospital" },
-        { key: "Secondary care hospital", label: "Secondary care hospital", value: "Secondary care hospital", isSelected: facilityType === "Secondary care hospital" },
-        { key: "Primary care hospital", label: "Primary care hospital", value: "Primary care hospital", isSelected: facilityType === "Primary care hospital" },
-        { key: "Health centers", label: "Health centers (Public, Private, CHAG)", value: "Health centers (Public, Private, CHAG)", isSelected: facilityType === "Health centers (Public, Private, CHAG)" },
-        { key: "Maternity homes", label: "Maternity homes", value: "Maternity homes", isSelected: facilityType === "Maternity homes" },
-        { key: "Private clinics", label: "Private clinics", value: "Private clinics", isSelected: facilityType === "Private clinics" },
-        { key: "Dental clinics", label: "Dental clinics", value: "Dental clinics", isSelected: facilityType === "Dental clinics" },
-        { key: "Eye centers", label: "Eye centers", value: "Eye centers", isSelected: facilityType === "Eye centers" },
-        { key: "Diagnostic centers", label: "Diagnostic centers", value: "Diagnostic centers", isSelected: facilityType === "Diagnostic centers" },
-        { key: "CHPS Compounds", label: "CHPS Compounds", value: "CHPS Compounds", isSelected: facilityType === "CHPS Compounds" },
+        { key: "1 - Tertiary care hospital", label: "1 - Tertiary care hospital", value: "1 - Tertiary care hospital", isSelected: facilityType === "1 - Tertiary care hospital" },
+        { key: "2 - Secondary care hospital", label: "2 - Secondary care hospital", value: "2 - Secondary care hospital", isSelected: facilityType === "2 - Secondary care hospital" },
+        { key: "3 - Primary care hospital", label: "3 - Primary care hospital", value: "3 - Primary care hospital", isSelected: facilityType === "3 - Primary care hospital" },
+        { key: "4 - Health centers", label: "4 - Health centers (Public, Private, CHAG)", value: "4 - Health centers (Public, Private, CHAG)", isSelected: facilityType === "4 - Health centers (Public, Private, CHAG)" },
+        { key: "5 - Maternity homes", label: "5 - Maternity homes", value: "5 - Maternity homes", isSelected: facilityType === "5 - Maternity homes" },
+        { key: "6 - Private clinics", label: "6 - Private clinics", value: "6 - Private clinics", isSelected: facilityType === "6 - Private clinics" },
+        { key: "7 - Dental clinics", label: "7 - Dental clinics", value: "7 - Dental clinics", isSelected: facilityType === "7 - Dental clinics" },
+        { key: "8 - Eye centers", label: "8 - Eye centers", value: "8 - Eye centers", isSelected: facilityType === "8 - Eye centers" },
+        { key: "9 - Diagnostic centers", label: "9 - Diagnostic centers", value: "9 - Diagnostic centers", isSelected: facilityType === "9 - Diagnostic centers" },
+        { key: "10 - CHPS Compounds", label: "10 - CHPS Compounds", value: "10 - CHPS Compounds", isSelected: facilityType === "10 - CHPS Compounds" },
     ]
 
     const prescribingLevels: DropdownItem[] = [
