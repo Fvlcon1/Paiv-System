@@ -10,7 +10,7 @@ import { Dispatch, SetStateAction, useContext, useEffect, useRef, useState } fro
 import { DispositionViewState, ViewState } from "@/app/utils/types"
 import VeficationFailed from "./verificationFailed"
 import { protectedApi } from "@/app/utils/apis/api"
-import { useEncounterContext } from "@/app/(main)/encounters-v1/encounter/[tokenId]/context/encounter.context"
+import { useEncounterContext } from "@/app/(main)/encounters/[tokenId]/context/encounter.context"
 import { useParams } from "next/navigation"
 
 const CamCapture = ({

@@ -1,5 +1,4 @@
-import { mainContext } from "@/app/context/context"
-import { useEncounterContext } from "@/app/(main)/encounters-v1/encounter/[tokenId]/context/encounter.context"
+import { useEncounterContext } from "@/app/(main)/encounters/[tokenId]/context/encounter.context"
 import { DispositionViewState, ViewState } from "@/app/utils/types"
 import Button from "@components/button/button"
 import OutlineButton from "@components/button/outlineButton"

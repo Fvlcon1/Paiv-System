@@ -7,7 +7,7 @@ import { TbFaceId } from "react-icons/tb"
 import Rules from "./components/rules"
 import CamContainer from "./components/camContainer"
 import CamCapture from "./components/camCapture"
-import { useEncounterContext } from "@/app/(main)/encounters-v1/encounter/[tokenId]/context/encounter.context"
+import { useEncounterContext } from "@/app/(main)/encounters/[tokenId]/context/encounter.context"
 
 const CaptureContainer = () => {
     const {setDispositionViewState} = useEncounterContext()

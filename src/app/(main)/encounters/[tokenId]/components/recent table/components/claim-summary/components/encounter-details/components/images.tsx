@@ -4,7 +4,7 @@ import { FaUserCircle } from "react-icons/fa"
 import { GiCancel } from "react-icons/gi"
 import { RiVerifiedBadgeFill } from "react-icons/ri"
 import { ReactNode } from "react"
-import { IEncounterDetails } from "@/app/(main)/encounters-v1/encounter/[tokenId]/utils/types"
+import { IEncounterDetails } from "@/app/(main)/encounters/[tokenId]/utils/types"
 import { FaUser } from "react-icons/fa6"
 import Text from "@styles/components/text"
 

@@ -3,7 +3,7 @@ import theme from "@styles/theme"
 import Images from "./components/images"
 import getTableData from "./utils/get-table-data"
 import DualTable from "./components/dual-table"
-import { IEncounterDetails } from "@/app/(main)/encounters-v1/encounter/[tokenId]/utils/types"
+import { IEncounterDetails } from "@/app/(main)/encounters/[tokenId]/utils/types"
 
 const EncounterDetails = ({
     encounterDetails
