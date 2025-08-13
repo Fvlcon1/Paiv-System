@@ -3,27 +3,27 @@
 import { createContext, useContext, ReactNode, useState, SetStateAction, Dispatch } from "react";
 
 const EncounterContext = createContext<{
-    setShowClaims: Dispatch<SetStateAction<boolean>>
-    showClaims: boolean
     setShowEncounterDetails: Dispatch<SetStateAction<boolean>>
     showEncounterDetilas: boolean
+    setIsFilterVisible: Dispatch<SetStateAction<boolean>>
+    isFilterVisible: boolean
 }>({
-    showClaims : false,
-    setShowClaims : ()=>{},
     setShowEncounterDetails : ()=>{},
-    showEncounterDetilas : false
+    showEncounterDetilas : false,
+    setIsFilterVisible : ()=>{},
+    isFilterVisible : false
 });
 
 export const EncounterProvider = ({ children }: { children: ReactNode }) => {
-    const [showClaims, setShowClaims] = useState(false)
     const [showEncounterDetilas, setShowEncounterDetails] = useState(false)
+    const [isFilterVisible, setIsFilterVisible] = useState(false)
     return (
         <EncounterContext.Provider
             value={{
-                setShowClaims,
-                showClaims,
                 setShowEncounterDetails,
-                showEncounterDetilas
+                showEncounterDetilas,
+                setIsFilterVisible,
+                isFilterVisible
             }}
         >
             {children}

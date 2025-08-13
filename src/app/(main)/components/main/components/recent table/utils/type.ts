@@ -20,5 +20,5 @@ export interface IRecentVisitsTable extends IRecentVisits {
     image : ReactNode,
     lastVisit? : ReactNode,
     verificationStatus : ReactNode,
-    cardValidity : ReactNode
+    cardValidity? : ReactNode
 }

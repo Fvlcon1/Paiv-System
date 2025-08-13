@@ -1,92 +1,11 @@
-import Text from "@styles/components/text"
-
-export const columns = [
+export const data = [
     {
-        accessorKey : 'image',
-        header : 'Image',
-        cell : ({getValue} : {getValue : any}) => {
-            return (
-                <Text>
-                    {getValue()}
-                </Text>
-            )
-        }
-    },
-    {
-        accessorKey : 'firstname',
-        header : 'First Name',
-        cell : ({getValue} : {getValue : any}) => {
-            return (
-                <Text>
-                    {getValue()}
-                </Text>
-            )
-        }
-    },
-    {
-        accessorKey : 'othernames',
-        header : 'Other Names',
-        cell : ({getValue} : {getValue : any}) => {
-            return (
-                <Text>
-                    {getValue()}
-                </Text>
-            )
-        }
-    },
-    {
-        accessorKey : 'lastname',
-        header : 'Last Name',
-        cell : ({getValue} : {getValue : any}) => {
-            return (
-                <Text>
-                    {getValue()}
-                </Text>
-            )
-        }
-    },
-    {
-        accessorKey : 'nhisId',
-        header : 'NHIS Number',
-        cell : ({getValue} : {getValue : any}) => {
-            return (
-                <Text>
-                    {getValue()}
-                </Text>
-            )
-        }
-    },
-    {
-        accessorKey : 'checkIn',
-        header : 'Check in',
-        cell : ({getValue} : {getValue : any}) => {
-            return (
-                <Text>
-                    {getValue()}
-                </Text>
-            )
-        }
-    },
-    {
-        accessorKey : 'checkout',
-        header : 'Check out',
-        cell : ({getValue} : {getValue : any}) => {
-            return (
-                <Text>
-                    {getValue()}
-                </Text>
-            )
-        }
-    },
-    {
-        accessorKey : 'verificationStatus',
-        header : 'Status',
-        cell : ({getValue} : {getValue : any}) => {
-            return (
-                <Text>
-                    {getValue()}
-                </Text>
-            )
-        }
-    },
+        image : "https://avatar.iran.liara.run/public",
+        firstname : "Dennis",
+        othernames : "Boachie",
+        nhisId : "440099281",
+        checkIn : "2025-08-01T12:00:00.000Z",
+        checkout : "2025-08-01T12:00:00.000Z",
+        verificationStatus : "successful"
+    }
 ]

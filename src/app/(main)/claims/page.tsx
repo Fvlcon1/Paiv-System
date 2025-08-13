@@ -1,37 +1,20 @@
-'use client'
+'use client'    
+import SlideIn from "@styles/components/slidein"
+import TableHead from "./components/table-head"
+import TableBodySorted from "./components/table-body-sorted"
+import Top from "./components/top"
 
-import { useState } from "react"
-import TopSection from "./components/topSection"
-import ClaimsForm from "../components/claimsForm/claimsForm"
-import ClaimsTable from "./components/claimsTable/claimsTable"
 
-const Claims = () => {
-    const [showClaims, setShowClaims] = useState(false)
-
+const HospitalPage = () => {
     return (
-        <>
-            {
-                showClaims &&
-                <ClaimsForm 
-                    close={()=>setShowClaims(false)}
-                />
-            }
-            <div className="w-full px-8 pt-4 flex flex-col">
-                {/* Top Section */}
-                <TopSection />
-
-                {/* <div className="flex items-center gap-2">
-                    <Button 
-                        text="Add Claim"
-                        className="!bg-bg-secondary"
-                        onClick={()=>{
-                            setShowClaims(true)
-                        }}
-                    />
-                </div> */}
-                <ClaimsTable />
-            </div>
-        </>
+        <SlideIn
+            direction="right"
+            className="w-full flex flex-col gap-2 py-4"
+        >
+            <Top />
+            <TableHead />
+            <TableBodySorted />
+        </SlideIn>
     )
 }
-export default Claims
+export default HospitalPage

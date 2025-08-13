@@ -37,7 +37,7 @@ const RenderMenuSection = ({
     const getActiveJsStyle = (item:IMenuType) => {
         return isActive(pathname, item.path)
         ? theme.colors.bg.primary
-        : theme.colors.bg.primary + hexOpacity(60)
+        : theme.colors.bg.primary + hexOpacity(80)
     }
 
     return (

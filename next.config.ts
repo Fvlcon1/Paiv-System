@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "national-health.s3.us-east-1.amazonaws.com",
       },
+      {
+        protocol: "https",
+        hostname: "avatar.iran.liara.run",
+      },
     ]
   },
 };

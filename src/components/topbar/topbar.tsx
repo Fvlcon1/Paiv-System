@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import ClickableTab from "@components/clickable/clickabletab"
 import Text from "@styles/components/text"
 import { FaChevronDown } from "react-icons/fa"
@@ -11,65 +11,57 @@ import { PiWarningOctagonFill } from "react-icons/pi"
 import { FaBell } from "react-icons/fa6"
 import { hexOpacity } from "@/utils/hexOpacity"
 import { usePathname } from "next/navigation"
+import Link from "next/link"
+import Logo from "@components/logo/logo"
 
 const Profile = () => {
     const { userDetails, logout } = useAuth()
     const { isUserProfileLoading } = useProfile()
-    const {theme} = useTheme()
+    const { theme } = useTheme()
     const pathname = usePathname()
+    const containerRef = useRef<HTMLDivElement>(null);
 
-    const pageMapping : Record<string, string> = {
-        "/patient-verification" : "Patient Verification",
-        "/encounters" : "Encounters",
-        "/claims" : "Claims",
-        "/issues" : "Issues",
-        "/claim-support" : "Claim Support",
-        "/reports" : "Reports",
-        "/settings" : "Settings",
+    const pageMapping: Record<string, string> = {
+        "/patient-verification": "Patient Verification",
+        "/encounters": "Encounters",
+        "/claims": "Claims",
+        "/issues": "Issues",
+        "/claim-support": "Claim Support",
+        "/reports": "Reports",
+        "/settings": "Settings",
+    }
+
+    const LogoProfile = () => {
+        return (
+            <div className="w-full h-[50px] justify-center flex flex-col gap-1 py-4 px-0 border-b border-bg-primary/10">
+                <Link className="flex items-center gap-2" href={'/'}>
+                    <Logo size={22} color="dark" />
+                    <Text
+                        bold={theme.text.bold.md}
+                        size={theme.text.size.body2}
+                    >
+                        PAIV System
+                    </Text>
+                </Link>
+            </div>
+        )
     }
 
     return (
         <div className="flex gap-2 items-center">
-            <Text
+            <LogoProfile />
+            {/* <Text
                 size={theme.text.size.body2}
                 bold={theme.text.bold.md}
             >
                 {pageMapping[pathname]}
-            </Text>
-            {
-                // isUserProfileLoading ?
-                //     <div className="normal-loader !w-[18px]"></div>
-                //     :
-                //     userDetails?.hospitalName &&
-                //     <Pressable scaleFactor={1.015}>
-                //         <div className="flex px-2 py-[6px] pr-[10px] border-[1px] border-solid border-border-primary rounded-xl bg-bg-tetiary cursor-pointer hover:bg-bg-quantinary duration-200 h-fit items-center gap-1">
-                //             <MdLocalHospital color={theme.colors.text.secondary} />
-                //             <Text>
-                //                 {userDetails?.hospitalName}
-                //             </Text>
-                //         </div>
-                //     </Pressable>
-            }
-            {
-                // userDetails?.email &&
-                // <ClickableTab>
-                //     <div className="flex gap-1 items-center">
-                //         <Text>
-                //             {userDetails?.email}
-                //         </Text>
-                //         <FaChevronDown
-                //             size={10}
-                //             color={theme.colors.text.tetiary}
-                //         />
-                //     </div>
-                // </ClickableTab>
-            }
+            </Text> */}
         </div>
     )
 }
 
 const Right = () => {
-    const {theme} = useTheme()
+    const { theme } = useTheme()
     return (
         <div className="flex items-center">
             <ClickableTab>
@@ -80,7 +72,7 @@ const Right = () => {
             </ClickableTab>
             <ClickableTab>
                 <div className="relative">
-                    <FaBell 
+                    <FaBell
                         color={theme.colors.text.tetiary}
                         size={17}
                     />
@@ -91,7 +83,7 @@ const Right = () => {
             <div className="flex gap-1 items-center">
                 <div className="flex items-center gap-1">
                     <div className="w-[30px] h-[30px] rounded-full flex items-center justify-center bg-main-primary/80">
-                        <Text 
+                        <Text
                             textColor={theme.colors.bg.primary + hexOpacity(80)}
                             bold={theme.text.bold.md}
                         >
@@ -116,7 +108,7 @@ const Topbar = () => {
     return (
         <div className="w-full pl-[250px] h-[50px] border-b-[1px] border-solid border-border-primary fixed top-0 left-0 transition-all duration-300 z-[10]">
             <div className={`w-full h-full flex justify-center bg-bg-primary`}>
-                <div className="px-8 w-full h-full flex items-center justify-between">
+                <div className="px-4 w-full h-full flex items-center justify-between">
                     <Profile />
                     <Right />
                 </div>

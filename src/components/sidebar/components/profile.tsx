@@ -69,7 +69,7 @@ const Profile = () => {
 
     return (
         <div className="w-full flex flex-col">
-            <LogoProfile />            
+            {/* <LogoProfile /> */}
             <Hospital />
         </div>
     )

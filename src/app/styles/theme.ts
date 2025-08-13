@@ -14,7 +14,7 @@ export const lightColors = {
         secondary: '#F4F4F4',
         tetiary: '#EBEBEB',
         quantinary: "#D0D0D0",
-		sidebar : "#32586B"
+		sidebar : "#375462"
     },
     border: {
         primary: "#E8EDEF",
@@ -73,6 +73,7 @@ export const theme = {
             body2: TypographySize.body2,
             HL: TypographySize.HL,
             HM: TypographySize.HM,
+            HM2: TypographySize.HM2,
         },
         bold: {
             sm: TypographyBold.sm,

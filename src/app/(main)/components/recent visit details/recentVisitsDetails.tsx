@@ -27,8 +27,8 @@ const RecentVisitsDetails = ({
 }) => {
     const [zoomProfile, setZoomProfile] = useState(false)
     useEffect(()=>{
-        console.log({data})
-    },[data])
+        console.log({data, display})
+    },[data, display])
     
     return (
         <>
