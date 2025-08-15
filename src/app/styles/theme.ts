@@ -10,10 +10,10 @@ export const lightColors = {
     },
     bg: {
         primary: '#FFFFFF',
-        primaryLighter : '#FBFBFB',
-        secondary: '#F4F4F4',
-        tetiary: '#EBEBEB',
-        quantinary: "#D0D0D0",
+        primaryLighter : '#FBFCFC',
+        secondary: '#F6F8FA',
+        tetiary: '#EBF0F2',
+        quantinary: "#E2E9EC",
 		sidebar : "#375462"
     },
     border: {

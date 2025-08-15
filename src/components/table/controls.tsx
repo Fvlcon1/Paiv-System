@@ -46,32 +46,6 @@ const Controls = ({
                 setPageSize={setPageSize}
                 setPageNumber={setPageNumber}
             />
-            <div className="flex h-[33px] p-1 border-[1px] border-solid border-border-primary rounded-lg gap-[1px] bg-bg-primary">
-                <Tooltip title='List'>
-                    <div 
-                        className={`${view === 'list' ? 'bg-bg-tetiary' : ''}  p-1 px-2 rounded-md hover:bg-bg-tetiary cursor-pointer duration-150`}
-                        onClick={()=>setView("list")}
-                    >
-                        <FaListUl
-                            size={13}
-                            color={view === "list" ? theme.colors.text.primary : theme.colors.text.tetiary}
-                            className="mt-[1px]"
-                        />
-                    </div>
-                </Tooltip>
-                <Tooltip title="Grid">
-                    <div 
-                        className={`${view === 'grid' ? 'bg-bg-tetiary' : ''} p-1 px-2 rounded-md hover:bg-bg-tetiary cursor-pointer duration-150`}
-                        onClick={()=>setView("grid")}
-                    >
-                        <IoGrid
-                            size={13}
-                            color={view === "grid" ? theme.colors.text.primary : theme.colors.text.tetiary}
-                            className="mt-[1px]"
-                        />
-                    </div>
-                </Tooltip>
-            </div>
         </div>
     )
 }

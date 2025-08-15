@@ -3,6 +3,8 @@ import Text from "@styles/components/text"
 import { HiMagnifyingGlass } from "react-icons/hi2"
 import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table"
 import NoData from "@components/NoData/noData"
+import { ReactNode } from "react"
+import { gradientClass } from "@/utils/constants"
 
 const Table = ({
     data,
@@ -11,7 +13,8 @@ const Table = ({
     isError,
     columns,
     handleOnRowClick,
-    title
+    title,
+    className,
 } : {
     data : any[]
     error: Error | null,
@@ -19,7 +22,8 @@ const Table = ({
     isError : boolean,
     columns : any,
     handleOnRowClick? : (dataItem : any)=>void,
-    title? : string
+    title? : string | ReactNode
+    className? : string,
 }) => {
     const { theme } = useTheme()
 
@@ -30,18 +34,20 @@ const Table = ({
     })
 
     return (
-        <div className="flex flex-col max-w-[var(--max-page-width)] w-full bg-main-primary/5 rounded-2xl mt-2">
+        <div className={`flex flex-col w-full bg-main-primary/5 rounded-2xl mt-2 ${className}`}>
             {
                 title &&
                 <div className="flex py-2.5 px-3 items-center gap-1 w-full">
-                    <HiMagnifyingGlass color={theme.colors.text.secondary} />
-                    <Text>
+                    {/* <HiMagnifyingGlass color={theme.colors.text.secondary} /> */}
+                    <Text
+                        bold={theme.text.bold.md}
+                    >
                         {title}
                     </Text>
                 </div>
             }
 
-            <div className="flex flex-col justify-between w-full bg-bg-primary max-h-[400px] overflow-y-auto rounded-2xl border border-border-primary">
+            <div className="flex flex-col justify-between w-full bg-bg-primary overflow-y-auto rounded-2xl border border-border-primary">
                 <table className="w-full">
                     <thead className="">
                         {
@@ -52,7 +58,7 @@ const Table = ({
                                             <th className="px-6 py-2 text-left tracking-wider border-b-[1px] border-border-primary border-solid" key={header.id}>
                                                 <Text
                                                     bold={theme.text.bold.md}
-                                                    textColor={theme.colors.text.tetiary}
+                                                    className={gradientClass}
                                                 >
                                                     {header.isPlaceholder
                                                         ? null

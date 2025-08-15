@@ -98,15 +98,15 @@ const Dropdown = ({
 		const pos = position || autoPosition;
 		switch (pos) {
 			case "bottom-right":
-				return "right-0 mt-2 top-full";
+				return "right-0 mt-1 top-full";
 			case "bottom-left":
-				return "left-0 mt-2 top-full";
+				return "left-0 mt-1 top-full";
 			case "top-right":
-				return "right-0 mb-2 bottom-full";
+				return "right-0 mb-1 bottom-full";
 			case "top-left":
-				return "left-0 mb-2 bottom-full";
+				return "left-0 mb-1 bottom-full";
 			default:
-				return "right-0 mt-2 top-full";
+				return "right-0 mt-1 top-full";
 		}
 	};
 
@@ -134,7 +134,7 @@ const Dropdown = ({
 						initial={{ opacity: 0, y: -10 }}
 						animate={{ opacity: 1, y: 0 }}
 						exit={{ opacity: 0, y: -10 }}
-						className={`absolute overflow-y-auto min-w-[150px] max-h-[300px] w-full bg-bg-primary border border-border-primary rounded-lg shadow-lg shadow-[#4d4ddc11] z-50 py-1 pt-[6px] ${getMenuPositionClass()} ${className ?? ""}`}
+						className={`absolute overflow-y-auto min-w-[150px] max-h-[300px] w-full bg-bg-primary border border-border-primary rounded-lg shadow-lg z-[1050] py-1 pt-[6px] ${getMenuPositionClass()} ${className ?? ""}`}
 					>
 						{/* items */}
 						{menuItems && (
@@ -154,6 +154,7 @@ const Dropdown = ({
 											onClick={() => {
 												if (!item.disabled && display === undefined) handleClose();
 												if (item.value) onChange?.(item.value);
+												console.log({item : item})
 												item.onClick?.();
 											}}
 										>

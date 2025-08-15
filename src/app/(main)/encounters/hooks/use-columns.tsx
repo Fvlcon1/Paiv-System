@@ -34,7 +34,7 @@ const Status = ({ status }: { status: string }) => {
         "failed": "bg-red-100"
     }
     return (
-        <div className={`flex items-center gap-2 px-3 py-1 rounded-full ${bgColor[status as keyof typeof bgColor]}`}>
+        <div className={`flex items-center w-fit gap-2 px-3 py-1 rounded-full ${bgColor[status as keyof typeof bgColor]}`}>
             <Text
                 textColor={color[status as keyof typeof color]}
             >
@@ -82,9 +82,11 @@ const useColumns = () => {
             header : 'Last Name',
             cell : ({getValue} : {getValue : any}) => {
                 return (
-                    <Text bold={theme.text.bold.md}>
-                        {getValue()}
-                    </Text>
+                    <div className="py-2">
+                        <Text bold={theme.text.bold.md}>
+                            {getValue()}
+                        </Text>
+                    </div>
                 )
             }
         },

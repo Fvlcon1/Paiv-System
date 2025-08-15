@@ -13,8 +13,8 @@ export const columns = [
         }
     },
     {
-        accessorKey : 'firstname',
-        header : 'First Name',
+        accessorKey : 'lastname',
+        header : 'Last Name',
         cell : ({getValue} : {getValue : any}) => {
             return (
                 <Text>
@@ -26,17 +26,6 @@ export const columns = [
     {
         accessorKey : 'othernames',
         header : 'Other Names',
-        cell : ({getValue} : {getValue : any}) => {
-            return (
-                <Text>
-                    {getValue()}
-                </Text>
-            )
-        }
-    },
-    {
-        accessorKey : 'lastname',
-        header : 'Last Name',
         cell : ({getValue} : {getValue : any}) => {
             return (
                 <Text>

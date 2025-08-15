@@ -13,7 +13,7 @@ const OutterContainer = ({
     children? : ReactNode
 }) => {
     return (
-        <div className="flex justify-center items-center shadow-lg hover:shadow-xl border-border-primary border-[1px] hover:shadow-[#5d5bb82a] duration-500 shadow-[#5d5bb816] p-2 w-[140px] h-[140px] bg-bg-tetiary rounded-full">
+        <div className="flex justify-center items-center border-border-primary border-[1px] p-2 w-[140px] h-[140px] bg-bg-tetiary rounded-full">
             {children}
         </div>
     )

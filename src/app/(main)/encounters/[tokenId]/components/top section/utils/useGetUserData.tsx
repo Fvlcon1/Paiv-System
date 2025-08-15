@@ -1,7 +1,7 @@
 import Text from "@styles/components/text"
 import theme from "@styles/theme"
 import { getAgeFromDate } from "../../../utils/getAgeFromDate"
-import { getDateTime } from "@/utils/getDate"
+import { getDateTime, getRelativeTime } from "@/utils/getDate"
 import { getLengthOfStay } from "../../../utils/getLengthOfStay"
 import { useEncounterContext } from "../../../context/encounter.context"
 
@@ -33,7 +33,7 @@ const useGetUserData = () => {
 				<Text textColor={theme.colors.text.tetiary}>
 					Insurance Type:
 				</Text>
-				<Text>
+				<Text ellipsis>
 					&nbsp;{insuranceType}
 				</Text>
 			</div>
@@ -43,7 +43,7 @@ const useGetUserData = () => {
 				<Text textColor={theme.colors.text.tetiary}>
 					Address:
 				</Text>
-				<Text>
+				<Text ellipsis>
 					&nbsp;{residentialAddress}
 				</Text>
 			</div>,
@@ -51,7 +51,7 @@ const useGetUserData = () => {
 				<Text textColor={theme.colors.text.tetiary}>
 					Ghana Card Number:
 				</Text>
-				<Text>
+				<Text ellipsis>
 					&nbsp;{ghanaCardNumber}
 				</Text>
 			</div>,
@@ -61,7 +61,7 @@ const useGetUserData = () => {
 				<Text textColor={theme.colors.text.tetiary}>
 					NHIS Number:
 				</Text>
-				<Text>
+				<Text ellipsis>
 					&nbsp;{nhisId}
 				</Text>
 			</div>,
@@ -69,8 +69,8 @@ const useGetUserData = () => {
 				<Text textColor={theme.colors.text.tetiary}>
 					Claim submitted on:
 				</Text>
-				<Text>
-					&nbsp;{claimSubmissionAt ? getDateTime(claimSubmissionAt) : "-"}
+				<Text ellipsis>
+					&nbsp;{claimSubmissionAt ? getRelativeTime(claimSubmissionAt) : "-"}
 				</Text>
 			</div>
 		],
@@ -79,16 +79,16 @@ const useGetUserData = () => {
 				<Text textColor={theme.colors.text.tetiary}>
 					Check in time:
 				</Text>
-				<Text>
-					{checkinTime ? getDateTime(checkinTime) : "-"}
+				<Text ellipsis>
+					{checkinTime ? getRelativeTime(checkinTime) : "-"}
 				</Text>
 			</div>,
 			<div className="flex gap-1">
 				<Text textColor={theme.colors.text.tetiary}>
 					Check out time:
 				</Text>
-				<Text>
-					{checkoutTime ? getDateTime(checkoutTime) : "-"}
+				<Text ellipsis>
+					{checkoutTime ? getRelativeTime(checkoutTime) : "-"}
 				</Text>
 			</div>
 		],
@@ -97,7 +97,7 @@ const useGetUserData = () => {
 				<Text textColor={theme.colors.text.tetiary}>
 					Disposition:
 				</Text>
-				<Text>
+				<Text ellipsis>
 					&nbsp;{disposition ?? '-'}
 				</Text>
 			</div>,
@@ -105,7 +105,7 @@ const useGetUserData = () => {
 				<Text textColor={theme.colors.text.tetiary}>
 					Length of stay:
 				</Text>
-				<Text>
+				<Text ellipsis>
 					&nbsp;{
 						(checkinTime && checkoutTime)
 							? getLengthOfStay(checkinTime, checkoutTime)

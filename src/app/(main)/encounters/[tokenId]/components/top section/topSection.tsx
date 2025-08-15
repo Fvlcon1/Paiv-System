@@ -4,14 +4,9 @@ import Details from "./components/details"
 const TopSection = () => {
 
     return (
-        <div className="flex gap-8 w-full items-center">
-
-            {/* Images */}
+        <div className="flex gap-8 items-center justify-center">
             <Images />
-
-            {/* Details */}
             <Details />
-            
         </div>
     )
 }

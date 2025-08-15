@@ -3,12 +3,15 @@ import { useEncounterContext } from "../../../context/encounter.context";
 import { ViewState } from "../../../utils/types";
 import { DispositionViewState } from "@/app/utils/types";
 import { Dispatch, SetStateAction } from "react";
+import { useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 
 const Buttons = ({
     setShowSubmittedClaims
 } : {
     setShowSubmittedClaims : Dispatch<SetStateAction<boolean>>
 }) => {
+    const { tokenId } = useParams();
     const { setViewState, setDispositionViewState, getEncounterMutation, getEncounterPending, encounterData, encounterDetails, showClaims, setShowClaims } = useEncounterContext();
     const checkinFailed = encounterDetails?.checkinImageUrl && !encounterDetails.checkinStatus
     const checkinSuccessful = encounterDetails?.checkinStatus
@@ -17,13 +20,15 @@ const Buttons = ({
     const claimSubmittedAt = encounterDetails?.claimSubmissionAt
     const showSubmitClaimButton = (checkinFailed || checkinSuccessful || checkoutSuccessful) && !claimSubmittedAt
 
+    const router = useRouter()
+
     return (
         <div className="flex gap-2">
             {
                 !checkinSuccessful &&
                 <Button
                     text="Verify Visit"
-                    className="!bg-main-primary !h-[33px]"
+                    className="!h-[32px]"
                     onClick={() => setViewState(ViewState.VERIFICATION_SELECTION)}
                 />
             }
@@ -31,7 +36,7 @@ const Buttons = ({
                 checkinSuccessful && !checkoutTime &&
                 <Button
                     text="Close Encounter"
-                    className="!bg-main-primary"
+                    className="!h-[32px]"
                     onClick={() => setDispositionViewState(DispositionViewState.INSTRUCTIONS)}
                 />
             }
@@ -39,7 +44,9 @@ const Buttons = ({
                 // showSubmitClaimButton &&
                 <Button
                     text="Submit Claim"
-                    onClick={()=>setShowClaims(true)}
+                    // onClick={()=>setShowClaims(true)}
+                    onClick={()=>router.push(`${tokenId}/submit-claim`)}
+                    className="!h-[32px]"
                 />
             }
             {

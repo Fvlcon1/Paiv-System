@@ -12,6 +12,7 @@ import useEncounter from "../hooks/use-encounter";
 import RecentVisitsDetails from "../../components/recent visit details/recentVisitsDetails";
 import { IRecentVisitsTable } from "../utils/type";
 import { useEncounterContext } from "../context/encounterContext";
+import TableComponent from "@components/table/table";
 
 const Table = () => {
     const { columns } = useColumns()
@@ -39,86 +40,17 @@ const Table = () => {
                 setDisplay={setShowEncounterDetails}
             />
             <div className="px-4">
-                <table className="w-full min-w-[800px] border-separate border-spacing-0">
-                    {/* Table Head */}
-                    <thead className="">
-                        {getHeaderGroups().map((headerGroup) => (
-                            <tr key={headerGroup.id}>
-                                {headerGroup.headers.map((header, colIndex) => (
-                                    <th
-                                        key={header.id}
-                                        className={`text-left border-b-[1px] cursor-pointer border-solid border-border-primary 
-                                        ${colIndex === 0 ? 'sticky left-0 bg-white max-w-[50px]' : ''}
-                                        ${colIndex === 0 && isScrolling ? 'after:content-[""] after:absolute after:top-0 after:right-[-8px] duration-1000 after:h-full after:w-2 after:bg-gradient-to-r after:from-black/15 after:to-transparent' : ''}`
-                                        }
-                                        onClick={header.column.getToggleSortingHandler()}
-                                        style={{
-                                            minWidth: colIndex === 0 ? '150px' : '150px',
-                                            maxWidth: colIndex === 0 ? '150px' : '150px',
-                                        }}
-                                    >
-                                        <div className={`py-[15px] ${colIndex === 0 ? 'px-[10px]' : 'px-[30px]'} flex h-full items-center gap-1`}>
-                                            <Text
-                                                ellipsis
-                                                className={gradientClass}
-                                                bold={theme.text.bold.md}
-                                            >
-                                                {
-                                                    header.isPlaceholder
-                                                        ? null
-                                                        : flexRender(header.column.columnDef.header, header.getContext())
-                                                }
-                                            </Text>
-                                            {
-                                                // colIndex !== 0 && (
-                                                //     {
-                                                //         asc: <FaSortUp size={13} color={theme.colors.main.primary} />,
-                                                //         desc: <FaSortDown size={13} color={theme.colors.main.primary} />,
-                                                //     }[header.column.getIsSorted() as string]
-                                                //     ??
-                                                //     <FaSort size={13} color={theme.colors.bg.quantinary} />
-                                                // )
-                                            }
-                                        </div>
-                                    </th>
-                                ))}
-                            </tr>
-                        ))}
-                    </thead>
-
-                    <tbody className={`${isLoading ? "opacity-50" : ""}`}>
-                        {getRowModel().rows.map((row, index) => (
-                            <tr
-                                key={row.id}
-                                className={`${isLoading ? "cursor-wait" : "cursor-pointer"} ${index % 2 === 0 ? "bg-bg-primary-lighter" : ""} group hover:bg-bg-secondary duration-500`}
-                                onClick={()=>{
-                                    router.push(`/encounters/${row.original.token}`)
-                                    // setShowEncounterDetails(true)
-                                    // setSelectedVisit(recentVisitsTableData[index])
-                                }}
-                            >
-                                {row.getVisibleCells().map((cell, colIndex) => (
-                                    <td
-                                        key={cell.id}
-                                        className={`border-b-[1px] border-solid border-border-primary py-4 duration-500 group-hover:bg-bg-secondary
-                                        ${index % 2 === 0 ? "bg-bg-primary-lighter" : ""}
-
-                                        ${colIndex === 0 && isScrolling ? 'after:content-[""] after:absolute after:top-0 after:right-[-8px] duration-1000 after:h-full after:w-2 after:bg-gradient-to-r after:from-black/15 after:to-transparent' : ''}
-                                    `}
-                                        style={{
-                                            minWidth: colIndex === 0 ? '150px' : '150px',
-                                            maxWidth: colIndex === 0 ? '150px' : '150px',
-                                        }}
-                                    >
-                                        <div className={`${colIndex === 0 ? 'px-[10px]' : 'px-[30px]'} w-full flex h-full items-center gap-1`}>
-                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                        </div>
-                                    </td>
-                                ))}
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                <TableComponent 
+                    data={recentVisitsTableData}
+                    columns={columns}
+                    isLoading={isLoading}
+                    isError={false}
+                    error={null}
+                    title="Recent Visits"
+                    handleOnRowClick={(dataItem) => {
+                        router.push(`/encounters/${dataItem.token}`)
+                    }}
+                />
             </div>
         </>
     )

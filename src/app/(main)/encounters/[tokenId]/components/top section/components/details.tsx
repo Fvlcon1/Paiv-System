@@ -4,22 +4,22 @@ import theme from "@styles/theme"
 import useGetUserData from "../utils/useGetUserData"
 import { useEncounterContext } from "../../../context/encounter.context"
 import DualTable from "./dual-table"
+import { gradientClass } from "@/utils/constants"
 
 const Details = () => {
     const {encounterDetails} = useEncounterContext()
     const {data} = useGetUserData()
     
     return (
-        <div className="flex gap-4 flex-1 justify-between items-end h-fit">
-            <div className="flex gap-1 flex-col mt-[20px] w-full">
+        <div className="flex gap-4 w-[600px] justify-between items-end h-fit">
+            <div className="flex gap-2 flex-col w-full">
 
                 {/* Full name */}
                 <Text
-                    size={TypographySize.HL}
-                    bold={TypographyBold.md}
+                    size={TypographySize.HM}
+                    bold={TypographyBold.md2}
                     textColor={theme.colors.text.secondary}
-                    className="pl-[20px]"
-                    fontfamily="greater-theory"
+                    className={`${gradientClass} pl-[10px]`}
                 >
                     {`${encounterDetails?.firstname}${encounterDetails?.othernames ? ` ${encounterDetails?.othernames}` : ''} ${encounterDetails?.lastname}`}
                 </Text>

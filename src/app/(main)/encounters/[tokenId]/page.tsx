@@ -52,7 +52,7 @@ const Encounter = () => {
             <VerificationStates />
             <Disposition />
             <Slidein
-                className="flex flex-col gap-6 px-8"
+                className="flex flex-col gap-6 px-4"
                 direction="right"
             >
                 <div className="w-full flex flex-col justify-center gap-6 border-b-[1px] border-solid border-b-border-primary py-[30px]">

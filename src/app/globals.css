@@ -15,11 +15,11 @@
   
   /* Background colors */
   --color-bg-primary: #FFFFFF;
-  --color-bg-primary-lighter: #FBFBFB;
-  --color-bg-secondary: #F4F4F4;
-  --color-bg-tetiary: #EBEBEB;
-  --color-bg-quantinary: #D0D0D0;
-  --color-bg-sidebar: #375462;
+  --color-bg-primary-lighter: #F7F9FA;
+  --color-bg-secondary: #F2F4F7;
+  --color-bg-tetiary: #E6EAEE;
+  --color-bg-quantinary: #D9DFE6;
+  --color-bg-sidebar: #022C56;
   
   /* Border colors */
   --color-border-primary: #E8EDEF;

@@ -60,27 +60,24 @@ const useRecentVisits = () => {
             
             return {
                 ...recentVisit,
-                othernames : recentVisit.othernames ?? '-',
+                othernames : `${visit.first_name || ''} ${visit.middle_name || ''}`.trim() || '-',
                 verificationStatus : recentVisit.verificationStatus 
                     ? (<Status status="successful" />) 
                     : (<Status status="failed" />),
                 lastVisit: (
                     <div className="flex flex-col">
                         <Text>
-                            {`${(new Date(visit.verification_date)).toDateString()}`}
-                        </Text>
-                        <Text textColor={theme.colors.text.tetiary}>
-                            {`${getTime(visit.verification_date)} | ${getRelativeTime(visit.verification_date)}`}
+                            {getRelativeTime(visit.verification_date)}
                         </Text>
                     </div>
                 ),
                 image: (
-                    <div className="rounded-lg overflow-hidden relative w-[50px] h-[50px] ">
+                    <div className="rounded-lg overflow-hidden relative w-[35px] h-[35px] ">
                         <Image
                             src={visit.profile_image_url ?? null}
                             alt="profile image"
-                            width={50}
-                            height={50}
+                            width={35}
+                            height={35}
                             style={{ height: "auto", width: "100%" }}
                         />
                     </div>

@@ -49,7 +49,7 @@ const Pagination = ({
                     <Input
                         value={pageSize}
                         setValue={setPageSize}
-                        className="!h-fit !bg-transparent !justify-center !p-0 border-none"
+                        className="!h-fit !bg-transparent !justify-center !p-0 !border-none"
                         inputClassName="!w-[33px] !text-center"
                         placeholder="20"
                     />
@@ -60,7 +60,7 @@ const Pagination = ({
                     <Input
                         value={pageNumber}
                         setValue={setPageNumber}
-                        className="!h-fit !bg-transparent !justify-center !p-0 border-none"
+                        className="!h-fit !bg-transparent !justify-center !p-0 !border-none"
                         inputClassName="!w-[33px] !text-center"
                         placeholder="20"
                     />

@@ -8,13 +8,13 @@ const DualTable = ({
     data: any[]
 }) => {
     return (
-        <div className="w-full max-w-[800px] flex flex-col gap-2">
+        <div className="w-full max-w-[600px] flex flex-col gap-2">
             <table className="w-full">
                 <tbody>
                     {
                         data.map((item, index) => (
                             <tr className={`${index % 2 === 0 ? 'bg-bg-secondary' : ''}`} key={index}>
-                                <td className={`pl-[20px] py-[10px] rounded-l-lg`}>
+                                <td className={`pl-[15px] py-[15px] rounded-l-lg`}>
                                     {
                                         typeof item[0] === 'string' ?
                                             <Text
