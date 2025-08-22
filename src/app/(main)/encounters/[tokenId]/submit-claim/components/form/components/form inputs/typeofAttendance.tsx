@@ -10,6 +10,7 @@ import { AppTypographyProps, TypographyBold } from "@styles/style.types"
 import { Radio } from "antd"
 import Checkbox, { CheckboxGroupProps, CheckboxProps } from "antd/es/checkbox"
 import { useState } from "react"
+import { gradientClass } from "@/utils/constants"
 
 export type IOptions = "Chronic Follow-up" | "Emergency/Acute Episode" | "Ante-natal" | "Post-natal"
 
@@ -44,10 +45,10 @@ const TypeofAttendance = () => {
     return (
         <div className="w-full flex flex-col justify-between gap-2 p-6 bg-bg-primary-lighter/0 rounded-2xl border border-border-primary">
             <div className="flex flex-col gap-1">
-                <Text bold={TypographyBold.md2}>
+                <Text className={gradientClass} bold={TypographyBold.md2}>
                     Type of Attendance *
                 </Text>
-                <Text textColor={theme.colors.text.tetiary}>
+                <Text>
                     Select the type of attendance
                 </Text>
             </div>

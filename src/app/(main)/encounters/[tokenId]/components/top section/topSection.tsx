@@ -4,7 +4,7 @@ import Details from "./components/details"
 const TopSection = () => {
 
     return (
-        <div className="flex gap-8 items-center justify-center">
+        <div className="flex gap-8 items-center">
             <Images />
             <Details />
         </div>

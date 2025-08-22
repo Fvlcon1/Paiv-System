@@ -12,30 +12,7 @@ import { useState } from "react"
 import { hexOpacity } from "@/utils/hexOpacity"
 import FormViewState from "./components/form-viewstate"
 import { useRegisterContext } from "./context/register-context"
-
-const Logo = () => {
-    const LogoImage = () => (
-        <Image
-            src={"/assets/prod/logo-gradient.png"}
-            alt="logo"
-            width={25}
-            height={25}
-        />
-    )
-
-    return (
-        <div className="flex items-center gap-1">
-            <LogoImage />
-            <Text
-                bold={theme.text.bold.md}
-                size={theme.text.size.body2}
-                className={gradientClass}
-            >
-                PAIV System
-            </Text>
-        </div>
-    )
-}
+import Logo from "@components/logo/logo"
 
 const Footer = () => {
     return (
@@ -56,7 +33,7 @@ const Main = () => {
         step === 5 ? null : (
             <ClickableTab
                 className="!w-fit !py-1.5"
-                onClick={() => setStep(prev => prev > 1 ? prev - 1 : prev)}
+                onClick={() => setStep(step > 1 ? step - 1 : step)}
             >
                 <div className="flex items-center gap-2">
                     <FaArrowLeftLong size={12} color={theme.colors.text.secondary} />
@@ -103,7 +80,7 @@ const Main = () => {
 const Register2 = () => {
     return (
         <div className="w-full h-full flex-col gap-[60px] flex items-center justify-center bg-main-primary/5">
-            <Logo />
+            <Logo size={70} />
             <Main />
             <Footer />
         </div>

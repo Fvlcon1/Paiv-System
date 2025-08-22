@@ -6,6 +6,9 @@ export const data = [
         dateSubmitted: "2025-08-01T12:00:00.000Z",
         dateProcessed: "2025-08-01T12:00:00.000Z",
         status: "approved",
+        claimId : "CL993-001",
+        lastModified : "2025-08-01T12:00:00.000Z",
+        serviceType : "Inpatient"
     },
     {
         id: "NS993-002",
@@ -14,6 +17,9 @@ export const data = [
         dateSubmitted: "2025-08-01T14:30:00.000Z",
         dateProcessed: "2025-08-02T09:15:00.000Z",
         status: "pending",
+        claimId: "CL993-002",
+        lastModified: "2025-08-01T14:30:00.000Z",
+        serviceType: "Outpatient"
     },
     {
         id: "NS993-003",
@@ -22,6 +28,9 @@ export const data = [
         dateSubmitted: "2025-08-02T08:45:00.000Z",
         dateProcessed: "2025-08-02T15:30:00.000Z",
         status: "approved",
+        claimId: "CL993-003",
+        lastModified: "2025-08-02T15:30:00.000Z",
+        serviceType: "Dental"
     },
     {
         id: "NS993-004",
@@ -30,6 +39,9 @@ export const data = [
         dateSubmitted: "2025-08-02T11:00:00.000Z",
         dateProcessed: "2025-08-03T10:45:00.000Z",
         status: "rejected",
+        claimId: "CL993-004",
+        lastModified: "2025-08-03T10:45:00.000Z",
+        serviceType: "Optical"
     },
     {
         id: "NS993-005",
@@ -38,6 +50,9 @@ export const data = [
         dateSubmitted: "2025-08-03T14:15:00.000Z",
         dateProcessed: "2025-08-04T09:30:00.000Z",
         status: "pending",
+        claimId: "CL993-005",
+        lastModified: "2025-08-03T14:15:00.000Z",
+        serviceType: "Inpatient"
     },
     {
         id: "NS993-006",
@@ -46,6 +61,9 @@ export const data = [
         dateSubmitted: "2025-08-04T10:00:00.000Z",
         dateProcessed: "2025-08-04T16:15:00.000Z",
         status: "approved",
+        claimId: "CL993-006",
+        lastModified: "2025-08-04T16:15:00.000Z",
+        serviceType: "Maternity"
     },
     {
         id: "NS993-007",
@@ -54,6 +72,9 @@ export const data = [
         dateSubmitted: "2025-08-05T09:30:00.000Z",
         dateProcessed: "2025-08-05T14:45:00.000Z",
         status: "pending",
+        claimId: "CL993-007",
+        lastModified: "2025-08-05T09:30:00.000Z",
+        serviceType: "Outpatient"
     },
     {
         id: "NS993-008",
@@ -62,6 +83,9 @@ export const data = [
         dateSubmitted: "2025-08-05T13:00:00.000Z",
         dateProcessed: "2025-08-06T11:30:00.000Z",
         status: "approved",
+        claimId: "CL993-008",
+        lastModified: "2025-08-06T11:30:00.000Z",
+        serviceType: "Dental"
     },
     {
         id: "NS993-009",
@@ -70,6 +94,9 @@ export const data = [
         dateSubmitted: "2025-08-06T15:15:00.000Z",
         dateProcessed: "2025-08-07T09:45:00.000Z",
         status: "pending",
+        claimId: "CL993-009",
+        lastModified: "2025-08-06T15:15:00.000Z",
+        serviceType: "Optical"
     },
     {
         id: "NS993-010",
@@ -78,6 +105,9 @@ export const data = [
         dateSubmitted: "2025-08-07T10:30:00.000Z",
         dateProcessed: "2025-08-07T16:00:00.000Z",
         status: "rejected",
+        claimId: "CL993-010",
+        lastModified: "2025-08-07T16:00:00.000Z",
+        serviceType: "Maternity"
     },
     {
         id: "NS993-011",
@@ -86,6 +116,9 @@ export const data = [
         dateSubmitted: "2025-08-08T09:45:00.000Z",
         dateProcessed: "2025-08-08T14:15:00.000Z",
         status: "approved",
+        claimId: "CL993-011",
+        lastModified: "2025-08-08T14:15:00.000Z",
+        serviceType: "Inpatient"
     },
     {
         id: "NS993-012",
@@ -94,6 +127,9 @@ export const data = [
         dateSubmitted: "2025-08-08T13:30:00.000Z",
         dateProcessed: "2025-08-09T10:00:00.000Z",
         status: "pending",
+        claimId: "CL993-012",
+        lastModified: "2025-08-08T13:30:00.000Z",
+        serviceType: "Outpatient"
     },
     {
         id: "NS993-013",
@@ -102,6 +138,9 @@ export const data = [
         dateSubmitted: "2025-08-09T15:00:00.000Z",
         dateProcessed: "2025-08-10T09:30:00.000Z",
         status: "approved",
+        claimId: "CL993-013",
+        lastModified: "2025-08-10T09:30:00.000Z",
+        serviceType: "Dental"
     },
     {
         id: "NS993-014",
@@ -110,6 +149,9 @@ export const data = [
         dateSubmitted: "2025-08-10T10:15:00.000Z",
         dateProcessed: "2025-08-10T15:45:00.000Z",
         status: "pending",
+        claimId: "CL993-014",
+        lastModified: "2025-08-10T10:15:00.000Z",
+        serviceType: "Optical"
     },
     {
         id: "NS993-015",
@@ -118,6 +160,9 @@ export const data = [
         dateSubmitted: "2025-08-11T09:00:00.000Z",
         dateProcessed: "2025-08-11T13:30:00.000Z",
         status: "approved",
+        claimId: "CL993-015",
+        lastModified: "2025-08-11T13:30:00.000Z",
+        serviceType: "Maternity"
     },
     {
         id: "NS993-016",
@@ -126,6 +171,9 @@ export const data = [
         dateSubmitted: "2025-08-11T14:45:00.000Z",
         dateProcessed: "2025-08-12T10:15:00.000Z",
         status: "rejected",
+        claimId: "CL993-016",
+        lastModified: "2025-08-12T10:15:00.000Z",
+        serviceType: "Inpatient"
     },
     {
         id: "NS993-017",
@@ -134,6 +182,9 @@ export const data = [
         dateSubmitted: "2025-08-12T09:30:00.000Z",
         dateProcessed: "2025-08-12T14:00:00.000Z",
         status: "approved",
+        claimId: "CL993-017",
+        lastModified: "2025-08-12T14:00:00.000Z",
+        serviceType: "Outpatient"
     },
     {
         id: "NS993-018",
@@ -142,6 +193,9 @@ export const data = [
         dateSubmitted: "2025-08-13T13:15:00.000Z",
         dateProcessed: "2025-08-13T16:30:00.000Z",
         status: "pending",
+        claimId: "CL993-018",
+        lastModified: "2025-08-13T13:15:00.000Z",
+        serviceType: "Dental"
     },
     {
         id: "NS993-019",
@@ -150,6 +204,9 @@ export const data = [
         dateSubmitted: "2025-08-14T09:45:00.000Z",
         dateProcessed: "2025-08-14T14:15:00.000Z",
         status: "approved",
+        claimId: "CL993-019",
+        lastModified: "2025-08-14T14:15:00.000Z",
+        serviceType: "Optical"
     },
     {
         id: "NS993-020",
@@ -158,5 +215,8 @@ export const data = [
         dateSubmitted: "2025-08-15T10:30:00.000Z",
         dateProcessed: "2025-08-15T15:45:00.000Z",
         status: "pending",
+        claimId: "CL993-020",
+        lastModified: "2025-08-15T10:30:00.000Z",
+        serviceType: "Maternity"
     }
 ];

@@ -85,16 +85,20 @@ const Button = ({
 			}}
 		>
 			{loading ? loader : icon}
-			<Text
-				size={textSize}
-				bold={textBold ?? TypographyBold.md}
-				textColor={getTextColor()}
-				maxLines={1}
-				ellipsis
-				whiteSpace="nowrap"
-			>
-				{text ?? 'Button'}
-			</Text>
+			{
+				text && text.length && (
+					<Text
+						size={textSize}
+						bold={textBold ?? TypographyBold.md}
+						textColor={getTextColor()}
+						maxLines={1}
+						ellipsis
+						whiteSpace="nowrap"
+					>
+						{text ?? 'Button'}
+					</Text>
+				)
+			}
 		</div>
 	)
 

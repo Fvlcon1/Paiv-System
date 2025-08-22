@@ -1,89 +1,112 @@
 'use client'
 
-import { useState } from 'react';
 import Dropdown from "@components/dropdown/dropdown"
 import Input from "@components/input/input"
 import Text from "@styles/components/text"
 import theme from "@styles/theme"
 import { FaChevronDown, FaPlus, FaTrash } from "react-icons/fa"
-import { GiCaduceus } from "react-icons/gi"
+import { GiTestTubes } from "react-icons/gi"
 import { useClaimsFormContext } from "../../../../context/context"
 import useDropdownItems from "../../../../hooks/dropdownItems/useDropdownItems"
-import Chip from "../../../chip/chip"
 import { TypographyBold } from "@styles/style.types"
 import { gradientClass } from "@/utils/constants"
 import Button from '@components/button/button';
 import { v4 as uuidv4 } from 'uuid';
+import { DatePicker } from 'antd';
 
 interface LabTestRow {
     id: string;
-    test: string;
-    date: any;
+    gdrg: string;
+    procedure: string;
+    unitPrice: string;
+    date: string | null;
 }
 
 const LabTests = () => {
-    const { formik, handleRemoveLabTest } = useClaimsFormContext()
+    const { formik } = useClaimsFormContext()
     const { labTestItems } = useDropdownItems()
-
-    const [rows, setRows] = useState<LabTestRow[]>([
-        { id: uuidv4(), test: '', date: null }
-    ]);
+    const { labTests = [] } = formik.values
 
     const addRow = () => {
-        setRows([...rows, { id: uuidv4(), test: '', date: null }]);
+        const newLabTests = [...labTests, { id: uuidv4(), gdrg: '', procedure: '', unitPrice: '', date: null }];
+        formik.setFieldValue('labTests', newLabTests);
     };
 
-    const removeRow = (id: string) => {
-        if (rows.length > 1) {
-            setRows(rows.filter(row => row.id !== id));
+    const removeRow = (index: number) => {
+        if (labTests.length > 1) {
+            const newLabTests = [...labTests];
+            newLabTests.splice(index, 1);
+            formik.setFieldValue('labTests', newLabTests);
         }
     };
 
-    const updateRow = (id: string, field: keyof LabTestRow, value: any) => {
-        setRows(rows.map(row =>
-            row.id === id ? { ...row, [field]: value } : row
-        ));
+    const updateRow = (index: number, field: keyof LabTestRow, value: any) => {
+        const newLabTests = [...labTests];
+        newLabTests[index] = { ...newLabTests[index], [field]: value };
+        formik.setFieldValue('labTests', newLabTests);
     };
 
-    const TestInput = ({ row }: { row: LabTestRow }) => (
+    const GDRGInput = ({ index }: { index: number }) => (
+        <Input
+            value={labTests[index]?.gdrg || ''}
+            onChange={(e) => updateRow(index, 'gdrg', e.target.value)}
+            placeholder="GDRG"
+            className="w-full !h-[32px] shadow-xs !px-2.5"
+        />
+    )
+
+    const ProcedureInput = ({ index }: { index: number }) => (
         <Dropdown
             className="w-full"
             menuItems={labTestItems}
-            onChange={(e) => updateRow(row.id, 'test', e.service)}
+            onChange={(e) => updateRow(index, 'procedure', e.service)}
         >
             <div className="w-full">
                 <Input
-                    value={row.test}
-                    onChange={(e) => updateRow(row.id, 'test', e.target.value)}
-                    placeholder="Select test"
+                    value={labTests[index]?.procedure || ''}
+                    onChange={(e) => updateRow(index, 'procedure', e.target.value)}
+                    placeholder="Select procedure"
                     className="w-full !h-[32px] shadow-xs !px-2.5"
                     PostIcon={<FaChevronDown color={theme.colors.text.tetiary} size={12} />}
-                    PreIcon={<GiCaduceus color={theme.colors.text.tetiary} size={12} />}
+                    PreIcon={<GiTestTubes color={theme.colors.text.tetiary} size={12} />}
                 />
             </div>
         </Dropdown>
     )
 
-    const DateInput = ({ row }: { row: LabTestRow }) => (
+    const UnitPriceInput = ({ index }: { index: number }) => (
+        <Input
+            value={labTests[index]?.unitPrice || ''}
+            onChange={(e) => updateRow(index, 'unitPrice', e.target.value)}
+            placeholder="Unit Price"
+            type="number"
+            className="w-full !h-[32px] shadow-xs !px-2.5"
+        />
+    )
+
+    const DateInput = ({ index }: { index: number }) => (
         <div className="flex items-center gap-2">
-            <input
-                type="date"
-                value={row.date || ''}
-                onChange={(e) => updateRow(row.id, 'date', e.target.value)}
-                className="shadow-xs px-2.5 h-[32px] w-full rounded-md border border-border-primary"
+            <DatePicker
+                value={labTests[index]?.date || null}
+                onChange={(date) => updateRow(index, 'date', date)}
+                className='shadow-xs px-2.5 h-[32px] w-full'
                 style={{
+                    borderRadius: "8px",
                     fontFamily: "montserrat",
                     fontSize: "12px",
                     color: theme.colors.text.secondary,
+                    fontWeight: theme.text.bold.sm2,
+                    borderColor: theme.colors.border.secondary,
                 }}
             />
         </div>
     )
 
     const heads = [
-        "Test",
-        "Date",
-        ""
+        "GDRG",
+        "Procedure",
+        "Unit Price",
+        "Date"
     ]
 
     return (
@@ -92,8 +115,8 @@ const LabTests = () => {
                 <Text bold={TypographyBold.md2} className={gradientClass}>
                     Investigation
                 </Text>
-                <Text textColor={theme.colors.text.tetiary}>
-                    Select laboratory tests conducted during diagnosis.
+                <Text>
+                    Enter lab test details including GDRG, procedure, and pricing.
                 </Text>
             </div>
 
@@ -101,26 +124,46 @@ const LabTests = () => {
                 <table className="min-w-full rounded-xl">
                     <thead className="bg-gray-100 border-b border-border-primary">
                         <tr>
-                            {heads.map((head, index) => (
-                                <th key={index} className="text-left px-4.5 py-2">
-                                    <Text lineHeight={1} className={gradientClass}>{head}</Text>
-                                </th>
-                            ))}
+                            {
+                                heads.map((head, index) => (
+                                    <th
+                                        key={index}
+                                        className={`text-left px-4 py-2 bg-gray-100 ${index === 0 ? 'rounded-tl-xl' : ''}`}
+                                    >
+                                        <Text lineHeight={1} className={gradientClass}>{head}</Text>
+                                    </th>
+                                ))
+                            }
+                            <th className="text-left px-2 py-2 bg-gray-100 rounded-tr-xl">
+                                <Button
+                                    onClick={addRow}
+                                    type='button'
+                                    className='!h-fit !w-fit !p-2'
+                                    text=""
+                                    icon={<FaPlus size={10} />}
+                                />
+                            </th>
                         </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                        {rows.map((row) => (
+                    <tbody className="divide-y divide-gray-200">
+                        {labTests.map((row: LabTestRow, index: number) => (
                             <tr key={row.id} className="hover:bg-gray-50">
                                 <td className="px-4 py-2 whitespace-nowrap">
-                                    <TestInput row={row} />
+                                    <GDRGInput index={index} />
                                 </td>
                                 <td className="px-4 py-2 whitespace-nowrap">
-                                    <DateInput row={row} />
+                                    <ProcedureInput index={index} />
                                 </td>
-                                <td className="whitespace-nowrap">
+                                <td className="px-4 py-2 whitespace-nowrap">
+                                    <UnitPriceInput index={index} />
+                                </td>
+                                <td className="px-4 py-2 whitespace-nowrap">
+                                    <DateInput index={index} />
+                                </td>
+                                <td className="whitespace-nowrap px-2">
                                     <button
                                         type="button"
-                                        onClick={() => removeRow(row.id)}
+                                        onClick={() => removeRow(index)}
                                         className="flex items-center gap-2 px-2 py-2 text-white bg-text-danger cursor-pointer rounded-md hover:opacity-80"
                                     >
                                         <FaTrash size={12} />
@@ -132,24 +175,15 @@ const LabTests = () => {
                 </table>
             </div>
 
-            <div className="flex justify-end">
-                <Button 
-                    onClick={addRow}
-                    type='button'
-                    text="Add Test"
-                    icon={<FaPlus size={12} />}
-                />
-            </div>
-
-            <div className="flex gap-2 flex-wrap">
-                {formik?.values.labTests.map((test: any, index: number) => (
-                    <Chip key={index} onClick={() => handleRemoveLabTest(test)}>
+            {/* <div className="flex gap-2 flex-wrap">
+                {rows.map((row, index) => (
+                    <Chip key={index}>
                         <Text>
-                            {`${test.code} - (${test.service})`}
+                            {row.gdrg} - {row.procedure} (${row.unitPrice}) - {row.date || 'No date'}
                         </Text>
                     </Chip>
                 ))}
-            </div>
+            </div> */}
         </div>
     )
 }

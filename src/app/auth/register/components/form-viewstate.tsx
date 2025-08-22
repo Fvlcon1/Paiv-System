@@ -4,20 +4,23 @@ import LocationInfoForm from "./location-info-form"
 import ContactPersonForm from "./contact-person-form"
 import CredentialingForm from "./credentialing-form"
 import CompletedForm from "./completed"
+import AuthenticationDetailsForm from "./authentication-details-form"
 
 const FormViewState = () => {
     const { step, setStep } = useRegisterContext()
     
     return (
         step === 1 
-        ? <FacilityInfoForm /> 
+        ? <AuthenticationDetailsForm />
         : step === 2 
-        ? <LocationInfoForm /> 
+        ? <FacilityInfoForm /> 
         : step === 3 
-        ? <ContactPersonForm /> 
+        ? <LocationInfoForm /> 
         : step === 4 
-        ? <CredentialingForm /> 
+        ? <ContactPersonForm /> 
         : step === 5 
+        ? <CredentialingForm /> 
+        : step === 6 
         ? <CompletedForm /> 
         : null
     )

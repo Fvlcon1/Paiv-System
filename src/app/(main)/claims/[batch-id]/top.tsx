@@ -130,7 +130,7 @@ const Top = () => {
                     </div>
                     <div className="flex items-center gap-2">
                         <Button 
-                            text="Submit Claims"
+                            text="Submit Batch"
                             onClick={() => setShowSubmitModal(true)}
                         />
                         <ClickableTab

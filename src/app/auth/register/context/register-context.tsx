@@ -9,18 +9,43 @@ const RegisterContext = createContext<{
     credentialFormik: any,
     contactPersonFormik: any,
     locationFormik: any,
-    facilityInfoFormik: any
+    facilityInfoFormik: any,
+    registerMutation: any,
+    registerLoading: boolean,
+    initRegisterLoading: boolean,
+    authenticationFormik: any,
+    passwordCriteria: any[],
+    showForm: boolean
 }>({
     step: 1,
     setStep: () => { },
     credentialFormik: null,
     contactPersonFormik: null,
     locationFormik: null,
-    facilityInfoFormik: null
+    facilityInfoFormik: null,
+    registerMutation: null,
+    registerLoading: false,
+    initRegisterLoading: false,
+    authenticationFormik: null,
+    passwordCriteria: [],
+    showForm: false
 })
 
 const RegisterContextProvider = ({ children }: { children: React.ReactNode }) => {
-    const {step, setStep, credentialFormik, contactPersonFormik, locationFormik, facilityInfoFormik} = useRegister()
+    const {
+        step,
+        setStep,
+        credentialFormik,
+        contactPersonFormik,
+        locationFormik,
+        facilityInfoFormik,
+        registerMutation,
+        registerLoading,
+        initRegisterLoading,
+        authenticationFormik,
+        passwordCriteria,
+        showForm
+    } = useRegister()
 
     return (
         <RegisterContext.Provider
@@ -30,7 +55,13 @@ const RegisterContextProvider = ({ children }: { children: React.ReactNode }) =>
                 credentialFormik,
                 contactPersonFormik,
                 locationFormik,
-                facilityInfoFormik
+                facilityInfoFormik,
+                registerMutation,
+                registerLoading,
+                initRegisterLoading,
+                authenticationFormik,
+                passwordCriteria,
+                showForm
             }}
         >
             {children}

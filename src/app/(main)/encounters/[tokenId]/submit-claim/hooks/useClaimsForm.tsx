@@ -8,8 +8,9 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import toast from "react-hot-toast";
 import { useEncounterContext } from "../../context/encounter.context";
-import { IClaimsDetailType, IDiagnosisType, IServicesType } from "../utils/types";
+import { IClaimsDetailType, IDiagnosisType, IMedicalProceduresType, IServicesType } from "../utils/types";
 import { convertToClaimsDetails } from "../utils/convertToClaimsDetails";
+import { v4 as uuidv4 } from 'uuid';
 
 const useClaimsForm = () => {
     const { getEncounterMutation, setShowClaims } = useEncounterContext();
@@ -23,7 +24,7 @@ const useClaimsForm = () => {
     const formik = useFormik({
         initialValues: {
             diagnosis: [] as IDiagnosisType[],
-            medicalProcedures: [] as IServicesType[],
+            medicalProcedures: [{ id: uuidv4(), gdrg: '', icd10: '', procedure: '', date: null }] as IMedicalProceduresType[],
             serviceOutcome : "",
             serviceType1 : "",
             serviceType2 : "",
@@ -257,11 +258,9 @@ const useClaimsForm = () => {
         );
     }, [formik]);
 
-    const handleRemoveMedicalProcedure = useCallback((procedure: IServicesType) => {
-        formik.setFieldValue(
-            "medicalProcedures",
-            formik.values.medicalProcedures.filter((item) => item !== procedure)
-        );
+    const handleRemoveMedicalProcedure = useCallback((index : number) => {
+        const updated = formik.values.medicalProcedures.filter((_ : any, i : number) => i !== index);
+        formik.setFieldValue('medicalProcedures', updated);
     }, [formik]);
 
     const handleRemoveDrug = (drugCode: string) => {

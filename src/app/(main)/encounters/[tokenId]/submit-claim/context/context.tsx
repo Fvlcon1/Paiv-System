@@ -10,7 +10,7 @@ type ClaimsFormContextType = {
     handleAddMedicalProcedure: (procedure: IServicesType) => void;
     handleRemoveLabTest: (test: IServicesType) => void;
     handleAddLabTest: (test: IServicesType) => void;
-    handleRemoveMedicalProcedure: (procedure: IServicesType) => void;
+    handleRemoveMedicalProcedure: (index : number) => void;
     handleAddDrug: () => void;
     drugFormik: any;
     setMedicalProcedure: Dispatch<SetStateAction<string>>;

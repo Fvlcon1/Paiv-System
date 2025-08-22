@@ -8,7 +8,7 @@ type InputProps = {
     className?: string;
     onClick?: () => void;
     placeholder?: string;
-    type?: "text" | "number" | "password";
+    type?: "text" | "number" | "password" | "email";
     PreIcon?: ReactNode;
     PostIcon?: ReactNode;
     required?: boolean;

@@ -2,7 +2,7 @@ import Image from "next/image"
 import Text from "@styles/components/text"
 import theme from "@styles/theme"
 import { PiHospitalFill } from "react-icons/pi"
-import { FaLocationArrow } from "react-icons/fa"
+import { FaHospitalSymbol, FaLocationArrow } from "react-icons/fa"
 import { MdContacts } from "react-icons/md"
 import { FaLock } from "react-icons/fa"
 import { FaCheckCircle } from "react-icons/fa"
@@ -14,37 +14,19 @@ import { FaArrowLeftLong } from "react-icons/fa6"
 import { hexOpacity } from "@/utils/hexOpacity"
 import { useState } from "react"
 import { useRegisterContext } from "../context/register-context"
+import Logo from "@components/logo/logo"
 
 const Left = () => {
     const { theme } = useTheme()
     const router = useRouter()
     const { step, setStep } = useRegisterContext()
-    
-    const Logo = () => {
-        const LogoImage = () => (
-            <Image
-                src={"/assets/prod/logo-light.png"}
-                alt="logo"
-                width={25}
-                height={25}
-            />
-        )
-
-        return (
-            <div className="flex items-center gap-1">
-                <LogoImage />
-                <Text
-                    bold={theme.text.bold.md}
-                    size={theme.text.size.body2}
-                    textColor={theme.colors.bg.primary}
-                >
-                    PAIV System
-                </Text>
-            </div>
-        )
-    }
 
     const steps = [
+        {
+            title: "Authentication Details",
+            description: "Provide your authentication details",
+            icon: FaHospitalSymbol
+        },
         {
             title: "Facility Information",
             description: "Input the details of your facility",

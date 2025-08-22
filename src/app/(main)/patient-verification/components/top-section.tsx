@@ -11,11 +11,12 @@ import Text from "@styles/components/text"
 import Input from "@components/input/input"
 import { MdKeyboardCommandKey } from "react-icons/md"
 import { useVerificationContext } from "../context/verification-context"
+import { gradientClass } from "@/utils/constants"
 
 const TopSection = () => {
     const { theme } = useTheme()
     const [selectedFilter, setSelectedFilter] = useState<string>("All")
-    const filters = ["All", "NHIS Id", "Name"]
+    const filters = ["All", "NHIS ID", "Name"]
 
     const links = [
         {
@@ -116,7 +117,7 @@ const TopSection = () => {
                 <Text
                     size={theme.text.size.HM2}
                     bold={theme.text.bold.md2}
-                    className="!bg-gradient-to-r !from-main-primary !to-main-primary-gradient !bg-clip-text !text-transparent"
+                    className={gradientClass}
                 >
                     Find and verify patients
                 </Text>

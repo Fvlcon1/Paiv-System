@@ -7,6 +7,7 @@ import Checkbox, { CheckboxGroupProps, CheckboxProps } from "antd/es/checkbox"
 import { AppTypographyProps, TypographyBold } from "@styles/style.types"
 import { useEffect, useState } from "react"
 import Divider from "@components/divider/divider"
+import { gradientClass } from "@/utils/constants"
 
 export type IOptions1 = "Outpatient" | "Inpatient" | "Diagnostic"
 export type IOptions2 = "Unbundled" | "All-Inclusive"
@@ -76,10 +77,10 @@ const ServiceType = () => {
             {/* Service type option 1 */}
             <div className="w-full flex flex-col justify-between gap-2">
                 <div className="flex flex-col gap-1">
-                    <Text bold={TypographyBold.md2}>
+                    <Text className={gradientClass} bold={TypographyBold.md2}>
                         Service Type (Option 1) *
                     </Text>
-                    <Text textColor={theme.colors.text.tetiary}>
+                    <Text>
                         Select appropriate service type
                     </Text>
                 </div>
@@ -107,10 +108,10 @@ const ServiceType = () => {
             {/* Service type option 2 */}
             <div className="w-full flex flex-col justify-between gap-2">
                 <div className="flex flex-col gap-1">
-                    <Text bold={TypographyBold.md2}>
+                    <Text className={gradientClass} bold={TypographyBold.md2}>
                         Service Type (Option 2) *
                     </Text>
-                    <Text textColor={theme.colors.text.tetiary}>
+                    <Text>
                         Select appropriate service type
                     </Text>
                 </div>

@@ -12,7 +12,7 @@ import useEncounter from "../hooks/use-encounter";
 import RecentVisitsDetails from "../../components/recent visit details/recentVisitsDetails";
 import { IRecentVisitsTable } from "../utils/type";
 import { useEncounterContext } from "../context/encounterContext";
-import TableComponent from "@components/table/table";
+import TableComponent from "@components/table/table-v2";
 
 const Table = () => {
     const { columns } = useColumns()

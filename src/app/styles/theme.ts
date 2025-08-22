@@ -2,9 +2,9 @@ import { TypographyBold, TypographySize } from "./style.types"
 
 export const lightColors = {
     text: {
-        primary: '#284452',
-        secondary: '#3F6D84',
-        tetiary: '#95AAB6',
+        primary: '#3D3D3D',
+        secondary: '#626262',
+        tetiary: '#A6A6A6',
         danger: '#b93b36',
         success: '#29a333',
     },
@@ -14,7 +14,7 @@ export const lightColors = {
         secondary: '#F6F8FA',
         tetiary: '#EBF0F2',
         quantinary: "#E2E9EC",
-		sidebar : "#375462"
+		sidebar : "#011926"
     },
     border: {
         primary: "#E8EDEF",

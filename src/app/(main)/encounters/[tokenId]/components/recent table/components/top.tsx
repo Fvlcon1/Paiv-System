@@ -22,7 +22,7 @@ const Top = ({
                 close={() => setIsVisible(false)}
             />
             <div className="w-full flex gap-4 items-center">
-                <Controls
+                {/* <Controls
                     pageSize={pageSize}
                     setPageSize={setPageSize}
                     pageNumber={pageNumber}
@@ -30,8 +30,7 @@ const Top = ({
                     view={view}
                     setView={setView}
                     handleReload={handleReload}
-                />
-                <div className="h-[20px] w-[1px] bg-border-primary" />
+                /> */}
                 <Buttons 
                     setShowSubmittedClaims={setIsVisible}
                 />

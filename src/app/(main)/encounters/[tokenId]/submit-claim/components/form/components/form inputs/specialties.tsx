@@ -6,6 +6,7 @@ import { TypographyBold } from "@styles/style.types";
 import { useEffect, useState } from "react";
 import { FiInfo } from "react-icons/fi";
 import { hexOpacity } from "@/utils/hexOpacity";
+import { gradientClass } from "@/utils/constants";
 
 export type IOptions = 'ASUR' | 'DENT' | 'ENTH' | 'MEDI' | 'OBGY' | 'OPDC' | 'OPHT' | 'ORTH' | 'PAED' | 'PSUR' | 'RSUR';
 
@@ -79,10 +80,10 @@ const Specialties = () => {
     return (
         <div className="w-full flex flex-col justify-between gap-2 p-6 bg-bg-primary-lighter/0 rounded-2xl border border-border-primary">
             <div className="flex flex-col gap-1">
-                <Text bold={TypographyBold.md2}>
+                <Text className={gradientClass} bold={TypographyBold.md2}>
                     Specialties Attended *
                 </Text>
-                <Text textColor={theme.colors.text.tetiary}>
+                <Text>
                     Select the Specialties Attended
                 </Text>
             </div>

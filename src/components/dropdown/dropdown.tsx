@@ -134,6 +134,7 @@ const Dropdown = ({
 						initial={{ opacity: 0, y: -10 }}
 						animate={{ opacity: 1, y: 0 }}
 						exit={{ opacity: 0, y: -10 }}
+						onClick={(e) => e.stopPropagation()}
 						className={`absolute overflow-y-auto min-w-[150px] max-h-[300px] w-full bg-bg-primary border border-border-primary rounded-lg shadow-lg z-[1050] py-1 pt-[6px] ${getMenuPositionClass()} ${className ?? ""}`}
 					>
 						{/* items */}

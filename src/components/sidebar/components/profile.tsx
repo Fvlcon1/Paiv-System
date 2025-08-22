@@ -27,21 +27,23 @@ const Profile = () => {
     const Hospital = () => {
         return (
             <div className="flex w-full p-3 border-b border-bg-primary/10">
-                <div className="flex w-full h-[50px] gap-1 items-center p-3 px-2 rounded-lg bg-bg-primary/10">
-                    <MdLocalHospital size={35} color={theme.colors.bg.primary} />
-                    <div className="flex flex-col gap-1">
-                        <Text 
-                            textColor={theme.colors.bg.primary}
-                        >
-                            37 Military Hospital
-                        </Text>
-                        <Text 
-                            textColor={theme.colors.bg.quantinary}
-                        >
-                            Liberation road, Accra
-                        </Text>
+                <Link className="w-full" href={'/facility-profile'}>
+                    <div className="flex w-full h-[50px] gap-1 items-center p-3 px-2 rounded-lg bg-bg-primary/10 hover:bg-bg-primary/20 duration-200 cursor-pointer">
+                        <MdLocalHospital size={35} color={theme.colors.bg.primary} />
+                        <div className="flex flex-col gap-1">
+                            <Text 
+                                textColor={theme.colors.bg.primary}
+                            >
+                                37 Military Hospital
+                            </Text>
+                            <Text 
+                                textColor={theme.colors.bg.quantinary}
+                            >
+                                Liberation road, Accra
+                            </Text>
+                        </div>
                     </div>
-                </div>
+                </Link>
             </div>
         )
     }

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Dropdown from "@components/dropdown/dropdown"
 import Input from "@components/input/input"
 import Text from "@styles/components/text"
@@ -8,53 +7,56 @@ import { GiCaduceus } from "react-icons/gi"
 import { useClaimsFormContext } from "../../../../context/context"
 import useDropdownItems from "../../../../hooks/dropdownItems/useDropdownItems"
 import Button from "@components/button/button"
-import Chip from "../../../chip/chip"
 import { TypographyBold } from "@styles/style.types"
-import { BsInfoCircle } from "react-icons/bs"
 import { gradientClass } from "@/utils/constants"
 import { v4 as uuidv4 } from 'uuid';
+import { DatePicker } from 'antd';
+import { BsInfoCircle } from "react-icons/bs"
+import Chip from "../../../chip/chip"
 
 interface DrugRow {
     id: string;
     drug: string;
+    dosage: string;
     frequency: string;
     duration: string;
+    date: string | null;
 }
 
 const Drugs = () => {
-    const { formik, handleRemoveDrug } = useClaimsFormContext()
+    const { formik } = useClaimsFormContext()
     const { drugItems } = useDropdownItems()
-
-    const [rows, setRows] = useState<DrugRow[]>([
-        { id: uuidv4(), drug: '', frequency: '', duration: '' }
-    ]);
+    const { drugs = [] } = formik.values
 
     const addRow = () => {
-        setRows([...rows, { id: uuidv4(), drug: '', frequency: '', duration: '' }]);
+        const newDrugs = [...drugs, { id: uuidv4(), drug: '', dosage: '', frequency: '', duration: '', date: null }];
+        formik.setFieldValue('drugs', newDrugs);
     };
 
-    const removeRow = (id: string) => {
-        if (rows.length > 1) {
-            setRows(rows.filter(row => row.id !== id));
+    const removeRow = (index: number) => {
+        if (drugs.length > 1) {
+            const newDrugs = [...drugs];
+            newDrugs.splice(index, 1);
+            formik.setFieldValue('drugs', newDrugs);
         }
     };
 
-    const updateRow = (id: string, field: keyof DrugRow, value: string) => {
-        setRows(rows.map(row =>
-            row.id === id ? { ...row, [field]: value } : row
-        ));
+    const updateRow = (index: number, field: keyof DrugRow, value: string | null) => {
+        const newDrugs = [...drugs];
+        newDrugs[index] = { ...newDrugs[index], [field]: value };
+        formik.setFieldValue('drugs', newDrugs);
     };
 
-    const DrugInput = ({ row }: { row: DrugRow }) => (
+    const DrugInput = ({ index }: { index: number }) => (
         <Dropdown
             className="w-full"
             menuItems={drugItems}
-            onChange={(e) => updateRow(row.id, 'drug', e.service)}
+            onChange={(e) => updateRow(index, 'drug', e.service)}
         >
             <div className="w-full">
                 <Input
-                    value={row.drug}
-                    onChange={(e) => updateRow(row.id, 'drug', e.target.value)}
+                    value={drugs[index]?.drug || ''}
+                    onChange={(e) => updateRow(index, 'drug', e.target.value)}
                     placeholder="Select drug"
                     className="w-full !h-[32px] shadow-xs !px-2.5"
                     PostIcon={<FaChevronDown color={theme.colors.text.tetiary} size={12} />}
@@ -64,11 +66,22 @@ const Drugs = () => {
         </Dropdown>
     )
 
-    const FrequencyInput = ({ row }: { row: DrugRow }) => (
+    const DosageInput = ({ index }: { index: number }) => (
         <div className="flex items-center gap-2 w-full">
             <Input
-                value={row.frequency}
-                onChange={(e) => updateRow(row.id, 'frequency', e.target.value)}
+                value={drugs[index]?.dosage || ''}
+                onChange={(e) => updateRow(index, 'dosage', e.target.value)}
+                placeholder="Dosage"
+                className="w-full !h-[32px] shadow-xs !px-2.5"
+            />
+        </div>
+    )
+
+    const FrequencyInput = ({ index }: { index: number }) => (
+        <div className="flex items-center gap-2 w-full">
+            <Input
+                value={drugs[index]?.frequency || ''}
+                onChange={(e) => updateRow(index, 'frequency', e.target.value)}
                 placeholder="Frequency"
                 type="number"
                 className="w-full !h-[32px] shadow-xs !px-2.5"
@@ -81,11 +94,29 @@ const Drugs = () => {
         </div>
     )
 
-    const DurationInput = ({ row }: { row: DrugRow }) => (
+    const DateInput = ({ index }: { index: number }) => (
+        <div className="flex items-center gap-2">
+            <DatePicker
+                value={drugs[index]?.date || null}
+                onChange={(date) => updateRow(index, 'date', date)}
+                className='shadow-xs px-2.5 h-[32px] w-full'
+                style={{
+                    borderRadius: "8px",
+                    fontFamily: "montserrat",
+                    fontSize: "12px",
+                    color: theme.colors.text.secondary,
+                    fontWeight: theme.text.bold.sm2,
+                    borderColor: theme.colors.border.secondary,
+                }}
+            />
+        </div>
+    )
+
+    const DurationInput = ({ index }: { index: number }) => (
         <div className="flex items-center gap-2 w-full">
             <Input
-                value={row.duration}
-                onChange={(e) => updateRow(row.id, 'duration', e.target.value)}
+                value={drugs[index]?.duration || ''}
+                onChange={(e) => updateRow(index, 'duration', e.target.value)}
                 placeholder="Duration"
                 type="number"
                 className="w-full !h-[32px] shadow-xs !px-2.5"
@@ -100,9 +131,10 @@ const Drugs = () => {
 
     const heads = [
         "Drug",
+        "Dosage",
         "Frequency",
         "Duration",
-        ""
+        "Date"
     ]
 
     return (
@@ -111,7 +143,7 @@ const Drugs = () => {
                 <Text bold={TypographyBold.md2} className={gradientClass}>
                     Prescription
                 </Text>
-                <Text textColor={theme.colors.text.tetiary}>
+                <Text>
                     Select prescribed medications (generic name, strength, dosage).
                 </Text>
             </div>
@@ -120,29 +152,49 @@ const Drugs = () => {
                 <table className="min-w-full rounded-xl">
                     <thead className="bg-gray-100 border-b border-border-primary">
                         <tr>
-                            {heads.map((head, index) => (
-                                <th key={index} className="text-left px-4.5 py-2">
-                                    <Text lineHeight={1} className={gradientClass}>{head}</Text>
-                                </th>
-                            ))}
+                            {
+                                heads.map((head, index) => (
+                                    <th
+                                        key={index}
+                                        className={`text-left px-4 py-2 bg-gray-100 ${index === 0 ? 'rounded-tl-xl' : ''}`}
+                                    >
+                                        <Text lineHeight={1} className={gradientClass}>{head}</Text>
+                                    </th>
+                                ))
+                            }
+                            <th className="text-left px-2 py-2 bg-gray-100 rounded-tr-xl">
+                                <Button
+                                    onClick={addRow}
+                                    type='button'
+                                    className='!h-fit !w-fit !p-2'
+                                    text=""
+                                    icon={<FaPlus size={10} />}
+                                />
+                            </th>
                         </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                        {rows.map((row) => (
+                    <tbody className="divide-y divide-gray-200">
+                        {drugs.map((row: DrugRow, index: number) => (
                             <tr key={row.id} className="hover:bg-gray-50">
                                 <td className="px-4 py-2 whitespace-nowrap">
-                                    <DrugInput row={row} />
+                                    <DrugInput index={index} />
                                 </td>
                                 <td className="px-4 py-2 whitespace-nowrap">
-                                    <FrequencyInput row={row} />
+                                    <DosageInput index={index} />
                                 </td>
                                 <td className="px-4 py-2 whitespace-nowrap">
-                                    <DurationInput row={row} />
+                                    <FrequencyInput index={index} />
                                 </td>
-                                <td className="whitespace-nowrap">
+                                <td className="px-4 py-2 whitespace-nowrap">
+                                    <DurationInput index={index} />
+                                </td>
+                                <td className="px-4 py-2 whitespace-nowrap">
+                                    <DateInput index={index} />
+                                </td>
+                                <td className="whitespace-nowrap px-2">
                                     <button
                                         type="button"
-                                        onClick={() => removeRow(row.id)}
+                                        onClick={() => removeRow(index)}
                                         className="flex items-center gap-2 px-2 py-2 text-white bg-text-danger cursor-pointer rounded-md hover:opacity-80"
                                     >
                                         <FaTrash size={12} />
@@ -152,15 +204,6 @@ const Drugs = () => {
                         ))}
                     </tbody>
                 </table>
-            </div>
-
-            <div className="flex justify-end">
-                <Button 
-                    onClick={addRow}
-                    type='button'
-                    text="Add Drug"
-                    icon={<FaPlus size={12} />}
-                />
             </div>
 
             {!formik.values.pharmacy && (
@@ -178,15 +221,15 @@ const Drugs = () => {
                 </Text>
             )}
 
-            <div className="flex gap-2 flex-wrap">
+            {/* <div className="flex gap-2 flex-wrap">
                 {formik?.values.drugs?.map((drug: any, index: number) => (
                     <Chip key={index} onClick={() => handleRemoveDrug(drug.code)}>
                         <Text>
-                            {`${drug.code} (${drug.frequency} hourly for ${drug.duration} day(s))`}
+                            {`${drug.code} (${drug.dosage}, ${drug.frequency} hourly for ${drug.duration} day(s)) - ${drug.date || 'No date'}`}
                         </Text>
                     </Chip>
                 ))}
-            </div>
+            </div> */}
         </div>
     )
 }

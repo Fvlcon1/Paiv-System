@@ -114,7 +114,7 @@ const useColumns = () => {
         },
         {
             accessorKey: 'verificationStatus',
-            header: 'Status',
+            header: 'Verification Status',
             cell: ({ getValue }: { getValue: any }) => {
                 return (
                     <Status

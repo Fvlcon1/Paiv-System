@@ -35,13 +35,7 @@ const Profile = () => {
         return (
             <div className="w-full h-[50px] justify-center flex flex-col gap-1 py-4 px-0 border-b border-bg-primary/10">
                 <Link className="flex items-center gap-2" href={'/'}>
-                    <Logo size={22} color="dark" />
-                    <Text
-                        bold={theme.text.bold.md}
-                        size={theme.text.size.body2}
-                    >
-                        PAIV System
-                    </Text>
+                    <Logo size={40} color="dark" />
                 </Link>
             </div>
         )

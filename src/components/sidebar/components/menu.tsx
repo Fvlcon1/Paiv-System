@@ -21,21 +21,16 @@ import { MdDashboard, MdSpaceDashboard } from "react-icons/md"
 
 const Menu = () => {
     const mainMenu = [
-        // {
-        //     title : "Home",
-        //     icon : RiHome6Fill,
-        //     path : "/",
-        // },
-        {
-            title : "Dashboard",
-            icon : RiDashboardFill,
-            path : "/dashboard",
-        },
         {
             title : "Patient Verification",
             icon : FaAddressCard,
             path : "/patient-verification",
         },
+        // {
+        //     title : "Dashboard",
+        //     icon : RiDashboardFill,
+        //     path : "/dashboard",
+        // },
         {
             title : "Encounters",
             icon : FaUsers,
@@ -46,16 +41,16 @@ const Menu = () => {
             icon : FaFolderClosed,
             path : "/claims",
         },
-        {
-            title : "Issues",
-            icon : HiMiniWrenchScrewdriver,
-            path : "/issues",
-        },
-        {
-            title : "Claim Support",
-            icon : BsClipboardCheckFill,
-            path : '/claim-support',
-        },
+        // {
+        //     title : "Issues",
+        //     icon : HiMiniWrenchScrewdriver,
+        //     path : "/issues",
+        // },
+        // {
+        //     title : "Claim Support",
+        //     icon : BsClipboardCheckFill,
+        //     path : '/claim-support',
+        // },
         // {
         //     title : "Claims",
         //     icon : PiFilesFill,

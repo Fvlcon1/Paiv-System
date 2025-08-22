@@ -28,7 +28,6 @@ const Buttons = ({
                 !checkinSuccessful &&
                 <Button
                     text="Verify Visit"
-                    className="!h-[32px]"
                     onClick={() => setViewState(ViewState.VERIFICATION_SELECTION)}
                 />
             }
@@ -36,7 +35,6 @@ const Buttons = ({
                 checkinSuccessful && !checkoutTime &&
                 <Button
                     text="Close Encounter"
-                    className="!h-[32px]"
                     onClick={() => setDispositionViewState(DispositionViewState.INSTRUCTIONS)}
                 />
             }
@@ -46,7 +44,6 @@ const Buttons = ({
                     text="Submit Claim"
                     // onClick={()=>setShowClaims(true)}
                     onClick={()=>router.push(`${tokenId}/submit-claim`)}
-                    className="!h-[32px]"
                 />
             }
             {

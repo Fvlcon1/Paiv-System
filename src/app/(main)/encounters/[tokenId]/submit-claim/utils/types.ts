@@ -78,3 +78,10 @@ export interface IDrugType {
     unitOfPricing : string
 }
 
+export interface IMedicalProceduresType {
+    id: string;
+    gdrg: string;
+    icd10: string;
+    procedure: string;
+    date: any;
+}

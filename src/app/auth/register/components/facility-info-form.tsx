@@ -9,7 +9,7 @@ import { FaChevronDown } from "react-icons/fa6"
 import { useEffect } from "react"
 
 const FacilityInfoForm = () => {
-    const { step, setStep, facilityInfoFormik } = useRegisterContext()
+    const { step, setStep, facilityInfoFormik, registerLoading } = useRegisterContext()
     const facilityType = facilityInfoFormik.values.facilityType
     const prescribingLevel = facilityInfoFormik.values.prescribingLevel
 
@@ -159,6 +159,7 @@ const FacilityInfoForm = () => {
             <Button
                 text="Continue"
                 onClick={handleContinue}
+                loading={registerLoading}
                 className="!w-full !h-[45px]"
             />
         </div>

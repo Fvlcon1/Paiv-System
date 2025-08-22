@@ -46,14 +46,14 @@ const Form = ({
                             </Text>
                         </div>
                         :
-                        <form onSubmit={handleShowClaims} className="flex flex-col gap-2 w-full overflow-y-auto">
-                            <Text
+                        <form onSubmit={handleShowClaims} className="flex flex-col gap-3 w-full overflow-y-auto">
+                            {/* <Text
                                 className={gradientClass + " pl-1"}
                                 size={theme.text.size.HM}
                                 bold={theme.text.bold.md2}
                             >
                                 Claims Form
-                            </Text>
+                            </Text> */}
 
                             <div className="flex flex-col gap-2 w-full">
                                 <div className="flex flex-col gap-6 w-full">
@@ -67,7 +67,7 @@ const Form = ({
                                     <LabTests />
                                 </div>
                             </div>
-                            <div className="flex w-full justify-end gap-2">
+                            <div className="flex w-full justify-end gap-2 mt-4">
                                 <OutlineButton
                                     text="Save Draft"
                                     type="button"

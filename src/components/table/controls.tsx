@@ -35,11 +35,11 @@ const Controls = ({
                 </div>
                 : <></>
             }
-            <div className="flex h-[33px] bg-bg-primary items-center p-1 px-2 border-[1px] border-solid border-border-primary rounded-lg gap-[1px] cursor-pointer hover:bg-bg-tetiary">
+            {/* <div className="flex h-[33px] bg-bg-primary items-center p-1 px-2 border-[1px] border-solid border-border-primary rounded-lg gap-[1px] cursor-pointer hover:bg-bg-tetiary">
                 <HiAdjustmentsHorizontal
                     color={theme.colors.text.primary}
                 />
-            </div>
+            </div> */}
             <Pagination
                 pageNumber={pageNumber}
                 pageSize={pageSize}
