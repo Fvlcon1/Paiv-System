@@ -17,6 +17,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Cookies from "universal-cookie";
 import { useAuth } from "@/app/context/authContext";
+import { storeProviderId } from "../../register/utils/helpers";
 
 const cookies = new Cookies()
 
@@ -128,7 +129,8 @@ const MFACode = ({
     const submitOTP = async (otp: string) => {
         console.log({ otp });
         const response = await protectedApi.POST("mfa/verify-otp", {
-            otp: otp
+            otp: otp,
+            email : userDetails?.email
         });
         return response
     };
@@ -137,11 +139,15 @@ const MFACode = ({
         mutationFn : submitOTP,
         onSuccess : (data)=>{
             cookies.set("accessToken", data.access_token, {path : "/"})
-            toast.success("Setup completed successfully")
+            if(!data.profile_complete) {
+                router.push("/auth/register?incomplete=true")
+                return storeProviderId(data.id)
+            }
+            toast.success("Login successful")
             router.push("/")
         },
         onError : ()=>{
-            toast.error("Error setting up mobile auth")
+            toast.error("Error logging in")
         }
     })
 

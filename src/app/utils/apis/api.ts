@@ -25,19 +25,28 @@ export const protectedApi = {
             throw error;
         }
     },
-    POST: async (url: string, body?: any) => {
+    POST: async (url: string, body?: any, params?: any) => {
         try {
             const headers = getHeaders();
-            const response = await axiosInstance.post(url, body, { headers });
+            const response = await axiosInstance.post(url, body, { headers, params });
             return response.data;
         } catch (error) {
             throw error;
         }
     },
-    PUT: async (url: string, body?: any) => {
+    PUT: async (url: string, body?: any, params?: any) => {
         try {
             const headers = getHeaders();
-            const response = await axiosInstance.put(url, body, { headers });
+            const response = await axiosInstance.put(url, body, { headers, params });
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
+    },
+    PATCH: async (url: string, body?: any, params?: any) => {
+        try {
+            const headers = getHeaders();
+            const response = await axiosInstance.patch(url, body, { headers, params });
             return response.data;
         } catch (error) {
             throw error;

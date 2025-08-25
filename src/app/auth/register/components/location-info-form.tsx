@@ -6,13 +6,14 @@ import { useRegisterContext } from "../context/register-context"
 import { FaChevronDown } from "react-icons/fa6"
 import Dropdown from "@components/dropdown/dropdown"
 import useRegion from "../hooks/use-region"
+import SlideIn from "@styles/components/slidein"
 
 const LocationInfoForm = () => {
-    const { step, setStep, locationFormik } = useRegisterContext()
+    const { step, setStep, locationFormik, registerLoading } = useRegisterContext()
     const { regionDropdown, districtDropdown } = useRegion()
     
     return (
-        <div className="w-full flex flex-col gap-4">
+        <SlideIn direction="right" className="w-full flex flex-col gap-4">
             <div className="flex flex-col gap-1">
                 <Text
                     bold={theme.text.bold.md}
@@ -72,7 +73,7 @@ const LocationInfoForm = () => {
                 <Text>GPS Coordinates (Optional)</Text>
                 <Input
                     placeholder="Eg. 123.456789, 123.456789"
-                    value={locationFormik.values.coordinates}
+                    value={locationFormik.values.coordinates ?? ""}
                     onChange={(e) => locationFormik.handleChange(e)}
                     onBlur={(e) => locationFormik.handleBlur(e)}
                     name="coordinates"
@@ -146,9 +147,10 @@ const LocationInfoForm = () => {
             <Button
                 text="Continue"
                 onClick={locationFormik.handleSubmit}
+                loading={registerLoading}
                 className="!w-full !h-[45px]"
             />
-        </div>
+        </SlideIn>
     )
 }
 

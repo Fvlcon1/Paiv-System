@@ -10,6 +10,7 @@ import { useState, useEffect } from "react"
 import styles from './completed.module.css'
 import OutlineButton from "@components/button/outlineButton"
 import { IoIosMail } from "react-icons/io"
+import SlideIn from "@styles/components/slidein"
 
 const Completed = () => {
     const { step, setStep } = useRegisterContext()
@@ -49,7 +50,7 @@ const Completed = () => {
     const confettiShapes = ['circle', 'square', 'triangle']
 
     return (
-        <div className="w-full h-full relative">
+        <SlideIn direction="right" className="w-full h-full relative">
             {/* Confetti Container */}
             {showConfetti && (
                 <div className="absolute inset-0 pointer-events-none overflow-hidden z-10">
@@ -105,7 +106,7 @@ const Completed = () => {
                     />
                 </div>
             </div>
-        </div>
+        </SlideIn>
     )
 }
 

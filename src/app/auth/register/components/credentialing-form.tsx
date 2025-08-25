@@ -9,9 +9,12 @@ import { useState } from "react"
 import { HiDocumentText } from "react-icons/hi2"
 import { IoIosCloseCircle } from "react-icons/io"
 import ClickableTab from "@components/clickable/clickabletab"
+import { DatePicker } from "antd"
+import moment from "moment"
+import SlideIn from "@styles/components/slidein"
 
 const CredentialingForm = () => {
-    const { step, setStep, credentialFormik } = useRegisterContext()
+    const { step, setStep, credentialFormik, credentialUploadLoading } = useRegisterContext()
     const [dragActive, setDragActive] = useState(false)
 
     // Format file size to appropriate unit (KB, MB, GB)
@@ -53,7 +56,7 @@ const CredentialingForm = () => {
     }
 
     return (
-        <div className="w-full flex flex-col gap-4">
+        <SlideIn direction="right" className="w-full flex flex-col gap-4">
             <div className="flex flex-col gap-1">
                 <Text
                     bold={theme.text.bold.md}
@@ -90,14 +93,22 @@ const CredentialingForm = () => {
             </div>
             <div className="flex flex-col gap-1">
                 <Text>Issue Date *</Text>
-                <Input
-                    placeholder="Eg. 2022-01-01"
-                    value={credentialFormik.values.issueDate}
-                    onChange={(e) => credentialFormik.handleChange(e)}
-                    onBlur={(e) => credentialFormik.handleBlur(e)}
+                <DatePicker
+                    value={credentialFormik.values.issueDate ? moment(credentialFormik.values.issueDate) : null}
+                    onChange={(date) => {
+                        credentialFormik.setFieldValue('issueDate', date ? date.format('YYYY-MM-DD') : '');
+                    }}
+                    onBlur={() => credentialFormik.setFieldTouched('issueDate', true)}
                     name="issueDate"
-                    className="shadow-xs"
-                    borderColor={(credentialFormik.errors.issueDate && credentialFormik.touched.issueDate) && theme.colors.text.danger}
+                    className="shadow-xs h-[40px] w-full !rounded-lg !border-border-secondary"
+                    style={{ 
+                        borderColor: (credentialFormik.errors.issueDate && credentialFormik.touched.issueDate) ? theme.colors.text.danger : undefined,
+                        color: (credentialFormik.errors.issueDate && credentialFormik.touched.issueDate) ? theme.colors.text.danger : undefined,
+                        fontFamily: "montserrat",
+                        fontSize: "12px",
+                        fontWeight: theme.text.bold.sm2,
+                    }}
+                    format="YYYY-MM-DD"
                 />
                 {
                     (credentialFormik.errors.issueDate && credentialFormik.touched.issueDate) && (
@@ -111,14 +122,22 @@ const CredentialingForm = () => {
             </div>
             <div className="flex flex-col gap-1">
                 <Text>Expiry Date *</Text>
-                <Input
-                    placeholder="Eg. 2025-01-01"
-                    value={credentialFormik.values.expiryDate}
-                    onChange={(e) => credentialFormik.handleChange(e)}
-                    onBlur={(e) => credentialFormik.handleBlur(e)}
+                <DatePicker
+                    value={credentialFormik.values.expiryDate ? moment(credentialFormik.values.expiryDate) : null}
+                    onChange={(date) => {
+                        credentialFormik.setFieldValue('expiryDate', date ? date.format('YYYY-MM-DD') : '');
+                    }}
+                    onBlur={() => credentialFormik.setFieldTouched('expiryDate', true)}
                     name="expiryDate"
-                    className="shadow-xs"
-                    borderColor={(credentialFormik.errors.expiryDate && credentialFormik.touched.expiryDate) && theme.colors.text.danger}
+                    className="shadow-xs h-[40px] w-full !rounded-lg !border-border-secondary"
+                    style={{ 
+                        borderColor: (credentialFormik.errors.expiryDate && credentialFormik.touched.expiryDate) ? theme.colors.text.danger : undefined,
+                        color: (credentialFormik.errors.expiryDate && credentialFormik.touched.expiryDate) ? theme.colors.text.danger : undefined,
+                        fontFamily: "montserrat",
+                        fontSize: "12px",
+                        fontWeight: theme.text.bold.sm2,
+                    }}
+                    format="YYYY-MM-DD"
                 />
                 {
                     (credentialFormik.errors.expiryDate && credentialFormik.touched.expiryDate) && (
@@ -218,9 +237,10 @@ const CredentialingForm = () => {
             <Button
                 text="Next"
                 onClick={credentialFormik.handleSubmit}
+                loading={credentialUploadLoading}
                 className="!w-full !h-[45px]"
             />
-        </div>
+        </SlideIn>
     )
 }
 

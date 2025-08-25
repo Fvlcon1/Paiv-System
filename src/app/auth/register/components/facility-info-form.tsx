@@ -7,6 +7,7 @@ import { DropdownItem } from "@/utils/@types"
 import Dropdown from "@components/dropdown/dropdown"
 import { FaChevronDown } from "react-icons/fa6"
 import { useEffect } from "react"
+import SlideIn from "@styles/components/slidein"
 
 const FacilityInfoForm = () => {
     const { step, setStep, facilityInfoFormik, registerLoading } = useRegisterContext()
@@ -41,7 +42,7 @@ const FacilityInfoForm = () => {
     }
 
     return (
-        <div className="w-full flex flex-col gap-4">
+        <SlideIn direction="right" className="w-full flex flex-col gap-4">
             <div className="flex flex-col gap-1">
                 <Text
                     bold={theme.text.bold.md}
@@ -104,7 +105,8 @@ const FacilityInfoForm = () => {
                     )
                 }
             </div>
-            <div className="flex flex-col gap-1">
+
+            {/* <div className="flex flex-col gap-1">
                 <div className="flex flex-col gap-1">
                     <Text>Provider Id *</Text>
                     <Text textColor={theme.colors.text.tetiary}>Must match your credential certificate</Text>
@@ -127,7 +129,8 @@ const FacilityInfoForm = () => {
                         </Text>
                     )
                 }
-            </div>
+            </div> */}
+            
             <div className="flex flex-col gap-1">
                 <Text>Prescribing Level *</Text>
                 <Dropdown
@@ -162,7 +165,7 @@ const FacilityInfoForm = () => {
                 loading={registerLoading}
                 className="!w-full !h-[45px]"
             />
-        </div>
+        </SlideIn>
     )
 }
 

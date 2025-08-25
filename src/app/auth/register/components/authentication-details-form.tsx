@@ -7,6 +7,7 @@ import { useState } from "react"
 import { FaEye } from "react-icons/fa"
 import { FaEyeSlash } from "react-icons/fa6"
 import ClickableTab from "@components/clickable/clickabletab"
+import SlideIn from "@styles/components/slidein"
 
 const AuthenticationDetailsForm = () => {
     const { step, setStep, authenticationFormik, passwordCriteria, initRegisterLoading } = useRegisterContext()
@@ -14,7 +15,7 @@ const AuthenticationDetailsForm = () => {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
     return (
-        <div className="w-full flex flex-col gap-4">
+        <SlideIn direction="right" className="w-full flex flex-col gap-4">
             <div className="flex flex-col gap-1">
                 <Text
                     bold={theme.text.bold.md}
@@ -122,7 +123,7 @@ const AuthenticationDetailsForm = () => {
                 loading={initRegisterLoading}
                 className="!w-full !h-[45px]"
             />
-        </div>
+        </SlideIn>
     )
 }
 

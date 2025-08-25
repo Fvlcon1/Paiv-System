@@ -12,7 +12,7 @@ import { useEffect, useState } from "react"
 
 const MFA = () => {
     const {viewState, setViewState} = useMFAContext()
-    const [isEmail2faEnabled, setIsEmail2faEnabled] = useState(false)
+    const [isEmail2faEnabled, setIsEmail2faEnabled] = useState(true)
 
     const checkMfaStatus = async () => {
         const response = await protectedApi.GET("mfa/check-status")
@@ -34,7 +34,8 @@ const MFA = () => {
     })
 
     useEffect(()=>{
-        checkMfaStatusMutation()
+        setViewState(MFAViewStates.EMAIL)
+        // checkMfaStatusMutation()
     },[])
 
     return (

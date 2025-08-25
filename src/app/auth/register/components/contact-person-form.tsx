@@ -3,12 +3,13 @@ import theme from "@styles/theme"
 import Input from "@components/input/input"
 import Button from "@components/button/button"
 import { useRegisterContext } from "../context/register-context"
+import SlideIn from "@styles/components/slidein"
 
 const ContactPersonForm = () => {
-    const { step, setStep, contactPersonFormik } = useRegisterContext()
+    const { step, setStep, contactPersonFormik, registerLoading } = useRegisterContext()
     
     return (
-        <div className="w-full flex flex-col gap-4">
+        <SlideIn direction="right" className="w-full flex flex-col gap-4">
             <div className="flex flex-col gap-1">
                 <Text
                     bold={theme.text.bold.md}
@@ -109,9 +110,10 @@ const ContactPersonForm = () => {
             <Button
                 text="Next"
                 onClick={contactPersonFormik.handleSubmit}
+                loading={registerLoading}
                 className="!w-full !h-[45px]"
             />
-        </div>
+        </SlideIn>
     )
 }
 

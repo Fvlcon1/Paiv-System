@@ -51,9 +51,10 @@ const Login = () => {
 
     const handleSubmitMutation = useMutation({
         mutationFn: handeleSubmit,
-        onSuccess: (data) => {
+        onSuccess: (data, variables) => {
             const token = data.access_token || data.temp_token
             cookies.set("accessToken", token, { path: "/" })
+            setUserDetails({email : variables.email})
             toast.success("Login successful")
             router.push("/auth/mfa")
         },

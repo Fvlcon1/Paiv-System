@@ -13,6 +13,7 @@ import { hexOpacity } from "@/utils/hexOpacity"
 import FormViewState from "./components/form-viewstate"
 import { useRegisterContext } from "./context/register-context"
 import Logo from "@components/logo/logo"
+import Loading from "@/app/loading"
 
 const Footer = () => {
     return (
@@ -30,7 +31,7 @@ const Main = () => {
     const { step, setStep } = useRegisterContext()
 
     const Previous = () => (
-        step === 5 ? null : (
+        (
             <ClickableTab
                 className="!w-fit !py-1.5"
                 onClick={() => setStep(step > 1 ? step - 1 : step)}
@@ -62,7 +63,7 @@ const Main = () => {
 
             <div className="flex flex-1 relative h-full rounded-xl p-4 justify-center items-center">
                 <div className="flex w-[80%] h-full flex-col gap-4 justify-between">
-                    <Previous />
+                    { step > 1 && step < 6 ? <Previous /> : null }
                     <FormViewState />
                     <Text
                         textColor={theme.colors.text.tetiary + hexOpacity(50)}
@@ -78,6 +79,12 @@ const Main = () => {
 }
 
 const Register2 = () => {
+    const { showForm } = useRegisterContext()
+
+    if (!showForm) return (
+        <Loading />
+    )
+
     return (
         <div className="w-full h-full flex-col gap-[60px] flex items-center justify-center bg-main-primary/5">
             <Logo size={70} />

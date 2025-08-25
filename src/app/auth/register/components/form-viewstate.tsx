@@ -7,7 +7,7 @@ import CompletedForm from "./completed"
 import AuthenticationDetailsForm from "./authentication-details-form"
 
 const FormViewState = () => {
-    const { step, setStep } = useRegisterContext()
+    const { step, setStep, showForm } = useRegisterContext()
     
     return (
         step === 1 

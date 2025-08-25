@@ -1,24 +1,38 @@
 import { getWithExpiry, setWithExpiry } from "@/utils/storage";
 import { Provider } from "./types";
 
+/**
+ * Stores the ID of the health provider not the credential ID
+ * @param providerId The ID of the health provider not the credential ID
+ */
 export const storeProviderId = (providerId: string) => {
     const ONE_HOUR_MS = 60 * 60 * 1000; // 1 hour in milliseconds
     setWithExpiry('providerId', providerId, ONE_HOUR_MS);
 };
 
+/**
+ * Retrieves the ID of the health provider not the credential ID
+ * @returns The ID of the health provider not the credential ID
+ */
 export const getProviderId = (): string | null => {
     return getWithExpiry('providerId');
 };
 
+/**
+ * Transforms the provider data from the API response to the Provider type
+ * @param data The provider data from the API response
+ * @returns The provider data in the Provider type
+ */
 export const transformProviderData = (data: any): Provider => {
     return {
         id: data.id,
         credentialingDocument: data.credentialing_document,
+        credentialingDocumentUrl: data.credentialing_document_url,
         credentialId: data.credential_id,
         issueDate: data.issue_date,
         expiryDate: data.expiry_date,
         contactPersonName: data.contact_person_name,
-        contactPersonPhone: data.contact_person_phone,
+        contactPersonPhone: data.phone_number,
         contactPersonEmail: data.contact_person_email,
         contactPersonRole: data.contact_person_role,
         region: data.region,

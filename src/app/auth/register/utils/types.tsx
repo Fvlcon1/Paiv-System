@@ -1,6 +1,7 @@
 export interface Provider {
     id: string,
     credentialingDocument: string,
+    credentialingDocumentUrl: string,
     credentialId: string,
     issueDate: string,
     expiryDate: string,
