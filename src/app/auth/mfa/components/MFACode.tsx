@@ -182,7 +182,7 @@ const MFACode = ({
                         Back
                     </Text>
                 </Pressable>
-                <div className="flex flex-col gap-0 items-center">
+                <div className="flex flex-col gap-1 items-center">
                     <Text
                         fontfamily="greater-theory"
                         textColor={theme.colors.main.primary}

@@ -63,7 +63,7 @@ const Main = () => {
 
             <div className="flex flex-1 relative h-full rounded-xl p-4 justify-center items-center">
                 <div className="flex w-[80%] h-full flex-col gap-4 justify-between">
-                    { step > 1 && step < 6 ? <Previous /> : null }
+                    <Previous />
                     <FormViewState />
                     <Text
                         textColor={theme.colors.text.tetiary + hexOpacity(50)}

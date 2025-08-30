@@ -108,15 +108,19 @@ const useRegister = () => {
         onError: (error) => {
             // toast.error(error?.message)
             console.log({ error })
+        },
+        onSettled: () => {
+            setShowForm(true)
         }
     })
 
     useEffect(() => {
         if (incomplete) checkPendingUserSignupMutation()
+        else setShowForm(true)
     }, [incomplete])
 
     const getUploadUrl = async (filename: string) => {
-        const response = await protectedApi.POST("/v2/credentialing/upload-url", {}, { filename : `${filename}-${uuidv4()}.pdf` })
+        const response = await protectedApi.POST("/v2/credentialing/upload-url", {}, { filename: `${filename}-${uuidv4()}.pdf` })
         console.log({ response })
         return response
     }
@@ -170,8 +174,8 @@ const useRegister = () => {
             id,
             credential_document_url: credentialingDocumentUrl?.length ? credentialingDocumentUrl : undefined,
             credential_id: credentialId?.length ? credentialId : undefined,
-            issue_date: "2025-08-23",
-            expiry_date: "2025-08-23",
+            issue_date: issueDate?.length ? issueDate : undefined,
+            expiry_date: expiryDate?.length ? expiryDate : undefined,
             contact_person_name: contactPersonName?.length ? contactPersonName : undefined,
             phone_number: contactPersonPhone?.length ? contactPersonPhone : undefined,
             contact_person_email: contactPersonEmail?.length ? contactPersonEmail : undefined,
@@ -263,7 +267,18 @@ const useRegister = () => {
         credentialingDocumentUrl: yup.string(),
         credentialId: yup.string().required("Credential id is required."),
         issueDate: yup.string().required("Issue date is required."),
-        expiryDate: yup.string().required("Expiry date is required."),
+        expiryDate: yup
+            .string()
+            .required("Expiry date is required.")
+            .test(
+                'is-after-issue-date',
+                'Expiry date must be after issue date',
+                function (value) {
+                    const { issueDate } = this.parent;
+                    if (!issueDate || !value) return true; // Let required validation handle empty fields
+                    return new Date(value) > new Date(issueDate);
+                }
+            ),
     })
     const credentialFormik = useFormik({
         initialValues: {
@@ -284,7 +299,7 @@ const useRegister = () => {
             toast.error("Credentialing document is required.")
             return
         }
-        const { upload_url : uploadUrl, file_url : fileUrl } = await getUploadUrlMutation(facilityInfoFormik.values.providerName)
+        const { upload_url: uploadUrl, file_url: fileUrl } = await getUploadUrlMutation(facilityInfoFormik.values.providerName)
         await axios.put(uploadUrl, credentialFormik.values.credentialingDocument, {
             headers: {
                 "Content-Type": (credentialFormik.values.credentialingDocument as any)?.type

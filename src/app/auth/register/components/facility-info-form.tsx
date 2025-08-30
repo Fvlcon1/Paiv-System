@@ -28,7 +28,7 @@ const FacilityInfoForm = () => {
     ]
 
     const prescribingLevels: DropdownItem[] = [
-        { key: "A", label: "Level A (CHIPS Compounds)", value: "A", isSelected: prescribingLevel === "A" },
+        { key: "A", label: "Level A (CHPS Compounds)", value: "A", isSelected: prescribingLevel === "A" },
         { key: "B1", label: "Level B1 (Healthe centers without a doctor)", value: "B1", isSelected: prescribingLevel === "B1" },
         { key: "B2", label: "Level B2 (Healthe centers with a doctor)", value: "B2", isSelected: prescribingLevel === "B2" },
         { key: "C", label: "Level C (District Hospitals - Primary Hospitals)", value: "C", isSelected: prescribingLevel === "C" },
