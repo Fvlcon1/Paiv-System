@@ -6,6 +6,7 @@ import VeficationFailed from "./capture container/components/verificationFailed"
 import Instructions from "./instructions/instructions"
 import VerificationSelection from "./verification selection/verificationSelection"
 import VerificationSuccessfulContainer from "./verification successful container/verificationSuccessfulContainer"
+import FingerPrint from "./fingerprint/fingerprint"
 
 const VerificationStates = () => {
     const {viewState} = useEncounterContext()
@@ -14,14 +15,16 @@ const VerificationStates = () => {
             {
                 viewState === ViewState.VERIFICATION_SELECTION
                 ? <VerificationSelection key={1} />
+                : viewState === ViewState.FINGERPRINT
+                ? <FingerPrint key={2} />
                 : viewState === ViewState.INSTRUCTIONS
-                ? <Instructions key={2} />
+                ? <Instructions key={3} />
                 : viewState === ViewState.CAPTURE
-                ? <CaptureContainer key={3} />
+                ? <CaptureContainer key={4} />
                 : viewState === ViewState.VERIFICATION_SUCCESS
-                ? <VerificationSuccessfulContainer key={4} />
+                ? <VerificationSuccessfulContainer key={5} />
                 : viewState === ViewState.VERIFICATION_FAILED
-                ? <VeficationFailed key={5} />
+                ? <VeficationFailed key={6} />
                 : <></>
             }
         </AnimatePresence>

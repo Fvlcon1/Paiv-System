@@ -35,7 +35,8 @@ const Selection = ({
         if (!selectedVerification) 
             return toast.error("Please select a verification method");
         if(selectedVerification === "fingerPrint")
-            return setSelectionViewState("FingerPrintError")
+            return setViewState(ViewState.FINGERPRINT);
+            // return setSelectionViewState("FingerPrintError")
         setViewState(ViewState.INSTRUCTIONS);
     };
 
