@@ -24,7 +24,7 @@ export const useWebSocket = ({
   const [isConnected, setIsConnected] = useState(false);
   const [reconnectCount, setReconnectCount] = useState(0);
   const ws = useRef<WebSocket | null>(null);
-  const reconnectTimeoutRef = useRef<any>();
+  const reconnectTimeoutRef = useRef<any>(30);
   const messageHandlers = useRef<Set<MessageHandler>>(new Set());
 
   const connect = useCallback(() => {
